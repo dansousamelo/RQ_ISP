@@ -58,7 +58,7 @@ export default {
 
   async findUser(req: Request, res: Response) {
     try {
-      const { accessCode } = req.body;
+      const { accessCode } = req.params;
 
       const users = await prisma.user.findMany();
 
