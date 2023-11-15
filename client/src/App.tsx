@@ -5,10 +5,10 @@ import { defaultTheme } from './styles/themes/default'
 import { GlobalStyle } from './styles/global'
 import { HeaderProvider } from './contexts/HeaderContext'
 import { Form } from './pages/Form'
-import { CreateCheklist } from './pages/HomePage/components/CreateChecklist'
-import { ManagementChecklist } from './pages/HomePage/components/ManagementChecklist'
 import { InpectionList } from './pages/InspectionList'
 import { PrivateRoute } from './components/PrivateRoute'
+import { CreateCheklist } from './pages/CreateChecklist'
+import { ManagementChecklist } from './pages/ManagementChecklist'
 
 export function App() {
   return (
