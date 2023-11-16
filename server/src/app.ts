@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 // Rotas de Usuário
 app.post("/create-user", user_controllers.createUser);
-app.get("/find-user/:accessCode", user_controllers.findUser);
+app.get("/find-user", user_controllers.findUser);
 
 // Rotas de Serviço
 app.post("/refresh-token", async (req, res) => {
