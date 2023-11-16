@@ -47,11 +47,10 @@ async function regenerateToken(): Promise<boolean> {
       )
 
       if (response.status === 200) {
-        const data: TokenData = response.data
-        const { token, refreshToken } = data
+        const data: TokenData = response.data.data
+        const { token } = data
 
         Cookies.set(ACCESS_TOKEN_COOKIE_NAME, token)
-        Cookies.set(REFRESH_TOKEN_COOKIE_NAME, refreshToken)
         createCookieWithExpiration()
 
         return true
@@ -73,21 +72,17 @@ export function PrivateRoute({
 }: PrivateRouteProps): JSX.Element | null {
   const navigate = useNavigate()
   const accessToken = getAccessToken()
-  console.log('accessToken: ', accessToken)
   const refreshToken = getRefreshToken()
 
   useEffect(() => {
     if (!accessToken || !refreshToken) {
-      console.log('caiu aqui')
       navigate('/')
       return
     }
 
     if (isTokenExpired()) {
       regenerateToken().then((regenerated) => {
-        console.log('caiu aqui 2')
         if (!regenerated) {
-          console.log('caiu aqui 3')
           navigate('/')
         }
       })
