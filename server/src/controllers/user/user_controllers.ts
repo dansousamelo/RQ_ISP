@@ -5,6 +5,7 @@ import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
+import { isString } from "../../interfaces/type_guards";
 
 export default {
   async createUser(req: Request, res: Response) {
@@ -58,10 +59,9 @@ export default {
 
   async findUser(req: Request, res: Response) {
     try {
-      const accessCode: string | undefined =
-        typeof req.query.accessCode === "string"
-          ? req.query.accessCode
-          : undefined;
+      const accessCode = isString(req.query.accessCode)
+        ? req.query.accessCode
+        : null;
 
       if (!accessCode) {
         return res.status(404).json({
