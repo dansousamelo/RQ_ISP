@@ -58,7 +58,19 @@ export default {
 
   async findUser(req: Request, res: Response) {
     try {
-      const { accessCode } = req.params;
+      const accessCode: string | undefined =
+        typeof req.query.accessCode === "string"
+          ? req.query.accessCode
+          : undefined;
+
+      if (!accessCode) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Não foi Fornecido um código de acesso",
+          data: {},
+        });
+      }
 
       const users = await prisma.user.findMany();
 
