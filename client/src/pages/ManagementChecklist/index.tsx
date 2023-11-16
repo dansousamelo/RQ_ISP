@@ -44,7 +44,8 @@ export function ManagementChecklist() {
           accessCode: data.accessCode,
         },
       })
-      const { token, refreshToken } = response.data
+
+      const { token, refreshToken } = response.data.data
 
       setAccessToken(token)
       setRefreshToken(refreshToken)
