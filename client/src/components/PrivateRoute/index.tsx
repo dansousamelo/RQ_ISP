@@ -8,6 +8,7 @@ import {
   getAccessToken,
   getRefreshToken,
 } from '../../utils/cookies'
+import { api } from '../../lib/axios'
 
 interface TokenData {
   token: string
@@ -33,20 +34,23 @@ async function regenerateToken(): Promise<boolean> {
 
   if (refreshToken) {
     try {
-      const response = await fetch('http://localhost:8000/refresh-token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await api.post(
+        'refresh-token',
+        {
+          refreshToken,
         },
-        body: JSON.stringify({ refreshToken }),
-      })
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
 
-      if (response.ok) {
-        const data: TokenData = await response.json()
-        const { token, refreshToken } = data
+      if (response.status === 200) {
+        const data: TokenData = response.data.data
+        const { token } = data
 
         Cookies.set(ACCESS_TOKEN_COOKIE_NAME, token)
-        Cookies.set(REFRESH_TOKEN_COOKIE_NAME, refreshToken)
         createCookieWithExpiration()
 
         return true
@@ -68,21 +72,17 @@ export function PrivateRoute({
 }: PrivateRouteProps): JSX.Element | null {
   const navigate = useNavigate()
   const accessToken = getAccessToken()
-  console.log('accessToken: ', accessToken)
   const refreshToken = getRefreshToken()
 
   useEffect(() => {
     if (!accessToken || !refreshToken) {
-      console.log('caiu aqui')
       navigate('/')
       return
     }
 
     if (isTokenExpired()) {
       regenerateToken().then((regenerated) => {
-        console.log('caiu aqui 2')
         if (!regenerated) {
-          console.log('caiu aqui 3')
           navigate('/')
         }
       })

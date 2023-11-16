@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm, useFormState, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import managerListPicture from '../../assets/managerList.png'
 import { Info } from 'phosphor-react'
 import * as S from './styles'
@@ -18,6 +18,7 @@ import { MainContent } from '../../components/MainContent/components'
 import { Input } from '../../components/Input'
 import { Spinner } from '../../components/Spinner'
 import { Footer } from '../../components/Footer'
+import { api } from '../../lib/axios'
 
 const formSchema = z.object({
   accessCode: z.string().min(1, 'Campo obrigatório'),
@@ -38,18 +39,13 @@ export function ManagementChecklist() {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       setIsLoading(true)
-      const response = await axios.post(
-        'http://localhost:8000/find-user',
-        {
+      const response = await api.get(`find-user`, {
+        params: {
           accessCode: data.accessCode,
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      const { token, refreshToken } = response.data
+      })
+
+      const { token, refreshToken } = response.data.data
 
       setAccessToken(token)
       setRefreshToken(refreshToken)
