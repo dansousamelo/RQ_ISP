@@ -102,7 +102,7 @@ export function ManagementChecklist() {
                 }
                 type="text"
                 {...register('accessCode')}
-                placeholder={'Digite o texto opcional'}
+                placeholder={'Digite o seu código de acesso'}
                 onChange={handleInputChange}
               />
               {errors.accessCode && (
