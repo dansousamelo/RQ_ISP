@@ -5,6 +5,7 @@ import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
+import { isString } from "../../interfaces/type_guards";
 
 export default {
   async createUser(req: Request, res: Response) {
@@ -58,7 +59,18 @@ export default {
 
   async findUser(req: Request, res: Response) {
     try {
-      const accessCode = req.query.accessCode as string;
+      const accessCode = isString(req.query.accessCode)
+        ? req.query.accessCode
+        : null;
+
+      if (!accessCode) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Não foi Fornecido um código de acesso",
+          data: {},
+        });
+      }
 
       const users = await prisma.user.findMany();
 
