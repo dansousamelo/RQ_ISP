@@ -81,7 +81,7 @@ export function ManagementChecklist() {
           />
           <S.ContentWrapper>
             <MainContent.Heading>
-              Acessar lista de verificação
+              Acessar lista de inspeções
             </MainContent.Heading>
             <MainContent.Paragraph>
               Gerencie suas inspeções de forma eficiente, permitindo um controle
