@@ -11,7 +11,7 @@
 
 | Data | Autor | Versão | Alteração |   
 | ---- | ------ | ------ | ------ |
-| 23/09/2020 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de arquitetura |
+| 25/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de arquitetura |
 
 ## Introdução
 Este documento de arquitetura tem como objetivo principal fornecer uma visão abrangente e detalhada da arquitetura de *software* aplicada ao sistema, com foco especial nas decisões arquiteturais essenciais para orientar o desenvolvimento da aplicação *RQ\_ISP*. Ele serve como alicerce para uma compreensão completa da arquitetura do sistema e das escolhas críticas realizadas durante o ciclo de desenvolvimento. 
@@ -140,6 +140,7 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 ### Banco de dados
 
 - **_PostgreSQL_**: O sistema de gerenciamento de banco de dados _PostgreSQL_ será utilizado para a persistência de dados. Ele oferece robustez, confiabilidade e recursos avançados de consulta.
+- **_Prisma_**: O mapeamento objeto-relacional _(ORM)_ _Prisma_ será utilizada como camada de abstração para as operações no banco de dados. Ademais, será utilizada por fornecer uma camada de tipagem estática e também por facilitar a criação de migrações no banco.
 - **_Diagrama Entidade Relacionamento_**: Um Diagrama Entidade-Relacionamento _(DER)_ é uma representação visual que descreve a estrutura de um banco de dados de forma conceitual, mostrando as entidades (objetos) e seus relacionamentos dentro do sistema. A Figura abaixo retrata o Diagrama Entidade Relacionamento elaborado.
 
 ## Padrões de codificação
@@ -169,7 +170,7 @@ Por meio do uso do _Git_, todas as alterações feitas no código serão cuidado
 
  * ELMASRI, Ramez; NAVATHE, Shamkant B. Fundamentals of Database Systems. Pearson, 2015
 
- KRUCHTEN, Philippe. Architectural Blueprints—The “4+1” View Model of Software Architecture. IEEE Software, 1995.
+ * KRUCHTEN, Philippe. Architectural Blueprints—The “4+1” View Model of Software Architecture. IEEE Software, 1995.
 
  * HEJLSBERG, Anders. TypeScript: JavaScript Development at Application Scale. 2012.
 
@@ -185,8 +186,9 @@ Por meio do uso do _Git_, todas as alterações feitas no código serão cuidado
   
  * LARMAN, Craig. Applying UML and Patterns. Prentice Hall, 2004.
 
- MARTIN, Robert C. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Prentice Hall, 2017.
-
+ * MARTIN, Robert C. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Prentice Hall, 2017.
+ 
+ * Prisma. Is Prisma an ORM? | What is an ORM? Disponível em: https://www.prisma.io/docs/concepts/overview/prisma-in-your-stack/is-prisma-an-orm. Acesso em: 23 nov. de  2023
 
 
 
