@@ -62,7 +62,7 @@ export default {
       const accessCode = isString(req.query.accessCode)
         ? req.query.accessCode
         : null;
-
+      
       if (!accessCode) {
         return res.status(404).json({
           error: true,
