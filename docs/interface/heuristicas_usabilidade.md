@@ -24,7 +24,7 @@ Na Figura 1, foi introduzido um sistema de carregamento para botões que requere
 <br/>
 <div align="center">
     <p>Figura 1: Botão de entrada com indicador de carregamento.</p>
-    <img src="https://dansousamelo.github.io/RQ_ISP/N01CARREGAR.png" width="60%" height="60%">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/N01CARREGAR.png" width="60%" height="60%">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -32,7 +32,7 @@ Na Figura 1, foi introduzido um sistema de carregamento para botões que requere
 <br/>
 <div align="center">
     <p>Figura 2: Indicador de status de inspeção</p>
-    <img width="30%" height="30%" src="https://dansousamelo.github.io/RQ_ISP/N01STATUS.png">
+    <img width="30%" height="30%" src="https://dansousamelo.github.io/RQ_ISP/assets/N01STATUS.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -46,7 +46,7 @@ Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos u
 <br/>
 <div align="center">
     <p>Figura 3: Indicador de status de inspeção</p>
-    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/N02ARRASTAR.png">
+    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ARRASTAR.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -54,7 +54,7 @@ Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos u
 <br/>
 <div align="center">
     <p>Figura 4: Ícones para criar e acessar listas de inspeção, respectivamente.</p>
-    <img width="20%" height="20%" src="https://dansousamelo.github.io/RQ_ISP/N02ICONES.png">
+    <img width="20%" height="20%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ICONES.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -68,7 +68,7 @@ Essa heurística enfatiza a importância de manter os usuários informados sobre
 <br/>
 <div align="center">
     <p>Figura 5: Detalhes de uma inspeção e da página atual do usuário.</p>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/N03VOLTAR.png">
+    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N03VOLTAR.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -76,14 +76,14 @@ Essa heurística enfatiza a importância de manter os usuários informados sobre
 <br/>
 <div align="center">
     <p>Figura 6: Toasts de sucesso e erro, respectivamente.</p>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/TOASTS.png">
+    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/TOASTS.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
 <br/>
 <div align="center">
     <p>Figura 7: Diálogo de erro.</p>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/ERROMODAL.png">
+    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/ERROMODAL.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -105,7 +105,7 @@ Projetar interfaces à prova de erros, que ofereçam confirmações antes de aç
 <br/>
 <div align="center">
     <p>Figura 8: Formulário para preencher informações de uma inspeção.</p>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/N05OBRIGATORIO.png">
+    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N05OBRIGATORIO.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -114,7 +114,7 @@ O sistema também permite que o usuário cancele uma ação, como mostrado na Fi
 <br/>
 <div align="center">
     <p>Figura 9: Confirmar ação de deleção de uma inspeção.</p>
-    <img width="60%" height="60%" src="https://dansousamelo.github.io/RQ_ISP/DELETARINSPECAO.png">
+    <img width="60%" height="60%" src="https://dansousamelo.github.io/RQ_ISP/assets/DELETARINSPECAO.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
@@ -143,7 +143,7 @@ A Figura 10 ilustra um exemplo de mensagem informada ao usuário quando o mesmo 
 <br/>
 <div align="center">
     <p>Figura 10: Formulário para preencher informações de uma inspeção.</p>
-    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/N09CODIGOINVALIDO.png">
+    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N09CODIGOINVALIDO.png">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
