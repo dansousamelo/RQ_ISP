@@ -12,6 +12,7 @@
 | Data | Autor | Versão | Alteração |   
 | ---- | ------ | ------ | ------ |
 | 25/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de arquitetura |
+| 25/11/2023 | Daniel Veras e Paulo Almeida | 1.0.1 | Adição da ORM Prisma |
 
 ## Introdução
 Este documento de arquitetura tem como objetivo principal fornecer uma visão abrangente e detalhada da arquitetura de *software* aplicada ao sistema, com foco especial nas decisões arquiteturais essenciais para orientar o desenvolvimento da aplicação *RQ\_ISP*. Ele serve como alicerce para uma compreensão completa da arquitetura do sistema e das escolhas críticas realizadas durante o ciclo de desenvolvimento. 
