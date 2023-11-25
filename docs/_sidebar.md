@@ -1,17 +1,13 @@
-[Documento de Arquitetura](arquitetura/documento_arquitetura.md)
+* **Coleta e refinamento**
+* [Lean Inception](coleta/lean.md)
+* [História de usuário](coleta/prototipo.md)
 
-<!-- 
-* **Design Patterns**
+* **Interface**
+	* [Heurísticas de Usabilidade](interface/heuristicas_usabilidade.md)
+	* [Cores](interface/cores.md)
+	* [Protótipo de alta fidelidade](interface/prototipo.md)
 
-	* **GoF's**
-		[Criacionais](gofs/criacionais.md)
+* **Desenvolvimento**
+* [Documento de Arquitetura](desenvolvimento/documento_arquitetura.md)
+* [Sprint 01](desenvolvimento/sprint01.md)
 
-		[Estruturais](gofs/estruturais.md)
-
-		[Comportamentais](gofs/comportamentais.md)
-	* **GRASP's**
-		[Pure Fabrication](grasps/pure_fabrication.md)
-		[Controller](grasps/controller.md)
-		[Indirection](grasps/indirection.md) -->
-
-	
