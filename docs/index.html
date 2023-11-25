@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>RQ_ISP</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Poiret+One&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    main {
+      background-color: #27272C !important;
+      color: #FFF !important;
+    }
+
+    span {
+      font-weight: bold !important;
+    }
+
+    strong {
+      color: #34CDFF !important; 
+    }
+
+    body {
+      font-family: 'Open Sans' !important;
+    }
+
+    
+
+    /* Sidebar styles */
+    .sidebar {
+      background: #181818 !important;
+    }
+    
+    
+
+    .sidebar strong:not(a strong) {
+      background: #FFF !important;
+      padding: 3px !important;
+      border-radius: 5px !important;
+      border: 1px solid #34CDFF !important;
+    }
+
+    /* Links styles */
+    a {
+      padding-left: 5px !important;
+      color: #FFF !important;
+      transition: all 0.3s ease-out !important;
+      text-decoration: none !important; 
+      font-weight: 500 !important;
+    }
+
+
+    a:hover {
+      color: #FFF !important;
+    }
+
+    .section-link {
+      border-color: white !important;
+      color: #34CDFF !important;
+      transition: all 0.3s ease-out !important;
+      font-weight: 500 !important;
+
+    }
+
+
+    .section-link:hover {
+      color: #0071A1 !important; /* Substitua com o tom de azul desejado */
+    }
+
+    .active {
+      color: #0071A1 !important;
+    }
+
+    /* Input styles */
+    input {
+      border-radius: 15px;
+      background: #34CDFF !important;
+      transition: all 0.8s ease-out !important;
+    }
+
+    .input-wrap {
+      padding: 0 15px;
+      background: #181818 !important;
+      border-color: #181818 !important;
+    }
+
+    input:hover, input:focus {
+      background: #FFF !important;
+      border-color: #34CDFF !important;
+    }
+
+    /* Sidebar Toggle Button styles */
+    .sidebar-toggle, .sidebar-toggle-button {
+      width: 36px;
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      background: #181818 !important;
+      border: 1px solid #34CDFF !important;
+      color: #FFF !important;
+      transition: all 0.3s ease-out !important;
+    }
+
+    .sidebar-toggle:hover, .sidebar-toggle-button:hover {
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      background: #FFF !important;
+      color: #181818 !important;
+      width: 46px;
+    }
+
+    /* Scrollbar styles */
+    ::-webkit-scrollbar {
+      width: 5px;
+      background-color: #181818 !important;
+    }
+
+    ::-webkit-scrollbar-button {
+      background-color: #181818 !important;
+    }
+
+    ::-webkit-scrollbar-track, ::-webkit-scrollbar-track-piece {
+      background-color: #34CDFF !important;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #34CDFF !important;
+    }
+
+    ::-webkit-scrollbar-corner, ::-webkit-resizer {
+      background-color: #181818 !important;
+    }
+
+    /* Cover and Show styles */
+    .cover, .show {
+      --selection-color: #181818 !important;
+      background: #181818 !important;
+      color: #181818 !important;
+      border-bottom: 2px solid #34CDFF;
+    }
+
+    .cover::after, .show::after {
+      --selection-color: #181818 !important;
+      background: #181818 !important;
+      color: #181818 !important;
+    }
+
+    /* Navigation custom CSS item styles */
+    .nav-custom-css-item {
+      color: #181818 !important;
+      background: #FFF !important;
+      padding: 2px 5px !important;
+      margin-right: 25px !important;
+      border-radius: 5px !important;
+      border: 1px solid #181818 !important;
+      transition: all 0.3s ease-out !important;
+    }
+
+    .nav-custom-css-item:hover {
+      color: #FFF !important;
+      background: #34CDFF !important;
+      border: 1px solid #34CDFF !important;
+    }
+
+    .markdown-section table {
+      display: inline-table !important;
+      width: 100%;
+    }
+
+    tr {
+      background-color: inherit !important;
+      
+
+    }
+    thead {
+      background: #181818 !important;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    
+    tbody {
+      background: #42424A !important;
+    }
+    thead th {
+      color: white !important;
+      text-align: center !important;
+    }
+
+    thead th:first-child {
+      border-top-left-radius: 4px !important;
+    }
+
+    thead th:last-child {
+      border-top-right-radius: 4px !important;
+    }
+
+   
+    tbody td {
+      text-align: center !important;
+    }
+
+    /* Image styles */
+    img {
+      border-radius: 4px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <!-- Scripts -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+  <script src="https://unpkg.com/docsify/lib/plugins/search.js"></script>
+
+  <script>
+    window.$docsify = {
+      coverpage: '_coverpage.md',
+      logo: 'assets/logoMenor.svg',
+      themeColor: '#34CDFF',
+      autoHeader: true,
+      loadSidebar: true,
+      subMaxLevel: 3,
+      name: 'RQ_ISP',
+      repo: 'https://github.com/dansousamelo/RQ_ISP'
+    }
+  </script>
+</body>
+</html>
