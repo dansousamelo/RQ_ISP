@@ -54,13 +54,13 @@ Além disso, os pacotes proporcionam benefícios adicionais, como o gerenciament
 #### Diagrama de pacotes do *frontend*
 O diagrama de pacotes do *frontend* representa a organização modular dos componentes visuais e lógicos que compõem a interface do usuário em aplicações web ou móveis. Ele descreve a estrutura das pastas que abrigam recursos estáticos, *scripts*, estilos e componentes reutilizáveis, tornando a arquitetura do lado do cliente mais compreensível. Este diagrama fornece orientações aos desenvolvedores sobre a localização e a interação com os diversos elementos do código *frontend*.
 
-<br />
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png">
+<br/>
+<div align="center">
+    <p>Diagrama de pacotes do <i>frontend</i>.</p>
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%">
+    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
-<br />
-
-
+<br/>
 
 A seguir, são apresentados os pacotes definidos na Figura acima, acompanhados de uma breve explicação:
 
@@ -81,11 +81,15 @@ A seguir, são apresentados os pacotes definidos na Figura acima, acompanhados d
 #### Diagrama de pacotes do *backend*
 O diagrama de pacotes do *backend* é uma representação visual da estrutura organizacional dos componentes lógicos que compõem a parte de servidor de um *software*, mostrando como eles estão agrupados em pacotes ou módulos para facilitar o desenvolvimento e a compreensão da arquitetura do *backend*.
 
-<br />
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png">
+
+
+<br/>
+<div align="center">
+    <p>Diagrama de pacotes do <i>backend</i>.</p>
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%">
+    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
-<br />
+<br/>
 
 A seguir, são apresentados os pacotes definidos na Figura acima, juntamente com uma breve explicação de cada um:
 
@@ -130,6 +134,7 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 - **_React_**: O _React_ continuará sendo o _framework_ utilizado para a construção da interface do usuário, aproveitando seus componentes reutilizáveis e a facilidade de desenvolvimento de interfaces interativas.
 - **_Styled Components_**: A estilização será implementada utilizando a biblioteca _Styled Components_. Isso permite que os estilos sejam definidos diretamente nos componentes _React_, mantendo a modularidade e a organização do código.
 - **_Context API_**: A _Context API_ do _React_ será usada para o gerenciamento de estado da aplicação. Ela permitirá que dados e estados globais sejam compartilhados entre componentes de forma eficiente, tornando a gestão de informações mais simples.
+
 
 ### Backend
 

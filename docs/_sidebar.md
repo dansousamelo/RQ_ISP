@@ -8,6 +8,6 @@
 	* [Protótipo de alta fidelidade](interface/prototipo.md)
 
 * **Desenvolvimento**
-* [Documento de Arquitetura](desenvolvimento/documento_arquitetura.md)
+* [Arquitetura](desenvolvimento/documento_arquitetura.md)
 * [Sprint 01](desenvolvimento/sprint01.md)
 
