@@ -1,7 +1,7 @@
 <br/>
 
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/assets/ARQ01.png" width="200" height="200">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/ARQ01.png" width="200" height="200">
 </div>
 
 <br/>
@@ -55,7 +55,7 @@ O diagrama de pacotes do *frontend* representa a organização modular dos compo
 
 <br />
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/assets/FR01.png">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png">
 </div>
 <br />
 
@@ -82,7 +82,7 @@ O diagrama de pacotes do *backend* é uma representação visual da estrutura or
 
 <br />
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/assets/BC01.png">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png">
 </div>
 <br />
 
