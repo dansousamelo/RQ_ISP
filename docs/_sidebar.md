@@ -1,6 +1,6 @@
 * **Coleta e refinamento**
 * [Lean Inception](coleta/lean.md)
-* [História de usuário](coleta/prototipo.md)
+* [História de usuário](coleta/historias.md)
 
 * **Interface**
 	* [Heurísticas de Usabilidade](interface/heuristicas_usabilidade.md)
