@@ -151,7 +151,7 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 
 <br/>
 <div align="center">
-    <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</i>.</p>
+    <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</p>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="100%" height="100%">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
