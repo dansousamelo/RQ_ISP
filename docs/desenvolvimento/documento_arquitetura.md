@@ -1,7 +1,7 @@
 <br/>
 
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/ARQ01.png" width="200" height="200">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/ARQ01.png" width="200" height="200" />
 </div>
 
 <br/>
@@ -58,7 +58,7 @@ O diagrama de pacotes do *frontend* representa a organização modular dos compo
 <br/>
 <div align="center">
     <p>Figura1: Diagrama de pacotes do <i>frontend</i>.</p>
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -87,7 +87,7 @@ O diagrama de pacotes do *backend* é uma representação visual da estrutura or
 <br/>
 <div align="center">
     <p>Figura2: Diagrama de pacotes do <i>backend</i>.</p>
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -152,7 +152,7 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 <br/>
 <div align="center">
     <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</p>
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="100%" height="100%">
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
