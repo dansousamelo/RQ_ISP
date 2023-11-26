@@ -56,7 +56,7 @@ O diagrama de pacotes do *frontend* representa a organização modular dos compo
 
 <br/>
 <div align="center">
-    <p>Diagrama de pacotes do <i>frontend</i>.</p>
+    <p>Figura1: Diagrama de pacotes do <i>frontend</i>.</p>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
@@ -85,7 +85,7 @@ O diagrama de pacotes do *backend* é uma representação visual da estrutura or
 
 <br/>
 <div align="center">
-    <p>Diagrama de pacotes do <i>backend</i>.</p>
+    <p>Figura2: Diagrama de pacotes do <i>backend</i>.</p>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%">
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
@@ -135,7 +135,6 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 - **_Styled Components_**: A estilização será implementada utilizando a biblioteca _Styled Components_. Isso permite que os estilos sejam definidos diretamente nos componentes _React_, mantendo a modularidade e a organização do código.
 - **_Context API_**: A _Context API_ do _React_ será usada para o gerenciamento de estado da aplicação. Ela permitirá que dados e estados globais sejam compartilhados entre componentes de forma eficiente, tornando a gestão de informações mais simples.
 
-
 ### Backend
 
 - **_Express.js_**: O _framework_ _Express.js_ será a base do _backend_, proporcionando uma estrutura sólida para a criação de _APIs RESTful_.
@@ -147,7 +146,16 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 
 - **_PostgreSQL_**: O sistema de gerenciamento de banco de dados _PostgreSQL_ será utilizado para a persistência de dados. Ele oferece robustez, confiabilidade e recursos avançados de consulta.
 - **_Prisma_**: O mapeamento objeto-relacional _(ORM)_ _Prisma_ será utilizada como camada de abstração para as operações no banco de dados. Ademais, será utilizada por fornecer uma camada de tipagem estática e também por facilitar a criação de migrações no banco.
-- **_Diagrama Entidade Relacionamento_**: Um Diagrama Entidade-Relacionamento _(DER)_ é uma representação visual que descreve a estrutura de um banco de dados de forma conceitual, mostrando as entidades (objetos) e seus relacionamentos dentro do sistema. A Figura abaixo retrata o Diagrama Entidade Relacionamento elaborado.
+- **_Diagrama Entidade Relacionamento_**: Um Diagrama Entidade-Relacionamento _(DER)_ é uma representação visual que descreve a estrutura de um banco de dados de forma conceitual, mostrando as entidades (objetos) e seus relacionamentos dentro do sistema. A Figura abaixo retrata o Diagrama Entidade Relacionamento elaborado. 
+
+<br/>
+<div align="center">
+    <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</i>.</p>
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="80%" height="80%">
+    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+</div>
+<br/>
+
 
 ## Padrões de codificação
 A consistência no código desempenha um papel essencial na facilitação da colaboração entre desenvolvedores e na manutenção do sistema ao longo do tempo. Para garantir essa consistência, serão aplicados os seguintes padrões de codificação:
