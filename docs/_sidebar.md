@@ -9,5 +9,5 @@
 
 * **Desenvolvimento**
 * [Arquitetura](desenvolvimento/documento_arquitetura.md)
-* [Sprint 01](desenvolvimento/sprint01.md)
+* [Sprint Overview](desenvolvimento/sprints.md)
 
