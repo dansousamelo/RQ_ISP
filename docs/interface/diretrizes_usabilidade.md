@@ -193,7 +193,7 @@ A definição de cores em sistemas é uma etapa crucial em diversas áreas, que 
 <br/>
 <div align="center">
     <figure>Figura 11: Cores do sistema.</figure>
-    <img width="50%" height="50%" src="../assets/COLORS.png" />
+    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/COLORS.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
@@ -213,7 +213,7 @@ O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta �
 <br/>
 <div align="center">
     <figure>Figura 12: Contraste entre o plano de fundo e os elementos superpostos sobre ele..</figure>
-    <img width="50%" height="50%" src="../assets/CONTRASTE.png" />
+    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/CONTRASTE.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
