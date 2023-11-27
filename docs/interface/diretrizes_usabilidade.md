@@ -8,7 +8,7 @@
 
 <div align="justify">
 
-<p align="justify">O objetivo deste documento é introduzir diretrizes de usabilidade com foco nas heurísticas de Nielsen e no contraste de cores. Essas diretrizes, inspiradas nas recomendações de Nielsen, serão integradas ao sistema, oferecendo orientações e melhores práticas para o desenvolvimento de interfaces e sistemas que proporcionem uma experiência do usuário mais aprimorada e eficaz no contexto da plataforma RQ_ISP.</p>
+O objetivo deste documento é introduzir diretrizes de usabilidade com foco nas heurísticas de Nielsen e no contraste de cores. Essas diretrizes, inspiradas nas recomendações de Nielsen, serão integradas ao sistema, oferecendo orientações e melhores práticas para o desenvolvimento de interfaces e sistemas que proporcionem uma experiência do usuário mais aprimorada e eficaz no contexto da plataforma RQ_ISP.
 
 </div>
 
@@ -22,7 +22,7 @@
 
 <div align="justify">
 
-&emsp;&emsp; As heurísticas de Nielsen referem-se a um conjunto de diretrizes e princípios de usabilidade criados por Jakob Nielsen, um renomado especialista em experiência do usuário. Essas heurísticas são um guia geral para avaliar a usabilidade de interfaces de usuário, ajudando a identificar problemas e áreas de melhoria em sistemas, aplicativos e sites. Elas fornecem critérios e princípios que os designers e desenvolvedores podem seguir para criar interfaces mais intuitivas e eficazes. As heurísticas de Nielsen abrangem diversos aspectos da usabilidade, incluindo a navegação, a clareza das informações, a consistência e a eficiência do sistema, entre outros. Portanto, são uma ferramenta valiosa para melhorar a experiência do usuário em produtos digitais
+As heurísticas de Nielsen referem-se a um conjunto de diretrizes e princípios de usabilidade criados por Jakob Nielsen, um renomado especialista em experiência do usuário. Essas heurísticas são um guia geral para avaliar a usabilidade de interfaces de usuário, ajudando a identificar problemas e áreas de melhoria em sistemas, aplicativos e sites. Elas fornecem critérios e princípios que os designers e desenvolvedores podem seguir para criar interfaces mais intuitivas e eficazes. As heurísticas de Nielsen abrangem diversos aspectos da usabilidade, incluindo a navegação, a clareza das informações, a consistência e a eficiência do sistema, entre outros. Portanto, são uma ferramenta valiosa para melhorar a experiência do usuário em produtos digitais
 
 </div>
 
@@ -38,96 +38,96 @@
 
 <br/>
 <div align="center">
-    <p>Figura 1: Botão de entrada com indicador de carregamento.</p>
+    <figure>Figura 1: Botão de entrada com indicador de carregamento.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/N01CARREGAR.png" width="60%" height="60%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 
 <br/>
 <div align="center">
-    <p>Figura 2: Indicador de status de inspeção</p>
+    <figure>Figura 2: Indicador de status de inspeção</figure>
     <img width="30%" height="30%" src="https://dansousamelo.github.io/RQ_ISP/assets/N01STATUS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 
 ### Compatibilidade entre o sistema e o mundo real
 
 <div align="justify">
-&emsp;&emsp; A interface do sistema deve refletir o mundo real dos usuários, utilizando terminologia e conceitos familiares, priorizando o reconhecimento em vez da memorização. Na aplicação, a utilização de ícones desempenha um papel fundamental na representação de ações que reproduzem interações do mundo real.
+A interface do sistema deve refletir o mundo real dos usuários, utilizando terminologia e conceitos familiares, priorizando o reconhecimento em vez da memorização. Na aplicação, a utilização de ícones desempenha um papel fundamental na representação de ações que reproduzem interações do mundo real.
 
-&emsp;&emsp; Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos usuários uma maneira intuitiva de interagir com elementos visuais. Além disso, na imagem 4, são apresentados ícones específicos que simplificam a criação de inspeções e o acesso às listas de inspeções, contribuindo para uma experiência de usuário mais fluida e coerente.
+Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos usuários uma maneira intuitiva de interagir com elementos visuais. Além disso, na imagem 4, são apresentados ícones específicos que simplificam a criação de inspeções e o acesso às listas de inspeções, contribuindo para uma experiência de usuário mais fluida e coerente.
 
 </div>
 
 
 <br/>
 <div align="center">
-    <p>Figura 3: Indicador de status de inspeção</p>
+    <figure>Figura 3: Indicador de status de inspeção</figure>
     <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ARRASTAR.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 
 <br/>
 <div align="center">
-    <p>Figura 4: Ícones para criar e acessar listas de inspeção, respectivamente.</p>
+    <figure>Figura 4: Ícones para criar e acessar listas de inspeção, respectivamente.</figure>
     <img width="20%" height="20%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ICONES.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Controle e liberdade do usuário
 <div align="justify">
 
-&emsp;&emsp; Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
+Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
 
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 5: Detalhes de uma inspeção e da página atual do usuário.</p>
+    <figure>Figura 5: Detalhes de uma inspeção e da página atual do usuário.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N03VOLTAR.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 
 <br/>
 <div align="center">
-    <p>Figura 6: Toasts de sucesso e erro, respectivamente.</p>
+    <figure>Figura 6: Toasts de sucesso e erro, respectivamente.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/TOASTS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 7: Diálogo de erro.</p>
+    <figure>Figura 7: Diálogo de erro.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/ERROMODAL.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 
 
 ### Consistência e Padrões
 <div align="justify">
-&emsp;&emsp; A aplicação consistente de padrões de design em toda a interface do sistema é recomendada para proporcionar uma compreensão rápida e precisa. O sistema adota uma abordagem abrangente para incorporar esses princípios, mantendo um layout uniforme em todas as páginas do aplicativo ou site. Isso significa que elementos como botões de ação e menus são dispostos de maneira consistente em todas as páginas, tornando a compreensão e a navegação mais acessíveis aos usuários. Além disso, a aplicação uniforme de cores, ícones e tipografia facilita a identificação rápida das funções dos elementos da interface.
+A aplicação consistente de padrões de design em toda a interface do sistema é recomendada para proporcionar uma compreensão rápida e precisa. O sistema adota uma abordagem abrangente para incorporar esses princípios, mantendo um layout uniforme em todas as páginas do aplicativo ou site. Isso significa que elementos como botões de ação e menus são dispostos de maneira consistente em todas as páginas, tornando a compreensão e a navegação mais acessíveis aos usuários. Além disso, a aplicação uniforme de cores, ícones e tipografia facilita a identificação rápida das funções dos elementos da interface.
 
-&emsp;&emsp; Outro aspecto relevante é a adoção de convenções de interação amplamente reconhecidas, como gestos familiares e cliques padrão, aumentando a previsibilidade das ações dos usuários. Essa abordagem também se estende ao feedback consistente, com indicadores visuais e animações utilizados de maneira uniforme para comunicar mensagens de sucesso, erro ou carregamento em todo o aplicativo.
+Outro aspecto relevante é a adoção de convenções de interação amplamente reconhecidas, como gestos familiares e cliques padrão, aumentando a previsibilidade das ações dos usuários. Essa abordagem também se estende ao feedback consistente, com indicadores visuais e animações utilizados de maneira uniforme para comunicar mensagens de sucesso, erro ou carregamento em todo o aplicativo.
 
-&emsp;&emsp; Além disso, a organização do conteúdo, a disposição lógica das informações e a consistência no uso do idioma são aspectos que enriquecem a experiência do usuário de maneira integrada.
+Além disso, a organização do conteúdo, a disposição lógica das informações e a consistência no uso do idioma são aspectos que enriquecem a experiência do usuário de maneira integrada.
 </div>
 
 ### Prevenção de erros
 <div align="justify">
-&emsp;&emsp; Projetar interfaces à prova de erros, que ofereçam confirmações antes de ações irreversíveis ocorrerem, é enfatizado na concepção do sistema. Um exemplo concreto dessa abordagem pode ser observado na Figura 8, que representa um formulário elaborado. Este formulário inclui campos obrigatórios e campos opcionais, visando assegurar que os usuários possam interagir com o sistema de maneira eficaz, reduzindo ao máximo a possibilidade de erros durante o preenchimento.
+Projetar interfaces à prova de erros, que ofereçam confirmações antes de ações irreversíveis ocorrerem, é enfatizado na concepção do sistema. Um exemplo concreto dessa abordagem pode ser observado na Figura 8, que representa um formulário elaborado. Este formulário inclui campos obrigatórios e campos opcionais, visando assegurar que os usuários possam interagir com o sistema de maneira eficaz, reduzindo ao máximo a possibilidade de erros durante o preenchimento.
 
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 8: Formulário para preencher informações de uma inspeção.</p>
+    <figure>Figura 8: Formulário para preencher informações de uma inspeção.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N05OBRIGATORIO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <div align="justify">
@@ -136,9 +136,9 @@
 
 <br/>
 <div align="center">
-    <p>Figura 9: Confirmar ação de deleção de uma inspeção.</p>
+    <figure>Figura 9: Confirmar ação de deleção de uma inspeção.</figure>
     <img width="60%" height="60%" src="https://dansousamelo.github.io/RQ_ISP/assets/DELETARINSPECAO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Reconhecimento ao invés de memorização
@@ -171,9 +171,9 @@
 
 <br/>
 <div align="center">
-    <p>Figura 10: Formulário para preencher informações de uma inspeção.</p>
+    <figure>Figura 10: Formulário para preencher informações de uma inspeção.</figure>
     <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N09CODIGOINVALIDO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Ajuda e documentação
@@ -186,35 +186,35 @@
 
 <div align="justify">
 
-&emsp;&emsp; A definição de cores em sistemas é uma etapa crucial em diversas áreas, que vai desde o design gráfico até a computação gráfica e o design de produtos. Essa definição possibilita especificar e comunicar de maneira precisa as características cromáticas, desempenhando um papel fundamental em aplicações gráficas. Além disso, enfatiza-se a importância de um sistema de cores bem definido para garantir a fidelidade na reprodução de cores em diferentes dispositivos e mídias. Dessa forma, a definição de cores em sistemas desempenha um papel essencial na manutenção da consistência e na garantia da precisão da representação cromática em diversas aplicações.
+A definição de cores em sistemas é uma etapa crucial em diversas áreas, que vai desde o design gráfico até a computação gráfica e o design de produtos. Essa definição possibilita especificar e comunicar de maneira precisa as características cromáticas, desempenhando um papel fundamental em aplicações gráficas. Além disso, enfatiza-se a importância de um sistema de cores bem definido para garantir a fidelidade na reprodução de cores em diferentes dispositivos e mídias. Dessa forma, a definição de cores em sistemas desempenha um papel essencial na manutenção da consistência e na garantia da precisão da representação cromática em diversas aplicações.
 
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 11: Cores do sistema.</p>
+    <figure>Figura 11: Cores do sistema.</figure>
     <img width="50%" height="50%" src="../assets/COLORS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Contraste
 
 <div align="justify">
 
-&emsp;&emsp; A acessibilidade na construção de software desempenha um papel crucial na garantia de que os aplicativos e sistemas digitais sejam acessíveis a todos os usuários, independentemente de suas capacidades individuais. A consideração da acessibilidade desde as fases iniciais do desenvolvimento de software é fundamental para a criação de produtos tecnológicos inclusivos, implicando projetar interfaces de usuário compatíveis com tecnologias assistivas e que sigam diretrizes de acessibilidade, como as estabelecidas no conjunto de normas Web Content Accessibility Guidelines (WCAG).
+A acessibilidade na construção de software desempenha um papel crucial na garantia de que os aplicativos e sistemas digitais sejam acessíveis a todos os usuários, independentemente de suas capacidades individuais. A consideração da acessibilidade desde as fases iniciais do desenvolvimento de software é fundamental para a criação de produtos tecnológicos inclusivos, implicando projetar interfaces de usuário compatíveis com tecnologias assistivas e que sigam diretrizes de acessibilidade, como as estabelecidas no conjunto de normas Web Content Accessibility Guidelines (WCAG).
 
-&emsp;&emsp; O valor de contraste é um conceito fundamental em áreas como design gráfico e arquitetura, sendo definido como a diferença perceptível entre os elementos visuais presentes em uma composição, abrangendo aspectos como cores, formas, tamanhos e texturas. Ele desempenha um papel crucial na comunicação visual, direcionando a atenção do espectador, estabelecendo hierarquias de informações e transmitindo emoções. Quando se deseja chamar a atenção de forma impactante, o contraste é a ferramenta mais eficaz, criando destaque e interesse visual. Arnheim também destacou a importância do contraste ao afirmar que ele capacita os designers a tornar elementos visuais distintos, conferindo dinamismo à composição e reforçando sua eficácia comunicativa.
+O valor de contraste é um conceito fundamental em áreas como design gráfico e arquitetura, sendo definido como a diferença perceptível entre os elementos visuais presentes em uma composição, abrangendo aspectos como cores, formas, tamanhos e texturas. Ele desempenha um papel crucial na comunicação visual, direcionando a atenção do espectador, estabelecendo hierarquias de informações e transmitindo emoções. Quando se deseja chamar a atenção de forma impactante, o contraste é a ferramenta mais eficaz, criando destaque e interesse visual. Arnheim também destacou a importância do contraste ao afirmar que ele capacita os designers a tornar elementos visuais distintos, conferindo dinamismo à composição e reforçando sua eficácia comunicativa.
 
-&emsp;&emsp; O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta útil para verificar o contraste de cores. A Figura 12 ilustra claramente o contraste entre o plano de fundo e os elementos superpostos sobre ele.
+O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta útil para verificar o contraste de cores. A Figura 12 ilustra claramente o contraste entre o plano de fundo e os elementos superpostos sobre ele.
 
 </div>
 
 
 <br/>
 <div align="center">
-    <p>Figura 12: Contraste entre o plano de fundo e os elementos superpostos sobre ele..</p>
+    <figure>Figura 12: Contraste entre o plano de fundo e os elementos superpostos sobre ele..</figure>
     <img width="50%" height="50%" src="../assets/CONTRASTE.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ## Referências
