@@ -98,7 +98,7 @@
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <p>Figura 5: Persona 2 da ferramenta RQ_ISP.</p>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/JORNADA-2.png" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/PERSONA-2.png" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -114,7 +114,7 @@
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <p>Figura 7: Jornada de usuário 2 da ferramenta RQ_ISP.</p>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/JORNADA-2.1.png" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/JORNADA-2.png" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
