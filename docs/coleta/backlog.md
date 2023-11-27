@@ -1,7 +1,7 @@
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/backlog/BACKLOG-ICON.png" width="200" height="200" />
+    <img src="https://github.com/dansousamelo/RQ_ISP/assets/backlog/BACKLOG-ICON.png" width="200" height="200" />
 </div>
 
 <br/>
@@ -14,31 +14,20 @@
 | 27/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento do Product Backlog |
 
 ## Introdução
-<div align="justify">
+O *Product Backlog*, ou *Backlog* do produto, é um conceito fundamental na metodologia ágil, especialmente no framework *Scrum*. Trata-se de uma lista dinâmica e prioritizada de funcionalidades, melhorias e requisitos que compõem o produto a ser desenvolvido. Os itens no *Product Backlog* podem variar em termos de complexidade, esforço necessário para implementação e valor para o usuário final. Eles são frequentemente descritos em termos de histórias de usuário, que são pequenas narrativas centradas no usuário que descrevem uma funcionalidade desejada (Schwaber; Sutherland, 2017).
 
-&emsp;&emsp; O *Product Backlog*, ou *Backlog* do produto, é um conceito fundamental na metodologia ágil, especialmente no framework *Scrum*. Trata-se de uma lista dinâmica e prioritizada de funcionalidades, melhorias e requisitos que compõem o produto a ser desenvolvido. Os itens no *Product Backlog* podem variar em termos de complexidade, esforço necessário para implementação e valor para o usuário final. Eles são frequentemente descritos em termos de histórias de usuário, que são pequenas narrativas centradas no usuário que descrevem uma funcionalidade desejada (Schwaber; Sutherland, 2017).
+O <i>Backlog</i> do produto, deste projeto, foi construído combinando os requisitos, funcionais e não funcionais, coletados em cada etapa do processo de elaboração do *Lean Inception*. Os requisitos funcionais são aqueles que delineiam as necessidades, características e funcionalidades essenciais do produto de software, já os requisitos não funcionais focam nas qualidades e restrições que o produto deve cumprir, abrangendo aspectos como desempenho, segurança e usabilidade (Sommerville, 2011.). 
 
-&emsp;&emsp; O <i>Backlog</i> do produto, deste projeto, foi construído combinando os requisitos, funcionais e não funcionais, coletados em cada etapa do processo de elaboração do *Lean Inception*. Os requisitos funcionais são aqueles que delineiam as necessidades, características e funcionalidades essenciais do produto de software, já os requisitos não funcionais focam nas qualidades e restrições que o produto deve cumprir, abrangendo aspectos como desempenho, segurança e usabilidade (Sommerville, 2011.). 
+As histórias de usuários são agrupadas e organizadas de acordo com seus épicos correspondentes, proporcionando uma estrutura que visa simplificar a gestão de requisitos em uma escala mais abrangente (Cohn, 2004). Os épicos estabelecidos nesta fase são: "Navegação Inicial", "Gerência de Inspeção de Artefatos", "Inspeção de Artefatos", "Rastreabilidade de Itens de uma Inspeção", "Análise de Resultados", "Criação Personalizada de Lista de Verificação", "Gerência de Criação de Lista de Verificação". Cada épico será explicado individulamente nas Seções a seguir.
 
-&emsp;&emsp; As histórias de usuários são agrupadas e organizadas de acordo com seus épicos correspondentes, proporcionando uma estrutura que visa simplificar a gestão de requisitos em uma escala mais abrangente (Cohn, 2004). Os épicos estabelecidos nesta fase são: "Navegação Inicial", "Gerência de Inspeção de Artefatos", "Inspeção de Artefatos", "Rastreabilidade de Itens de uma Inspeção", "Análise de Resultados", "Criação Personalizada de Lista de Verificação", "Gerência de Criação de Lista de Verificação". Cada épico será explicado individulamente nas Seções a seguir.
+E por fim, para calcular a pontuação de cada história, foi utilizada a sequência de Fibonacci. Este método reconhece a importância de atribuir valores que representem com precisão a complexidade relativa de cada tarefa. A sequência de Fibonacci, conhecida por seu crescimento exponencial, foi usada para criar um sistema que efetivamente abrange as variações de esforço e complexidade. As pontuações, que variam de 0 a 13, foram organizados de maneira a facilitar a priorização de histórias, otimizar o uso de recursos e tornar o desenvolvimento o mais eficiente possível (Conh, 2005). 
 
-&emsp;&emsp; E por fim, para calcular a pontuação de cada história, foi utilizada a sequência de Fibonacci. Este método reconhece a importância de atribuir valores que representem com precisão a complexidade relativa de cada tarefa. A sequência de Fibonacci, conhecida por seu crescimento exponencial, foi usada para criar um sistema que efetivamente abrange as variações de esforço e complexidade. As pontuações, que variam de 0 a 13, foram organizados de maneira a facilitar a priorização de histórias, otimizar o uso de recursos e tornar o desenvolvimento o mais eficiente possível (Conh, 2005). 
-
-</div>
 
 ## Requisitos Funcionais
-<div align="justify">
-
-&emsp;&emsp; Neste tópico, apresentam-se as histórias de usuários organizadas de acordo com seus respectivos épicos e derivam dos requisitos funcionais coletados durante a fase de coleta e refinamento dos requisitos. Cada um destes épicos, juntamente com suas histórias de usuários correspondentes, é descrito em detalhes nas subseções seguintes.
-
-</div>
+Neste tópico, apresentam-se as histórias de usuários organizadas de acordo com seus respectivos épicos e derivam dos requisitos funcionais coletados durante a fase de coleta e refinamento dos requisitos. Cada um destes épicos, juntamente com suas histórias de usuários correspondentes, é descrito em detalhes nas subseções seguintes.
 
 ### Navegação Inicial
-<div align="justify">
-
-&emsp;&emsp; No épico de navegação inicial estão todas as histórias de usuário relacionadas ao acesso inicial e à organização de inspeções na página inicial. Estas histórias abordam desde o início do processo de criação de uma inspeção até o acesso e a gestão das informações de credenciais. A Tabela 1 apresenta as histórias de usuário e suas respectivas pontuações do épico Navegação Inicial.
-
-</div>
+No épico de navegação inicial estão todas as histórias de usuário relacionadas ao acesso inicial e à organização de inspeções na página inicial. Estas histórias abordam desde o início do processo de criação de uma inspeção até o acesso e a gestão das informações de credenciais. A Tabela 1 apresenta as histórias de usuário e suas respectivas pontuações do épico Navegação Inicial.
 
 <figure style="text-align: center;">Tabela 1: Histórias usuário relacionadas ao Épico de Navegação Inicial.</figure>
 
@@ -51,11 +40,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Gerência de Inspeção de Artefatos
-<div align="justify">
-
-&emsp;&emsp; O épico de gerência de inspeção de artefatos concentra-se no controle e supervisão eficazes das inspeções. Aqui, as histórias de usuário abrangem um leque de funcionalidades, desde a visualização até a edição e exclusão de inspeções, passando pela administração dos participantes e liderança das inspeções. As especificidades dessas histórias, juntamente com suas pontuações, são apresentadas na Tabela 2, dedicada a este épico.
-
-</div>
+O épico de gerência de inspeção de artefatos concentra-se no controle e supervisão eficazes das inspeções. Aqui, as histórias de usuário abrangem um leque de funcionalidades, desde a visualização até a edição e exclusão de inspeções, passando pela administração dos participantes e liderança das inspeções. As especificidades dessas histórias, juntamente com suas pontuações, são apresentadas na Tabela 2, dedicada a este épico.
 
 <p style="text-align: center;">Tabela 2: Histórias usuário relacionadas ao Épico de Gerência de Inspeção de Artefatos.</p>
 
@@ -78,11 +63,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Inspeção de Artefatos
-<div align="justify">
-
-&emsp;&emsp; Dedicado ao núcleo do processo de inspeção, o épico de inspeção de artefatos trata das operações essenciais para a execução das inspeções. Este segmento inclui histórias de usuário que cobrem desde o salvamento de inspeções completas ou parciais até o monitoramento do progresso das inspeções, incluindo a seleção de modelos para as listas de verificação. A Tabela 3 fornece um detalhamento completo destas histórias e suas respectivas pontuações.
-
-</div>
+Dedicado ao núcleo do processo de inspeção, o épico de inspeção de artefatos trata das operações essenciais para a execução das inspeções. Este segmento inclui histórias de usuário que cobrem desde o salvamento de inspeções completas ou parciais até o monitoramento do progresso das inspeções, incluindo a seleção de modelos para as listas de verificação. A Tabela 3 fornece um detalhamento completo destas histórias e suas respectivas pontuações.
 
 <p style="text-align: center;">Tabela 3: Histórias usuário relacionadas ao Épico de Inspeção de Artefatos.</p>
 
@@ -98,11 +79,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Rastreabilidade de Itens de uma Inspeção
-<div align="justify">
-
-&emsp;&emsp; O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão detalhada dos artefatos envolvidos nas inspeções. As histórias de usuário deste épico lidam com a inclusão e manipulação de artefatos, desde a adição inicial até a marcação detalhada e ajustes necessários. Informações detalhadas sobre estas histórias e suas avaliações podem ser encontradas na Tabela 4.
-
-</div>
+O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão detalhada dos artefatos envolvidos nas inspeções. As histórias de usuário deste épico lidam com a inclusão e manipulação de artefatos, desde a adição inicial até a marcação detalhada e ajustes necessários. Informações detalhadas sobre estas histórias e suas avaliações podem ser encontradas na Tabela 4.
 
 <p style="text-align: center;">Tabela 5: Histórias usuário relacionadas ao Épico de Rastreabilidade de Itens de uma Inspeção.</p>
 
@@ -117,11 +94,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Análise de Resultados
-<div align="justify">
-
-&emsp;&emsp; O épico de análise de resultados é orientado para a avaliação e a disseminação dos dados coletados nas inspeções. As histórias de usuário aqui descrevem desde a visualização de dados em formatos gráficos até a exportação de dados e arquivos para uso externo, garantindo uma compreensão ampla dos resultados das inspeções. Estas histórias e suas pontuações são detalhadas na Tabela 6.
-
-</div>
+O épico de análise de resultados é orientado para a avaliação e a disseminação dos dados coletados nas inspeções. As histórias de usuário aqui descrevem desde a visualização de dados em formatos gráficos até a exportação de dados e arquivos para uso externo, garantindo uma compreensão ampla dos resultados das inspeções. Estas histórias e suas pontuações são detalhadas na Tabela 6.
 
 <p style="text-align: center;">Tabela 6: Histórias usuário relacionadas ao Épico de Análise de Resultados.</p>
 
@@ -134,11 +107,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Criação Personalizada de Lista de Verificação
-<div align="justify">
-
-&emsp;&emsp; O épico de Criação Personalizada de lista de verificação foca na habilidade do usuário de moldar listas de verificação de acordo com suas necessidades específicas no contexto de inspeção. Este conjunto de histórias de usuário explora desde a criação de listas customizadas até a implementação de medidas de segurança, como códigos de acesso e IDs. Além disso, inclui a funcionalidade de visualizar listas pré-existentes para inspiração e prevenção de redundâncias. Detalhes sobre estas histórias e suas pontuações são encontrados na Tabela 7.
-
-</div>
+O épico de Criação Personalizada de lista de verificação foca na habilidade do usuário de moldar listas de verificação de acordo com suas necessidades específicas no contexto de inspeção. Este conjunto de histórias de usuário explora desde a criação de listas customizadas até a implementação de medidas de segurança, como códigos de acesso e IDs. Além disso, inclui a funcionalidade de visualizar listas pré-existentes para inspiração e prevenção de redundâncias. Detalhes sobre estas histórias e suas pontuações são encontrados na Tabela 7.
 
 <p style="text-align: center;">Tabela 7: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
 
@@ -153,11 +122,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Gerência de Lista de Verificação
-<div align="justify">
-
-&emsp;&emsp; O épico de gerência de lista de verificação aborda o gerenciamento efetivo das listas de verificação após sua criação. As histórias de usuário aqui permitem ao usuário editar, exportar, excluir e duplicar listas de verificação, além de fornecerem uma visão geral de todas as listas criadas. Esta seção também destaca a funcionalidade de filtragem das listas, facilitando a localização rápida com base em títulos ou datas. A Tabela 8 apresenta um resumo dessas histórias de usuário, juntamente com suas respectivas pontuações.
-
-</div>
+O épico de gerência de lista de verificação aborda o gerenciamento efetivo das listas de verificação após sua criação. As histórias de usuário aqui permitem ao usuário editar, exportar, excluir e duplicar listas de verificação, além de fornecerem uma visão geral de todas as listas criadas. Esta seção também destaca a funcionalidade de filtragem das listas, facilitando a localização rápida com base em títulos ou datas. A Tabela 8 apresenta um resumo dessas histórias de usuário, juntamente com suas respectivas pontuações.
 
 <p style="text-align: center;">Tabela 7: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
 
@@ -173,18 +138,10 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ## Requisitos não funcionais
-<div align="justify">
-
-&emsp;&emsp; Neste tópico, são apresentados os requisitos não funcionais, os quais foram organizados em 5 categorias distintas: usabilidade, portabilidade, confiabilidade, eficiência e segurança. Os detalhes específicos de cada categoria serão abordados a seguir.
-
-</div>
+Neste tópico, são apresentados os requisitos não funcionais, os quais foram organizados em 5 categorias distintas: usabilidade, portabilidade, confiabilidade, eficiência e segurança. Os detalhes específicos de cada categoria serão abordados a seguir.
 
 ### Usabilidade
-<div align="justify">
-
-&emsp;&emsp; Neste tópico são apresentados requisitos não funcionais relacionados à usabilidade da interface de autenticação. A ênfase está na criação de uma experiência do usuário intuitiva, em conformidade com as diretrizes de design. A Tabela 8 fornece detalhes sobre os requisitos não funcionais específicos para usabilidade.
-
-</div>
+Neste tópico são apresentados requisitos não funcionais relacionados à usabilidade da interface de autenticação. A ênfase está na criação de uma experiência do usuário intuitiva, em conformidade com as diretrizes de design. A Tabela 8 fornece detalhes sobre os requisitos não funcionais específicos para usabilidade.
 
 <p style="text-align: center;">Tabela 8: Requisitos Não Funcional de Usabilidade.</p>
 
@@ -197,11 +154,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Portabilidade
-<div align="justify">
-
-&emsp;&emsp; Este tópico aborda um requisito não funcional de portabilidade do sistema. O objetivo é garantir que o sistema seja acessível de maneira consistente em uma variedade de navegadores populares. Consulte a Tabela 9 para obter detalhes sobre o requisito relacionado à portabilidade.
-
-</div>
+Este tópico aborda um requisito não funcional de portabilidade do sistema. O objetivo é garantir que o sistema seja acessível de maneira consistente em uma variedade de navegadores populares. Consulte a Tabela 9 para obter detalhes sobre o requisito relacionado à portabilidade.
 
 <p style="text-align: center;">Tabela 9: Requisito Não Funcional de Portabilidade.</p>
 
@@ -213,11 +166,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Confiabilidade
-<div align="justify">
-
-&emsp;&emsp; Nesta seção, é apresentado um requisito não funcional relacionado à confiabilidade. É crucial que os cookies mantenham uma vida útil adequada e não expirem prematuramente, a menos que o usuário escolha sair ou retirar seu consentimento. A Tabela 10 apresenta uma visão geral do requisito não funcional que garante a confiabilidade.
-
-</div>
+Nesta seção, é apresentado um requisito não funcional relacionado à confiabilidade. É crucial que os cookies mantenham uma vida útil adequada e não expirem prematuramente, a menos que o usuário escolha sair ou retirar seu consentimento. A Tabela 10 apresenta uma visão geral do requisito não funcional que garante a confiabilidade.
 
 <p style="text-align: center;">Tabela 10: Requisito Não Funcional de Confiabilidade.</p>
 
@@ -228,11 +177,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Eficiência
-<div align="justify">
-
-&emsp;&emsp; Aqui, é explorado um requisito não funcional relacionado à eficiência do sistema. Isso implica que o sistema deve ser capaz de fornecer respostas em tempo real de maneira ágil e eficaz. Detalhes específicos sobre o requisito de eficiência pode ser encontrado na Tabela 11.
-
-</div>
+Aqui, é explorado um requisito não funcional relacionado à eficiência do sistema. Isso implica que o sistema deve ser capaz de fornecer respostas em tempo real de maneira ágil e eficaz. Detalhes específicos sobre o requisito de eficiência pode ser encontrado na Tabela 11.
 
 <p style="text-align: center;">Tabela 11: Requisito Não Funcional de Eficiência.</p>
 
@@ -243,11 +188,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Segurança
-<div align="justify">
-
-&emsp;&emsp; Nesta seção, são discutidos os requisitos não funcionais relacionados à segurança abrangente do sistema. Isso envolve a proteção da confidencialidade dos dados do usuário, a garantia da segurança geral dos dados e a preservação da integridade dos dados. Para obter informações mais detalhadas, consulte a Tabela 12.
-
-</div>
+Nesta seção, são discutidos os requisitos não funcionais relacionados à segurança abrangente do sistema. Isso envolve a proteção da confidencialidade dos dados do usuário, a garantia da segurança geral dos dados e a preservação da integridade dos dados. Para obter informações mais detalhadas, consulte a Tabela 12.
 
 <p style="text-align: center;">Tabela 12: Requisitos Não Funcionais de Segurança.</p>
 
@@ -261,11 +202,7 @@
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ## Mínimo Produto Viável
-<div align="justify">
-
-&emsp;&emsp; Este tópico abrange os requisitos funcionais essenciais do mínimo produto viável (MVP), selecionados e definidos na dinâmica do sequenciador implementada durante o método *Lean Inception*. A Tabela 13 detalha essas funcionalidades, apresentando as histórias de usuário que compõem a estrutura do MVP.
-
-</div>
+Este tópico abrange os requisitos funcionais essenciais do mínimo produto viável (MVP), selecionados e definidos na dinâmica do sequenciador implementada durante o método *Lean Inception*. A Tabela 13 detalha essas funcionalidades, apresentando as histórias de usuário que compõem a estrutura do MVP.
 
 <p style="text-align: center;">Tabela 13: MVP do produto.</p>
 
@@ -300,9 +237,7 @@
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
-<div align="justify">
-
-&emsp;&emsp; Na definição das funcionalidades do MVP, aspectos como o valor de negócio, o benefício para o usuário e o esforço necessário para o desenvolvimento pela equipe foram cuidadosamente considerados. É importante destacar que os épicos de criação personalizada de lista de verificação e gerência de lista de verificação não foram incorporados no MVP.
+ Na definição das funcionalidades do MVP, aspectos como o valor de negócio, o benefício para o usuário e o esforço necessário para o desenvolvimento pela equipe foram cuidadosamente considerados. É importante destacar que os épicos de criação personalizada de lista de verificação e gerência de lista de verificação não foram incorporados no MVP.
 
 </div>
 
