@@ -1,7 +1,7 @@
 <br/>
 
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="../assets/PROTOTIPO.png" width="200" height="200" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/PROTOTIPO.png" width="200" height="200" />
 </div>
 
 <br/>
@@ -24,7 +24,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/01.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/01.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -33,7 +33,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/02.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/02.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -42,7 +42,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/03.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/03.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -51,7 +51,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/04.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/04.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -60,7 +60,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/05.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/05.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -69,7 +69,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/06.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/06.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -78,7 +78,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/08.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/08.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -88,7 +88,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/07.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/07.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -98,7 +98,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/11.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/11.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
@@ -108,7 +108,7 @@ Abaixo encontram-se todas as telas do sistema.
 
 <br/>
 <div align="center">
-    <img src="../assets/telas/12.png" width="100%" height="100%" />
+    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/12.png" width="100%" height="100%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
