@@ -5,6 +5,7 @@
 </div>
 
 <br/>
+
 Neste documento, é apresentado de forma detalhada a condução do <i>Lean Inception</i>, documentando cada fase e os artefatos gerados ao longo do caminho.
 
 ## Histórico de versões

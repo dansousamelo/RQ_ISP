@@ -5,6 +5,7 @@
 </div>
 
 <br/>
+
 A seguir, apresenta-se uma especificação clara e concisa dos tópicos relacionados ao Documento de Arquitetura.
 
 ## Histórico de versões
