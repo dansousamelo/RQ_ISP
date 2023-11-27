@@ -5,7 +5,7 @@
 </div>
 
 <br/>
-<p align="flex-direction: column; justify">Neste documento, é apresentado de forma detalhada a condução do <i>Lean Inception<i>, documentando cada fase e os artefatos gerados ao longo do caminho.</p>
+<p align="flex-direction: column; justify">Neste documento, é apresentado de forma detalhada a condução do <i>Lean Inception</i>, documentando cada fase e os artefatos gerados ao longo do caminho.</p>
 
 ## Histórico de versões
 
@@ -19,9 +19,9 @@
 
 &emsp;&emsp; A otimização da eficácia do Lean Inception é alcançada por meio de uma abordagem colaborativa com o cliente, destacando a importância da perspectiva do cliente na compreensão do produto pela equipe (Caroli, 2018). Validações contínuas foram realizadas durante o desenvolvimento do artefato para alinhar as visões da equipe e do proprietário do produto. Em vez das longas reuniões ao longo de uma semana preconizadas pelo Lean Inception, a equipe escolheu parear uma vez por semana por uma hora, demonstrando flexibilidade diante das dificuldades de conciliar horários. Essa abordagem mais acessível e eficiente foi adotada para garantir a participação ativa de todos os membros da equipe.
 
-&emsp;&emsp; Para alcançar esse objetivo, utilizou-se uma combinação de tarefas síncronas e assíncronas. Atividades síncronas estimularam discussões e facilitaram a criação de determinados artefatos. Nas atividades assíncronas, os participantes preencheram os artefatos designados como tarefas a serem realizadas fora do horário das reuniões. A Tabela 1 ilustra a realização das dinâmicas do <i>workshop<i> e suas datas.
+&emsp;&emsp; Para alcançar esse objetivo, utilizou-se uma combinação de tarefas síncronas e assíncronas. Atividades síncronas estimularam discussões e facilitaram a criação de determinados artefatos. Nas atividades assíncronas, os participantes preencheram os artefatos designados como tarefas a serem realizadas fora do horário das reuniões. A Tabela 1 ilustra a realização das dinâmicas do <i>workshop</i> e suas datas.
 
-<p style="text-align:center;">Tabela 1: Cronograma da realização das dinâmicas do <i>Lean Inception<i>.</p>
+<p style="text-align: center;">Tabela 1: Cronograma da realização das dinâmicas do <i>Lean Inception</i>.</p>
 
 | Dinâmica do Lean Inception                           | Semana 3 | Semana 4 | Semana 5  | Semana 6 | Semana 7 | Semana 8|
 |------------------------------------------------------|----------|-----------|----------|----------|----------|---------|
@@ -34,7 +34,7 @@
 | Sequenciador                                         |          |           |          |          |          |    x    |
 | Canvas MVP                                           |          |           |          |          |          |    x    |
 
-<p style="font-style: italic; text-align:center;">Fonte: Os próprios autores.</p>
+<p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 &emsp;&emsp; As seguintes dinâmicas foram realizadas pela equipe durante as etapas mostradas na Tabela 1:
 
@@ -127,14 +127,14 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 8: <i>Brainstorming<i> de funcionalidades da ferramenta RQ_ISP.</p>
+    <p>Figura 8: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</p>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/BRAINSTORMING-1.png" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 9: <i>Brainstorming<i> de funcionalidades da ferramenta RQ_ISP.</p>
+    <p>Figura 9: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</p>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/BRAINSTORMING-2.png" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
