@@ -14,15 +14,15 @@
 
 ## Histórico de versões
 
-| Data | Autor | Versão | Alteração |   
-| ---- | ------ | ------ | ------ |
-| 23/09/2020 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de heurísticas de usabilidade |
+| Data       | Autor                        | Versão | Alteração                                       |
+| ---------- | ---------------------------- | ------ | ----------------------------------------------- |
+| 23/09/2020 | Daniel Veras e Paulo Almeida | 1.0    | Criando documento de heurísticas de usabilidade |
 
 ## Heurísticas de Nielsen
 
 <div align="justify">
 
-&emsp;&emsp; As heurísticas de Nielsen referem-se a um conjunto de diretrizes e princípios de usabilidade criados por Jakob Nielsen, um renomado especialista em experiência do usuário. Essas heurísticas são um guia geral para avaliar a usabilidade de interfaces de usuário, ajudando a identificar problemas e áreas de melhoria em sistemas, aplicativos e sites. Elas fornecem critérios e princípios que os designers e desenvolvedores podem seguir para criar interfaces mais intuitivas e eficazes. As heurísticas de Nielsen abrangem diversos aspectos da usabilidade, incluindo a navegação, a clareza das informações, a consistência e a eficiência do sistema, entre outros. Portanto, são uma ferramenta valiosa para melhorar a experiência do usuário em produtos digitais
+As heurísticas de Nielsen referem-se a um conjunto de diretrizes e princípios de usabilidade criados por Jakob Nielsen, um renomado especialista em experiência do usuário. Essas heurísticas são um guia geral para avaliar a usabilidade de interfaces de usuário, ajudando a identificar problemas e áreas de melhoria em sistemas, aplicativos e sites. Elas fornecem critérios e princípios que os designers e desenvolvedores podem seguir para criar interfaces mais intuitivas e eficazes. As heurísticas de Nielsen abrangem diversos aspectos da usabilidade, incluindo a navegação, a clareza das informações, a consistência e a eficiência do sistema, entre outros. Portanto, são uma ferramenta valiosa para melhorar a experiência do usuário em produtos digitais
 
 </div>
 
@@ -43,7 +43,6 @@
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
-
 <br/>
 <div align="center">
     <p>Figura 2: Indicador de status de inspeção</p>
@@ -51,16 +50,14 @@
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
-
 ### Compatibilidade entre o sistema e o mundo real
 
 <div align="justify">
-&emsp;&emsp; A interface do sistema deve refletir o mundo real dos usuários, utilizando terminologia e conceitos familiares, priorizando o reconhecimento em vez da memorização. Na aplicação, a utilização de ícones desempenha um papel fundamental na representação de ações que reproduzem interações do mundo real.
+A interface do sistema deve refletir o mundo real dos usuários, utilizando terminologia e conceitos familiares, priorizando o reconhecimento em vez da memorização. Na aplicação, a utilização de ícones desempenha um papel fundamental na representação de ações que reproduzem interações do mundo real.
 
-&emsp;&emsp; Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos usuários uma maneira intuitiva de interagir com elementos visuais. Além disso, na imagem 4, são apresentados ícones específicos que simplificam a criação de inspeções e o acesso às listas de inspeções, contribuindo para uma experiência de usuário mais fluida e coerente.
+Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos usuários uma maneira intuitiva de interagir com elementos visuais. Além disso, na imagem 4, são apresentados ícones específicos que simplificam a criação de inspeções e o acesso às listas de inspeções, contribuindo para uma experiência de usuário mais fluida e coerente.
 
 </div>
-
 
 <br/>
 <div align="center">
@@ -68,7 +65,6 @@
     <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ARRASTAR.png" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
-
 
 <br/>
 <div align="center">
@@ -78,9 +74,10 @@
 </div>
 
 ### Controle e liberdade do usuário
+
 <div align="justify">
 
-&emsp;&emsp; Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
+Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
 
 </div>
 
@@ -90,7 +87,6 @@
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N03VOLTAR.png" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
-
 
 <br/>
 <div align="center">
@@ -106,20 +102,21 @@
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
 
-
-
 ### Consistência e Padrões
+
 <div align="justify">
-&emsp;&emsp; A aplicação consistente de padrões de design em toda a interface do sistema é recomendada para proporcionar uma compreensão rápida e precisa. O sistema adota uma abordagem abrangente para incorporar esses princípios, mantendo um layout uniforme em todas as páginas do aplicativo ou site. Isso significa que elementos como botões de ação e menus são dispostos de maneira consistente em todas as páginas, tornando a compreensão e a navegação mais acessíveis aos usuários. Além disso, a aplicação uniforme de cores, ícones e tipografia facilita a identificação rápida das funções dos elementos da interface.
+A aplicação consistente de padrões de design em toda a interface do sistema é recomendada para proporcionar uma compreensão rápida e precisa. O sistema adota uma abordagem abrangente para incorporar esses princípios, mantendo um layout uniforme em todas as páginas do aplicativo ou site. Isso significa que elementos como botões de ação e menus são dispostos de maneira consistente em todas as páginas, tornando a compreensão e a navegação mais acessíveis aos usuários. Além disso, a aplicação uniforme de cores, ícones e tipografia facilita a identificação rápida das funções dos elementos da interface.
 
-&emsp;&emsp; Outro aspecto relevante é a adoção de convenções de interação amplamente reconhecidas, como gestos familiares e cliques padrão, aumentando a previsibilidade das ações dos usuários. Essa abordagem também se estende ao feedback consistente, com indicadores visuais e animações utilizados de maneira uniforme para comunicar mensagens de sucesso, erro ou carregamento em todo o aplicativo.
+Outro aspecto relevante é a adoção de convenções de interação amplamente reconhecidas, como gestos familiares e cliques padrão, aumentando a previsibilidade das ações dos usuários. Essa abordagem também se estende ao feedback consistente, com indicadores visuais e animações utilizados de maneira uniforme para comunicar mensagens de sucesso, erro ou carregamento em todo o aplicativo.
 
-&emsp;&emsp; Além disso, a organização do conteúdo, a disposição lógica das informações e a consistência no uso do idioma são aspectos que enriquecem a experiência do usuário de maneira integrada.
+Além disso, a organização do conteúdo, a disposição lógica das informações e a consistência no uso do idioma são aspectos que enriquecem a experiência do usuário de maneira integrada.
+
 </div>
 
 ### Prevenção de erros
+
 <div align="justify">
-&emsp;&emsp; Projetar interfaces à prova de erros, que ofereçam confirmações antes de ações irreversíveis ocorrerem, é enfatizado na concepção do sistema. Um exemplo concreto dessa abordagem pode ser observado na Figura 8, que representa um formulário elaborado. Este formulário inclui campos obrigatórios e campos opcionais, visando assegurar que os usuários possam interagir com o sistema de maneira eficaz, reduzindo ao máximo a possibilidade de erros durante o preenchimento.
+Projetar interfaces à prova de erros, que ofereçam confirmações antes de ações irreversíveis ocorrerem, é enfatizado na concepção do sistema. Um exemplo concreto dessa abordagem pode ser observado na Figura 8, que representa um formulário elaborado. Este formulário inclui campos obrigatórios e campos opcionais, visando assegurar que os usuários possam interagir com o sistema de maneira eficaz, reduzindo ao máximo a possibilidade de erros durante o preenchimento.
 
 </div>
 
@@ -142,32 +139,37 @@
 </div>
 
 ### Reconhecimento ao invés de memorização
+
 <div align="justify">
 &emsp;&emsp;Os sistemas devem ser projetados de forma que as informações necessárias estejam visíveis e disponíveis, em vez de exigir que os usuários memorizem informações. O sistema foi desenvolvido com o objetivo de fornecer aos usuários a capacidade de reconhecer ações e opções, em vez de exigir que eles memorizem informações específicas. Isso significa que os elementos da interface foram projetados de forma a serem intuitivos e facilmente compreensíveis. Por exemplo, ícones descritivos são usados para representar claramente a ação ou função que eles realizam, evitando a necessidade de memorização de seu significado.
 
 &emsp;&emsp;Acrescentando a isso, a organização lógica de informações agrupa elementos relacionados e dispõe-os de maneira intuitiva, permitindo que os usuários encontrem facilmente o que estão procurando. Essas abordagens reduzem a carga cognitiva associada à memorização de procedimentos ou termos, possibilitando que os usuários naveguem e interajam de forma mais fluida e sem a necessidade de memorizar complexos conjuntos de regras ou comandos.
+
 </div>
 
 ### Flexibilidade e eficiência de uso
+
 <div align="justify">
 &emsp;&emsp;A criação de sistemas eficazes tanto para usuários novatos quanto para experientes é incentivada. O sistema foi projetado com a flexibilidade e eficiência de uso em mente, oferecendo aos usuários a capacidade de interagir de maneira eficaz e personalizada. Foram incorporados atalhos de teclado que permitem a execução rápida de ações comuns, além da possibilidade de reordenar elementos na interface de acordo com as preferências individuais dos usuários. Essas funcionalidades agilizam a interação com o sistema, tornando-o mais adaptável às necessidades de cada usuário e proporcionando uma experiência de uso eficiente e personalizada.
 </div>
 
 ### Estética e design minimalista
+
 <div align="justify">
 &emsp;&emsp;O sistema implementa uma abordagem de design minimalista que se reflete em sua interface. Isso se traduz em uma interface limpa e organizada, onde a simplicidade é a chave. Para alcançar esse objetivo, utiliza-se uma paleta de cores minimalista, com tons sutis e poucas variações, criando um visual elegante e agradável. A tipografia utilizada é clara e legível, proporcionando uma experiência de leitura agradável para os usuários. O espaçamento entre elementos é cuidadosamente ajustado, evitando qualquer sensação de aglomeração visual e tornando a interação mais agradável.
 
 &emsp;&emsp;Outro aspecto importante desse design minimalista é a escrita de textos concisos e diretos, evitando o excesso de informações que possam sobrecarregar o usuário. O contraste de cores é usado de forma estratégica para destacar elementos importantes, direcionando a atenção do usuário para onde ela é necessária. Essa abordagem de design também se concentra na funcionalidade, priorizando a usabilidade sobre elementos decorativos ou desnecessários, garantindo que a experiência do usuário seja intuitiva e eficaz.
+
 </div>
 
 ### Ajuda aos usuários a reconhecer, diagnosticar e recuperar erros
+
 <div align="justify">
 &emsp;&emsp;Os sistemas devem ser capazes de informar claramente aos usuários quando ocorrem erros e fornecer orientações para corrigi-los. O sistema contempla a ajuda aos usuários para reconhecer e diagnosticar erros por meio da implementação de mensagens de erro claras e descritivas. Essas mensagens são cuidadosamente elaboradas para explicar de maneira simples e direta qualquer problema que o usuário possa encontrar durante sua interação com o sistema. Ao apresentar mensagens de erro informativas, o sistema capacita os usuários a compreenderem a natureza do erro e, assim, tomar medidas apropriadas para resolvê-lo. Essa abordagem visa tornar a experiência do usuário mais transparente e facilitar a resolução de problemas, melhorando a usabilidade e a eficácia geral do sistema.
 
 &emsp;&emsp;A Figura 10 ilustra um exemplo de mensagem informada ao usuário quando o mesmo coloca o código de acesso errado.
 
 </div>
-
 
 <br/>
 <div align="center">
@@ -186,7 +188,7 @@
 
 <div align="justify">
 
-&emsp;&emsp; A definição de cores em sistemas é uma etapa crucial em diversas áreas, que vai desde o design gráfico até a computação gráfica e o design de produtos. Essa definição possibilita especificar e comunicar de maneira precisa as características cromáticas, desempenhando um papel fundamental em aplicações gráficas. Além disso, enfatiza-se a importância de um sistema de cores bem definido para garantir a fidelidade na reprodução de cores em diferentes dispositivos e mídias. Dessa forma, a definição de cores em sistemas desempenha um papel essencial na manutenção da consistência e na garantia da precisão da representação cromática em diversas aplicações.
+A definição de cores em sistemas é uma etapa crucial em diversas áreas, que vai desde o design gráfico até a computação gráfica e o design de produtos. Essa definição possibilita especificar e comunicar de maneira precisa as características cromáticas, desempenhando um papel fundamental em aplicações gráficas. Além disso, enfatiza-se a importância de um sistema de cores bem definido para garantir a fidelidade na reprodução de cores em diferentes dispositivos e mídias. Dessa forma, a definição de cores em sistemas desempenha um papel essencial na manutenção da consistência e na garantia da precisão da representação cromática em diversas aplicações.
 
 </div>
 
@@ -201,14 +203,13 @@
 
 <div align="justify">
 
-&emsp;&emsp; A acessibilidade na construção de software desempenha um papel crucial na garantia de que os aplicativos e sistemas digitais sejam acessíveis a todos os usuários, independentemente de suas capacidades individuais. A consideração da acessibilidade desde as fases iniciais do desenvolvimento de software é fundamental para a criação de produtos tecnológicos inclusivos, implicando projetar interfaces de usuário compatíveis com tecnologias assistivas e que sigam diretrizes de acessibilidade, como as estabelecidas no conjunto de normas Web Content Accessibility Guidelines (WCAG).
+A acessibilidade na construção de software desempenha um papel crucial na garantia de que os aplicativos e sistemas digitais sejam acessíveis a todos os usuários, independentemente de suas capacidades individuais. A consideração da acessibilidade desde as fases iniciais do desenvolvimento de software é fundamental para a criação de produtos tecnológicos inclusivos, implicando projetar interfaces de usuário compatíveis com tecnologias assistivas e que sigam diretrizes de acessibilidade, como as estabelecidas no conjunto de normas Web Content Accessibility Guidelines (WCAG).
 
-&emsp;&emsp; O valor de contraste é um conceito fundamental em áreas como design gráfico e arquitetura, sendo definido como a diferença perceptível entre os elementos visuais presentes em uma composição, abrangendo aspectos como cores, formas, tamanhos e texturas. Ele desempenha um papel crucial na comunicação visual, direcionando a atenção do espectador, estabelecendo hierarquias de informações e transmitindo emoções. Quando se deseja chamar a atenção de forma impactante, o contraste é a ferramenta mais eficaz, criando destaque e interesse visual. Arnheim também destacou a importância do contraste ao afirmar que ele capacita os designers a tornar elementos visuais distintos, conferindo dinamismo à composição e reforçando sua eficácia comunicativa.
+O valor de contraste é um conceito fundamental em áreas como design gráfico e arquitetura, sendo definido como a diferença perceptível entre os elementos visuais presentes em uma composição, abrangendo aspectos como cores, formas, tamanhos e texturas. Ele desempenha um papel crucial na comunicação visual, direcionando a atenção do espectador, estabelecendo hierarquias de informações e transmitindo emoções. Quando se deseja chamar a atenção de forma impactante, o contraste é a ferramenta mais eficaz, criando destaque e interesse visual. Arnheim também destacou a importância do contraste ao afirmar que ele capacita os designers a tornar elementos visuais distintos, conferindo dinamismo à composição e reforçando sua eficácia comunicativa.
 
-&emsp;&emsp; O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta útil para verificar o contraste de cores. A Figura 12 ilustra claramente o contraste entre o plano de fundo e os elementos superpostos sobre ele.
+O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta útil para verificar o contraste de cores. A Figura 12 ilustra claramente o contraste entre o plano de fundo e os elementos superpostos sobre ele.
 
 </div>
-
 
 <br/>
 <div align="center">
@@ -219,8 +220,8 @@
 
 ## Referências
 
-* MACK, R.; NIELSEN, J. Métodos de Inspeção de Usabilidade. ACM SIGCHI Bulletin, v. 25, n. 1, p. 28-33, Janeiro de 1993. DOI: 10.1145/157203.157207.
+- MACK, R.; NIELSEN, J. Métodos de Inspeção de Usabilidade. ACM SIGCHI Bulletin, v. 25, n. 1, p. 28-33, Janeiro de 1993. DOI: 10.1145/157203.157207.
 
-* Norman, D. A., & Draper, S. W. (1986). User Centered System Design: New Perspectives on Human-computer Interaction. Lawrence Erlbaum Associates.
+- Norman, D. A., & Draper, S. W. (1986). User Centered System Design: New Perspectives on Human-computer Interaction. Lawrence Erlbaum Associates.
 
-* WADDELL, C. et al. Constructing Accessible Web Sites. Apress, 2003.
+- WADDELL, C. et al. Constructing Accessible Web Sites. Apress, 2003.
