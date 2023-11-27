@@ -5,7 +5,7 @@
 </div>
 
 <br/>
-<p align="justify">A seguir, apresenta-se uma especificação clara e concisa dos tópicos relacionados ao Documento de Arquitetura.</p>
+A seguir, apresenta-se uma especificação clara e concisa dos tópicos relacionados ao Documento de Arquitetura.
 
 ## Histórico de versões
 
@@ -57,9 +57,9 @@ O diagrama de pacotes do *frontend* representa a organização modular dos compo
 
 <br/>
 <div align="center">
-    <p>Figura 1: Diagrama de pacotes do <i>frontend</i>.</p>
+    <p>Figura 1: Diagrama de pacotes do <i>frontend</i>.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -86,9 +86,9 @@ O diagrama de pacotes do *backend* é uma representação visual da estrutura or
 
 <br/>
 <div align="center">
-    <p>Figura 2: Diagrama de pacotes do <i>backend</i>.</p>
+    <p>Figura 2: Diagrama de pacotes do <i>backend</i>.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -151,9 +151,9 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 
 <br/>
 <div align="center">
-    <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</p>
+    <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 

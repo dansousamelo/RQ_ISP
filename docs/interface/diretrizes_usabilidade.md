@@ -8,7 +8,7 @@
 
 <div align="justify">
 
-<p align="justify">O objetivo deste documento é introduzir diretrizes de usabilidade com foco nas heurísticas de Nielsen e no contraste de cores. Essas diretrizes, inspiradas nas recomendações de Nielsen, serão integradas ao sistema, oferecendo orientações e melhores práticas para o desenvolvimento de interfaces e sistemas que proporcionem uma experiência do usuário mais aprimorada e eficaz no contexto da plataforma RQ_ISP.</p>
+O objetivo deste documento é introduzir diretrizes de usabilidade com foco nas heurísticas de Nielsen e no contraste de cores. Essas diretrizes, inspiradas nas recomendações de Nielsen, serão integradas ao sistema, oferecendo orientações e melhores práticas para o desenvolvimento de interfaces e sistemas que proporcionem uma experiência do usuário mais aprimorada e eficaz no contexto da plataforma RQ_ISP.
 
 </div>
 
@@ -38,39 +38,41 @@ As heurísticas de Nielsen referem-se a um conjunto de diretrizes e princípios 
 
 <br/>
 <div align="center">
-    <p>Figura 1: Botão de entrada com indicador de carregamento.</p>
+    <figure>Figura 1: Botão de entrada com indicador de carregamento.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/N01CARREGAR.png" width="60%" height="60%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 2: Indicador de status de inspeção</p>
+    <figure>Figura 2: Indicador de status de inspeção</figure>
     <img width="30%" height="30%" src="https://dansousamelo.github.io/RQ_ISP/assets/N01STATUS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Compatibilidade entre o sistema e o mundo real
 
 <div align="justify">
 A interface do sistema deve refletir o mundo real dos usuários, utilizando terminologia e conceitos familiares, priorizando o reconhecimento em vez da memorização. Na aplicação, a utilização de ícones desempenha um papel fundamental na representação de ações que reproduzem interações do mundo real.
+A interface do sistema deve refletir o mundo real dos usuários, utilizando terminologia e conceitos familiares, priorizando o reconhecimento em vez da memorização. Na aplicação, a utilização de ícones desempenha um papel fundamental na representação de ações que reproduzem interações do mundo real.
 
+Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos usuários uma maneira intuitiva de interagir com elementos visuais. Além disso, na imagem 4, são apresentados ícones específicos que simplificam a criação de inspeções e o acesso às listas de inspeções, contribuindo para uma experiência de usuário mais fluida e coerente.
 Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos usuários uma maneira intuitiva de interagir com elementos visuais. Além disso, na imagem 4, são apresentados ícones específicos que simplificam a criação de inspeções e o acesso às listas de inspeções, contribuindo para uma experiência de usuário mais fluida e coerente.
 
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 3: Indicador de status de inspeção</p>
+    <figure>Figura 3: Indicador de status de inspeção</figure>
     <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ARRASTAR.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 4: Ícones para criar e acessar listas de inspeção, respectivamente.</p>
+    <figure>Figura 4: Ícones para criar e acessar listas de inspeção, respectivamente.</figure>
     <img width="20%" height="20%" src="https://dansousamelo.github.io/RQ_ISP/assets/N02ICONES.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Controle e liberdade do usuário
@@ -78,28 +80,29 @@ Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos u
 <div align="justify">
 
 Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
+Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
 
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 5: Detalhes de uma inspeção e da página atual do usuário.</p>
+    <figure>Figura 5: Detalhes de uma inspeção e da página atual do usuário.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N03VOLTAR.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 6: Toasts de sucesso e erro, respectivamente.</p>
+    <figure>Figura 6: Toasts de sucesso e erro, respectivamente.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/TOASTS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <br/>
 <div align="center">
-    <p>Figura 7: Diálogo de erro.</p>
+    <figure>Figura 7: Diálogo de erro.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/ERROMODAL.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Consistência e Padrões
@@ -122,9 +125,9 @@ Projetar interfaces à prova de erros, que ofereçam confirmações antes de aç
 
 <br/>
 <div align="center">
-    <p>Figura 8: Formulário para preencher informações de uma inspeção.</p>
+    <figure>Figura 8: Formulário para preencher informações de uma inspeção.</figure>
     <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/N05OBRIGATORIO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <div align="justify">
@@ -133,9 +136,9 @@ Projetar interfaces à prova de erros, que ofereçam confirmações antes de aç
 
 <br/>
 <div align="center">
-    <p>Figura 9: Confirmar ação de deleção de uma inspeção.</p>
+    <figure>Figura 9: Confirmar ação de deleção de uma inspeção.</figure>
     <img width="60%" height="60%" src="https://dansousamelo.github.io/RQ_ISP/assets/DELETARINSPECAO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Reconhecimento ao invés de memorização
@@ -173,9 +176,9 @@ Projetar interfaces à prova de erros, que ofereçam confirmações antes de aç
 
 <br/>
 <div align="center">
-    <p>Figura 10: Formulário para preencher informações de uma inspeção.</p>
+    <figure>Figura 10: Formulário para preencher informações de uma inspeção.</figure>
     <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/N09CODIGOINVALIDO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Ajuda e documentação
@@ -194,9 +197,9 @@ A definição de cores em sistemas é uma etapa crucial em diversas áreas, que 
 
 <br/>
 <div align="center">
-    <p>Figura 11: Cores do sistema.</p>
-    <img width="50%" height="50%" src="../assets/COLORS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure>Figura 11: Cores do sistema.</figure>
+    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/COLORS.png" />
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ### Contraste
@@ -213,9 +216,9 @@ O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta �
 
 <br/>
 <div align="center">
-    <p>Figura 12: Contraste entre o plano de fundo e os elementos superpostos sobre ele..</p>
-    <img width="50%" height="50%" src="../assets/CONTRASTE.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure>Figura 12: Contraste entre o plano de fundo e os elementos superpostos sobre ele..</figure>
+    <img width="50%" height="50%" src="https://dansousamelo.github.io/RQ_ISP/assets/CONTRASTE.png" />
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ## Referências
