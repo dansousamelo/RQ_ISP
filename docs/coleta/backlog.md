@@ -1,7 +1,7 @@
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <img src="../assets/backlog/BACKLOG-ICON.png" width="200" height="200" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/backlog/BACKLOG-ICON.png" width="200" height="200" />
 </div>
 
 <br/>
