@@ -57,7 +57,7 @@ O diagrama de pacotes do *frontend* representa a organização modular dos compo
 
 <br/>
 <div align="center">
-    <p>Figura1: Diagrama de pacotes do <i>frontend</i>.</p>
+    <p>Figura 1: Diagrama de pacotes do <i>frontend</i>.</p>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
@@ -86,7 +86,7 @@ O diagrama de pacotes do *backend* é uma representação visual da estrutura or
 
 <br/>
 <div align="center">
-    <p>Figura2: Diagrama de pacotes do <i>backend</i>.</p>
+    <p>Figura 2: Diagrama de pacotes do <i>backend</i>.</p>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%" />
     <p style="font-style: italic;">Fonte: Os próprios autores.</p>
 </div>
