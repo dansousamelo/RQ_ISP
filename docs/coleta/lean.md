@@ -5,7 +5,7 @@
 </div>
 
 <br/>
-<p align="flex-direction: column; justify">Neste documento, é apresentado de forma detalhada a condução do <i>Lean Inception</i>, documentando cada fase e os artefatos gerados ao longo do caminho.</p>
+Neste documento, é apresentado de forma detalhada a condução do <i>Lean Inception</i>, documentando cada fase e os artefatos gerados ao longo do caminho.
 
 ## Histórico de versões
 
@@ -21,7 +21,7 @@
 
 &emsp;&emsp; Para alcançar esse objetivo, utilizou-se uma combinação de tarefas síncronas e assíncronas. Atividades síncronas estimularam discussões e facilitaram a criação de determinados artefatos. Nas atividades assíncronas, os participantes preencheram os artefatos designados como tarefas a serem realizadas fora do horário das reuniões. A Tabela 1 ilustra a realização das dinâmicas do <i>workshop</i> e suas datas.
 
-<p style="text-align: center;">Tabela 1: Cronograma da realização das dinâmicas do <i>Lean Inception</i>.</p>
+<figure style="text-align: center;">Tabela 1: Cronograma da realização das dinâmicas do <i>Lean Inception</i>.</figure>
 
 | Dinâmica do Lean Inception                           | Semana 3 | Semana 4 | Semana 5  | Semana 6 | Semana 7 | Semana 8|
 |------------------------------------------------------|----------|-----------|----------|----------|----------|---------|
@@ -34,7 +34,7 @@
 | Sequenciador                                         |          |           |          |          |          |    x    |
 | Canvas MVP                                           |          |           |          |          |          |    x    |
 
-<p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
+<figure style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</figure>
 
 &emsp;&emsp; As seguintes dinâmicas foram realizadas pela equipe durante as etapas mostradas na Tabela 1:
 
@@ -48,9 +48,9 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 1: Visão do produto da ferramenta RQ_ISP.</p>
+    <figure>Figura 1: Visão do produto da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/VISAO-DO-PRODUTO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -62,9 +62,9 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 2: "É - Não é - Faz - Não faz" da ferramenta RQ_ISP.</p>
+    <figure>Figura 2: "É - Não é - Faz - Não faz" da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/E-NAO_E.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -76,9 +76,9 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 3: Objetivos do produto da ferramenta RQ_ISP.</p>
+    <figure>Figura 3: Objetivos do produto da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/OBJETIVOS-DO-PRODUTO.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -90,32 +90,32 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 4: Persona 1 da ferramenta RQ_ISP.</p>
+    <figure>Figura 4: Persona 1 da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/PERSONA-1.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 5: Persona 2 da ferramenta RQ_ISP.</p>
+    <figure>Figura 5: Persona 2 da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/PERSONA-2.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 6: Jornada de usuário 1 da ferramenta RQ_ISP.</p>
+    <figure>Figura 6: Jornada de usuário 1 da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/JORNADA-1.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 7: Jornada de usuário 2 da ferramenta RQ_ISP.</p>
+    <figure>Figura 7: Jornada de usuário 2 da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/JORNADA-2.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -127,16 +127,16 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 8: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</p>
+    <figure>Figura 8: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/BRAINSTORMING-1.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 9: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</p>
+    <figure>Figura 9: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/BRAINSTORMING-2.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -150,23 +150,23 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 10: Lógica simbólica da atividade Revisão técnica, de negócio e UX.</p>
+    <figure>Figura 10: Lógica simbólica da atividade Revisão técnica, de negócio e UX.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/TEUX-1.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 11: Revisão técnica, de negócio e UX da ferramenta RQ_ISP.</p>
+    <figure>Figura 11: Revisão técnica, de negócio e UX da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/TEUX-2.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 12: Revisão técnica, de negócio e UX da ferramenta RQ_ISP.</p>
+    <figure>Figura 12: Revisão técnica, de negócio e UX da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/TEUX-3.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -179,30 +179,30 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 13: Sequênciador da ferramenta RQ_ISP.</p>
+    <figure>Figura 13: Sequênciador da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-1.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 14: Sequênciador da ferramenta RQ_ISP.</p>
+    <figure>Figura 14: Sequênciador da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-2.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 15: Sequênciador da ferramenta RQ_ISP.</p>
+    <figure>Figura 15: Sequênciador da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-3.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 16: Sequênciador da ferramenta RQ_ISP.</p>
+    <figure>Figura 16: Sequênciador da ferramenta RQ_ISP.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-4.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -214,9 +214,9 @@
 
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <p>Figura 17: <i>MVP Canvas da ferramenta RQ_ISP</i>.</p>
+    <figure>Figura 17: <i>MVP Canvas da ferramenta RQ_ISP</i>.</figure>
     <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/MVP-CANVAS.png" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 ## Referências
