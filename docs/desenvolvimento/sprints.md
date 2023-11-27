@@ -98,4 +98,6 @@ Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao c
 - **Daniel**: Concluir tarefas e aprimorar conteúdos sobre programação backend.
 
 
+## Referências
+
  * Schwaber, K.; Beedle, M. Agile Software Development with Scrum. Pearson, 2002.
