@@ -5,7 +5,8 @@
 </div>
 
 <br/>
-<p align="justify">Protótipos de alta fidelidade são uma peça central no design e desenvolvimento de produtos, atuando como uma ponte entre as ideias conceituais e a realidade tangível. Eles são representações quase finais de um produto, que simulam a aparência, a sensação e, muitas vezes, a funcionalidade do design pretendido. Ao criar um protótipo de alta fidelidade, designers e desenvolvedores buscam oferecer uma experiência que se aproxime o máximo possível do produto final, permitindo testar interações, fluxos de usuário e interfaces gráficas de forma detalhada e realista.</p>
+
+Protótipos de alta fidelidade são uma peça central no design e desenvolvimento de produtos, atuando como uma ponte entre as ideias conceituais e a realidade tangível. Eles são representações quase finais de um produto, que simulam a aparência, a sensação e, muitas vezes, a funcionalidade do design pretendido. Ao criar um protótipo de alta fidelidade, designers e desenvolvedores buscam oferecer uma experiência que se aproxime o máximo possível do produto final, permitindo testar interações, fluxos de usuário e interfaces gráficas de forma detalhada e realista.
 
 ## Histórico de versões
 
@@ -15,17 +16,18 @@
 
 
 ## Telas
-
-Abaixo encontram-se todas as telas do sistema.
+<div align="justify">
+&emsp;&emsp;Abaixo encontram-se todas as telas do sistema.
+<br/>
 
 ### Começar inspeção
 
-
+</div>
 
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/01.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -34,7 +36,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/02.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -43,7 +45,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/03.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -52,7 +54,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/04.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -61,7 +63,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/05.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -70,7 +72,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/06.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -79,7 +81,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/08.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -89,7 +91,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/07.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -99,7 +101,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/11.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
@@ -109,7 +111,7 @@ Abaixo encontram-se todas as telas do sistema.
 <br/>
 <div align="center">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/12.png" width="100%" height="100%" />
-    <p style="font-style: italic;">Fonte: Os próprios autores.</p>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
