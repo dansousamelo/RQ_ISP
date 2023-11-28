@@ -13,6 +13,7 @@ Neste documento, é apresentado de forma detalhada a condução do <i>Lean Incep
 | Data       | Autor                        | Versão | Alteração                           |
 | ---------- | ---------------------------- | ------ | ----------------------------------- |
 | 26/11/2023 | Daniel Veras e Paulo Almeida | 1.0    | Criando documento do Lean Inception |
+| 28/11/2023 | Daniel Veras e Paulo Almeida | 1.0    | Corrigindo sequênciador |
 
 ## Introdução
 
@@ -200,7 +201,8 @@ Em seguida, a equipe elaborou o sequenciador, fundamentado nos valores de esfor�
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <figure>Figura 14: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-2.png" />
+    <img src="../assets/lean/SEQUENCIADOR-2.png" />
+    <!-- <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-2.png" /> -->
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
