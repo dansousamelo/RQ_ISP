@@ -201,8 +201,7 @@ Em seguida, a equipe elaborou o sequenciador, fundamentado nos valores de esfor�
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <figure>Figura 14: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="../assets/lean/SEQUENCIADOR-2.png" />
-    <!-- <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-2.png" /> -->
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-2.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
