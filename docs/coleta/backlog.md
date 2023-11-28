@@ -12,6 +12,7 @@
 | Data | Autor | Versão | Alteração |   
 | ---- | ------ | ------ | ------ |
 | 27/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento do Product Backlog |
+| 28/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Corrigindo histórias de usuário |
 
 ## Introdução
 O *Product Backlog*, ou *Backlog* do produto, é um conceito fundamental na metodologia ágil, especialmente no framework *Scrum*. Trata-se de uma lista dinâmica e prioritizada de funcionalidades, melhorias e requisitos que compõem o produto a ser desenvolvido. Os itens no *Product Backlog* podem variar em termos de complexidade, esforço necessário para implementação e valor para o usuário final. Eles são frequentemente descritos em termos de histórias de usuário, que são pequenas narrativas centradas no usuário que descrevem uma funcionalidade desejada (Schwaber; Sutherland, 2017).
@@ -58,6 +59,7 @@ O épico de gerência de inspeção de artefatos concentra-se no controle e supe
 | HU13 | Eu, como usuário, gostaria de buscar inspeções específicas para encontrar rapidamente a informação que preciso. | 5 |
 | HU14 | Eu, como usuário, gostaria de adicionar, visualizar e editar cronogramas de inspeção para gerenciar melhor minhas atividades de inspeção. | 2 |
 | HU15 | Eu, como usuário, gostaria de filtrar a listagem de inspeções exibidas para encontrar facilmente as inspeções que me interessam. | 5 |
+| HU16 | Eu, como usuário, gostaria de visualizar uma inspeção ao finalizá-la para revisar e obter os resultados do processo que executei. | 5 |   
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -69,12 +71,13 @@ Dedicado ao núcleo do processo de inspeção, o épico de inspeção de artefat
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
-| HU16 | Eu, como usuário, gostaria de poder salvar uma inspeção completa, para registrar todas as informações relevantes após a conclusão da inspeção. | 5 |
-| HU17 | Eu, como usuário, gostaria de poder salvar uma inspeção incompleta, para retomá-la posteriormente. | 3 |
-| HU18 | Eu, como usuário, gostaria de visualizar o progresso de uma inspeção através do status de quantos itens já foram inspecionados, para acompanhar o andamento da inspeção. | 3 |
-| HU19 | Eu, como usuário, gostaria de poder cancelar uma inspeção, caso ela não possa ser concluída ou não seja mais necessária. | 2 |
-| HU20 | Eu, como usuário, gostaria de poder refazer uma inspeção, se for necessário revisá-la. | 3 |
-| HU21 | Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao criar uma inspeção, para orientar o processo de inspeção. | 2 |
+| HU17 | Eu, como usuário, gostaria de poder salvar uma inspeção completa, para registrar todas as informações relevantes após a conclusão da inspeção. | 5 |
+| HU18 | Eu, como usuário, gostaria de poder salvar uma inspeção incompleta, para retomá-la posteriormente. | 3 |
+| HU19 | Eu, como usuário, gostaria de visualizar o progresso de uma inspeção através do status de quantos itens já foram inspecionados, para acompanhar o andamento da inspeção. | 3 |
+| HU20 | Eu, como usuário, gostaria de poder cancelar uma inspeção, caso ela não possa ser concluída ou não seja mais necessária. | 2 |
+| HU21 | Eu, como usuário, gostaria de poder refazer uma inspeção, se for necessário revisá-la. | 3 |
+| HU22 | Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao criar uma inspeção, para orientar o processo de inspeção. | 2 |
+
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -85,11 +88,12 @@ O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão 
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
-| HU22 | Eu, como usuário, gostaria de adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção, para incluir os itens a serem inspecionados. | 5 |
-| HU23 | Eu, como usuário, gostaria de poder submeter arquivos para cada um dos itens ao realizar uma inspeção, para registrar informações relevantes. | 5 |
-| HU24 | Eu, como usuário, gostaria de poder anexar links externos, imagens e texto a um item de inspeção, para fornecer informações adicionais. | 5 |
-| HU25 | Eu, como usuário, gostaria de poder marcar requisitos existentes em arquivos submetidos, para identificar informações importantes. | 13 |
-| HU26 | Eu, como usuário, gostaria de poder limpar uma única marcação ou todas as marcações, para fazer correções quando necessário. | 3 |
+| HU23 | Eu, como usuário, gostaria de adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção, para incluir os itens a serem inspecionados. | 5 |
+| HU24 | Eu, como usuário, gostaria de poder submeter arquivos para cada um dos itens ao realizar uma inspeção, para registrar informações relevantes. | 5 |
+| HU25 | Eu, como usuário, gostaria de poder anexar links externos, imagens e texto a um item de inspeção, para fornecer informações adicionais. | 5 |
+| HU26 | Eu, como usuário, gostaria de poder marcar requisitos existentes em arquivos submetidos, para identificar informações importantes. | 13 |
+| HU27 | Eu, como usuário, gostaria de poder limpar uma única marcação ou todas as marcações, para fazer correções quando necessário. | 3 |
+
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -100,9 +104,9 @@ O épico de análise de resultados é orientado para a avaliação e a dissemina
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
-| HU27 | Eu, como usuário, gostaria de poder visualizar gráficos com a situação dos itens inspecionados, para obter *insights* visuais sobre os resultados da inspeção. | 8 |
-| HU28 | Eu, como usuário, gostaria de poder exportar os arquivos submetidos com as marcações realizadas, para ter um registro completo das informações. | 8 |
-| HU29 | Eu, como usuário, gostaria de poder exportar os dados obtidos em uma inspeção, para utilizar esses dados em outros contextos ou sistemas. | 13 |
+| HU28 | Eu, como usuário, gostaria de poder visualizar gráficos com a situação dos itens inspecionados, para obter *insights* visuais sobre os resultados da inspeção. | 8 |
+| HU29 | Eu, como usuário, gostaria de poder exportar os arquivos submetidos com as marcações realizadas, para ter um registro completo das informações. | 8 |
+| HU30 | Eu, como usuário, gostaria de poder exportar os dados obtidos em uma inspeção, para utilizar esses dados em outros contextos ou sistemas. | 13 |
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -113,11 +117,10 @@ O épico de Criação Personalizada de lista de verificação foca na habilidade
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
-| HU30 | Eu, como usuário, gostaria de criar listas de verificação personalizadas para atender às minhas necessidades específicas de inspeção. | 13 |
-| HU31 | Eu, como usuário, gostaria que o sistema gerasse um código de acesso ao criar uma lista de verificação personalizada para garantir a segurança e o acesso restrito às informações. | 2 |
-| HU32 | Eu, como usuário, gostaria que o sistema me perguntasse se possuo um ID e senha para atribuir à lista de verificação durante a criação, para manter a segurança dos meus dados. | 3 |
-| HU33 | Eu, como usuário, gostaria de visualizar listas de verificação existentes ao criar uma nova, para evitar duplicatas e inspirar-me em listas anteriores. | 5 |
-
+| HU31 | Eu, como usuário, gostaria de criar listas de verificação personalizadas para atender às minhas necessidades específicas de inspeção. | 13 |
+| HU32 | Eu, como usuário, gostaria que o sistema gerasse um código de acesso ao criar uma lista de verificação personalizada para garantir a segurança e o acesso restrito às informações. | 2 |
+| HU33 | Eu, como usuário, gostaria que o sistema me perguntasse se possuo um ID e senha para atribuir à lista de verificação durante a criação, para manter a segurança dos meus dados. | 3 |
+| HU34 | Eu, como usuário, gostaria de visualizar listas de verificação existentes ao criar uma nova, para evitar duplicatas e inspirar-me em listas anteriores. | 5 |
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -128,12 +131,12 @@ O épico de gerência de lista de verificação aborda o gerenciamento efetivo d
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
-| HU34 | Eu, como usuário, gostaria de editar uma lista de verificação para fazer ajustes conforme necessário. | 3 |
-| HU35 | Eu, como usuário, gostaria de exportar listas de verificação para usá-las em outros contextos ou compartilhá-las com colegas. | 3 |
-| HU36 | Eu, como usuário, gostaria de excluir listas de verificação que não são mais necessárias para manter minha organização limpa e atualizada. | 2 |
-| HU37 | Eu, como usuário, gostaria de visualizar uma listagem de todas as minhas listas de verificação para ter uma visão geral das minhas atividades de inspeção. | 3 |
-| HU38 | Eu, como usuário, gostaria de duplicar listas de verificação para reutilizar estruturas eficazes em diferentes contextos. | 3 |
-| HU39 | Eu, como usuário, gostaria de filtrar a listagem de listas de verificação por título ou data para localizar rapidamente as listas desejadas. | 3 |
+| HU35 | Eu, como usuário, gostaria de editar uma lista de verificação para fazer ajustes conforme necessário. | 3 |
+| HU36 | Eu, como usuário, gostaria de exportar listas de verificação para usá-las em outros contextos ou compartilhá-las com colegas. | 3 |
+| HU37 | Eu, como usuário, gostaria de excluir listas de verificação que não são mais necessárias para manter minha organização limpa e atualizada. | 2 |
+| HU38 | Eu, como usuário, gostaria de visualizar uma listagem de todas as minhas listas de verificação para ter uma visão geral das minhas atividades de inspeção. | 3 |
+| HU39 | Eu, como usuário, gostaria de duplicar listas de verificação para reutilizar estruturas eficazes em diferentes contextos. | 3 |
+| HU40 | Eu, como usuário, gostaria de filtrar a listagem de listas de verificação por título ou data para localizar rapidamente as listas desejadas. | 3 |
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -220,19 +223,20 @@ Este tópico abrange os requisitos funcionais essenciais do mínimo produto viá
 | HU10 | Eu, como usuário, gostaria de adicionar, visualizar e editar o contato do responsável por uma inspeção, para ter informações de contato relevantes. | 2 |
 | HU11 | Eu, como usuário do sistema, gostaria que o sistema registrasse a data da última modificação em uma inspeção, permitindo-me identificar facilmente quando ocorreram as alterações. | 3 |
 | HU12 | Eu, como usuário, quero ter a capacidade de adicionar, visualizar e editar um link para a gravação de uma inspeção, para que eu possa gerenciar facilmente as gravações associadas a cada inspeção. | 3 |
-| HU16 | Eu, como usuário, gostaria de poder salvar uma inspeção completa, para registrar todas as informações relevantes após a conclusão da inspeção. | 5 |
-| HU17 | Eu, como usuário, gostaria de poder salvar uma inspeção incompleta, para retomá-la posteriormente. | 3 |
-| HU18 | Eu, como usuário, gostaria de visualizar o progresso de uma inspeção através do status de quantos itens já foram inspecionados, para acompanhar o andamento da inspeção. | 3 |
-| HU19 | Eu, como usuário, gostaria de poder cancelar uma inspeção, caso ela não possa ser concluída ou não seja mais necessária. | 2 |
-| HU20 | Eu, como usuário, gostaria de poder refazer uma inspeção, se for necessário revisá-la. | 3 |
-| HU21 | Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao criar uma inspeção, para orientar o processo de inspeção. | 2 |
-| HU22 | Eu, como usuário, gostaria de adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção, para incluir os itens a serem inspecionados. | 5 |
-| HU23 | Eu, como usuário, gostaria de poder submeter arquivos para cada um dos itens ao realizar uma inspeção, para registrar informações relevantes. | 5 |
-| HU24 | Eu, como usuário, gostaria de poder anexar links externos, imagens e texto a um item de inspeção, para fornecer informações adicionais. | 5 |
-| HU25 | Eu, como usuário, gostaria de poder marcar requisitos existentes em arquivos submetidos, para identificar informações importantes. | 13 |
-| HU26 | Eu, como usuário, gostaria de poder limpar uma única marcação ou todas as marcações, para fazer correções quando necessário. | 3 |
-| HU27 | Eu, como usuário, gostaria de visualizar gráficos com a situação dos itens inspecionados, para obter *insights* visuais sobre os resultados da inspeção. | 8 |
-| HU29 | Eu, como usuário, gostaria de poder exportar os dados obtidos em uma inspeção, para utilizar esses dados em outros contextos ou sistemas. | 13 |
+| HU16 | Eu, como usuário, gostaria de visualizar uma inspeção ao finalizá-la para revisar e obter os resultados do processo que executei. | 5 | 
+| HU17 | Eu, como usuário, gostaria de poder salvar uma inspeção completa, para registrar todas as informações relevantes após a conclusão da inspeção. | 5 |
+| HU18 | Eu, como usuário, gostaria de poder salvar uma inspeção incompleta, para retomá-la posteriormente. | 3 |
+| HU19 | Eu, como usuário, gostaria de visualizar o progresso de uma inspeção através do status de quantos itens já foram inspecionados, para acompanhar o andamento da inspeção. | 3 |
+| HU20 | Eu, como usuário, gostaria de poder cancelar uma inspeção, caso ela não possa ser concluída ou não seja mais necessária. | 2 |
+| HU21 | Eu, como usuário, gostaria de poder refazer uma inspeção, se for necessário revisá-la. | 3 |
+| HU22 | Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao criar uma inspeção, para orientar o processo de inspeção. | 2 |
+| HU23 | Eu, como usuário, gostaria de adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção, para incluir os itens a serem inspecionados. | 5 |
+| HU24 | Eu, como usuário, gostaria de poder submeter arquivos para cada um dos itens ao realizar uma inspeção, para registrar informações relevantes. | 5 |
+| HU25 | Eu, como usuário, gostaria de poder anexar links externos, imagens e texto a um item de inspeção, para fornecer informações adicionais. | 5 |
+| HU26 | Eu, como usuário, gostaria de poder marcar requisitos existentes em arquivos submetidos, para identificar informações importantes. | 13 |
+| HU27 | Eu, como usuário, gostaria de poder limpar uma única marcação ou todas as marcações, para fazer correções quando necessário. | 3 |
+| HU28 | Eu, como usuário, gostaria de visualizar gráficos com a situação dos itens inspecionados, para obter *insights* visuais sobre os resultados da inspeção. | 8 |
+| HU30 | Eu, como usuário, gostaria de poder exportar os dados obtidos em uma inspeção, para utilizar esses dados em outros contextos ou sistemas. | 13 |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
