@@ -84,7 +84,7 @@ Dedicado ao núcleo do processo de inspeção, o épico de inspeção de artefat
 ### Rastreabilidade de Itens de uma Inspeção
 O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão detalhada dos artefatos envolvidos nas inspeções. As histórias de usuário deste épico lidam com a inclusão e manipulação de artefatos, desde a adição inicial até a marcação detalhada e ajustes necessários. Informações detalhadas sobre estas histórias e suas avaliações podem ser encontradas na Tabela 4.
 
-<p style="text-align: center;">Tabela 5: Histórias usuário relacionadas ao Épico de Rastreabilidade de Itens de uma Inspeção.</p>
+<p style="text-align: center;">Tabela 4: Histórias usuário relacionadas ao Épico de Rastreabilidade de Itens de uma Inspeção.</p>
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
@@ -98,9 +98,9 @@ O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Análise de Resultados
-O épico de análise de resultados é orientado para a avaliação e a disseminação dos dados coletados nas inspeções. As histórias de usuário aqui descrevem desde a visualização de dados em formatos gráficos até a exportação de dados e arquivos para uso externo, garantindo uma compreensão ampla dos resultados das inspeções. Estas histórias e suas pontuações são detalhadas na Tabela 6.
+O épico de análise de resultados é orientado para a avaliação e a disseminação dos dados coletados nas inspeções. As histórias de usuário aqui descrevem desde a visualização de dados em formatos gráficos até a exportação de dados e arquivos para uso externo, garantindo uma compreensão ampla dos resultados das inspeções. Estas histórias e suas pontuações são detalhadas na Tabela 5.
 
-<p style="text-align: center;">Tabela 6: Histórias usuário relacionadas ao Épico de Análise de Resultados.</p>
+<p style="text-align: center;">Tabela 5: Histórias usuário relacionadas ao Épico de Análise de Resultados.</p>
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
@@ -111,9 +111,9 @@ O épico de análise de resultados é orientado para a avaliação e a dissemina
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Criação Personalizada de Lista de Verificação
-O épico de Criação Personalizada de lista de verificação foca na habilidade do usuário de moldar listas de verificação de acordo com suas necessidades específicas no contexto de inspeção. Este conjunto de histórias de usuário explora desde a criação de listas customizadas até a implementação de medidas de segurança, como códigos de acesso e IDs. Além disso, inclui a funcionalidade de visualizar listas pré-existentes para inspiração e prevenção de redundâncias. Detalhes sobre estas histórias e suas pontuações são encontrados na Tabela 7.
+O épico de Criação Personalizada de lista de verificação foca na habilidade do usuário de moldar listas de verificação de acordo com suas necessidades específicas no contexto de inspeção. Este conjunto de histórias de usuário explora desde a criação de listas customizadas até a implementação de medidas de segurança, como códigos de acesso e IDs. Além disso, inclui a funcionalidade de visualizar listas pré-existentes para inspiração e prevenção de redundâncias. Detalhes sobre estas histórias e suas pontuações são encontrados na Tabela 6.
 
-<p style="text-align: center;">Tabela 7: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
+<p style="text-align: center;">Tabela 6: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
 
 | Item | História de Usuário | Pontuação |
 |------|----------------------|-----------|
@@ -125,7 +125,7 @@ O épico de Criação Personalizada de lista de verificação foca na habilidade
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
 ### Gerência de Lista de Verificação
-O épico de gerência de lista de verificação aborda o gerenciamento efetivo das listas de verificação após sua criação. As histórias de usuário aqui permitem ao usuário editar, exportar, excluir e duplicar listas de verificação, além de fornecerem uma visão geral de todas as listas criadas. Esta seção também destaca a funcionalidade de filtragem das listas, facilitando a localização rápida com base em títulos ou datas. A Tabela 8 apresenta um resumo dessas histórias de usuário, juntamente com suas respectivas pontuações.
+O épico de gerência de lista de verificação aborda o gerenciamento efetivo das listas de verificação após sua criação. As histórias de usuário aqui permitem ao usuário editar, exportar, excluir e duplicar listas de verificação, além de fornecerem uma visão geral de todas as listas criadas. Esta seção também destaca a funcionalidade de filtragem das listas, facilitando a localização rápida com base em títulos ou datas. A Tabela 7 apresenta um resumo dessas histórias de usuário, juntamente com suas respectivas pontuações.
 
 <p style="text-align: center;">Tabela 7: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
 
