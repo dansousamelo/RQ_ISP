@@ -1,3 +1,6 @@
+* **Planejamento**
+	* [Análise de ferramentas](planejamento/analise-ferramenta.md)
+
 * **Coleta e refinamento**
 	* [Lean Inception](coleta/lean.md)
 	* [Product Backlog](coleta/backlog.md)
