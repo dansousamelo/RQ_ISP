@@ -58,7 +58,7 @@ O diagrama de pacotes do *frontend* representa a organização modular dos compo
 
 <br/>
 <div align="center">
-    <p>Figura 1: Diagrama de pacotes do <i>frontend</i>.</figure>
+    <figure>Figura 1: Diagrama de pacotes do <i>frontend</i>.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/FR01.png" width="80%" height="80%" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
@@ -87,7 +87,7 @@ O diagrama de pacotes do *backend* é uma representação visual da estrutura or
 
 <br/>
 <div align="center">
-    <p>Figura 2: Diagrama de pacotes do <i>backend</i>.</figure>
+    <figure>Figura 2: Diagrama de pacotes do <i>backend</i>.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/BC01.png" width="80%" height="80%" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
@@ -152,7 +152,7 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 
 <br/>
 <div align="center">
-    <p>Figura 3: Diagrama Entidade Relacionamento do sistema.</figure>
+    <figure>Figura 3: Diagrama Entidade Relacionamento do sistema.</figure>
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="100%" height="100%" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
@@ -178,32 +178,18 @@ Por meio do uso do _Git_, todas as alterações feitas no código serão cuidado
 ## Referências
 
  * PostgreSQL. O que é o PostgreSQL. Disponível em: http://pgdocptbr.sourceforge.net/pg82/intro-whatis.html. Acesso em: 22 nov. 2023
-
  * RICHARDSON, Chris. Microservices: Patterns and Applications. [S.l.], 2020. Disponível em: https://microservices.io/. Acesso em: 25 nov. 2023.
-
-
  * DATE, C. J. An Introduction to Database Systems. Pearson, 2004
-
  * ELMASRI, Ramez; NAVATHE, Shamkant B. Fundamentals of Database Systems. Pearson, 2015
-
  * KRUCHTEN, Philippe. Architectural Blueprints—The “4+1” View Model of Software Architecture. IEEE Software, 1995.
-
  * HEJLSBERG, Anders. TypeScript: JavaScript Development at Application Scale. 2012.
-
  * VAZQUEZ, Abel. React JS: Library for Building User Interfaces. Web Development, 2018.
- 
  * FOWLER, Martin. Code Standardization. Addison-Wesley, 2018.
-  
  * MEAD, Andrew. Express in Action. Manning Publications, 2020.
-  
  * SCHMITT, Nikolas. Prisma: Next Generation ORM. Journal of Database Management, 2021.
-  
  * MADISON, Kyle. Styled Components in React. O'Reilly Media, 2019.
-  
  * LARMAN, Craig. Applying UML and Patterns. Prentice Hall, 2004.
-
  * MARTIN, Robert C. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Prentice Hall, 2017.
- 
  * Prisma. Is Prisma an ORM? | What is an ORM? Disponível em: https://www.prisma.io/docs/concepts/overview/prisma-in-your-stack/is-prisma-an-orm. Acesso em: 23 nov. de  2023
 
 
