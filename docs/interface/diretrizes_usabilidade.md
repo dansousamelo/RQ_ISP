@@ -223,8 +223,6 @@ O contraste das cores pode ser definido de acordo com o WebAIM, uma ferramenta �
 
 ## Referências
 
-- MACK, R.; NIELSEN, J. Métodos de Inspeção de Usabilidade. ACM SIGCHI Bulletin, v. 25, n. 1, p. 28-33, Janeiro de 1993. DOI: 10.1145/157203.157207.
-
-- Norman, D. A., & Draper, S. W. (1986). User Centered System Design: New Perspectives on Human-computer Interaction. Lawrence Erlbaum Associates.
-
-- WADDELL, C. et al. Constructing Accessible Web Sites. Apress, 2003.
+ * MACK, R.; NIELSEN, J. Métodos de Inspeção de Usabilidade. ACM SIGCHI Bulletin, v. 25, n. 1, p. 28-33, Janeiro de 1993. DOI: 10.1145/157203.157207.
+ * Norman, D. A., & Draper, S. W. (1986). User Centered System Design: New Perspectives on Human-computer Interaction. Lawrence Erlbaum Associates.
+ * WADDELL, C. et al. Constructing Accessible Web Sites. Apress, 2003.
