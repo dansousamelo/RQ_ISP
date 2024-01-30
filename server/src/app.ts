@@ -6,6 +6,10 @@ import { generateToken } from "./services/auth/auth_services";
 import dotenv from "dotenv";
 import cors from "cors";
 
+import FileServices from "./services/file/file_services";
+import multer from "multer";
+import multerConfig from "./config/multer";
+
 dotenv.config();
 
 const PORT = process.env.PORT || 8000;
@@ -65,9 +69,47 @@ app.post("/refresh-token", async (req, res) => {
     });
   } catch (error: any) {
     console.error(error);
-    return res.status(403).json({
+    return res.status(500).json({
+      error: true,
+      status: 500,
+      message: error.message,
+      data: {},
+    });
+  }
+});
+
+// rotas de arquivo
+const upload = multer(multerConfig);
+
+app.post("/upload-file", upload.single("file"), async (req, res) => {
+  try {
+    if (!req) {
+      throw new Error("Request object is undefined");
+    }
+
+    const { file } = req;
+
+    if (!file) {
+      throw new Error("No file uploaded");
+    }
+
+    const fileServices = new FileServices();
+
+    const fileUrl = await fileServices.uploadFile(file);
+
+    return res.status(200).json({
       error: false,
       status: 200,
+      message: "Arquivo submetido com sucesso!",
+      data: {
+        file_url: fileUrl,
+      },
+    });
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({
+      error: true,
+      status: 500,
       message: error.message,
       data: {},
     });
