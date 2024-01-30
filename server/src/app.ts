@@ -1,4 +1,5 @@
 import Express from "express";
+import { Request, Response } from "express"
 import user_controllers from "./controllers/user/user_controllers";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
@@ -8,6 +9,7 @@ import cors from "cors";
 
 import FileServices from "./services/file/file_services";
 import multer from "multer";
+import { Multer } from "multer";
 import multerConfig from "./config/multer";
 
 dotenv.config();
@@ -31,7 +33,7 @@ app.post("/create-user", user_controllers.createUser);
 app.get("/find-user", user_controllers.findUser);
 
 // Rotas de Serviço
-app.post("/refresh-token", async (req, res) => {
+app.post("/refresh-token", async (req: Request, res: Response) => {
   const { refreshToken } = req.body;
 
   if (!refreshToken) {
@@ -80,37 +82,36 @@ app.post("/refresh-token", async (req, res) => {
 
 // rotas de arquivo
 const upload = multer(multerConfig);
-
-app.post("/upload-file", upload.single("file"), async (req, res) => {
+app.post("/upload-file", upload.array("files"), async (req, res) => {
   try {
-    if (!req) {
-      throw new Error("Request object is undefined");
-    }
-
-    const { file } = req;
-
-    if (!file) {
-      throw new Error("No file uploaded");
+    const files = req.files as globalThis.Express.Multer.File[];
+    
+    if (!files || files.length === 0) {
+      throw new Error("Nenhum arquivo enviado");
     }
 
     const fileServices = new FileServices();
 
-    const fileUrl = await fileServices.uploadFile(file);
+    const uploadedFiles = [];
+
+    for (const file of files) {
+      const { fileName, fileUrl } = await fileServices.uploadFile(file);
+      uploadedFiles.push({ fileName, fileUrl });
+    }
 
     return res.status(200).json({
       error: false,
       status: 200,
-      message: "Arquivo submetido com sucesso!",
-      data: {
-        file_url: fileUrl,
-      },
+      message: "Arquivos submetidos com sucesso!",
+      data: uploadedFiles,
     });
-  } catch (error: any) {
-    console.error(error);
+
+  } catch (error) {
+    console.error("Erro durante o upload:", error);
     return res.status(500).json({
       error: true,
       status: 500,
-      message: error.message,
+      message: "Erro durante o upload",
       data: {},
     });
   }
