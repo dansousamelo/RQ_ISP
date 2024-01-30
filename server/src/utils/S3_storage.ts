@@ -17,8 +17,8 @@ class S3Storage {
     });
   }
 
-  async saveFile(filename: string): Promise<string> {
-    const originalPath = path.resolve(multerConfig.directory, filename);
+  async saveFile(fileName: string): Promise<string> {
+    const originalPath = path.resolve(multerConfig.directory, fileName);
     try {
       const ContentType = mime.getType(originalPath);
 
@@ -31,7 +31,7 @@ class S3Storage {
       await this.client
         .putObject({
           Bucket: bucket,
-          Key: filename,
+          Key: fileName,
           ACL: "public-read",
           Body: fileContent,
           ContentType,
@@ -40,13 +40,13 @@ class S3Storage {
 
       await fs.promises.unlink(originalPath);
 
-      const fileUrl = `https://${bucket}.s3.amazonaws.com/${filename}`;
+      const fileUrl = `https://${bucket}.s3.amazonaws.com/${fileName}`;
 
       return fileUrl;
       
     } catch (error) {
       console.error("Erro ao salvar o arquivo:", error);
-      throw error; // Propaga o erro para ser tratado no nível superior
+      throw error;
     }
   }
 }

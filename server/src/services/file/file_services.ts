@@ -1,10 +1,25 @@
 import S3Storage from "../../utils/S3_storage";
 
+type UploadResult = {
+    fileName: string;
+    fileUrl: string;
+  }
 class FileServices {
-  async uploadFile(file: Express.Multer.File): Promise<string> {
-    const s3Storage = new S3Storage();
+  async uploadFile(file: Express.Multer.File): Promise<UploadResult> {
+    try {
+        const s3Storage = new S3Storage();
 
-    return await s3Storage.saveFile(file.filename);
+        const { filename } = file;
+
+        const fileUrl = await s3Storage.saveFile(filename);
+        
+        const fileName = file.originalname;
+
+        return { fileName, fileUrl };
+      } catch (error) {
+        console.error("Erro ao fazer upload do arquivo:", error);
+        throw error;
+      }
   }
 
   async deleteFile(): Promise<void> {}
