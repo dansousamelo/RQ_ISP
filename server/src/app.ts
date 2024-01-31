@@ -11,6 +11,7 @@ import FileServices from "./services/file/file_services";
 import multer from "multer";
 import { Multer } from "multer";
 import multerConfig from "./config/multer";
+import { isMulterFilesArray } from "./interfaces/type_guards"
 
 dotenv.config();
 
@@ -87,7 +88,11 @@ app.post("/upload-file", upload.array("files"), async (req, res) => {
     const files = req.files as globalThis.Express.Multer.File[];
     
     if (!files || files.length === 0) {
-      throw new Error("Nenhum arquivo enviado");
+      throw new Error("Nenhum arquivo enviado!");
+    }
+
+    if(!isMulterFilesArray(files)){
+      throw new Error("Formato inválido de arquivo enviado!");
     }
 
     const fileServices = new FileServices();
@@ -107,7 +112,7 @@ app.post("/upload-file", upload.array("files"), async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Erro durante o upload:", error);
+    console.error("Erro durante o upload ", error);
     return res.status(500).json({
       error: true,
       status: 500,
