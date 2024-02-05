@@ -2,7 +2,6 @@ import { styled } from 'styled-components'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 
 export const StyledHeader = styled.header`
-  margin-bottom: auto;
   margin-top: 4rem;
   display: flex;
   align-items: center;
