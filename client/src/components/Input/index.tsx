@@ -45,10 +45,17 @@ const InputComponent = styled.input<InputProps>`
 
 const Label = styled.label`
   color: ${({ theme }) => theme.colors.neutral};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-style: normal;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+`
+
+const Description = styled.span`
+  color: ${({ theme }) => theme.colors.neutral};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-style: normal;
   font-weight: ${({ theme }) => theme.fontWeights.regular};
-  margin-bottom: ${({ theme }) => theme.space[2]};
+  margin-bottom: ${({ theme }) => theme.space[1]};
 `
 
 interface RequiredTextProps {
@@ -91,4 +98,5 @@ export const Input = {
   RequiredText,
   ErrorMessage,
   ErrorMessageRoot,
+  Description,
 }
