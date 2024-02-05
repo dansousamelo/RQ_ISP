@@ -14,20 +14,24 @@ const radioItems = [
   },
 ]
 
-export const RadioGroup = () => (
-  <form>
-    <S.RadioGroupRoot
-      defaultValue="privacyRequirement"
-      aria-label="View density"
-    >
-      {radioItems.map(({ value, id, label }) => (
-        <S.WrapperContent key={id}>
-          <S.RadioGroupItem value={value} id={id}>
-            <S.RadioGroupIndicator />
-          </S.RadioGroupItem>
-          <S.Label htmlFor={id}>{label}</S.Label>
-        </S.WrapperContent>
-      ))}
-    </S.RadioGroupRoot>
-  </form>
+interface RadioGroupProps {
+  handleChange: any
+  value: any
+}
+
+export const RadioGroup = ({ handleChange, value }: RadioGroupProps) => (
+  <S.RadioGroupRoot
+    value={value}
+    onValueChange={(value) => handleChange(value)}
+    aria-label="View density"
+  >
+    {radioItems.map(({ value, id, label }) => (
+      <S.WrapperContent key={id}>
+        <S.RadioGroupItem value={value} id={id}>
+          <S.RadioGroupIndicator />
+        </S.RadioGroupItem>
+        <S.Label htmlFor={id}>{label}</S.Label>
+      </S.WrapperContent>
+    ))}
+  </S.RadioGroupRoot>
 )
