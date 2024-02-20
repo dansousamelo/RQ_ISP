@@ -1,16 +1,40 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../../db";
+import { generateAccessCode } from "../../utils/string_generator";
 import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
 import { isString } from "../../interfaces/type_guards";
 
+export async function verifyUser(accessCode: string | null) {
+  if (!accessCode) {
+    throw new Error("Não foi fornecido um código de acesso!");
+  }
+
+  const users = await prisma.user.findMany();
+
+  if (users.length === 0) {
+    throw new Error("O código de acesso fornecido é inválido!");
+  }
+
+  const userExists = users.find((user: any) => {
+    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
+    return isMatch;
+  });
+
+  if (!userExists) {
+    throw new Error("O código de acesso fornecido é inválido!");
+  }
+
+  return userExists;
+}
+
 export default {
   async createUser(req: Request, res: Response) {
     try {
-      const { accessCode } = req.body;
+      const accessCode = generateAccessCode(10);
 
       const users = await prisma.user.findMany();
 
@@ -20,7 +44,7 @@ export default {
         return res.status(409).json({
           error: true,
           status: 409,
-          message: "Já existe um usuário com este código de acesso",
+          message: "Já existe um usuário com este código de acesso!",
           data: {},
         });
       }
@@ -39,9 +63,9 @@ export default {
       return res.status(201).json({
         error: false,
         status: 201,
-        message: "Usuário criado com sucesso",
+        message: "Usuário criado com sucesso!",
         data: {
-          user,
+          accessCode,
           token,
           refreshToken,
         },
@@ -62,40 +86,8 @@ export default {
       const accessCode = isString(req.query.accessCode)
         ? req.query.accessCode
         : null;
-      
-      if (!accessCode) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Não foi Fornecido um código de acesso",
-          data: {},
-        });
-      }
 
-      const users = await prisma.user.findMany();
-
-      if (users.length === 0) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "O código de acesso fornecido é inválido",
-          data: {},
-        });
-      }
-
-      const userExists = users.find((user: any) => {
-        const isMatch = bcrypt.compareSync(accessCode, user.access_code);
-        return isMatch;
-      });
-
-      if (!userExists) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "O código de acesso fornecido é inválido",
-          data: {},
-        });
-      }
+      const userExists = await verifyUser(accessCode);
 
       const token = await generateToken(userExists.id);
       const refreshToken = await generateRefreshToken(userExists.id);
@@ -103,7 +95,7 @@ export default {
       return res.status(200).json({
         error: false,
         status: 200,
-        message: "O código de acesso fornecido é válido",
+        message: "Usuário encontrado!",
         data: {
           user: {
             id: userExists.id,
