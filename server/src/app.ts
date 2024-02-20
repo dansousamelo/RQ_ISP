@@ -1,17 +1,20 @@
 import Express from "express";
+import { Request, Response } from "express"
 import user_controllers from "./controllers/user/user_controllers";
-import jwt from "jsonwebtoken";
-import crypto from "crypto";
-import { generateToken } from "./services/auth/auth_services";
 import dotenv from "dotenv";
 import cors from "cors";
+
+import token_controllers from "./controllers/token/token_controllers";
+
+import multer from "multer";
+import multerConfig from "./config/multer";
+import file_controller from "./controllers/file/file_controller";
+
+import inspection_controllers from "./controllers/inspection/inspection_controllers";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 8000;
-
-const secretKey =
-  process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
 
 const app = Express();
 app.use(Express.json());
@@ -24,55 +27,18 @@ app.get("/", (req, res) => {
 
 // Rotas de Usuário
 app.post("/create-user", user_controllers.createUser);
+app.get("/generate-access_code", user_controllers.createAccessCode);
 app.get("/find-user", user_controllers.findUser);
 
 // Rotas de Serviço
-app.post("/refresh-token", async (req, res) => {
-  const { refreshToken } = req.body;
+app.post("/refresh-token", token_controllers.generateRefreshToken);
 
-  if (!refreshToken) {
-    return res.status(401).json({
-      error: false,
-      status: 401,
-      message: "refreshToken não informado",
-      data: {},
-    });
-  }
+// rotas de arquivo
+const upload = multer(multerConfig);
+app.post("/upload-file", upload.array("files"), file_controller.uploadFile);
 
-  try {
-    const decoded = jwt.verify(refreshToken, secretKey) as
-      | { user_id: string }
-      | undefined;
-
-    if (!decoded || !decoded.user_id) {
-      return res.status(401).json({
-        error: true,
-        status: 201,
-        message: "Formato inválido de token de acesso",
-        data: {},
-      });
-    }
-
-    const newToken = generateToken(decoded.user_id);
-
-    return res.status(200).json({
-      error: false,
-      status: 200,
-      message: "New Refresh Token generated",
-      data: {
-        token: newToken,
-      },
-    });
-  } catch (error: any) {
-    console.error(error);
-    return res.status(403).json({
-      error: false,
-      status: 200,
-      message: error.message,
-      data: {},
-    });
-  }
-});
+//rotas de inspeção
+app.post("/create-inspection", inspection_controllers.createInspection);
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);
