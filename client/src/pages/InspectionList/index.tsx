@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { DialogControlled } from '../../components/DialogControlled'
 import { Footer } from '../../components/Footer'
 import { useLoggedInspectionContext } from '../../contexts/LoggedInspection'
@@ -5,30 +6,78 @@ import { isNotUndefined } from '../../interfaces/typeGuards'
 import { Header } from './components/Header'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import * as S from './styles'
-
-interface InspectionItem {
-  id: number
-  title: string
-  inspection_started: string
-  status: 'uninitiated' | 'initiated' | 'concluded'
-}
+import { MOCK_DATA } from './mocks'
+import { useCallback, useState } from 'react'
+import { SuccessToast } from '../../components/Toast'
 
 export function InpectionList() {
+  const navigate = useNavigate()
+
+  const [inspections, setInspections] = useState(MOCK_DATA)
+  const [idInspectionToDelete, setIdInspectionToDelete] = useState('')
+
+  const {
+    handleUpdateDialogControlled,
+    setDialogInspectionStep,
+    isDialogControlledOpen,
+  } = useLoggedInspectionContext()
+
+  const deleteInspectionDialog = useCallback(() => {
+    setInspections((inspections) =>
+      inspections.filter((item) => item.id !== idInspectionToDelete),
+    )
+    handleUpdateDialogControlled(false)
+    SuccessToast('Inspeção excluída com sucesso!')
+  }, [handleUpdateDialogControlled, idInspectionToDelete])
+
+  const { dialogItemToRender } = useDialogItemToRender({
+    handleUpdateDialogControlled,
+    deleteInspectionDialog,
+  })
+
+  const handleDeleteInspection = useCallback(
+    (id: string) => {
+      handleUpdateDialogControlled(true)
+      setDialogInspectionStep('delete_inspection')
+      setIdInspectionToDelete(id)
+    },
+    [handleUpdateDialogControlled, setDialogInspectionStep],
+  )
+
   const STATUS_ACTION_OPTIONS = {
     uninitiated: [
-      { label: 'Inspecionar', action: () => console.log('Inspecionar') },
-      { label: 'Excluir', action: () => console.log('Excluir') },
+      {
+        label: 'Inspecionar',
+        action: (id: string) => navigate(`/inspection/${id}`),
+      },
+      {
+        label: 'Excluir',
+        action: (id: string) => handleDeleteInspection(id),
+      },
     ],
     initiated: [
-      { label: 'Continuar', action: () => console.log('Continuar') },
+      {
+        label: 'Continuar',
+        action: (id: string) => navigate(`/inspection/${id}`),
+      },
       { label: 'Refazer', action: () => console.log('Refazer') },
-      { label: 'Excluir', action: () => console.log('Excluir') },
+      { label: 'Excluir', action: (id: string) => handleDeleteInspection(id) },
     ],
     concluded: [
-      { label: 'Visualizar', action: () => console.log('Continuar') },
+      {
+        label: 'Visualizar',
+        action: (id: string) => navigate(`/inspection/${id}`),
+      },
       { label: 'Refazer', action: () => console.log('Refazer') },
-      { label: 'Estatísticas', action: () => console.log('Estatísticas') },
-      { label: 'Excluir', action: () => console.log('Excluir') },
+      {
+        label: 'Estatísticas',
+        action: (id: string, name: string, type: string) =>
+          navigate(`/inspection/${id}/${name}/${type}/statistics`),
+      },
+      {
+        label: 'Excluir',
+        action: (id: string) => handleDeleteInspection(id),
+      },
     ],
   }
 
@@ -38,71 +87,22 @@ export function InpectionList() {
     concluded: 'Concluído',
   }
 
-  const MOCK_DATA: InspectionItem[] = [
-    {
-      id: 1,
-      title: 'ConecteSUS',
-      inspection_started: '01/10/2023',
-      status: 'uninitiated',
-    },
-    {
-      id: 2,
-      title: 'Sabin',
-      inspection_started: '01/10/2023',
-      status: 'initiated',
-    },
-    {
-      id: 3,
-      title: 'Avaliação do encamento do Distrito Federal',
-      inspection_started: '01/10/2023',
-      status: 'concluded',
-    },
-    {
-      id: 4,
-      title: 'Avaliação do encamento do Distrito Federal',
-      inspection_started: '01/10/2023',
-      status: 'concluded',
-    },
-    {
-      id: 5,
-      title: 'Avaliação do encamento do Distrito Federal',
-      inspection_started: '01/10/2023',
-      status: 'concluded',
-    },
-    {
-      id: 6,
-      title: 'Avaliação do encamento do Distrito Federal',
-      inspection_started: '01/10/2023',
-      status: 'concluded',
-    },
-    {
-      id: 7,
-      title: 'Avaliação do encamento do Distrito Federal',
-      inspection_started: '01/10/2023',
-      status: 'concluded',
-    },
-  ]
-
-  const { handleUpdateDialogControlled, isDialogControlledOpen } =
-    useLoggedInspectionContext()
-
-  const { dialogItemToRender } = useDialogItemToRender({
-    handleUpdateDialogControlled,
-  })
-
   return (
     <>
       <S.Container>
         <Header />
         <S.Title>Inspeções</S.Title>
         <S.Subtitle>Realize suas inspeções de forma eficiente.</S.Subtitle>
+
         <S.TableContainer>
           <S.TableHeader>Título</S.TableHeader>
           <S.TableHeader>Data de criação</S.TableHeader>
           <S.TableHeader>Status</S.TableHeader>
           <S.TableHeader />
+        </S.TableContainer>
 
-          {MOCK_DATA.map((item) => {
+        <S.TableContentContainer>
+          {inspections.map((item) => {
             const status = STATUS_OPTIONS[item.status]
             return (
               <>
@@ -120,7 +120,9 @@ export function InpectionList() {
                 <S.TableCell hasGap={true}>
                   {STATUS_ACTION_OPTIONS[item.status].map((action) => (
                     <S.ButtonStyled
-                      onClick={action.action}
+                      onClick={() =>
+                        action.action(item.id, item.title, item.type)
+                      }
                       label={action.label}
                       key={action.label}
                     >
@@ -131,7 +133,7 @@ export function InpectionList() {
               </>
             )
           })}
-        </S.TableContainer>
+        </S.TableContentContainer>
 
         <Footer />
       </S.Container>

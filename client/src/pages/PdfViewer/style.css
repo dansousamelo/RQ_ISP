@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.pdfViewer {
+  background: #15181b !important;
+}
+
+.sidebar {
+  overflow: auto;
+  color: rgb(119, 119, 119);
+  background: #181818 !important;
+}
+
+.sidebar__highlights {
+  list-style: "none";
+  padding: 0;
+}
+
+
+
+.highlight__image {
+  overflow: auto;
+  max-width: 300px;
+  border: 1px dashed;
+}
+
+.sidebar__highlight {
+  padding: 1rem;
+  cursor: pointer;
+  transition: background 140ms ease-in;
+  border-bottom: 1px solid rgb(119, 119, 119);
+}
+
+a {
+  color: #d35400;
+}
+
+blockquote {
+  padding: 0;
+  margin: 0;
+  quotes: "\201c" "\201d";
+}
+blockquote:before {
+  content: open-quote;
+}
+blockquote:after {
+  content: close-quote;
+}
+
+.Tip__card div > div:nth-child(2) {
+  display: none;
+}
+
+.Highlight {
+  pointer-events: none
+}
+
+.Tip__card {
+  background: black !important;
+  border-radius: 8px !important;
+}
+
+.Tip__card input {
+  width: 100%;
+  color: white;
+  background: #34CDFF;
+  border-radius: 8px;
+  height: 40px;
+  cursor: pointer;
+  content: 'Salvar' !important;
+}
+
+.Tip__card textarea {
+  background: black;
+  color: white !important;
+  resize: none;
+  outline: none;
+  border: 1px solid white !important;
+  border-radius: 8px;
+  padding: 8px;
+  width: 17rem !important;
+  height: 40px !important;
+}
+
+
+.Tip__card {
+  border: none;
+  border-radius: 8px;
+  padding: 16px !important;
+}
+
+
+.Tip__compact {
+  background-color: black !important;
+  padding: 12px 20px !important;
+  border-radius: 8px;
+}
+
+
+
+.Highlight {
+  position: absolute;
+}
+
+.Highlight__emoji {
+  position: absolute;
+  color: black;
+  opacity: 1;
+  font-size: 28px;
+}
+
+.Highlight__parts {
+  opacity: 1;
+}
+
+.Highlight__part {
+  cursor: pointer;
+  position: absolute;
+  background: rgba(255, 226, 143, 1);
+  transition: background 0.3s;
+  opacity: 0.5;
+}
+
+.Highlight__popup {
+  background-color: #3d464d;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  max-width: 300px;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.Highlight--scrolledTo .Highlight__part {
+  background: #ff4141;
+}

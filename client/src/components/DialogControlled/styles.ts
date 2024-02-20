@@ -2,11 +2,7 @@ import styled from 'styled-components'
 
 export const WrapperTitle = styled.div``
 
-interface WrapperActionButtonsProps {
-  hasIconGarbageHover: boolean
-}
-
-export const WrapperActionButtons = styled.div<WrapperActionButtonsProps>`
+export const WrapperActionButtons = styled.div`
   display: flex;
   flex: 1;
   align-items: center;

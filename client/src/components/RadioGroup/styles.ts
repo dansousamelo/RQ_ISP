@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
 export const RadioGroupRoot = styled(RadioGroup.Root)`
@@ -47,9 +47,28 @@ export const RadioGroupIndicator = styled(RadioGroup.Indicator)`
   }
 `
 
-export const Label = styled.label`
+interface LabelProps {
+  hasDescription: boolean
+}
+
+export const Label = styled.label<LabelProps>`
   color: white;
   font-size: ${({ theme }) => theme.fontSizes.sm};
   padding-left: 15px;
   width: 18rem;
+  ${({ hasDescription }) =>
+    hasDescription &&
+    css`
+      font-weight: bold;
+    `}
+`
+
+export const Description = styled.span`
+  color: white;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  padding-left: 27px;
+
+  &:first-of-type {
+    margin-bottom: 12px;
+  }
 `
