@@ -12,6 +12,7 @@ import multer from "multer";
 import { Multer } from "multer";
 import multerConfig from "./config/multer";
 import { isMulterFilesArray } from "./interfaces/type_guards"
+import inspection_controllers from "./controllers/inspection/inspection_controllers";
 
 dotenv.config();
 
@@ -100,8 +101,8 @@ app.post("/upload-file", upload.array("files"), async (req, res) => {
     const uploadedFiles = [];
 
     for (const file of files) {
-      const { fileName, fileUrl } = await fileServices.uploadFile(file);
-      uploadedFiles.push({ fileName, fileUrl });
+      const { fileName, fileUrl, fileType } = await fileServices.uploadFile(file);
+      uploadedFiles.push({ fileName, fileUrl, fileType });
     }
 
     return res.status(200).json({
@@ -121,6 +122,9 @@ app.post("/upload-file", upload.array("files"), async (req, res) => {
     });
   }
 });
+
+//rotas de inspeção
+app.post("/create-inspection", inspection_controllers.createInspection);
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);
