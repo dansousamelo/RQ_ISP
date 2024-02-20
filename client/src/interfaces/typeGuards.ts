@@ -79,3 +79,11 @@ export function isPortugueseLanguage(
     typeof language === 'string' && (language === 'pt' || language === 'pt-BR')
   )
 }
+
+export function isArray(value: any): value is any[] {
+  return Array.isArray(value)
+}
+
+export function isDocumetType(value: any): value is string {
+  return value === 'document'
+}

@@ -19,7 +19,12 @@ type Files = {
   url: string
 }[]
 
-export type InspectionDialog = 'first_step' | 'second_step' | 'third_step' | ''
+export type InspectionDialog =
+  | 'first_step'
+  | 'second_step'
+  | 'third_step'
+  | 'delete_inspection'
+  | ''
 
 interface LoggedInspectionContextType {
   inspectionChecklistType: InspectionChecklistType

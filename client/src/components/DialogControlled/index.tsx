@@ -110,6 +110,8 @@ export function DialogControlled({
     }
     if (button.borderColor) {
       buttonStyle.borderColor = button.borderColor
+      buttonStyle.borderWidth = '1px'
+      buttonStyle.borderStyle = 'solid'
     }
 
     if (button.type === 'submit') {
@@ -150,9 +152,6 @@ export function DialogControlled({
         {dialogItemToRender.component}
         {!!dialogItemToRender?.buttonConfig && (
           <S.WrapperActionButtons
-            hasIconGarbageHover={dialogItemToRender.buttonConfig.some(
-              (item) => item.id === 'delete',
-            )}
             style={{
               marginTop: dialogItemToRendeMarginTopButton,
             }}

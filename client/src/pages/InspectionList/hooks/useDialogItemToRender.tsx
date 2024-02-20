@@ -1,4 +1,5 @@
 import { useLoggedInspectionContext } from '../../../contexts/LoggedInspection'
+import { defaultTheme } from '../../../styles/themes/default'
 import { FirstStepDialog } from '../components/FirstStepDialog'
 import { SecondStepDialog } from '../components/SecondStepDialog'
 import { ThirdStepDialog } from '../components/ThirdStepDialog'
@@ -10,12 +11,15 @@ export interface ButtonProps {
   variant?: 'primary' | 'secondary'
   action: (id?: string) => void
   disabled?: boolean
+  color?: string
+  backgroundColor?: string
+  borderColor?: string
 }
 
 export interface DialogConfig {
   [key: string]: {
     title?: string | JSX.Element
-    component: string | JSX.Element
+    component?: string | JSX.Element
     description?: string | JSX.Element
     buttonConfig?: ButtonProps[]
     hideCloseButton?: boolean
@@ -26,10 +30,12 @@ export interface DialogConfig {
 
 interface DialogItemToRenderProps {
   handleUpdateDialogControlled: (open: boolean) => void
+  deleteInspectionDialog: () => void
 }
 
 export function useDialogItemToRender({
   handleUpdateDialogControlled,
+  deleteInspectionDialog,
 }: DialogItemToRenderProps) {
   const { dialogInspectionStep, setDialogInspectionStep } =
     useLoggedInspectionContext()
@@ -66,6 +72,30 @@ export function useDialogItemToRender({
         'Anexe os seus documentos para fazer marcações de rastreabilidade, você também poderá adicionar em outro momento.',
       component: <ThirdStepDialog />,
       width: '32rem',
+    },
+    delete_inspection: {
+      title: 'Excluir inspeção',
+      description:
+        'Tem certeza de que deseja excluir esta inspeção? Esta ação é irreversível e não será possível desfazê-la.',
+      width: '28rem',
+      buttonConfig: [
+        {
+          id: 'back',
+          label: 'Voltar',
+          variant: 'secondary',
+          action: () => handleUpdateDialogControlled(false),
+        },
+        {
+          id: 'delete',
+          label: 'Excluir',
+          variant: 'primary',
+          action: () => {
+            deleteInspectionDialog()
+          },
+          backgroundColor: defaultTheme.colors.error700,
+          color: defaultTheme.colors.neutral,
+        },
+      ],
     },
   }
 
