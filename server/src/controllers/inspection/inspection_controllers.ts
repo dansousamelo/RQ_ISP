@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { isString } from "../../interfaces/type_guards";
-import { verifyUser } from "../user/user_controllers";
+import { verifyUser, createUser } from "../user/user_controllers";
+import {
+  generateToken,
+  generateRefreshToken,
+} from "../../services/auth/auth_services";
 import { prisma } from "../../db";
+import bcrypt from "bcrypt";
 
 type DocumentItems = {
   fileName: string;
@@ -11,7 +16,9 @@ type DocumentItems = {
 
 function isValidInspectionType(inspection_type: string) {
   if (
-    inspection_type !== "privacyRequirement" && inspection_type !== "userStory") {
+    inspection_type !== "privacyRequirement" &&
+    inspection_type !== "userStory"
+  ) {
     throw new Error("O tipo de inspeção não é válido!");
   }
 
@@ -39,9 +46,26 @@ export default {
 
       const userExists = await verifyUser(accessCode);
 
+      if (userExists !== null) {
+        return res.status(500).json({
+          error: true,
+          status: 500,
+          message: "Já existe um usuário com este código de acesso!",
+          data: {},
+        });
+      }
+
+      const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+      const user = await prisma.user.create({
+        data: {
+          access_code: hashedAccessCode,
+        },
+      });
+
       const inspection = await prisma.inspection.create({
         data: {
-          user_id: userExists.id,
+          user_id: user.id,
           name,
           responsible,
           type: inspection_type,
@@ -66,6 +90,9 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
+      const token = await generateToken(user.id);
+      const refreshToken = await generateRefreshToken(user.id);
+
       return res.status(201).json({
         error: false,
         status: 201,
@@ -73,10 +100,11 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
+          token,
+          refreshToken,
         },
       });
     } catch (error: any) {
-      console.error(error);
       return res.status(500).json({
         error: true,
         status: 500,
