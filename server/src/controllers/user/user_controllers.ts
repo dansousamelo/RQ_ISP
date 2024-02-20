@@ -5,13 +5,6 @@ import { generateAccessCode } from "../../utils/access_code";
 import { generateToken, generateRefreshToken } from "../../services/auth/auth_services";
 import { isString } from "../../interfaces/type_guards";
 
-async function findUserByAccessCode(users: any[], accessCode: string) {
-  return users.find((user: any) => {
-    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
-    return isMatch;
-  });
-}
-
 export async function verifyUser(accessCode: string | null) {
   if (!accessCode) {
     throw new Error("Não foi fornecido um código de acesso!");
@@ -23,7 +16,10 @@ export async function verifyUser(accessCode: string | null) {
     throw new Error("O código de acesso fornecido é inválido!");
   }
 
-  const userExists = findUserByAccessCode(users, accessCode);
+  const userExists = users.find((user: any) => {
+    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
+    return isMatch;
+  });
 
   if (!userExists) {
     throw new Error("O código de acesso fornecido é inválido!");
