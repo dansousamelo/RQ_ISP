@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../../db";
-import { generateAccessCode } from "../../utils/string_generator";
-import {
-  generateToken,
-  generateRefreshToken,
-} from "../../services/auth/auth_services";
+import { generateAccessCode } from "../../utils/access_code";
+import { generateToken, generateRefreshToken } from "../../services/auth/auth_services";
 import { isString } from "../../interfaces/type_guards";
+
+async function findUserByAccessCode(users: any[], accessCode: string) {
+  return users.find((user: any) => {
+    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
+    return isMatch;
+  });
+}
 
 export async function verifyUser(accessCode: string | null) {
   if (!accessCode) {
@@ -19,10 +23,7 @@ export async function verifyUser(accessCode: string | null) {
     throw new Error("O código de acesso fornecido é inválido!");
   }
 
-  const userExists = users.find((user: any) => {
-    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
-    return isMatch;
-  });
+  const userExists = findUserByAccessCode(users, accessCode);
 
   if (!userExists) {
     throw new Error("O código de acesso fornecido é inválido!");
@@ -31,10 +32,31 @@ export async function verifyUser(accessCode: string | null) {
   return userExists;
 }
 
+async function generateUniqueAccessCode(): Promise<string> {
+  let accessCode = generateAccessCode(24);
+  console.log(accessCode);
+  const maxAttempts = 5;
+
+  for (let i = 0; i < maxAttempts; i++) {
+    try {
+      await verifyUser(accessCode);
+      accessCode = generateAccessCode(24);
+    } catch (error: any) {
+      if (error.message === "O código de acesso fornecido é inválido!") {
+        continue;
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  return accessCode;
+}
+
 export default {
   async createUser(req: Request, res: Response) {
     try {
-      const accessCode = generateAccessCode(10);
+      const { accessCode } = req.body;
 
       const users = await prisma.user.findMany();
 
@@ -77,6 +99,30 @@ export default {
         status: 500,
         message: error.message,
         data: {},
+      });
+    }
+  },
+
+  async createAccessCode(req: Request, res: Response) {
+    try {
+      const accessCode = await generateUniqueAccessCode();
+
+      return res.status(200).json({
+          error: false,
+          status: 201,
+          message: "Código de acesso criado com sucesso!",
+          data: {
+              accessCode
+          },
+      });
+
+  } catch (error: any) {
+      console.error(error);
+      return res.status(500).json({
+          error: true,
+          status: 500,
+          message: error.message,
+          data: {},
       });
     }
   },
