@@ -42,12 +42,21 @@ export const WrapperButton = styled.div`
 `
 
 export const ButtonStyled = styled(PrimaryButton)`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.success400} !important;
   color: ${({ theme }) => theme.colors.neutral}!important;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   &:hover {
     background-color: ${({ theme }) =>
       lightenColor(theme.colors.success400, 0.2)} !important;
+  }
+
+  div {
+    position: relative;
+    top: 1px;
   }
 
   ${({ disabled }) =>
