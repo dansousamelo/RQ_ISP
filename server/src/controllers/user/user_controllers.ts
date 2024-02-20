@@ -12,92 +12,116 @@ export async function verifyUser(accessCode: string | null) {
 
   const users = await prisma.user.findMany();
 
-  if (users.length === 0) {
-    throw new Error("O código de acesso fornecido é inválido!");
-  }
-
   const userExists = users.find((user: any) => {
     const isMatch = bcrypt.compareSync(accessCode, user.access_code);
     return isMatch;
   });
 
-  if (!userExists) {
-    throw new Error("O código de acesso fornecido é inválido!");
-  }
-
-  return userExists;
+  return userExists || null;
 }
 
 async function generateUniqueAccessCode(): Promise<string> {
-  let accessCode = generateAccessCode(24);
-  console.log(accessCode);
+  let accessCode = generateAccessCode(23);
   const maxAttempts = 5;
 
   for (let i = 0; i < maxAttempts; i++) {
-    try {
-      await verifyUser(accessCode);
-      accessCode = generateAccessCode(24);
-    } catch (error: any) {
-      if (error.message === "O código de acesso fornecido é inválido!") {
-        continue;
-      } else {
-        throw error;
-      }
+    const user = await verifyUser(accessCode);
+    if (user === null) {
+      accessCode = generateAccessCode(23);
+    } else {
+      return accessCode;
     }
   }
 
-  return accessCode;
+  throw new Error("Não foi possível gerar um código de acesso único após várias tentativas.");
 }
 
-export default {
-  async createUser(req: Request, res: Response) {
-    try {
-      const { accessCode } = req.body;
+export async function createUser(accessCode: string) {
+  try {
+    const users = await prisma.user.findMany();
 
-      const users = await prisma.user.findMany();
-
-      if (
-        users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
-      ) {
-        return res.status(409).json({
-          error: true,
-          status: 409,
-          message: "Já existe um usuário com este código de acesso!",
-          data: {},
-        });
-      }
-
-      const hashedAccessCode = await bcrypt.hash(accessCode, 10);
-
-      const user = await prisma.user.create({
-        data: {
-          access_code: hashedAccessCode,
-        },
-      });
-
-      const token = await generateToken(user.id);
-      const refreshToken = await generateRefreshToken(user.id);
-
-      return res.status(201).json({
-        error: false,
-        status: 201,
-        message: "Usuário criado com sucesso!",
-        data: {
-          accessCode,
-          token,
-          refreshToken,
-        },
-      });
-    } catch (error: any) {
-      console.error(error);
-      return res.status(500).json({
+    if (users.some((user) => bcrypt.compareSync(accessCode, user.access_code))) {
+      return {
         error: true,
-        status: 500,
-        message: error.message,
+        status: 409,
+        message: "Já existe um usuário com este código de acesso!",
         data: {},
-      });
+      };
     }
-  },
+
+    const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        access_code: hashedAccessCode,
+      },
+    });
+
+    return {
+      error: false,
+      status: 201,
+      message: "Usuário criado com sucesso!",
+      id: user.id
+    };
+  } catch (error: any) {
+    console.error(error);
+    return {
+      error: true,
+      status: 500,
+      message: error.message,
+      data: {},
+    };
+  }
+}
+export default {
+  // async createUser(req: Request, res: Response) {
+  //   try {
+  //     const { accessCode } = req.body;
+
+  //     const users = await prisma.user.findMany();
+
+  //     if (
+  //       users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
+  //     ) {
+  //       return res.status(409).json({
+  //         error: true,
+  //         status: 409,
+  //         message: "Já existe um usuário com este código de acesso!",
+  //         data: {},
+  //       });
+  //     }
+
+  //     const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+  //     const user = await prisma.user.create({
+  //       data: {
+  //         access_code: hashedAccessCode,
+  //       },
+  //     });
+
+  //     const token = await generateToken(user.id);
+  //     const refreshToken = await generateRefreshToken(user.id);
+
+  //     return res.status(201).json({
+  //       error: false,
+  //       status: 201,
+  //       message: "Usuário criado com sucesso!",
+  //       data: {
+  //         accessCode,
+  //         token,
+  //         refreshToken,
+  //       },
+  //     });
+  //   } catch (error: any) {
+  //     console.error(error);
+  //     return res.status(500).json({
+  //       error: true,
+  //       status: 500,
+  //       message: error.message,
+  //       data: {},
+  //     });
+  //   }
+  // },
 
   async createAccessCode(req: Request, res: Response) {
     try {
@@ -130,6 +154,15 @@ export default {
         : null;
 
       const userExists = await verifyUser(accessCode);
+
+      if(!userExists) {
+        return res.status(500).json({
+          error: true,
+          status: 500,
+          message: "O código de acesso fornecido é inválido!",
+          data: {},
+        });
+      }
 
       const token = await generateToken(userExists.id);
       const refreshToken = await generateRefreshToken(userExists.id);
