@@ -23,8 +23,15 @@ export const Subtitle = styled.h2`
 export const TableContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 2fr) 3fr;
+  margin-top: 24px;
+`
+
+export const TableContentContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 2fr) 3fr;
   overflow-y: auto;
   margin: 24px 0;
+  margin-top: 0px;
 `
 
 export const WrapperStatusIndicator = styled.div`

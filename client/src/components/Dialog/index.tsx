@@ -65,8 +65,6 @@ const Title = styled(DialogRadix.Title)`
 const Description = styled(DialogRadix.Description)`
   font-family: ${({ theme }) => theme.fonts.primary};
   color: ${({ theme }) => theme.colors.neutral};
-  /* font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.regular}; */
 `
 
 const WarningProvider = styled(DialogRadix.WarningProvider)`
@@ -81,7 +79,7 @@ const CloseIconButton = styled(DialogRadix.Close)`
   right: 1.5rem;
   line-height: 0;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.neutral900};
+  color: ${({ theme }) => theme.colors.neutral};
   z-index: 100;
 `
 

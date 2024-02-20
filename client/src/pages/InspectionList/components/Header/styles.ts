@@ -2,19 +2,19 @@ import { styled } from 'styled-components'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 
 export const StyledHeader = styled.header`
-  margin-top: 4rem;
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid #4b5563;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
 `
 
 export const Title = styled.h1`
   font-family: 'Poiret One', cursive;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
-  line-height: 2.5rem;
+  line-height: 2rem;
   color: #22d3ee;
 `
 

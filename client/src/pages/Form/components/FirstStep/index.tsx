@@ -5,6 +5,7 @@ import { StatusIndicator } from '../StatusIndicator'
 import * as S from './styles'
 import { MainContent } from '../../../../components/MainContent/components'
 import { useInitialInspectionContext } from '../../../../contexts/InitialInspectionContext'
+import { RADIO_ITEMS } from '../../../InspectionList/components/FirstStepDialog/constants'
 
 export function FirstStep() {
   const {
@@ -32,6 +33,7 @@ export function FirstStep() {
           </MainContent.Paragraph>
           <S.RadioGroupWrapper>
             <RadioGroup
+              radioItems={RADIO_ITEMS}
               value={inspectionChecklistType}
               handleChange={updateInspectionChecklistType}
             />
