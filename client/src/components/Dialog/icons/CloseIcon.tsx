@@ -3,7 +3,7 @@ import React, { SVGProps } from 'react'
 export const CloseIcon: React.FC<SVGProps<SVGSVGElement>> = ({
   width = '14',
   height = '14',
-  fill = '#484848',
+  fill = '#FFFFFF',
   ...props
 }) => (
   <svg
