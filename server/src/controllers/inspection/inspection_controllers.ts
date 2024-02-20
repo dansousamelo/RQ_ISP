@@ -3,7 +3,7 @@ import { isString } from "../../interfaces/type_guards";
 import { verifyUser } from "../user/user_controllers";
 import { prisma } from "../../db";
 
-type DocumentItem = {
+type DocumentItems = {
   fileName: string;
   fileUrl: string;
   fileType: string;
@@ -51,7 +51,7 @@ export default {
         },
       });
 
-      const documentPromises = documents.map(async (doc: DocumentItem) => {
+      const documentPromises = documents.map(async (doc: DocumentItems) => {
         const { fileName, fileUrl, fileType } = doc;
         const document = await prisma.document.create({
           data: {
@@ -66,12 +66,9 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
-      console.log(inspection);
-      console.log(uploadedDocuments);
-
-      return res.status(200).json({
+      return res.status(201).json({
         error: false,
-        status: 200,
+        status: 201,
         message: "Inspeção criada com sucesso!",
         data: {
           inspection,
