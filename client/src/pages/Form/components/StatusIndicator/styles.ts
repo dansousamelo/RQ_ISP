@@ -12,7 +12,6 @@ interface DotProps {
 
 export const Dot = styled.div<DotProps>`
   width: 10px;
-  cursor: pointer;
   height: 10px;
   border-radius: ${({ theme }) => theme.radii.full};
   background-color: ${({ active, theme }) =>

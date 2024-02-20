@@ -3,9 +3,10 @@ import * as S from './styles'
 
 interface AccessCodeProps {
   code: string
+  isAccessCodeFetching: boolean
 }
 
-export function AccessCode({ code }: AccessCodeProps) {
+export function AccessCode({ code, isAccessCodeFetching }: AccessCodeProps) {
   const handleCopy = () => {
     navigator.clipboard
       .writeText(code)
@@ -21,7 +22,11 @@ export function AccessCode({ code }: AccessCodeProps) {
         <S.Title>Código de acesso</S.Title>
         <S.Copy onClick={handleCopy} />
       </S.TitleAndIconWrapper>
-      <S.Code>{code}</S.Code>
+      {isAccessCodeFetching ? (
+        <span>Gerando código de acesso...</span>
+      ) : (
+        <S.Code>{code}</S.Code>
+      )}
     </S.Container>
   )
 }
