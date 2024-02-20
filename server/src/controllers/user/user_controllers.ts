@@ -1,11 +1,57 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../../db";
-import {
-  generateToken,
-  generateRefreshToken,
-} from "../../services/auth/auth_services";
+import { generateAccessCode } from "../../utils/access_code";
+import { generateToken, generateRefreshToken } from "../../services/auth/auth_services";
 import { isString } from "../../interfaces/type_guards";
+
+async function findUserByAccessCode(users: any[], accessCode: string) {
+  return users.find((user: any) => {
+    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
+    return isMatch;
+  });
+}
+
+export async function verifyUser(accessCode: string | null) {
+  if (!accessCode) {
+    throw new Error("Não foi fornecido um código de acesso!");
+  }
+
+  const users = await prisma.user.findMany();
+
+  if (users.length === 0) {
+    throw new Error("O código de acesso fornecido é inválido!");
+  }
+
+  const userExists = findUserByAccessCode(users, accessCode);
+
+  if (!userExists) {
+    throw new Error("O código de acesso fornecido é inválido!");
+  }
+
+  return userExists;
+}
+
+async function generateUniqueAccessCode(): Promise<string> {
+  let accessCode = generateAccessCode(24);
+  console.log(accessCode);
+  const maxAttempts = 5;
+
+  for (let i = 0; i < maxAttempts; i++) {
+    try {
+      await verifyUser(accessCode);
+      accessCode = generateAccessCode(24);
+    } catch (error: any) {
+      if (error.message === "O código de acesso fornecido é inválido!") {
+        continue;
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  return accessCode;
+}
 
 export default {
   async createUser(req: Request, res: Response) {
@@ -20,7 +66,7 @@ export default {
         return res.status(409).json({
           error: true,
           status: 409,
-          message: "Já existe um usuário com este código de acesso",
+          message: "Já existe um usuário com este código de acesso!",
           data: {},
         });
       }
@@ -39,9 +85,9 @@ export default {
       return res.status(201).json({
         error: false,
         status: 201,
-        message: "Usuário criado com sucesso",
+        message: "Usuário criado com sucesso!",
         data: {
-          user,
+          accessCode,
           token,
           refreshToken,
         },
@@ -57,45 +103,37 @@ export default {
     }
   },
 
+  async createAccessCode(req: Request, res: Response) {
+    try {
+      const accessCode = await generateUniqueAccessCode();
+
+      return res.status(200).json({
+          error: false,
+          status: 201,
+          message: "Código de acesso criado com sucesso!",
+          data: {
+              accessCode
+          },
+      });
+
+  } catch (error: any) {
+      console.error(error);
+      return res.status(500).json({
+          error: true,
+          status: 500,
+          message: error.message,
+          data: {},
+      });
+    }
+  },
+
   async findUser(req: Request, res: Response) {
     try {
       const accessCode = isString(req.query.accessCode)
         ? req.query.accessCode
         : null;
-      
-      if (!accessCode) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Não foi Fornecido um código de acesso",
-          data: {},
-        });
-      }
 
-      const users = await prisma.user.findMany();
-
-      if (users.length === 0) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "O código de acesso fornecido é inválido",
-          data: {},
-        });
-      }
-
-      const userExists = users.find((user: any) => {
-        const isMatch = bcrypt.compareSync(accessCode, user.access_code);
-        return isMatch;
-      });
-
-      if (!userExists) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "O código de acesso fornecido é inválido",
-          data: {},
-        });
-      }
+      const userExists = await verifyUser(accessCode);
 
       const token = await generateToken(userExists.id);
       const refreshToken = await generateRefreshToken(userExists.id);
@@ -103,7 +141,7 @@ export default {
       return res.status(200).json({
         error: false,
         status: 200,
-        message: "O código de acesso fornecido é válido",
+        message: "Usuário encontrado!",
         data: {
           user: {
             id: userExists.id,
