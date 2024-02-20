@@ -10,7 +10,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
   id          String @id @default(uuid())
   access_code String @unique
+
+  Inspection Inspection[]
+}
+
+model Inspection {
+  id                String  @id @default(uuid())
+  user_id           String
+  name              String
+  responsible       String
+  type              Type
+  recording_url     String?
+  participants      String?
+  responsible_email String
+
+  user     User       @relation(fields: [user_id], references: [id])
+  Document Document[]
+}
+
+enum Type {
+  privacyRequirement
+  userStory
+}
+
+model Document {
+  id            String @id @default(uuid())
+  inspection_id String
+  name          String
+  type          String
+  url           String
+
+  inspection Inspection @relation(fields: [inspection_id], references: [id])
 }
