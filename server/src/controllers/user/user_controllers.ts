@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../../db";
 import { generateAccessCode } from "../../utils/access_code";
-import { generateToken, generateRefreshToken } from "../../services/auth/auth_services";
+import {
+  generateToken,
+  generateRefreshToken,
+} from "../../services/auth/auth_services";
 import { isString } from "../../interfaces/type_guards";
 
 export async function verifyUser(accessCode: string | null) {
@@ -26,21 +29,25 @@ async function generateUniqueAccessCode(): Promise<string> {
 
   for (let i = 0; i < maxAttempts; i++) {
     const user = await verifyUser(accessCode);
-    if (user === null) {
+    if (user) {
       accessCode = generateAccessCode(23);
     } else {
       return accessCode;
     }
   }
 
-  throw new Error("Não foi possível gerar um código de acesso único após várias tentativas.");
+  throw new Error(
+    "Não foi possível gerar um código de acesso único após várias tentativas."
+  );
 }
 
 export async function createUser(accessCode: string) {
   try {
     const users = await prisma.user.findMany();
 
-    if (users.some((user) => bcrypt.compareSync(accessCode, user.access_code))) {
+    if (
+      users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
+    ) {
       return {
         error: true,
         status: 409,
@@ -61,7 +68,7 @@ export async function createUser(accessCode: string) {
       error: false,
       status: 201,
       message: "Usuário criado com sucesso!",
-      id: user.id
+      id: user.id,
     };
   } catch (error: any) {
     console.error(error);
@@ -128,21 +135,20 @@ export default {
       const accessCode = await generateUniqueAccessCode();
 
       return res.status(200).json({
-          error: false,
-          status: 201,
-          message: "Código de acesso criado com sucesso!",
-          data: {
-              accessCode
-          },
+        error: false,
+        status: 201,
+        message: "Código de acesso criado com sucesso!",
+        data: {
+          accessCode,
+        },
       });
-
-  } catch (error: any) {
+    } catch (error: any) {
       console.error(error);
       return res.status(500).json({
-          error: true,
-          status: 500,
-          message: error.message,
-          data: {},
+        error: true,
+        status: 500,
+        message: error.message,
+        data: {},
       });
     }
   },
@@ -155,7 +161,7 @@ export default {
 
       const userExists = await verifyUser(accessCode);
 
-      if(!userExists) {
+      if (!userExists) {
         return res.status(500).json({
           error: true,
           status: 500,
