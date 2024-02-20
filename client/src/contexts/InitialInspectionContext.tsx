@@ -30,6 +30,7 @@ interface InitialInspectionContextType {
   updateActiveTabOnUpload: (value: ActiveUploadTab) => void
   filesUploaded: Files
   setFilesUploaded: React.Dispatch<React.SetStateAction<Files>>
+  setActiveStep: React.Dispatch<React.SetStateAction<number>>
 }
 
 interface InitialInspectionProviderProps {
@@ -90,6 +91,7 @@ export function InitialInspectionProvider({
         updateActiveTabOnUpload,
         filesUploaded,
         setFilesUploaded,
+        setActiveStep,
       }}
     >
       {children}

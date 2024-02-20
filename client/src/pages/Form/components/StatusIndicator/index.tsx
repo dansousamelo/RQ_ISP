@@ -4,7 +4,6 @@ import * as S from './styles'
 interface StatusIndicatorProps {
   currentStep: number
 }
-
 export const StatusIndicator: React.FC<StatusIndicatorProps> = ({
   currentStep,
 }) => {

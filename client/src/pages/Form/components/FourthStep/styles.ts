@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 import { lightenColor } from '../../../../utils/colors'
 
@@ -49,6 +49,20 @@ export const ButtonStyled = styled(PrimaryButton)`
     background-color: ${({ theme }) =>
       lightenColor(theme.colors.success400, 0.2)} !important;
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+
+      background-color: ${({ theme }) => theme.colors.neutral400} !important;
+      color: ${({ theme }) => theme.colors.neutral}!important;
+      font-weight: ${({ theme }) => theme.fontWeights.bold};
+      &:hover {
+        background-color: ${({ theme }) =>
+          lightenColor(theme.colors.neutral400, 0.2)} !important;
+      }
+    `}
 `
 
 export const BackButtonStyled = styled(PrimaryButton)`
