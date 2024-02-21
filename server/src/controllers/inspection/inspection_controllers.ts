@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { isString } from "../../interfaces/type_guards";
-import { verifyUser, createUser } from "../user/user_controllers";
+import {
+  isValidInspectionType,
+  isValidInspectionEmail,
+  isValidInspectionDocument,
+} from "./interfaces/type_guards";
+import { verifyUser } from "../user/user_controllers";
 import {
   generateToken,
   generateRefreshToken,
@@ -8,41 +13,44 @@ import {
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
 
-type DocumentItems = {
-  fileName: string;
-  fileUrl: string;
-  fileType: string;
-};
-
-function isValidInspectionType(inspection_type: string) {
-  if (
-    inspection_type !== "privacyRequirement" &&
-    inspection_type !== "userStory"
-  ) {
-    throw new Error("O tipo de inspeção não é válido!");
-  }
-
-  return inspection_type;
-}
+import { DocumentItems } from "../../interfaces/types";
 
 export default {
   async createInspection(req: Request, res: Response) {
     try {
-      const {
-        inspection_type,
-        name,
-        responsible,
-        responsible_email,
-        recording_url,
-        participants,
-        documents,
-      } = req.body;
+      const inspection_type = isValidInspectionType(req.body.inspection_type);
 
-      isValidInspectionType(inspection_type);
+      const name = isString(req.body.name) ? req.body.name : null;
+
+      const responsible = isString(req.body.responsible)
+        ? req.body.responsible
+        : null;
+
+      const responsible_email = isValidInspectionEmail(
+        req.body.responsible_email
+      );
+
+      const { recording_url, participants, documents } = req.body;
 
       const accessCode = isString(req.body.accessCode)
         ? req.body.accessCode
         : null;
+
+      if (!name || !responsible) {
+        throw new Error(
+          `Forneça um ${!name ? "nome" : "responsável"} válido para inspeção!`
+        );
+      }
+
+      if (documents && documents.length > 0) {
+        const isValidDocuments = documents.every(isValidInspectionDocument);
+
+        if (!isValidDocuments) {
+          throw new Error(
+            "Os atributos de documentos não foram fornecidos corretamente"
+          );
+        }
+      }
 
       const userExists = await verifyUser(accessCode);
 
