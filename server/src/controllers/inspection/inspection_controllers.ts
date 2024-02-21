@@ -76,25 +76,35 @@ export default {
 
       if (token) {
         const verifiedUserId = await verifyToken(token);
-        
+
         if (!verifiedUserId) {
           return res.status(401).json({
             error: true,
             status: 401,
             message: "Token inválido!",
             data: {},
-          }); 
+          });
+        } else {
+          const userExists = await verifyUser(accessCode);
+
+          if (userExists) {
+            userId = verifiedUserId;
+          } else {
+            return res.status(404).json({
+              error: true,
+              status: 401,
+              message: "Usuário não encontrado!",
+              data: {},
+            });
+          }
         }
-
-        userId = verifiedUserId;
-
       } else {
         const userExists = await verifyUser(accessCode);
 
         if (userExists) {
-          
-          throw new Error("Já existe um usuário com este código de acesso e não foi enviado um token de verificação")
-        
+          throw new Error(
+            "Já existe um usuário com este código de acesso e não foi enviado um token de verificação"
+          );
         } else {
           const hashedAccessCode = await bcrypt.hash(accessCode, 10);
 
@@ -108,8 +118,8 @@ export default {
         }
       }
 
-      if(userId === null) {
-        throw new Error("Não foi possível identificar o usuário!")
+      if (userId === null) {
+        throw new Error("Usuário não encontrado!");
       }
 
       const inspection = await prisma.inspection.create({
