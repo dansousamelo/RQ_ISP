@@ -60,7 +60,6 @@ export function InpectionList() {
         label: 'Continuar',
         action: (id: string) => navigate(`/inspection/${id}`),
       },
-      { label: 'Refazer', action: () => console.log('Refazer') },
       { label: 'Excluir', action: (id: string) => handleDeleteInspection(id) },
     ],
     concluded: [
@@ -68,7 +67,6 @@ export function InpectionList() {
         label: 'Visualizar',
         action: (id: string) => navigate(`/inspection/${id}`),
       },
-      { label: 'Refazer', action: () => console.log('Refazer') },
       {
         label: 'Estatísticas',
         action: (id: string, name: string, type: string) =>
@@ -143,6 +141,7 @@ export function InpectionList() {
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
           isLoadingRequisition={false}
+          onClose={() => setDialogInspectionStep('')}
         />
       )}
     </>

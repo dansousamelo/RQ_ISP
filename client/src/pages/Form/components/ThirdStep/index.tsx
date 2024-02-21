@@ -12,6 +12,7 @@ import { SettingsTabs } from '../../../../components/SettingsTabs'
 import { useCallback } from 'react'
 import { UploadedDocumentList } from '../../../../components/FileUploader/components/UploadedDocumentList'
 import { SeeIcon } from './icons/SeeIcon'
+import { LoadingBars } from '../../../../components/LoadingBars'
 
 export function ThirdStep() {
   const {
@@ -22,7 +23,8 @@ export function ThirdStep() {
     filesUploaded,
   } = useInitialInspectionContext()
 
-  const { getInputProps, getRootProps, onClearFile } = usePDFUploader()
+  const { getInputProps, loadingFiles, getRootProps, onClearFile } =
+    usePDFUploader()
 
   const onDeleteFile = useCallback(
     (name: string) => {
@@ -34,29 +36,32 @@ export function ThirdStep() {
   const tabs = [
     {
       title: 'Anexar',
-      content: () => (
-        <FileUploader.FileUploader {...getRootProps()} variant={'valid'}>
-          <FileUploader.WrapperIconAndMessageUpload>
-            <FileUploader.UploadIcon />
-            <FileUploader.MessageUpload>
-              Arraste seu(s) arquivo(s) pdf(s) aqui ou{' '}
-              <FileUploader.MessageUploadBold>
-                clique para buscar
-              </FileUploader.MessageUploadBold>{' '}
-              em seu computador.
-            </FileUploader.MessageUpload>
-          </FileUploader.WrapperIconAndMessageUpload>
+      content: () =>
+        loadingFiles ? (
+          <LoadingBars />
+        ) : (
+          <FileUploader.FileUploader {...getRootProps()} variant={'valid'}>
+            <FileUploader.WrapperIconAndMessageUpload>
+              <FileUploader.UploadIcon />
+              <FileUploader.MessageUpload>
+                Arraste seu(s) arquivo(s) pdf(s) aqui ou{' '}
+                <FileUploader.MessageUploadBold>
+                  clique para buscar
+                </FileUploader.MessageUploadBold>{' '}
+                em seu computador.
+              </FileUploader.MessageUpload>
+            </FileUploader.WrapperIconAndMessageUpload>
 
-          <FileUploader.MessageUploadDescription>
-            Apenas arquivos no formato pdf são permitidos.
-          </FileUploader.MessageUploadDescription>
-          <input
-            name="dropzone-file"
-            {...getInputProps()}
-            data-testid="thumbnail-fille"
-          />
-        </FileUploader.FileUploader>
-      ),
+            <FileUploader.MessageUploadDescription>
+              Apenas arquivos no formato pdf são permitidos.
+            </FileUploader.MessageUploadDescription>
+            <input
+              name="dropzone-file"
+              {...getInputProps()}
+              data-testid="thumbnail-fille"
+            />
+          </FileUploader.FileUploader>
+        ),
       value: 'upload_documents',
     },
     {

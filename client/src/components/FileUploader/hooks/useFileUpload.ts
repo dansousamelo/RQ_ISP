@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Accept, useDropzone } from 'react-dropzone'
 import { useInitialInspectionContext } from '../../../contexts/InitialInspectionContext'
 import { ErrorToast } from '../../Toast'
@@ -21,6 +21,7 @@ export function useFileUpload({
   maxFiles = 5,
   validator,
 }: useFileUploadProps) {
+  const [loadingFiles, setLoadingFiles] = useState(false)
   const firstRender = useRef(true)
 
   const { updateActiveTabOnUpload, setFilesUploaded, filesUploaded } =
@@ -28,12 +29,15 @@ export function useFileUpload({
 
   const uploadImage = async (file: File[]) => {
     try {
+      setLoadingFiles(true)
       const response = await uploadFile(file)
       return response
     } catch (error) {
       ErrorToast(
         'Não foi possível enviar o arquivo. Tente novamente mais tarde',
       )
+    } finally {
+      setLoadingFiles(false)
     }
   }
 
@@ -99,5 +103,6 @@ export function useFileUpload({
     isDragAccept,
     onDrop,
     onClearFile,
+    loadingFiles,
   }
 }
