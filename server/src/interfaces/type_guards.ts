@@ -1,5 +1,5 @@
 export function isString(value: unknown): value is string {
-  return typeof value === "string";
+  return typeof value === "string" && value !== "";
 }
 
 export function isMulterFilesArray(files: any): files is globalThis.Express.Multer.File[] {
