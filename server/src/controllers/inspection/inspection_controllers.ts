@@ -149,7 +149,9 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
-      // const refreshToken = await generateRefreshToken(user.id);
+      
+      const access_token = await generateToken(userId);
+      const refreshToken = await generateRefreshToken(userId);
 
       return res.status(201).json({
         error: false,
@@ -158,8 +160,8 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
-          // token,
-          // refreshToken,
+          token: access_token,
+          refreshToken
         },
       });
     } catch (error: any) {
