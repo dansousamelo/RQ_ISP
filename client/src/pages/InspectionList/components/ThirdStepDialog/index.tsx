@@ -145,16 +145,22 @@ export function ThirdStepDialog() {
         >
           Voltar
         </S.BackButtonStyled>
-        <S.ButtonStyled onClick={() => handleCreateInspection(dataToSend)}>
-          {filesUploaded.length > 0 && !isCreatingInspection
-            ? 'Criar inspeção'
-            : 'Pular e criar inspeção'}
+        <S.ButtonStyled
+          disabled={isCreatingInspection}
+          onClick={() => handleCreateInspection(dataToSend)}
+        >
+          {!isCreatingInspection
+            ? filesUploaded.length > 0
+              ? 'Criar inspeção'
+              : 'Pular e criar inspeção'
+            : null}
+
           {isCreatingInspection && (
             <div>
               <Spinner />
             </div>
           )}
-          {isCreatingInspection ? 'Carregando' : 'Iniciar inspeção'}
+          {isCreatingInspection && 'Carregando'}
         </S.ButtonStyled>
       </S.WrapperButton>
     </S.ContentWrapper>
