@@ -62,7 +62,7 @@ export function FourthStep() {
       setAccessToken(token)
       setRefreshToken(refreshToken)
       createCookieWithExpiration()
-      navigate('/inspection/list')
+      navigate(`/inspection/list/${accessCode}`)
 
       SuccessToast('Inspeção criada com sucesso')
     } catch (error: unknown) {
@@ -85,9 +85,8 @@ export function FourthStep() {
             Tudo certo para iniciar a sua inspeção!
           </MainContent.Heading>
           <MainContent.Paragraph>
-            Guarde o código de acesso gerado, ele será necessário sempre que
-            você quiser gerenciar ou realizar inspeções no futuro. Copie ou, se
-            preferir, faça download.
+            Guarde o código de acesso para futuras inspeções. O código só será
+            efetivado ao iniciar essa inspeção.
           </MainContent.Paragraph>
 
           <AccessCode
@@ -96,7 +95,7 @@ export function FourthStep() {
           />
 
           <S.MessageToDownload>
-            Ou se preferir clique{' '}
+            Se preferir clique{' '}
             <b
               style={{ cursor: 'pointer' }}
               onClick={() => downloadTxtFile(accessCode as string)}
