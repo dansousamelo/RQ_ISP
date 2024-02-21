@@ -10,6 +10,7 @@ import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
+import { verifyToken } from "../token/token_controllers";
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
 
@@ -30,7 +31,7 @@ export default {
         req.body.responsible_email
       );
 
-      const { recording_url, participants, documents } = req.body;
+      const { recording_url, participants, documents, token } = req.body;
 
       const accessCode = isString(req.body.accessCode)
         ? req.body.accessCode
@@ -52,28 +53,68 @@ export default {
         }
       }
 
-      const userExists = await verifyUser(accessCode);
+      let userId: string | null = null;
 
-      if (userExists !== null) {
-        return res.status(500).json({
-          error: true,
-          status: 500,
-          message: "Já existe um usuário com este código de acesso!",
-          data: {},
-        });
+      // const userExists = await verifyUser(accessCode);
+
+      // if (userExists !== null) {
+      //   return res.status(500).json({
+      //     error: true,
+      //     status: 500,
+      //     message: "Já existe um usuário com este código de acesso!",
+      //     data: {},
+      //   });
+      // }
+
+      // const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+      // const user = await prisma.user.create({
+      //   data: {
+      //     access_code: hashedAccessCode,
+      //   },
+      // });
+
+      if (token) {
+        const verifiedUserId = await verifyToken(token);
+        
+        if (!verifiedUserId) {
+          return res.status(401).json({
+            error: true,
+            status: 401,
+            message: "Token inválido!",
+            data: {},
+          }); 
+        }
+
+        userId = verifiedUserId;
+
+      } else {
+        const userExists = await verifyUser(accessCode);
+
+        if (userExists) {
+          
+          throw new Error("Já existe um usuário com este código de acesso e não foi enviado um token de verificação")
+        
+        } else {
+          const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+          const newUser = await prisma.user.create({
+            data: {
+              access_code: hashedAccessCode,
+            },
+          });
+
+          userId = newUser.id;
+        }
       }
 
-      const hashedAccessCode = await bcrypt.hash(accessCode, 10);
-
-      const user = await prisma.user.create({
-        data: {
-          access_code: hashedAccessCode,
-        },
-      });
+      if(userId === null) {
+        throw new Error("Não foi possível identificar o usuário!")
+      }
 
       const inspection = await prisma.inspection.create({
         data: {
-          user_id: user.id,
+          user_id: userId,
           name,
           responsible,
           type: inspection_type,
@@ -98,8 +139,7 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
-      const token = await generateToken(user.id);
-      const refreshToken = await generateRefreshToken(user.id);
+      // const refreshToken = await generateRefreshToken(user.id);
 
       return res.status(201).json({
         error: false,
@@ -108,8 +148,8 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
-          token,
-          refreshToken,
+          // token,
+          // refreshToken,
         },
       });
     } catch (error: any) {
