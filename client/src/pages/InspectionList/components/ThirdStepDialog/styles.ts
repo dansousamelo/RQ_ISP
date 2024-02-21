@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 import { lightenColor } from '../../../../utils/colors'
 
@@ -13,7 +13,9 @@ export const ContentWrapper = styled(motion.div).attrs(() => ({
   animate: 'visible',
   variants: fadeInVariants,
   transition: { duration: 1 },
-}))``
+}))`
+  margin-top: ${({ theme }) => theme.space[2]};
+`
 
 export const WrapperButton = styled.div`
   margin-top: ${({ theme }) => theme.space[4]};
@@ -26,14 +28,37 @@ export const WrapperButton = styled.div`
 `
 
 export const ButtonStyled = styled(PrimaryButton)`
-  background-color: ${({ theme }) => theme.colors.blue500} !important;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.success400} !important;
   color: ${({ theme }) => theme.colors.neutral}!important;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   &:hover {
     background-color: ${({ theme }) =>
-      lightenColor(theme.colors.blue500, 0.2)} !important;
+      lightenColor(theme.colors.success400, 0.2)} !important;
   }
-`
 
+  div {
+    position: relative;
+    top: 1px;
+  }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+
+      background-color: ${({ theme }) => theme.colors.neutral400} !important;
+      color: ${({ theme }) => theme.colors.neutral}!important;
+      font-weight: ${({ theme }) => theme.fontWeights.bold};
+      &:hover {
+        background-color: ${({ theme }) =>
+          lightenColor(theme.colors.neutral400, 0.2)} !important;
+      }
+    `}
+`
 export const BackButtonStyled = styled(PrimaryButton)`
   background-color: inherit;
   text-align: center !important;
