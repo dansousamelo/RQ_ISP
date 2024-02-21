@@ -51,7 +51,10 @@ export function useDialogItemToRender({
           id: 'back',
           label: 'Voltar',
           variant: 'secondary',
-          action: () => handleUpdateDialogControlled(false),
+          action: () => {
+            handleUpdateDialogControlled(false)
+            setDialogInspectionStep('')
+          },
         },
         {
           id: 'continue',
@@ -83,7 +86,10 @@ export function useDialogItemToRender({
           id: 'back',
           label: 'Voltar',
           variant: 'secondary',
-          action: () => handleUpdateDialogControlled(false),
+          action: () => {
+            handleUpdateDialogControlled(false)
+            setDialogInspectionStep('')
+          },
         },
         {
           id: 'delete',
@@ -91,6 +97,7 @@ export function useDialogItemToRender({
           variant: 'primary',
           action: () => {
             deleteInspectionDialog()
+            setDialogInspectionStep('')
           },
           backgroundColor: defaultTheme.colors.error700,
           color: defaultTheme.colors.neutral,

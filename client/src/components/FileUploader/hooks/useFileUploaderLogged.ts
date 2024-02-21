@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Accept, useDropzone } from 'react-dropzone'
 import { ErrorToast } from '../../Toast'
 import { useLoggedInspectionContext } from '../../../contexts/LoggedInspection'
@@ -21,6 +21,8 @@ export function useFileUploaderLogged({
   maxFiles = 5,
   validator,
 }: useFileUploadProps) {
+  const [loadingFiles, setLoadingFiles] = useState(false)
+
   const firstRender = useRef(true)
 
   const { updateActiveTabOnUpload, setFilesUploaded, filesUploaded } =
@@ -28,15 +30,17 @@ export function useFileUploaderLogged({
 
   const uploadImage = async (file: File[]) => {
     try {
+      setLoadingFiles(true)
       const response = await uploadFile(file)
       return response
     } catch (error) {
       ErrorToast(
         'Não foi possível enviar o arquivo. Tente novamente mais tarde',
       )
+    } finally {
+      setLoadingFiles(false)
     }
   }
-
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       const duplicateNames = acceptedFiles.filter((file) =>
@@ -73,7 +77,6 @@ export function useFileUploaderLogged({
     },
     [filesUploaded, setFilesUploaded, updateActiveTabOnUpload],
   )
-
   const { getRootProps, getInputProps, isDragAccept, acceptedFiles } =
     useDropzone({
       onDrop,
@@ -99,5 +102,6 @@ export function useFileUploaderLogged({
     isDragAccept,
     onDrop,
     onClearFile,
+    loadingFiles,
   }
 }

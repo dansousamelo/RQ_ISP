@@ -50,7 +50,10 @@ export function App() {
                 path="/inspection/list"
                 element={<PrivateRoute element={<InpectionList />} />}
               /> */}
-                  <Route path="/inspection/list" element={<InpectionList />} />
+                  <Route
+                    path="/inspection/list/:accessCode"
+                    element={<InpectionList />}
+                  />
                   <Route
                     path="/inspection/:id/:name/:type/statistics"
                     element={<Statistics />}
