@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 // Rotas de Usuário
-// app.post("/create-user", user_controllers.createUser);
+app.post("/create-user", user_controllers.createUser);
 app.get("/generate-access_code", user_controllers.createAccessCode);
 app.get("/find-user", user_controllers.findUser);
 
