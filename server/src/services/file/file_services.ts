@@ -1,12 +1,8 @@
 import S3Storage from "../../utils/S3_storage";
+import { DocumentItems } from "../../interfaces/types";
 
-type UploadResult = {
-    fileName: string;
-    fileUrl: string;
-    fileType: string;
-  }
 class FileServices {
-  async uploadFile(file: Express.Multer.File): Promise<UploadResult> {
+  async uploadFile(file: Express.Multer.File): Promise<DocumentItems> {
     try {
         const s3Storage = new S3Storage();
 
