@@ -1,71 +1,130 @@
 import { Request, Response } from "express";
 import { isString } from "../../interfaces/type_guards";
-import { verifyUser, createUser } from "../user/user_controllers";
+import {
+  isValidInspectionType,
+  isValidInspectionEmail,
+  isValidInspectionDocument,
+} from "./interfaces/type_guards";
+import { verifyUser } from "../user/user_controllers";
 import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
+import { verifyToken } from "../token/token_controllers";
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
 
-type DocumentItems = {
-  fileName: string;
-  fileUrl: string;
-  fileType: string;
-};
-
-function isValidInspectionType(inspection_type: string) {
-  if (
-    inspection_type !== "privacyRequirement" &&
-    inspection_type !== "userStory"
-  ) {
-    throw new Error("O tipo de inspeção não é válido!");
-  }
-
-  return inspection_type;
-}
+import { DocumentItems } from "../../interfaces/types";
 
 export default {
   async createInspection(req: Request, res: Response) {
     try {
-      const {
-        inspection_type,
-        name,
-        responsible,
-        responsible_email,
-        recording_url,
-        participants,
-        documents,
-      } = req.body;
+      const inspection_type = isValidInspectionType(req.body.inspection_type);
 
-      isValidInspectionType(inspection_type);
+      const name = isString(req.body.name) ? req.body.name : null;
+
+      const responsible = isString(req.body.responsible)
+        ? req.body.responsible
+        : null;
+
+      const responsible_email = isValidInspectionEmail(
+        req.body.responsible_email
+      );
+
+      const { recording_url, participants, documents, token } = req.body;
 
       const accessCode = isString(req.body.accessCode)
         ? req.body.accessCode
         : null;
 
-      const userExists = await verifyUser(accessCode);
-
-      if (userExists !== null) {
-        return res.status(500).json({
-          error: true,
-          status: 500,
-          message: "Já existe um usuário com este código de acesso!",
-          data: {},
-        });
+      if (!name || !responsible) {
+        throw new Error(
+          `Forneça um ${!name ? "nome" : "responsável"} válido para inspeção!`
+        );
       }
 
-      const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+      if (documents && documents.length > 0) {
+        const isValidDocuments = documents.every(isValidInspectionDocument);
 
-      const user = await prisma.user.create({
-        data: {
-          access_code: hashedAccessCode,
-        },
-      });
+        if (!isValidDocuments) {
+          throw new Error(
+            "Os atributos de documentos não foram fornecidos corretamente"
+          );
+        }
+      }
+
+      let userId: string | null = null;
+
+      // const userExists = await verifyUser(accessCode);
+
+      // if (userExists !== null) {
+      //   return res.status(500).json({
+      //     error: true,
+      //     status: 500,
+      //     message: "Já existe um usuário com este código de acesso!",
+      //     data: {},
+      //   });
+      // }
+
+      // const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+      // const user = await prisma.user.create({
+      //   data: {
+      //     access_code: hashedAccessCode,
+      //   },
+      // });
+
+      if (token) {
+        const verifiedUserId = await verifyToken(token);
+
+        if (!verifiedUserId) {
+          return res.status(401).json({
+            error: true,
+            status: 401,
+            message: "Token inválido!",
+            data: {},
+          });
+        } else {
+          const userExists = await verifyUser(accessCode);
+
+          if (userExists) {
+            userId = verifiedUserId;
+          } else {
+            return res.status(404).json({
+              error: true,
+              status: 401,
+              message: "Usuário não encontrado!",
+              data: {},
+            });
+          }
+        }
+      } else {
+        const userExists = await verifyUser(accessCode);
+
+        if (userExists) {
+          throw new Error(
+            "Já existe um usuário com este código de acesso e não foi enviado um token de verificação"
+          );
+        } else {
+          const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+
+          const newUser = await prisma.user.create({
+            data: {
+              access_code: hashedAccessCode,
+            },
+          });
+
+          userId = newUser.id;
+        }
+      }
+
+      if (userId === null) {
+        throw new Error("Usuário não encontrado!");
+      }
 
       const inspection = await prisma.inspection.create({
         data: {
-          user_id: user.id,
+          user_id: userId,
           name,
           responsible,
           type: inspection_type,
@@ -90,8 +149,7 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
-      const token = await generateToken(user.id);
-      const refreshToken = await generateRefreshToken(user.id);
+      // const refreshToken = await generateRefreshToken(user.id);
 
       return res.status(201).json({
         error: false,
@@ -100,8 +158,8 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
-          token,
-          refreshToken,
+          // token,
+          // refreshToken,
         },
       });
     } catch (error: any) {

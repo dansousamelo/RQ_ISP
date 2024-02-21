@@ -27,7 +27,7 @@ model Inspection {
   participants      String?
   responsible_email String
 
-  user     User       @relation(fields: [user_id], references: [id])
+  user     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Document Document[]
 }
 
@@ -43,5 +43,5 @@ model Document {
   type          String
   url           String
 
-  inspection Inspection @relation(fields: [inspection_id], references: [id])
+  inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
 }
