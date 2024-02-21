@@ -41,94 +41,55 @@ async function generateUniqueAccessCode(): Promise<string> {
   );
 }
 
-export async function createUser(accessCode: string) {
-  try {
-    const users = await prisma.user.findMany();
-
-    if (
-      users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
-    ) {
-      return {
-        error: true,
-        status: 409,
-        message: "Já existe um usuário com este código de acesso!",
-        data: {},
-      };
-    }
-
-    const hashedAccessCode = await bcrypt.hash(accessCode, 10);
-
-    const user = await prisma.user.create({
-      data: {
-        access_code: hashedAccessCode,
-      },
-    });
-
-    return {
-      error: false,
-      status: 201,
-      message: "Usuário criado com sucesso!",
-      id: user.id,
-    };
-  } catch (error: any) {
-    console.error(error);
-    return {
-      error: true,
-      status: 500,
-      message: error.message,
-      data: {},
-    };
-  }
-}
 export default {
-  // async createUser(req: Request, res: Response) {
-  //   try {
-  //     const { accessCode } = req.body;
+  async createUser(req: Request, res: Response) {
+    try {
+      const { accessCode } = req.body;
 
-  //     const users = await prisma.user.findMany();
+      const users = await prisma.user.findMany();
 
-  //     if (
-  //       users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
-  //     ) {
-  //       return res.status(409).json({
-  //         error: true,
-  //         status: 409,
-  //         message: "Já existe um usuário com este código de acesso!",
-  //         data: {},
-  //       });
-  //     }
+      if (
+        users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
+      ) {
+        return res.status(409).json({
+          error: true,
+          status: 409,
+          message: "Já existe um usuário com este código de acesso!",
+          data: {},
+        });
+      }
 
-  //     const hashedAccessCode = await bcrypt.hash(accessCode, 10);
+      const hashedAccessCode = await bcrypt.hash(accessCode, 10);
 
-  //     const user = await prisma.user.create({
-  //       data: {
-  //         access_code: hashedAccessCode,
-  //       },
-  //     });
+      const user = await prisma.user.create({
+        data: {
+          access_code: hashedAccessCode,
+        },
+      });
 
-  //     const token = await generateToken(user.id);
-  //     const refreshToken = await generateRefreshToken(user.id);
+      const token = await generateToken(user.id);
+      const refreshToken = await generateRefreshToken(user.id);
 
-  //     return res.status(201).json({
-  //       error: false,
-  //       status: 201,
-  //       message: "Usuário criado com sucesso!",
-  //       data: {
-  //         accessCode,
-  //         token,
-  //         refreshToken,
-  //       },
-  //     });
-  //   } catch (error: any) {
-  //     console.error(error);
-  //     return res.status(500).json({
-  //       error: true,
-  //       status: 500,
-  //       message: error.message,
-  //       data: {},
-  //     });
-  //   }
-  // },
+      return res.status(201).json({
+        error: false,
+        status: 201,
+        message: "Usuário criado com sucesso!",
+        data: {
+          accessCode,
+          token,
+          refreshToken,
+        },
+      });
+    } catch (error: any) {
+      console.error(error);
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: error.message,
+        data: {},
+      });
+    }
+  },
 
   async createAccessCode(req: Request, res: Response) {
     try {
