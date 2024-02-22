@@ -121,7 +121,7 @@ const PdfViewer = () => {
           {(pdfDocument) => (
             <PdfHighlighter
               pdfDocument={pdfDocument}
-              enableAreaSelection={(event) => event.altKey}
+              enableAreaSelection={() => false}
               onScrollChange={resetHash}
               scrollRef={(scrollTo) => {
                 scrollViewerToRef.current = scrollTo

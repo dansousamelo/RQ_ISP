@@ -136,8 +136,8 @@ export function Sidebar({
 
         <S.MarkTitle>Marcações</S.MarkTitle>
         <S.Description>
-          Crie marcações selecionando o texto ao lado. Para criar um destaque de
-          área, mantenha pressionada a tecla ⌥ Option (Alt), clique e arraste.
+          Crie marcações selecionando o texto ao lado. Ao criar as marcações,
+          você poderá gerenciá-las e, ao finalizar, salve suas alterações.
         </S.Description>
 
         {isLoading ? (
