@@ -38,11 +38,8 @@ export const MarkTitle = styled.h2`
 
 export const Description = styled.p`
   color: white;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 8px;
+  margin: 8px 1rem 1rem 1rem;
   font-size: 14px;
-  width: 95%;
 `
 
 export const SaveButton = styled(PrimaryButton)`
