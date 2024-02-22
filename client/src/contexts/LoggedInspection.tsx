@@ -41,6 +41,7 @@ interface LoggedInspectionContextType {
   >
   isDialogControlledOpen: boolean
   handleUpdateDialogControlled: (open: boolean) => void
+  setSecondStepData: React.Dispatch<React.SetStateAction<SecondStepData>>
 }
 
 interface LoggedInspectionProviderProps {
@@ -99,6 +100,7 @@ export function LoggedInspectionProvider({
         setDialogInspectionStep,
         handleUpdateDialogControlled,
         isDialogControlledOpen,
+        setSecondStepData,
       }}
     >
       {children}

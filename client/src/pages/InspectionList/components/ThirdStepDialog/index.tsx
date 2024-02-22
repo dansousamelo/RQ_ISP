@@ -4,6 +4,7 @@ import { UploadedDocumentList } from '../../../../components/FileUploader/compon
 import { SettingsTabs } from '../../../../components/SettingsTabs'
 import {
   ActiveUploadTab,
+  SecondStepData,
   useLoggedInspectionContext,
 } from '../../../../contexts/LoggedInspection'
 import { SeeIcon } from '../../../Form/components/ThirdStep/icons/SeeIcon'
@@ -30,6 +31,9 @@ export function ThirdStepDialog() {
     setDialogInspectionStep,
     inspectionChecklistType,
     secondStepData,
+    handleUpdateDialogControlled,
+    setSecondStepData,
+    setFilesUploaded,
   } = useLoggedInspectionContext()
 
   const { getInputProps, getRootProps, loadingFiles, onClearFile } =
@@ -63,10 +67,14 @@ export function ThirdStepDialog() {
       console.log('response: ', response)
 
       SuccessToast('Inspeção criada com sucesso')
+      setSecondStepData({} as SecondStepData)
     } catch (error: unknown) {
       if (error instanceof AxiosError) ErrorToast(error.response?.data.message)
     } finally {
       setIsCreatingInspection(false)
+      handleUpdateDialogControlled(false)
+      setDialogInspectionStep('')
+      setFilesUploaded([])
     }
   }
 
