@@ -10,10 +10,11 @@ import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
+import { inspectionTemplates } from "../../services/inspection/populateDB_service";
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
 
-import { User, Inspection, DocumentItems } from "../../interfaces/types";
+import { User, Inspection, DocumentItems, Item, Template } from "../../interfaces/types";
 
 import { getErrorMessage } from "../../utils/error";
 
@@ -51,7 +52,7 @@ export default {
           status: 400,
           message: getErrorMessage(error),
           data: {},
-        })
+        });
       }
 
       if (!isString(accessCode)) {
@@ -153,6 +154,46 @@ export default {
           data: {},
         });
       }
+      
+      let template: Template;
+      let items;
+
+      try {
+        const templateData = inspectionTemplates(
+          inspection_type,
+          inspection.id
+        );
+
+        template = await prisma.template.create({
+          data: {
+            inspection_id: inspection.id,
+            name: templateData.templateName,
+            description: templateData.templateDescription,
+          },
+        });
+
+        items = await Promise.all(templateData.templateItems.map(async (item: Item) => {
+          const createdItem = await prisma.item.create({
+            data: {
+              template_id: template.id,
+              item_index: item.item_index,
+              description: item.description,
+              situation: item.situation,
+              observations: item.observations,
+              category: item.category
+            },
+          });
+          return createdItem;
+        }));
+      
+      } catch (error) {
+        return res.status(500).json({
+          error: true,
+          status: 500,
+          message: getErrorMessage(error),
+          data: {},
+        });
+      }
 
       const uploadedDocuments = await Promise.all(documentPromises);
       const access_token = await generateToken(user.id);
@@ -165,6 +206,8 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
+          template,
+          items,
           token: access_token,
           refreshToken,
         },
@@ -202,7 +245,7 @@ export default {
           data: {},
         });
       }
-      
+
       try {
         isValidInspectionEmail(responsible_email);
         isValidInspectionType(inspection_type);
@@ -212,7 +255,7 @@ export default {
           status: 400,
           message: getErrorMessage(error),
           data: {},
-        })
+        });
       }
 
       if (!isString(accessCode)) {
@@ -298,6 +341,47 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
+            
+      let template: Template;
+      let items;
+
+      try {
+        const templateData = inspectionTemplates(
+          inspection_type,
+          inspection.id
+        );
+
+        template = await prisma.template.create({
+          data: {
+            inspection_id: inspection.id,
+            name: templateData.templateName,
+            description: templateData.templateDescription,
+          },
+        });
+
+        items = await Promise.all(templateData.templateItems.map(async (item: Item) => {
+          const createdItem = await prisma.item.create({
+            data: {
+              template_id: template.id,
+              item_index: item.item_index,
+              description: item.description,
+              situation: item.situation,
+              observations: item.observations,
+              category: item.category
+            },
+          });
+          return createdItem;
+        }));
+      
+      } catch (error) {
+        return res.status(500).json({
+          error: true,
+          status: 500,
+          message: getErrorMessage(error),
+          data: {},
+        });
+      }
+
       return res.status(201).json({
         error: false,
         status: 201,
@@ -305,6 +389,8 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
+          template,
+          items,
         },
       });
     } catch (error) {
