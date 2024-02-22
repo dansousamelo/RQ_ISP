@@ -51,6 +51,7 @@ interface DialogItemToRenderProps {
   id: string
   handleDeleteTrail: (id: string) => void
   documentsUploaded: DocumentUploadedProps[]
+  accessCode: string
 }
 
 export function useDialogItemToRender({
@@ -66,6 +67,7 @@ export function useDialogItemToRender({
   id,
   handleDeleteTrail,
   documentsUploaded,
+  accessCode,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
@@ -202,6 +204,7 @@ export function useDialogItemToRender({
           }
           amountOfItens={tableData.length}
           idMark={idDialogOpen}
+          accessCode={accessCode}
         />
       ),
       width: '28rem',

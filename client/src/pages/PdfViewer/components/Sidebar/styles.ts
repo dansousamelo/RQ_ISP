@@ -62,6 +62,7 @@ export const SaveButton = styled(PrimaryButton)`
 
 export const CancelButton = styled(PrimaryButton)`
   position: relative;
+
   background-color: inherit;
   text-align: center !important;
   color: ${({ theme }) => theme.colors.error700} !important;
@@ -79,6 +80,7 @@ export const CancelButton = styled(PrimaryButton)`
 export const ResetButton = styled(PrimaryButton)`
   position: relative;
   margin-top: 1rem;
+
   background-color: inherit;
   text-align: center !important;
   color: ${({ theme }) => theme.colors.neutral} !important;

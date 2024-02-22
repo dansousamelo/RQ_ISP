@@ -34,7 +34,10 @@ export function Statistics() {
 
   
 `
-  const { name, type } = useParams()
+
+  const isLoading = false
+
+  const { name, type, accessCode } = useParams()
   const navigate = useNavigate()
   const graphicsRef = useRef<HTMLDivElement | null>(null)
   const itensRef = useRef<HTMLDivElement | null>(null)
@@ -73,7 +76,7 @@ export function Statistics() {
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
       label: 'Inspeções',
-      action: () => navigate('/inspection/list'),
+      action: () => navigate(`/inspection/list/${accessCode}`),
     },
     {
       label: name as string,
@@ -87,6 +90,7 @@ export function Statistics() {
         <Header
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           setDialogStep={setDialogStep}
+          isLoading={isLoading}
         />
         <Breadcrumb items={BREADCRUMBS} />
         <S.Title>{name}</S.Title>
@@ -98,11 +102,16 @@ export function Statistics() {
 
         {hasSubtypes ? (
           <S.WrapperSelectAndGraphics>
-            <SelectSubTypes
-              defaultValue={'general'}
-              items={SUBTYPES_OPTIONS}
-              handleValueChange={onValueChange}
-            />
+            {isLoading ? (
+              <S.SelectSkeleton />
+            ) : (
+              <SelectSubTypes
+                defaultValue={'general'}
+                items={SUBTYPES_OPTIONS}
+                handleValueChange={onValueChange}
+              />
+            )}
+
             <div
               style={{
                 display: 'flex',
@@ -110,16 +119,28 @@ export function Statistics() {
                 margin: '16px 0',
               }}
             >
-              <BarChart
-                labels={LABELS}
-                values={VALUES}
-                title={titleFormatted as string}
-              />
+              {isLoading ? (
+                <S.BarSkeleton />
+              ) : (
+                <BarChart
+                  labels={LABELS}
+                  values={VALUES}
+                  title={titleFormatted as string}
+                />
+              )}
             </div>
           </S.WrapperSelectAndGraphics>
         ) : (
           <S.WrapperChartBar>
-            <BarChart labels={LABELS} values={VALUES} title={name as string} />
+            {isLoading ? (
+              <S.BarSkeleton />
+            ) : (
+              <BarChart
+                labels={LABELS}
+                values={VALUES}
+                title={name as string}
+              />
+            )}
           </S.WrapperChartBar>
         )}
 

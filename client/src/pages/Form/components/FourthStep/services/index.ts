@@ -5,5 +5,13 @@ export async function getAccessCode() {
 }
 
 export async function postInspectionData(data: any) {
-  return await api.post('create-inspection', data)
+  return await api.post('create-first-inspection', data)
+}
+
+export async function postInspectionLoggedData({ data, token }: any) {
+  return await api.post('create-inspection', data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 }

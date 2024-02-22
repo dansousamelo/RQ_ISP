@@ -13,7 +13,7 @@ import { usePDFLoggedUploader } from './hooks/usePDFLoggedUploader'
 import { LoadingBars } from '../../../../components/LoadingBars'
 import { useParams } from 'react-router-dom'
 import { convertToCustomFormat } from '../../../Form/components/FourthStep/utils'
-import { postInspectionData } from '../../../Form/components/FourthStep/services'
+import { postInspectionLoggedData } from '../../../Form/components/FourthStep/services'
 import { ErrorToast, SuccessToast } from '../../../../components/Toast'
 import { AxiosError } from 'axios'
 import { getAccessToken } from '../../../../utils/cookies'
@@ -45,8 +45,6 @@ export function ThirdStepDialog() {
 
   const token = getAccessToken()
 
-  console.log('token: ', token)
-
   const dataToSend = {
     inspection_type: inspectionChecklistType,
     responsible: secondStepData.responsable,
@@ -56,13 +54,15 @@ export function ThirdStepDialog() {
     responsible_email: secondStepData.email,
     documents: convertToCustomFormat(filesUploaded),
     accessCode,
-    token,
   }
 
   async function handleCreateInspection(dataToSend: any) {
     try {
       setIsCreatingInspection(true)
-      const response = await postInspectionData(dataToSend)
+      const response = await postInspectionLoggedData({
+        data: dataToSend,
+        token,
+      })
 
       console.log('response: ', response)
 
