@@ -13,9 +13,23 @@ export interface Inspection {
   participants?: string | null;
   responsible_email: string;
 }
+
+export interface Template {
+  id: string; 
+  inspection_id: string;
+  name: string;
+  description: string;
+}
+export interface Item {
+  item_index: int;
+  description: string;
+  situation: string | null;
+  observations: string;
+  category?: string;
+}
+
 export type DocumentItems = {
   fileName: string;
   fileUrl: string;
   fileType: string;
 };
-
