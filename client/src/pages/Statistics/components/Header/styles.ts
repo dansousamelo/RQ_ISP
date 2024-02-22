@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
+import { Skeleton } from '../../../../components/Skeleton'
 
 export const StyledHeader = styled.header`
   margin-top: 1.5rem;
@@ -31,4 +32,10 @@ export const ClickableIcon = styled.div`
 export const PrimaryButtonStyled = styled(PrimaryButton)`
   display: flex;
   gap: ${({ theme }) => theme.space[1]};
+`
+
+export const ButtonSkeleton = styled(Skeleton)`
+  height: 37px;
+  width: 101px;
+  border-radius: 8px;
 `

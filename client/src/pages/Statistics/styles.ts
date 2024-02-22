@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { Skeleton } from '../../components/Skeleton'
 
 export const Container = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ export const Subtitle = styled.h2`
 
 export const WrapperSelectAndGraphics = styled.div`
   display: flex;
+  flex: 1;
   gap: 12rem;
 `
 
@@ -35,4 +37,16 @@ export const WrapperChartBar = styled.div`
 
 export const PrintComponent = styled.div`
   visibility: hidden;
+`
+
+export const SelectSkeleton = styled(Skeleton)`
+  height: 32px;
+  width: 80px;
+  border-radius: 8px;
+`
+
+export const BarSkeleton = styled(Skeleton)`
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 `
