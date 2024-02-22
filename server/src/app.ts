@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import token_controllers from "./controllers/token/token_controllers";
+import { verifyToken } from "./middlewares/auth/token_middlewares";
 
 import multer from "multer";
 import multerConfig from "./config/multer";
@@ -38,7 +39,8 @@ const upload = multer(multerConfig);
 app.post("/upload-file", upload.array("files"), file_controller.uploadFile);
 
 //rotas de inspeção
-app.post("/create-inspection", inspection_controllers.createInspection);
+app.post("/create-first-inspection", inspection_controllers.createFirstInspection);
+app.post("/create-inspection", verifyToken, inspection_controllers.createInspection);
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);
