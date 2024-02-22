@@ -6,18 +6,6 @@ import { generateToken } from "../../services/auth/auth_services";
 const secretKey =
   process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
 
-export async function verifyToken(token: string): Promise<string | null> {
-  if (!token) {
-    throw new Error("Token não fornecido!");
-  }
-
-  try {
-    const decoded = jwt.verify(token, secretKey) as { user_id: string };
-    return decoded.user_id;
-  } catch (error) {
-    throw new Error("Token inválido!");
-  }
-}
 
 export default {
   async generateRefreshToken(req: Request, res: Response) {
