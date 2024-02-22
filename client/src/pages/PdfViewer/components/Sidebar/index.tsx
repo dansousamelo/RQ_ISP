@@ -123,7 +123,7 @@ export function Sidebar({
     navigate(`/inspection/list/${accessCode}`)
   }
 
-  const isLoading = true
+  const isLoading = false
 
   return (
     <>
