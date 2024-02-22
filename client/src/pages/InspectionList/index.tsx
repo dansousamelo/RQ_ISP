@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { DialogControlled } from '../../components/DialogControlled'
 import { Footer } from '../../components/Footer'
 import { useLoggedInspectionContext } from '../../contexts/LoggedInspection'
@@ -9,9 +9,14 @@ import * as S from './styles'
 import { MOCK_DATA } from './mocks'
 import { useCallback, useState } from 'react'
 import { SuccessToast } from '../../components/Toast'
+import { TableSkeleton } from './components/TableSkeleton'
 
 export function InpectionList() {
   const navigate = useNavigate()
+
+  const loading = false
+
+  const { accessCode } = useParams()
 
   const [inspections, setInspections] = useState(MOCK_DATA)
   const [idInspectionToDelete, setIdInspectionToDelete] = useState('')
@@ -48,7 +53,7 @@ export function InpectionList() {
     uninitiated: [
       {
         label: 'Inspecionar',
-        action: (id: string) => navigate(`/inspection/${id}`),
+        action: (id: string) => navigate(`/inspection/${id}/${accessCode}`),
       },
       {
         label: 'Excluir',
@@ -58,19 +63,21 @@ export function InpectionList() {
     initiated: [
       {
         label: 'Continuar',
-        action: (id: string) => navigate(`/inspection/${id}`),
+        action: (id: string) => navigate(`/inspection/${id}/${accessCode}`),
       },
       { label: 'Excluir', action: (id: string) => handleDeleteInspection(id) },
     ],
     concluded: [
       {
         label: 'Visualizar',
-        action: (id: string) => navigate(`/inspection/${id}`),
+        action: (id: string) => navigate(`/inspection/${id}/${accessCode}`),
       },
       {
         label: 'Estatísticas',
         action: (id: string, name: string, type: string) =>
-          navigate(`/inspection/${id}/${name}/${type}/statistics`),
+          navigate(
+            `/inspection/${id}/${name}/${type}/${accessCode}/statistics`,
+          ),
       },
       {
         label: 'Excluir',
@@ -92,46 +99,52 @@ export function InpectionList() {
         <S.Title>Inspeções</S.Title>
         <S.Subtitle>Realize suas inspeções de forma eficiente.</S.Subtitle>
 
-        <S.TableContainer>
-          <S.TableHeader>Título</S.TableHeader>
-          <S.TableHeader>Data de criação</S.TableHeader>
-          <S.TableHeader>Status</S.TableHeader>
-          <S.TableHeader />
-        </S.TableContainer>
+        {loading ? (
+          <TableSkeleton />
+        ) : (
+          <>
+            <S.TableContainer>
+              <S.TableHeader>Título</S.TableHeader>
+              <S.TableHeader>Data de criação</S.TableHeader>
+              <S.TableHeader>Status</S.TableHeader>
+              <S.TableHeader />
+            </S.TableContainer>
 
-        <S.TableContentContainer>
-          {inspections.map((item) => {
-            const status = STATUS_OPTIONS[item.status]
-            return (
-              <>
-                <S.TableTitleCell title={item.title} key={item.id}>
-                  {item.title}
-                </S.TableTitleCell>
+            <S.TableContentContainer>
+              {inspections.map((item) => {
+                const status = STATUS_OPTIONS[item.status]
+                return (
+                  <>
+                    <S.TableTitleCell title={item.title} key={item.id}>
+                      {item.title}
+                    </S.TableTitleCell>
 
-                <S.TableCell>{item.inspection_started}</S.TableCell>
-                <S.TableCell>
-                  <S.WrapperStatusIndicator>
-                    <S.StatusIndicator status={item.status} />
-                    {status}
-                  </S.WrapperStatusIndicator>
-                </S.TableCell>
-                <S.TableCell hasGap={true}>
-                  {STATUS_ACTION_OPTIONS[item.status].map((action) => (
-                    <S.ButtonStyled
-                      onClick={() =>
-                        action.action(item.id, item.title, item.type)
-                      }
-                      label={action.label}
-                      key={action.label}
-                    >
-                      {action.label}
-                    </S.ButtonStyled>
-                  ))}
-                </S.TableCell>
-              </>
-            )
-          })}
-        </S.TableContentContainer>
+                    <S.TableCell>{item.inspection_started}</S.TableCell>
+                    <S.TableCell>
+                      <S.WrapperStatusIndicator>
+                        <S.StatusIndicator status={item.status} />
+                        {status}
+                      </S.WrapperStatusIndicator>
+                    </S.TableCell>
+                    <S.TableCell hasGap={true}>
+                      {STATUS_ACTION_OPTIONS[item.status].map((action) => (
+                        <S.ButtonStyled
+                          onClick={() =>
+                            action.action(item.id, item.title, item.type)
+                          }
+                          label={action.label}
+                          key={action.label}
+                        >
+                          {action.label}
+                        </S.ButtonStyled>
+                      ))}
+                    </S.TableCell>
+                  </>
+                )
+              })}
+            </S.TableContentContainer>
+          </>
+        )}
 
         <Footer />
       </S.Container>

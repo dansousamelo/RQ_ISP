@@ -55,13 +55,16 @@ export function App() {
                     element={<InpectionList />}
                   />
                   <Route
-                    path="/inspection/:id/:name/:type/statistics"
+                    path="/inspection/:id/:name/:type/:accessCode/statistics"
                     element={<Statistics />}
                   />
-                  <Route path="/inspection/:id" element={<Inspection />} />
+                  <Route
+                    path="/inspection/:id/:accessCode"
+                    element={<Inspection />}
+                  />
 
                   <Route
-                    path="/inspection/:id/:pdf/:amountOfItens/:idMark/mark"
+                    path="/inspection/:id/:pdf/:amountOfItens/:idMark/:accessCode/mark"
                     element={<PdfViewer />}
                   />
                   <Route path="*" element={<PageNotFound />} />

@@ -86,6 +86,7 @@ export const TableTitleCell = styled.time<TableCellProps>`
   margin-top: 4px;
   background-color: ${({ theme }) => theme.colors.neutral700};
   padding: 24px 0px;
+  line-height: 2.4;
 
   padding-left: ${({ hasGap }) => (hasGap ? '0px' : '40px')};
 
@@ -98,6 +99,7 @@ export const TableCell = styled.tr<TableCellProps>`
   margin-top: 4px;
   background-color: ${({ theme }) => theme.colors.neutral700};
   padding: 24px 0px;
+  line-height: 2.4;
 
   padding-left: ${({ hasGap }) => (hasGap ? '0px' : '40px')};
 

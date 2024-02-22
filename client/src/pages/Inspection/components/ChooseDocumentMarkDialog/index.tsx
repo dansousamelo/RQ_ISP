@@ -29,6 +29,7 @@ interface ChooseDocumentMarkDialogProps {
   id: string
   amountOfItens: number
   idMark: string
+  accessCode: string
 }
 
 export function ChooseDocumentMarkDialog({
@@ -38,6 +39,7 @@ export function ChooseDocumentMarkDialog({
   hasTrailFilled,
   idMark,
   amountOfItens,
+  accessCode,
 }: ChooseDocumentMarkDialogProps) {
   const {
     control,
@@ -52,7 +54,7 @@ export function ChooseDocumentMarkDialog({
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     const selectedValueEncoded = data.selectedValue.replace(/\//g, '%2F')
     navigate(
-      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/mark`,
+      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${accessCode}/mark`,
     )
   }
   return (
