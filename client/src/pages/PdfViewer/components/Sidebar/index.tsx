@@ -8,6 +8,7 @@ import { HighlightProps } from '../../interfaces'
 import * as S from './styles'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import { useNavigate, useParams } from 'react-router-dom'
+import { HighlightSkeleton } from './components/HighlightSkeleton'
 
 const updateHash = (highlight: HighlightProps) => {
   document.location.hash = `highlight-${highlight.id}`
@@ -76,7 +77,7 @@ export function Sidebar({
 
   const navigate = useNavigate()
 
-  const { id } = useParams()
+  const { id, accessCode } = useParams()
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
     useDialogControlled()
@@ -106,7 +107,7 @@ export function Sidebar({
   }, [handleUpdateDialogControlled])
 
   function backToInspection() {
-    navigate(`/inspection/${id}`)
+    navigate(`/inspection/${id}/${accessCode}`)
   }
 
   const { dialogItemToRender } = useDialogItemToRender({
@@ -119,8 +120,10 @@ export function Sidebar({
   })
 
   function backToInspectionList() {
-    navigate(`/inspection/list`)
+    navigate(`/inspection/list/${accessCode}`)
   }
+
+  const isLoading = true
 
   return (
     <>
@@ -137,25 +140,26 @@ export function Sidebar({
           área, mantenha pressionada a tecla ⌥ Option (Alt), clique e arraste.
         </S.Description>
 
-        <S.MarkList>
-          {highlights.map((highlight, index) => (
-            <li
-              key={index}
-              className="sidebar__highlight"
-              onClick={() => {
-                updateHash(highlight)
-              }}
-            >
-              <SidebarLiContent
-                highlight={highlight}
-                onDeleteHighlight={onDeleteHighlight}
-              />
-            </li>
-          ))}
-        </S.MarkList>
-        {/* <div style={{ padding: '1rem' }}>
-        <button onClick={toggleDocument}>Toggle PDF document</button>
-      </div> */}
+        {isLoading ? (
+          <HighlightSkeleton />
+        ) : (
+          <S.MarkList>
+            {highlights.map((highlight, index) => (
+              <li
+                key={index}
+                className="sidebar__highlight"
+                onClick={() => {
+                  updateHash(highlight)
+                }}
+              >
+                <SidebarLiContent
+                  highlight={highlight}
+                  onDeleteHighlight={onDeleteHighlight}
+                />
+              </li>
+            ))}
+          </S.MarkList>
+        )}
 
         <S.WrapperButtons>
           {highlights.length > 0 && (

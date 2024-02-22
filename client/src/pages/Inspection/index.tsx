@@ -15,6 +15,8 @@ import { isNotUndefined } from '../../interfaces/typeGuards'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import TableRow from './components/TableRow'
 import { useParams, useNavigate } from 'react-router-dom'
+import { InspectionTableSkeleton } from './components/InspectionTableSkeleton'
+import { HeaderSkeleton } from './components/HeaderSkeleton'
 
 interface BreadcrumbItem {
   label: string
@@ -33,13 +35,15 @@ export type InspectionDialog =
   | ''
 
 export function Inspection() {
-  const { id } = useParams()
+  const { id, accessCode } = useParams()
   const navigate = useNavigate()
+
+  const loading = false
 
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
       label: 'Inspeções',
-      action: () => navigate('/inspection/list'),
+      action: () => navigate(`/inspection/list/${accessCode}`),
     },
     {
       label: 'ConecteSUS',
@@ -81,6 +85,7 @@ export function Inspection() {
     id: id as string,
     handleDeleteTrail,
     documentsUploaded: MOCK_DOCUMENTS_UPLOADED,
+    accessCode: accessCode as string,
   })
 
   const handleSaveAll = () => {
@@ -91,56 +96,66 @@ export function Inspection() {
     <>
       <S.Container>
         <Breadcrumb items={BREADCRUMBS} />
-        <Header
-          tableData={tableData}
-          handleUpdateDialogControlled={handleUpdateDialogControlled}
-          setDialogInspectionStep={setDialogInspectionStep}
-        />
 
-        <S.TableStyled>
-          <thead>
-            <tr>
-              <th
-                style={{
-                  borderTopLeftRadius: '8px',
-                }}
-              >
-                Item
-              </th>
-              <th>Situação</th>
-              <th>Descrição</th>
-              <th>Observações</th>
-              <th
-                style={{
-                  borderTopRightRadius: '8px',
-                }}
-              >
-                Rastro
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((item, index) => (
-              <TableRow
-                item={item}
-                key={item.id}
-                index={index}
-                setIsEditing={setIsEditing}
-                setDialogInspectionStep={setDialogInspectionStep}
-                handleUpdateDialogControlled={handleUpdateDialogControlled}
-                setIdDialogOpen={setIdDialogOpen}
-                setTableData={setTableData}
-                tableData={tableData}
-                setEditorData={setEditorData}
-              />
-            ))}
-          </tbody>
-        </S.TableStyled>
+        {loading ? (
+          <HeaderSkeleton />
+        ) : (
+          <Header
+            tableData={tableData}
+            handleUpdateDialogControlled={handleUpdateDialogControlled}
+            setDialogInspectionStep={setDialogInspectionStep}
+          />
+        )}
+
+        {loading ? (
+          <InspectionTableSkeleton />
+        ) : (
+          <S.TableStyled>
+            <thead>
+              <tr>
+                <th
+                  style={{
+                    borderTopLeftRadius: '8px',
+                  }}
+                >
+                  Item
+                </th>
+                <th>Situação</th>
+                <th>Descrição</th>
+                <th>Observações</th>
+                <th
+                  style={{
+                    borderTopRightRadius: '8px',
+                  }}
+                >
+                  Rastro
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((item, index) => (
+                <TableRow
+                  item={item}
+                  key={item.id}
+                  index={index}
+                  setIsEditing={setIsEditing}
+                  setDialogInspectionStep={setDialogInspectionStep}
+                  handleUpdateDialogControlled={handleUpdateDialogControlled}
+                  setIdDialogOpen={setIdDialogOpen}
+                  setTableData={setTableData}
+                  tableData={tableData}
+                  setEditorData={setEditorData}
+                />
+              ))}
+            </tbody>
+          </S.TableStyled>
+        )}
+
         <S.WrapperSaveAndCancel>
           <S.CancelInspectionButton onClick={handleSaveAll}>
             Cancelar
           </S.CancelInspectionButton>
-          <S.SaveInspectionButton onClick={handleSaveAll}>
+          <S.SaveInspectionButton disabled={loading} onClick={handleSaveAll}>
             Salvar
           </S.SaveInspectionButton>
         </S.WrapperSaveAndCancel>

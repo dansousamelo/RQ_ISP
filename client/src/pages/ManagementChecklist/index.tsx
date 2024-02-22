@@ -7,7 +7,7 @@ import managerListPicture from '../../assets/managerList.png'
 import { Info } from 'phosphor-react'
 import * as S from './styles'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   createCookieWithExpiration,
   setAccessToken,
@@ -30,6 +30,8 @@ export function ManagementChecklist() {
   const { register, handleSubmit, control } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   })
+
+  const { accessCode } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [errorInRequest, setErrorInRequest] = useState('')
   const navigate = useNavigate()
@@ -50,7 +52,7 @@ export function ManagementChecklist() {
       setAccessToken(token)
       setRefreshToken(refreshToken)
       createCookieWithExpiration()
-      navigate('/inspection/list')
+      navigate(`/inspection/list/${accessCode}`)
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         setErrorInRequest(error.response?.data.message)
