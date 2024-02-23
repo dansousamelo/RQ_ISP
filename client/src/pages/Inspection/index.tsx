@@ -17,6 +17,8 @@ import TableRow from './components/TableRow'
 import { useParams, useNavigate } from 'react-router-dom'
 import { InspectionTableSkeleton } from './components/InspectionTableSkeleton'
 import { HeaderSkeleton } from './components/HeaderSkeleton'
+import { getInspectionItemsRepository } from './repository/getInspectionItemsRepository'
+import { getAccessToken } from '../../utils/cookies'
 
 interface BreadcrumbItem {
   label: string
@@ -38,7 +40,16 @@ export function Inspection() {
   const { id, accessCode } = useParams()
   const navigate = useNavigate()
 
-  const loading = false
+  const token = getAccessToken()
+
+  const { inspectionsItems, isInspectionItemsLoading } =
+    getInspectionItemsRepository({
+      accessCode: accessCode as string,
+      inspectionId: id as string,
+      token: token as string,
+    })
+
+  console.log('inspectionsItems: ', inspectionsItems)
 
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
@@ -97,7 +108,7 @@ export function Inspection() {
       <S.Container>
         <Breadcrumb items={BREADCRUMBS} />
 
-        {loading ? (
+        {isInspectionItemsLoading ? (
           <HeaderSkeleton />
         ) : (
           <Header
@@ -107,7 +118,7 @@ export function Inspection() {
           />
         )}
 
-        {loading ? (
+        {isInspectionItemsLoading ? (
           <InspectionTableSkeleton />
         ) : (
           <S.TableStyled>
@@ -155,7 +166,10 @@ export function Inspection() {
           <S.CancelInspectionButton onClick={handleSaveAll}>
             Cancelar
           </S.CancelInspectionButton>
-          <S.SaveInspectionButton disabled={loading} onClick={handleSaveAll}>
+          <S.SaveInspectionButton
+            disabled={isInspectionItemsLoading}
+            onClick={handleSaveAll}
+          >
             Salvar
           </S.SaveInspectionButton>
         </S.WrapperSaveAndCancel>

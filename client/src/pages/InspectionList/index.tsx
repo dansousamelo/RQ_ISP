@@ -9,7 +9,7 @@ import * as S from './styles'
 import { useCallback, useState } from 'react'
 import { SuccessToast } from '../../components/Toast'
 import { TableSkeleton } from './components/TableSkeleton'
-import { getInspectionListRepository } from './respostory/getInspectionListRepository'
+import { getInspectionListRepository } from './repository/getInspectionListRepository'
 import { getAccessToken } from '../../utils/cookies'
 
 export function InpectionList() {
