@@ -8,13 +8,20 @@ const secretKey =
   process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
 
 export function generateToken(user_id: string): string {
-  const expiresIn = "15m";
-  return jwt.sign({ user_id }, secretKey, { expiresIn });
+  const expirationMinutes = 1060
+  const expirationSeconds = expirationMinutes * 60
+  return jwt.sign({ user_id }, secretKey, { expiresIn: expirationSeconds });
 }
 
 export function generateRefreshToken(user_id: string): string {
-  const expiresIn = "1w";
-  return jwt.sign({ user_id }, secretKey, { expiresIn });
+  const secondsPerMinute = 60;
+  const minutesPerHour = 60;
+  const hoursPerDay = 24;
+  const daysPerWeek = 7;
+
+  const secondsPerWeek = secondsPerMinute * minutesPerHour * hoursPerDay * daysPerWeek;
+
+  return jwt.sign({ user_id }, secretKey, { expiresIn: secondsPerWeek });
 }
 
 export function getSecretKey(): string {

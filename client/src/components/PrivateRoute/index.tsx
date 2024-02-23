@@ -20,16 +20,27 @@ function isTokenExpired(): boolean {
   const currentTime = Math.floor(Date.now() / 1000)
   const tokenExpiration = Cookies.get('tokenExpiration')
 
+  console.log('-------------------------')
+  console.log('tokenExpiration: ', tokenExpiration)
+  console.log('currentTime: ', currentTime)
+
   const expirationTimestamp = parseInt(String(tokenExpiration), 10)
+
+  console.log('expirationTimestamp: ', expirationTimestamp)
 
   if (isNaN(expirationTimestamp)) {
     return true
   }
+  console.log(
+    'currentTime > expirationTimestamp: ',
+    currentTime > expirationTimestamp,
+  )
 
+  console.log('-------------------------')
   return currentTime > expirationTimestamp
 }
 
-async function regenerateToken(): Promise<boolean> {
+export async function regenerateToken(): Promise<boolean> {
   const refreshToken = Cookies.get(REFRESH_TOKEN_COOKIE_NAME)
 
   if (refreshToken) {
@@ -73,6 +84,9 @@ export function PrivateRoute({
   const navigate = useNavigate()
   const accessToken = getAccessToken()
   const refreshToken = getRefreshToken()
+
+  console.log('accessToken: ', accessToken)
+  console.log('refreshToken: ', refreshToken)
 
   useEffect(() => {
     if (!accessToken || !refreshToken) {
