@@ -1,5 +1,15 @@
 import { useQuery } from 'react-query'
 import { getInspectionList } from '../services'
+import { useState } from 'react'
+
+export type InspectionItemType = 'privacyRequirement' | 'userStory'
+export interface InspectionItem {
+  id: string
+  name: string
+  type: InspectionItemType
+  created_at: string
+  status: 'uninitiated' | 'initiated' | 'concluded'
+}
 
 export function getInspectionListRepository({
   accessCode,
@@ -8,16 +18,20 @@ export function getInspectionListRepository({
   accessCode: string
   token: string
 }) {
-  async function fetchInspectionList(): Promise<any> {
+  const [inspections, setInspections] = useState<InspectionItem[]>([])
+  async function fetchInspectionList(): Promise<void> {
     const response = await getInspectionList({ accessCode, token })
 
-    return response.data.data
+    setInspections(response.data.data.inspections)
   }
 
-  const { data: inspectionList, isFetching: isInspectionListLoading } =
-    useQuery([`inspectionList-${accessCode}`], fetchInspectionList, {
+  const { isFetching: isInspectionListLoading } = useQuery(
+    [`inspectionList-${accessCode}`],
+    fetchInspectionList,
+    {
       staleTime: Infinity,
-    })
+    },
+  )
 
-  return { isInspectionListLoading, inspectionList }
+  return { isInspectionListLoading, inspections, setInspections }
 }
