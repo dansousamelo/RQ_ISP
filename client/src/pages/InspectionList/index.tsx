@@ -10,13 +10,22 @@ import { MOCK_DATA } from './mocks'
 import { useCallback, useState } from 'react'
 import { SuccessToast } from '../../components/Toast'
 import { TableSkeleton } from './components/TableSkeleton'
+import { getInspectionListRepository } from './respostory/getInspectionListRepository'
+import { getAccessToken } from '../../utils/cookies'
 
 export function InpectionList() {
   const navigate = useNavigate()
 
-  const loading = false
-
   const { accessCode } = useParams()
+  const token = getAccessToken() as string
+
+  const { inspectionList, isInspectionListLoading } =
+    getInspectionListRepository({
+      accessCode: accessCode as string,
+      token,
+    })
+
+  console.log('inspectionList: ', inspectionList)
 
   const [inspections, setInspections] = useState(MOCK_DATA)
   const [idInspectionToDelete, setIdInspectionToDelete] = useState('')
@@ -99,7 +108,7 @@ export function InpectionList() {
         <S.Title>Inspeções</S.Title>
         <S.Subtitle>Realize suas inspeções de forma eficiente.</S.Subtitle>
 
-        {loading ? (
+        {isInspectionListLoading ? (
           <TableSkeleton />
         ) : (
           <>
