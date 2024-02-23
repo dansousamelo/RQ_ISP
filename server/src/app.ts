@@ -43,6 +43,7 @@ app.post("/create-first-inspection", inspection_controllers.createFirstInspectio
 app.post("/create-inspection", verifyToken, inspection_controllers.createInspection);
 app.get("/list-inspections", verifyToken, inspection_controllers.listInspections);
 app.get("/find-inspection", verifyToken, inspection_controllers.findInspectionItems);
+app.get("/find-inspection-attribute", verifyToken, inspection_controllers.findInspectionAttributes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);
