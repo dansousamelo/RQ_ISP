@@ -17,7 +17,7 @@ export interface Inspection {
   status: Status;
   created_at: Datetime;
   updated_at: Datetime;
-  document?: DocumentItems;
+  Document?: Document[];
 }
 
 export interface Template {
@@ -32,7 +32,7 @@ export interface Item {
   situation: string | null;
   observations: string;
   category?: string | null;
-  trail? : Trail;
+  trail?: Trail;
 }
 
 export interface Trail {
@@ -40,6 +40,16 @@ export interface Trail {
   item_id: string;
   page_number?: int | null;
   text: string;
+}
+
+export interface Document {
+  id: string;
+  inspection_id: string;
+  name: string;
+  type: string;
+  url: string;
+  created_at: Datetime;
+  updated_at: Datetime;
 }
 
 export type DocumentItems = {
