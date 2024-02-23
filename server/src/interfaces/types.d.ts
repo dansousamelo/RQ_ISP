@@ -1,3 +1,5 @@
+import { Datetime } from "aws-sdk/clients/costoptimizationhub";
+
 export interface User {
   id: string;
   access_code: string;
@@ -12,10 +14,13 @@ export interface Inspection {
   recording_url?: string | null;
   participants?: string | null;
   responsible_email: string;
+  status: Status;
+  created_at: Datetime;
+  updated_at: Datetime;
 }
 
 export interface Template {
-  id: string; 
+  id: string;
   inspection_id: string;
   name: string;
   description: string;
