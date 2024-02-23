@@ -575,7 +575,7 @@ export default {
         });
       }
 
-      let items: Item[];
+      let items: Item[] | null;
 
       try {
         
@@ -590,6 +590,9 @@ export default {
             item_index: "asc",
           },
         });
+
+        items.sort((a, b) => parseInt(a.item_index) - parseInt(b.item_index));
+
       } catch (error) {
         return res.status(500).json({
           error: true,
