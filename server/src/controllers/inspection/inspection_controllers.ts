@@ -14,7 +14,13 @@ import { inspectionTemplates } from "../../services/inspection/populateDB_servic
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
 
-import { User, Inspection, DocumentItems, Item, Template } from "../../interfaces/types";
+import {
+  User,
+  Inspection,
+  DocumentItems,
+  Item,
+  Template,
+} from "../../interfaces/types";
 
 import { getErrorMessage } from "../../utils/error";
 
@@ -154,7 +160,7 @@ export default {
           data: {},
         });
       }
-      
+
       let template: Template;
       let items;
 
@@ -172,20 +178,21 @@ export default {
           },
         });
 
-        items = await Promise.all(templateData.templateItems.map(async (item: Item) => {
-          const createdItem = await prisma.item.create({
-            data: {
-              template_id: template.id,
-              item_index: item.item_index,
-              description: item.description,
-              situation: item.situation,
-              observations: item.observations,
-              category: item.category
-            },
-          });
-          return createdItem;
-        }));
-      
+        items = await Promise.all(
+          templateData.templateItems.map(async (item: Item) => {
+            const createdItem = await prisma.item.create({
+              data: {
+                template_id: template.id,
+                item_index: item.item_index,
+                description: item.description,
+                situation: item.situation,
+                observations: item.observations,
+                category: item.category,
+              },
+            });
+            return createdItem;
+          })
+        );
       } catch (error) {
         return res.status(500).json({
           error: true,
@@ -341,7 +348,6 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
-            
       let template: Template;
       let items;
 
@@ -359,20 +365,21 @@ export default {
           },
         });
 
-        items = await Promise.all(templateData.templateItems.map(async (item: Item) => {
-          const createdItem = await prisma.item.create({
-            data: {
-              template_id: template.id,
-              item_index: item.item_index,
-              description: item.description,
-              situation: item.situation,
-              observations: item.observations,
-              category: item.category
-            },
-          });
-          return createdItem;
-        }));
-      
+        items = await Promise.all(
+          templateData.templateItems.map(async (item: Item) => {
+            const createdItem = await prisma.item.create({
+              data: {
+                template_id: template.id,
+                item_index: item.item_index,
+                description: item.description,
+                situation: item.situation,
+                observations: item.observations,
+                category: item.category,
+              },
+            });
+            return createdItem;
+          })
+        );
       } catch (error) {
         return res.status(500).json({
           error: true,
@@ -404,6 +411,62 @@ export default {
   },
 
   async listUserInspections(req: Request, res: Response) {
-    const body = req.body;
+    const { accessCode } = req.query;
+
+    if (!isString(accessCode)) {
+      return res.status(400).json({
+        error: true,
+        status: 400,
+        message: "Fornaça um código de acesso válido!",
+        data: {},
+      });
+    }
+
+    const user = await verifyUser(accessCode);
+
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        status: 401,
+        message: "Usuário não encontrado!",
+        data: {},
+      });
+    }
+
+    let inspections: Inspection[];
+
+    try {
+      inspections = await prisma.inspection.findMany({
+        where: {
+          user_id: user.id,
+        },
+      });
+
+      console.log(inspections);
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+
+    const inspectionsData = inspections.map((inspection) => ({
+      id: inspection.id,
+      name: inspection.name,
+      created_at: inspection.created_at,
+      type: inspection.type,
+      status: inspection.status,
+    }));
+
+    return res.status(200).json({
+      error: false,
+      status: 200,
+      message: "Inspeções do usuário encontradas com sucesso",
+      data: {
+        inspectionsData,
+      },
+    });
   },
 };
