@@ -29,7 +29,7 @@ export function getInspectionListRepository({
     [`inspectionList-${accessCode}`],
     fetchInspectionList,
     {
-      staleTime: Infinity,
+      refetchOnWindowFocus: false,
     },
   )
 
