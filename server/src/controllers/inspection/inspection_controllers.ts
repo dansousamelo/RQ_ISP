@@ -10,7 +10,7 @@ import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
-import { formatDate } from "../../utils/date_utils";
+import { formatDate, formatDataWithHours } from "../../utils/date_utils";
 import { inspectionTemplates } from "../../services/inspection/populateDB_service";
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
@@ -578,9 +578,6 @@ export default {
           include: {
             Trail: true,
           },
-          orderBy: {
-            item_index: "asc",
-          },
         });
 
         items.sort((a, b) => parseInt(a.item_index) - parseInt(b.item_index));
@@ -730,6 +727,7 @@ export default {
         responsible_email: inspection.responsible_email,
         documents: inspectionDocuments,
         status: inspection.status,
+        updated_at: formatDataWithHours(inspection.updated_at),
       };
 
       return res.status(200).json({
