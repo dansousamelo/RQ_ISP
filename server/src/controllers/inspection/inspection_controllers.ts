@@ -579,6 +579,9 @@ export default {
           include: {
             Trail: true,
           },
+          orderBy:{
+            item_index: "asc",
+          }
         });
       } catch (error) {
         return res.status(500).json({
@@ -637,4 +640,8 @@ export default {
       });
     }
   },
+  async findInspectionAttributes(req: Request, res: Response){
+    const { accessCode } = req.query;
+    const { inspection_id } = req.body;
+  }
 };
