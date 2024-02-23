@@ -76,7 +76,7 @@ model Template {
 model Item {
   id           String   @id @default(uuid())
   template_id  String
-  item_index   Int
+  item_index   String
   situation    String?
   description  String
   observations String
