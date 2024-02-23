@@ -28,6 +28,7 @@ model Inspection {
   recording_url     String?
   participants      String?
   responsible_email String
+  status            Status   @default(uninitiated)
   created_at        DateTime @default(now())
   updated_at        DateTime @default(now()) @updatedAt
 
@@ -39,6 +40,12 @@ model Inspection {
 enum Type {
   privacyRequirement
   userStory
+}
+
+enum Status {
+  uninitiated
+  initiated
+  concluded
 }
 
 model Document {
