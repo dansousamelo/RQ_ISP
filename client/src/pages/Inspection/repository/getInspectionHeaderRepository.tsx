@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 import { useState } from 'react'
-import { getInspectionItemList } from '../services'
+import { getInspectionHeader } from '../services'
 
 type Situation = 'as_per' | 'incomplete' | 'non_compilant' | 'not_applicable'
 
@@ -18,7 +18,7 @@ export interface TableDataProps {
   trail: string | null | Mark[] | any
 }
 
-export function getInspectionItemsRepository({
+export function getInspectionHeaderRepository({
   accessCode,
   token,
   inspectionId,
@@ -27,25 +27,25 @@ export function getInspectionItemsRepository({
   token: string
   inspectionId: string
 }) {
-  const [tableData, setTableData] = useState<TableDataProps[]>([])
+  const [headerData, setHeaderData] = useState<TableDataProps[]>([])
 
-  async function fetchInspectionItems(): Promise<void> {
-    const response = await getInspectionItemList({
+  async function fetchHeaderInspection(): Promise<void> {
+    const response = await getInspectionHeader({
       accessCode,
       token,
       inspectionId,
     })
 
-    setTableData(response.data.data.items)
+    setHeaderData(response.data.data.inspection)
   }
 
   const { isFetching: isInspectionItemsLoading } = useQuery(
-    [`inspection-item-${accessCode}-${inspectionId}`],
-    fetchInspectionItems,
+    [`inspection-header-${accessCode}-${inspectionId}`],
+    fetchHeaderInspection,
     {
       refetchOnWindowFocus: false,
     },
   )
 
-  return { isInspectionItemsLoading, tableData, setTableData }
+  return { isInspectionItemsLoading, headerData, setHeaderData }
 }
