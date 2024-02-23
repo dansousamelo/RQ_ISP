@@ -41,7 +41,8 @@ app.post("/upload-file", upload.array("files"), file_controller.uploadFile);
 //rotas de inspeção
 app.post("/create-first-inspection", inspection_controllers.createFirstInspection);
 app.post("/create-inspection", verifyToken, inspection_controllers.createInspection);
-app.get("/list-inspections", verifyToken, inspection_controllers.listUserInspections);
+app.get("/list-inspections", verifyToken, inspection_controllers.listInspections);
+app.get("/find-inspection", verifyToken, inspection_controllers.findInspectionItems);
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);
