@@ -3,8 +3,8 @@ import * as S from './styles'
 import { SITUATION_OPTIONS, isAvailableToTrail } from '../constants/mocks'
 import { SelectSituation } from '../SelectSituation'
 import { InspectionDialog } from '../..'
-import { TableDataProps } from '../../hooks/useDialogItemToRender'
 import { isArray, isDocumetType } from '../../../../interfaces/typeGuards'
+import { TableDataProps } from '../../repository/getInspectionItemsRepository'
 
 interface TableRowProps {
   item: TableDataProps
@@ -43,7 +43,7 @@ const TableRow: React.FC<TableRowProps> = ({
 
   function handleClickOpenMarksDocument() {
     handleUpdateDialogControlled(true)
-    setIdDialogOpen(item.id)
+    setIdDialogOpen(item.item_index)
     setDialogInspectionStep('document_trail_marks')
   }
 
@@ -57,7 +57,7 @@ const TableRow: React.FC<TableRowProps> = ({
   const handleValueChange = useCallback(
     (value: string, id: string, situation: string | null) => {
       const newData = tableData.map((item) => {
-        if (item.id === id) {
+        if (item.item_index === id) {
           return {
             ...item,
             situation: value,
@@ -65,7 +65,8 @@ const TableRow: React.FC<TableRowProps> = ({
           }
         }
         return item
-      })
+      }) as TableDataProps[]
+
       setTableData(newData)
     },
 
@@ -74,7 +75,7 @@ const TableRow: React.FC<TableRowProps> = ({
 
   const handleObservationsChange = (id: string, value: string) => {
     const newData = tableData.map((item) => {
-      if (item.id === id) {
+      if (item.item_index === id) {
         return { ...item, observations: value }
       }
       return item
@@ -89,7 +90,7 @@ const TableRow: React.FC<TableRowProps> = ({
   }
 
   return (
-    <tr key={item.id}>
+    <tr key={item.item_index}>
       <S.ItemTd status={item.situation}>{index + 1}</S.ItemTd>
       <td
         style={{
@@ -101,7 +102,7 @@ const TableRow: React.FC<TableRowProps> = ({
           defaultValue={item.situation}
           items={SITUATION_OPTIONS}
           handleValueChange={(value) =>
-            handleValueChange(value, item.id, item.situation)
+            handleValueChange(value, item.item_index, item.situation)
           }
         />
       </td>
@@ -117,13 +118,15 @@ const TableRow: React.FC<TableRowProps> = ({
           placeholder="Insira aqui observações, justificativas ou ações corretivas referentes ao item inspecionado"
           rows={5}
           cols={20}
-          value={item.observations}
-          onChange={(e) => handleObservationsChange(item.id, e.target.value)}
+          value={item.observations as string}
+          onChange={(e) =>
+            handleObservationsChange(item.item_index, e.target.value)
+          }
         />
       </td>
       <S.TrailTd>
         {isAvailableToTrail(item.situation) && !item.trail && (
-          <S.AddTrailButton onClick={() => handleChooseTrail(item.id)}>
+          <S.AddTrailButton onClick={() => handleChooseTrail(item.item_index)}>
             Adicionar rastro
           </S.AddTrailButton>
         )}
@@ -137,14 +140,14 @@ const TableRow: React.FC<TableRowProps> = ({
                   handleUpdateDialogControlled(true)
                   setEditorData(item.trail ?? '')
                   setDialogInspectionStep('text_editor_trail')
-                  setIdDialogOpen(item.id)
+                  setIdDialogOpen(item.item_index)
                   setIsEditing(true)
                 }}
                 dangerouslySetInnerHTML={{ __html: item.trail }}
               />
               <S.CloseRouded
                 onClick={() => {
-                  openDeleteTrailDialog(item.id)
+                  openDeleteTrailDialog(item.item_index)
                 }}
               />
             </S.TrailTextAndIconWrapper>
@@ -159,7 +162,7 @@ const TableRow: React.FC<TableRowProps> = ({
               </S.DocumentTypeText>
               <S.CloseRouded
                 onClick={() => {
-                  openDeleteTrailDialog(item.id)
+                  openDeleteTrailDialog(item.item_index)
                 }}
               />
               <S.ClickToSeeText onClick={handleClickOpenMarksDocument}>
