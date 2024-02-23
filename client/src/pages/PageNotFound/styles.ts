@@ -9,7 +9,7 @@ export const Container = styled.div`
 `
 
 export const Animation = styled.div`
-  transform: scale(0.6);
+  transform: scale(0.4);
   height: 80vh;
   filter: brightness(1.2) saturate(100%) hue-rotate(330deg);
 `
@@ -19,7 +19,7 @@ export const GoBackButton = styled(PrimaryButton)`
   text-align: center !important;
   font-weight: ${({ theme }) => theme.fontWeights.bold} !important;
   position: relative;
-  bottom: 60px;
+  bottom: 160px;
   margin: 0 auto;
   display: flex;
   align-items: center;
