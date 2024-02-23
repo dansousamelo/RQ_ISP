@@ -31,7 +31,6 @@ export function ManagementChecklist() {
     resolver: zodResolver(formSchema),
   })
 
-  const { accessCode } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [errorInRequest, setErrorInRequest] = useState('')
   const navigate = useNavigate()
@@ -52,7 +51,7 @@ export function ManagementChecklist() {
       setAccessToken(token)
       setRefreshToken(refreshToken)
       createCookieWithExpiration()
-      navigate(`/inspection/list/${accessCode}`)
+      navigate(`/inspection/list/${data.accessCode}`)
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         setErrorInRequest(error.response?.data.message)
