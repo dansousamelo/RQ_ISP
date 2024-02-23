@@ -3,10 +3,7 @@ import * as S from './styles'
 import { Breadcrumb } from '../../components/Breadcrumb'
 import { Header } from './components/Header'
 import { useState } from 'react'
-import {
-  MOCK_DATA,
-  MOCK_DOCUMENTS_UPLOADED,
-} from './components/constants/mocks'
+import { MOCK_DOCUMENTS_UPLOADED } from './components/constants/mocks'
 import {
   DialogControlled,
   useDialogControlled,
