@@ -17,6 +17,7 @@ export interface Inspection {
   status: Status;
   created_at: Datetime;
   updated_at: Datetime;
+  document?: DocumentItems;
 }
 
 export interface Template {
@@ -26,7 +27,7 @@ export interface Template {
   description: string;
 }
 export interface Item {
-  item_index: int;
+  item_index: string;
   description: string;
   situation: string | null;
   observations: string;
