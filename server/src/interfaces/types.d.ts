@@ -30,7 +30,15 @@ export interface Item {
   description: string;
   situation: string | null;
   observations: string;
-  category?: string;
+  category?: string | null;
+  trail? : Trail;
+}
+
+export interface Trail {
+  id: string;
+  item_id: string;
+  page_number?: int | null;
+  text: string;
 }
 
 export type DocumentItems = {
