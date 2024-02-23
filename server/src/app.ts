@@ -1,17 +1,11 @@
 import Express from "express";
-import { Request, Response } from "express"
-import user_controllers from "./controllers/user/user_controllers";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import token_controllers from "./controllers/token/token_controllers";
-import { verifyToken } from "./middlewares/auth/token_middlewares";
-
-import multer from "multer";
-import multerConfig from "./config/multer";
-import file_controller from "./controllers/file/file_controller";
-
-import inspection_controllers from "./controllers/inspection/inspection_controllers";
+import fileRoutes from "./routes/file/file_routes"
+import tokenRoutes from "./routes/token/token_routes"
+import userRoutes from "./routes/user/user_routes"
+import inspectionRoutes from "./routes/inspection/inspection_routes"
 
 dotenv.config();
 
@@ -27,23 +21,16 @@ app.get("/", (req, res) => {
 });
 
 // Rotas de Usuário
-app.post("/create-user", user_controllers.createUser);
-app.get("/generate-access_code", user_controllers.createAccessCode);
-app.get("/find-user", user_controllers.findUser);
+app.use("/", userRoutes);
 
-// Rotas de Serviço
-app.post("/refresh-token", token_controllers.generateRefreshToken);
+// Rotas de token
+app.use("/", tokenRoutes);
 
-// rotas de arquivo
-const upload = multer(multerConfig);
-app.post("/upload-file", upload.array("files"), file_controller.uploadFile);
+// Rotas de arquivo
+app.use("/", fileRoutes);
 
-//rotas de inspeção
-app.post("/create-first-inspection", inspection_controllers.createFirstInspection);
-app.post("/create-inspection", verifyToken, inspection_controllers.createInspection);
-app.get("/list-inspections", verifyToken, inspection_controllers.listInspections);
-app.get("/find-inspection", verifyToken, inspection_controllers.findInspectionItems);
-app.get("/find-inspection-attribute", verifyToken, inspection_controllers.findInspectionAttributes);
+// Rotas de inspeção
+app.use("/", inspectionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);
