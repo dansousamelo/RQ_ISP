@@ -46,13 +46,9 @@ export function App() {
                   <Route path="/list" element={<ManagementChecklist />} />
                   <Route path="/form" element={<Form />} />
 
-                  {/* <Route
-                path="/inspection/list"
-                element={<PrivateRoute element={<InpectionList />} />}
-              /> */}
                   <Route
                     path="/inspection/list/:accessCode"
-                    element={<InpectionList />}
+                    element={<PrivateRoute element={<InpectionList />} />}
                   />
                   <Route
                     path="/inspection/:id/:name/:type/:accessCode/statistics"

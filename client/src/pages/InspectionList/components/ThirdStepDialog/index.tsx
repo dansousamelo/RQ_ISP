@@ -59,12 +59,10 @@ export function ThirdStepDialog() {
   async function handleCreateInspection(dataToSend: any) {
     try {
       setIsCreatingInspection(true)
-      const response = await postInspectionLoggedData({
+      await postInspectionLoggedData({
         data: dataToSend,
         token,
       })
-
-      console.log('response: ', response)
 
       SuccessToast('Inspeção criada com sucesso')
       setSecondStepData({} as SecondStepData)

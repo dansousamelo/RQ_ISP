@@ -6,7 +6,6 @@ import { isNotUndefined } from '../../interfaces/typeGuards'
 import { Header } from './components/Header'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import * as S from './styles'
-import { MOCK_DATA } from './mocks'
 import { useCallback, useState } from 'react'
 import { SuccessToast } from '../../components/Toast'
 import { TableSkeleton } from './components/TableSkeleton'
@@ -19,15 +18,12 @@ export function InpectionList() {
   const { accessCode } = useParams()
   const token = getAccessToken() as string
 
-  const { inspectionList, isInspectionListLoading } =
+  const { inspections, isInspectionListLoading, setInspections } =
     getInspectionListRepository({
       accessCode: accessCode as string,
       token,
     })
 
-  console.log('inspectionList: ', inspectionList)
-
-  const [inspections, setInspections] = useState(MOCK_DATA)
   const [idInspectionToDelete, setIdInspectionToDelete] = useState('')
 
   const {
@@ -42,7 +38,7 @@ export function InpectionList() {
     )
     handleUpdateDialogControlled(false)
     SuccessToast('Inspeção excluída com sucesso!')
-  }, [handleUpdateDialogControlled, idInspectionToDelete])
+  }, [handleUpdateDialogControlled, idInspectionToDelete, setInspections])
 
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
@@ -124,11 +120,11 @@ export function InpectionList() {
                 const status = STATUS_OPTIONS[item.status]
                 return (
                   <>
-                    <S.TableTitleCell title={item.title} key={item.id}>
-                      {item.title}
+                    <S.TableTitleCell title={item.name} key={item.id}>
+                      {item.name}
                     </S.TableTitleCell>
 
-                    <S.TableCell>{item.inspection_started}</S.TableCell>
+                    <S.TableCell>{item.created_at}</S.TableCell>
                     <S.TableCell>
                       <S.WrapperStatusIndicator>
                         <S.StatusIndicator status={item.status} />
@@ -139,7 +135,7 @@ export function InpectionList() {
                       {STATUS_ACTION_OPTIONS[item.status].map((action) => (
                         <S.ButtonStyled
                           onClick={() =>
-                            action.action(item.id, item.title, item.type)
+                            action.action(item.id, item.name, item.type)
                           }
                           label={action.label}
                           key={action.label}
