@@ -8,7 +8,7 @@ const secretKey =
   process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
 
 export function generateToken(user_id: string): string {
-  const expiresIn = "15m";
+  const expiresIn = "10000000000000000000s";
   return jwt.sign({ user_id }, secretKey, { expiresIn });
 }
 
