@@ -10,6 +10,7 @@ import {
   generateToken,
   generateRefreshToken,
 } from "../../services/auth/auth_services";
+import { formatDate } from "../../utils/date_utils";
 import { inspectionTemplates } from "../../services/inspection/populateDB_service";
 import { prisma } from "../../db";
 import bcrypt from "bcrypt";
@@ -440,9 +441,11 @@ export default {
         where: {
           user_id: user.id,
         },
+        orderBy: {
+          created_at: 'desc',
+        }
       });
 
-      console.log(inspections);
     } catch (error) {
       return res.status(500).json({
         error: true,
@@ -455,7 +458,7 @@ export default {
     const inspectionsData = inspections.map((inspection) => ({
       id: inspection.id,
       name: inspection.name,
-      created_at: inspection.created_at,
+      created_at: formatDate(inspection.created_at),
       type: inspection.type,
       status: inspection.status,
     }));
@@ -465,7 +468,7 @@ export default {
       status: 200,
       message: "Inspeções do usuário encontradas com sucesso",
       data: {
-        inspectionsData,
+        inspections: inspectionsData,
       },
     });
   },
