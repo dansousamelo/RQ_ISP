@@ -11,6 +11,7 @@ import { defaultTheme } from '../../../styles/themes/default'
 import { DialogConfig } from '../../InspectionList/hooks/useDialogItemToRender'
 import { ChooseTrailDialog } from '../components/ChooseTrailDialog'
 import { isArray, isArrayNotEmpty } from '../../../interfaces/typeGuards'
+import { TableDataProps } from '../repository/getInspectionItemsRepository'
 
 export interface DocumentUploadedProps {
   label: string
@@ -27,14 +28,6 @@ export interface ButtonProps {
 }
 
 export type TrailType = 'text_editor' | 'mark_document'
-
-export interface TableDataProps {
-  id: string
-  situation: string | null
-  description: string
-  observations: string
-  trail: any
-}
 
 interface DialogItemToRenderProps {
   handleUpdateDialogControlled: (open: boolean) => void
@@ -71,7 +64,9 @@ export function useDialogItemToRender({
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
-  const itemSelected = tableData.find((item) => item.id === idDialogOpen)?.trail
+  const itemSelected = tableData.find(
+    (item) => item.item_index === idDialogOpen,
+  )?.trail
 
   const updateTrailType = useCallback((value: TrailType) => {
     setTrailType(value)
@@ -87,7 +82,7 @@ export function useDialogItemToRender({
 
   function saveTextEditorTrail() {
     const newData = tableData.map((item) => {
-      if (item.id === idDialogOpen) {
+      if (item.item_index === idDialogOpen) {
         return { ...item, trail: editorData }
       }
       return item

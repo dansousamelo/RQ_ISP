@@ -10,12 +10,12 @@ interface Mark {
   id: string
 }
 
-export interface InspectionItem {
+export interface TableDataProps {
   item_index: string
   situation: Situation | null
   description: string | null
   observations: string | null
-  trail: string | null | Mark[]
+  trail: string | null | Mark[] | any
 }
 
 export function getInspectionItemsRepository({
@@ -27,7 +27,8 @@ export function getInspectionItemsRepository({
   token: string
   inspectionId: string
 }) {
-  const [inspectionsItems, setInspectionsItems] = useState<InspectionItem[]>([])
+  const [tableData, setTableData] = useState<TableDataProps[]>([])
+
   async function fetchInspectionItems(): Promise<void> {
     const response = await getInspectionItemList({
       accessCode,
@@ -35,7 +36,7 @@ export function getInspectionItemsRepository({
       inspectionId,
     })
 
-    setInspectionsItems(response.data.data.items)
+    setTableData(response.data.data.items)
   }
 
   const { isFetching: isInspectionItemsLoading } = useQuery(
@@ -46,5 +47,5 @@ export function getInspectionItemsRepository({
     },
   )
 
-  return { isInspectionItemsLoading, inspectionsItems, setInspectionsItems }
+  return { isInspectionItemsLoading, tableData, setTableData }
 }
