@@ -42,14 +42,12 @@ export function Inspection() {
 
   const token = getAccessToken()
 
-  const { inspectionsItems, isInspectionItemsLoading } =
+  const { tableData, isInspectionItemsLoading, setTableData } =
     getInspectionItemsRepository({
       accessCode: accessCode as string,
       inspectionId: id as string,
       token: token as string,
     })
-
-  console.log('inspectionsItems: ', inspectionsItems)
 
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
@@ -63,7 +61,6 @@ export function Inspection() {
     },
   ]
 
-  const [tableData, setTableData] = useState(MOCK_DATA)
   const [dialogInspectionStep, setDialogInspectionStep] =
     useState<InspectionDialog>('')
   const [idDialogOpen, setIdDialogOpen] = useState('')
@@ -75,7 +72,7 @@ export function Inspection() {
 
   const handleDeleteTrail = (id: string) => {
     const newData = tableData.map((item) => {
-      if (item.id === id) {
+      if (item.item_index === id) {
         return { ...item, trail: null }
       }
       return item
@@ -147,7 +144,7 @@ export function Inspection() {
               {tableData.map((item, index) => (
                 <TableRow
                   item={item}
-                  key={item.id}
+                  key={item.item_index}
                   index={index}
                   setIsEditing={setIsEditing}
                   setDialogInspectionStep={setDialogInspectionStep}
