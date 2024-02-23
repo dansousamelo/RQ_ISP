@@ -11,14 +11,16 @@ datasource db {
 }
 
 model User {
-  id          String @id @default(uuid())
-  access_code String @unique
+  id          String   @id @default(uuid())
+  access_code String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
 
   Inspection Inspection[]
 }
 
 model Inspection {
-  id                String  @id @default(uuid())
+  id                String   @id @default(uuid())
   user_id           String
   name              String
   responsible       String
@@ -26,9 +28,13 @@ model Inspection {
   recording_url     String?
   participants      String?
   responsible_email String
+  status            Status   @default(uninitiated)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now()) @updatedAt
 
-  user     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  User     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Document Document[]
+  Template Template?
 }
 
 enum Type {
@@ -36,12 +42,60 @@ enum Type {
   userStory
 }
 
+enum Status {
+  uninitiated
+  initiated
+  concluded
+}
+
 model Document {
-  id            String @id @default(uuid())
+  id            String   @id @default(uuid())
   inspection_id String
   name          String
   type          String
   url           String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now()) @updatedAt
 
-  inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
+  Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
+}
+
+model Template {
+  id            String   @id @default(uuid())
+  inspection_id String   @unique
+  name          String
+  description   String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now()) @updatedAt
+
+  Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
+
+  Item Item[]
+}
+
+model Item {
+  id           String   @id @default(uuid())
+  template_id  String
+  item_index   Int
+  situation    String?
+  description  String
+  observations String
+  category     String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+
+  Template Template @relation(fields: [template_id], references: [id], onDelete: Cascade)
+
+  Trail Trail[]
+}
+
+model Trail {
+  id          String   @id @default(uuid())
+  item_id     String
+  page_number Int?
+  text        String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  Item Item @relation(fields: [item_id], references: [id], onDelete: Cascade)
 }
