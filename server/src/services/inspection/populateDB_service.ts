@@ -1,8 +1,7 @@
 import { Item } from "../../interfaces/types";
 
 export function inspectionTemplates(
-  inspection_type: string,
-  inspection_id: string
+  inspection_type: string
 ) {
   let templateName: string;
   let templateDescription: string;
