@@ -1,42 +1,28 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import { prisma } from "../../db/prismaClient";
 
-import { isString } from "../../interfaces/typeGuards";
+import { findUser, createUser } from "../services/userServices";
+import { generateUniqueAccessCode } from "../utils/generateAcessCode";
+import { generateToken, generateRefreshToken } from "../services/authServices";
 
-import { verifyUser } from "../../services/userServices";
-import { generateUniqueAccessCode } from "../../utils/generateAcessCode";
-
-import {
-  generateToken,
-  generateRefreshToken,
-} from "../../services/authServices";
+import { isString } from "../interfaces/typeGuards";
 
 export default {
   async createUser(req: Request, res: Response) {
     try {
       const { accessCode } = req.body;
 
-      const users = await prisma.user.findMany();
+      const userExists = await findUser(accessCode);
 
-      if (
-        users.some((user) => bcrypt.compareSync(accessCode, user.access_code))
-      ) {
-        return res.status(409).json({
+      if (userExists) {
+        return res.status(400).json({
           error: true,
-          status: 409,
+          status: 400,
           message: "Já existe um usuário com este código de acesso!",
           data: {},
         });
       }
 
-      const hashedAccessCode = await bcrypt.hash(accessCode, 10);
-
-      const user = await prisma.user.create({
-        data: {
-          access_code: hashedAccessCode,
-        },
-      });
+      const user = await createUser(accessCode)
 
       const token = await generateToken(user.id);
       const refreshToken = await generateRefreshToken(user.id);
@@ -46,13 +32,12 @@ export default {
         status: 201,
         message: "Usuário criado com sucesso!",
         data: {
-          accessCode,
+          // accessCode,
           token,
           refreshToken,
         },
       });
     } catch (error: any) {
-      console.error(error);
       return res.status(500).json({
         error: true,
         status: 500,
@@ -91,7 +76,7 @@ export default {
         ? req.query.accessCode
         : null;
 
-      const userExists = await verifyUser(accessCode);
+      const userExists = await findUser(accessCode);
 
       if (!userExists) {
         return res.status(500).json({
