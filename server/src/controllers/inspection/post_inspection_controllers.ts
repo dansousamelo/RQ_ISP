@@ -1,17 +1,21 @@
 import { Request, Response } from "express";
-import { isString } from "../../interfaces/type_guards";
+import {
+  isString,
+  isArray,
+  isArrayNotEmpty,
+} from "../../interfaces/typeGuards";
 import {
   isValidInspectionType,
   isValidInspectionEmail,
   isValidInspectionDocument,
 } from "./interfaces/type_guards";
-import { verifyUser } from "../user/user_controllers";
+import { verifyUser } from "../../services/userServices";
 import {
   generateToken,
   generateRefreshToken,
-} from "../../services/auth/auth_services";
-import { inspectionTemplates } from "../../services/inspection/populateDB_service";
-import { prisma } from "../../db";
+} from "../../services/authServices";
+import { inspectionTemplates } from "../../services/inspection/populateInspectionItemsService";
+import { prisma } from "../../db/prismaClient";
 import bcrypt from "bcrypt";
 
 import {
@@ -19,12 +23,11 @@ import {
   Inspection,
   DocumentItems,
   Item,
-  Template,
   Trail,
   Document,
 } from "../../interfaces/types";
 
-import { getErrorMessage } from "../../utils/error";
+import { getErrorMessage } from "../../utils/errorMessage";
 
 export default {
   async createFirstInspection(req: Request, res: Response) {
@@ -72,7 +75,7 @@ export default {
         });
       }
 
-      if (documents && documents.length > 0) {
+      if (documents && isArrayNotEmpty(documents)) {
         const isValidDocuments = documents.every(isValidInspectionDocument);
 
         if (!isValidDocuments) {
@@ -163,28 +166,16 @@ export default {
         });
       }
 
-      let template: Template;
       let items: Item[];
 
       try {
-        const templateData = inspectionTemplates(
-          inspection_type,
-          inspection.id
-        );
-
-        template = await prisma.template.create({
-          data: {
-            inspection_id: inspection.id,
-            name: templateData.templateName,
-            description: templateData.templateDescription,
-          },
-        });
+        const inspectionItemsData = inspectionTemplates(inspection_type);
 
         items = await Promise.all(
-          templateData.templateItems.map(async (item: Item) => {
+          inspectionItemsData.inspectionItems.map(async (item: Item) => {
             const createdItem = await prisma.item.create({
               data: {
-                template_id: template.id,
+                inspection_id: inspection.id,
                 item_index: item.item_index,
                 description: item.description,
                 situation: item.situation,
@@ -215,7 +206,6 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
-          template,
           items,
           token: access_token,
           refreshToken,
@@ -248,7 +238,9 @@ export default {
         return res.status(400).json({
           error: true,
           status: 400,
-          message: `Fornaça um ${ !name ? "nome" : "responsável" } válido para a inspeção!`,
+          message: `Fornaça um ${
+            !name ? "nome" : "responsável"
+          } válido para a inspeção!`,
           data: {},
         });
       }
@@ -348,28 +340,16 @@ export default {
 
       const uploadedDocuments = await Promise.all(documentPromises);
 
-      let template: Template;
       let items: Item[];
 
       try {
-        const templateData = inspectionTemplates(
-          inspection_type,
-          inspection.id
-        );
-
-        template = await prisma.template.create({
-          data: {
-            inspection_id: inspection.id,
-            name: templateData.templateName,
-            description: templateData.templateDescription,
-          },
-        });
+        const inspectionItemsData = inspectionTemplates(inspection_type);
 
         items = await Promise.all(
-          templateData.templateItems.map(async (item: Item) => {
+          inspectionItemsData.inspectionItems.map(async (item: Item) => {
             const createdItem = await prisma.item.create({
               data: {
-                template_id: template.id,
+                inspection_id: inspection.id,
                 item_index: item.item_index,
                 description: item.description,
                 situation: item.situation,
@@ -396,7 +376,6 @@ export default {
         data: {
           inspection,
           documents: uploadedDocuments,
-          template,
           items,
         },
       });
