@@ -19,10 +19,11 @@ import {
   DocumentHeader,
   getInspectionHeaderRepository,
 } from './repository/getInspectionHeaderRepository'
+import { BreadcrumbsSkeleton } from '../../components/Breadcrumb/skeleton'
 
 interface BreadcrumbItem {
   label: string
-  action: () => void
+  action?: () => void
   activate?: boolean
 }
 
@@ -60,24 +61,23 @@ export function Inspection() {
   const isLoadingInformations =
     isInspectionHeaderLoading || isInspectionItemsLoading
 
-  const BREADCRUMBS: BreadcrumbItem[] = [
-    {
-      label: 'Inspeções',
-      action: () => navigate(`/inspection/list/${accessCode}`),
-    },
-    {
-      label: 'ConecteSUS',
-      action: () => console.log('ConecteSUS'),
-      activate: true,
-    },
-  ]
-
   const [dialogInspectionStep, setDialogInspectionStep] =
     useState<InspectionDialog>('')
   const [idDialogOpen, setIdDialogOpen] = useState('')
   const [editorData, setEditorData] = useState<string>('')
   const [observationsData, setObservationsData] = useState<string>('')
   const [idEditing, setIsEditing] = useState(false)
+
+  const BREADCRUMBS: BreadcrumbItem[] = [
+    {
+      label: 'Inspeções',
+      action: () => navigate(`/inspection/list/${accessCode}`),
+    },
+    {
+      label: headerData.name,
+      activate: true,
+    },
+  ]
 
   const backToInpsectionList = useCallback(() => {
     navigate(`/inspection/list/${accessCode}`)
@@ -146,7 +146,11 @@ export function Inspection() {
   return (
     <>
       <S.Container>
-        <Breadcrumb items={BREADCRUMBS} />
+        {isLoadingInformations ? (
+          <BreadcrumbsSkeleton />
+        ) : (
+          <Breadcrumb items={BREADCRUMBS} />
+        )}
 
         {isLoadingInformations ? (
           <HeaderSkeleton />
