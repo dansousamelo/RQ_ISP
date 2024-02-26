@@ -15,7 +15,7 @@ export interface Inspection {
   status: Status;
   created_at: Datetime;
   updated_at: Datetime;
-  Document?: Document[];
+  documents?: Document[];
   Item?: Item[];
 }
 export interface Document {

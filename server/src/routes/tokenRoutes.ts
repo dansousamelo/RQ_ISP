@@ -1,6 +1,6 @@
 import express from "express";
 
-import token_controllers from "../controllers/token/tokenControllers";
+import token_controllers from "../controllers/tokenControllers";
 
 const router = express.Router();
 
