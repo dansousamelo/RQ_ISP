@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-import { getErrorMessage } from "../../utils/error";
+import { getErrorMessage } from "../utils/errorMessage";
 
 const secretKey =
   process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
@@ -11,7 +11,11 @@ export interface CustomRequest extends Request {
   token: string | JwtPayload;
 }
 
-export const verifyToken = (req: Request,res: Response, next: NextFunction) => {
+export const verifyToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
@@ -25,13 +29,13 @@ export const verifyToken = (req: Request,res: Response, next: NextFunction) => {
     }
 
     const decoded = jwt.verify(token, secretKey);
-    if(!decoded) {
+    if (!decoded) {
       return res.status(401).json({
         error: true,
         status: 400,
         message: "Forneça um token de acesso válido!",
         data: {},
-      })
+      });
     }
     (req as CustomRequest).token = decoded;
 
