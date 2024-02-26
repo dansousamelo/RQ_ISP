@@ -3,7 +3,7 @@ import express from "express";
 import multer from "multer";
 import multerConfig from "../config/multer";
 
-import file_controller from "../controllers/file/fileControllers";
+import file_controller from "../controllers/fileControllers";
 
 const router = express.Router();
 
