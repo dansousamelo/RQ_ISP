@@ -1,46 +1,16 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { prisma } from "../../db";
-import { generateAccessCode } from "../../utils/access_code";
+import { prisma } from "../../db/prismaClient";
+
+import { isString } from "../../interfaces/typeGuards";
+
+import { verifyUser } from "../../services/userServices";
+import { generateUniqueAccessCode } from "../../utils/generateAcessCode";
+
 import {
   generateToken,
   generateRefreshToken,
-} from "../../services/auth/auth_services";
-import { isString } from "../../interfaces/type_guards";
-import { User } from "../../interfaces/types";
-
-export async function verifyUser(accessCode: string | null) {
-  if (!accessCode) {
-    throw new Error("Não foi fornecido um código de acesso!");
-  }
-
-  const users = await prisma.user.findMany();
-
-  const userExists = users.find((user: User) => {
-    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
-    return isMatch;
-  });
-
-  return userExists || null;
-}
-
-async function generateUniqueAccessCode(): Promise<string> {
-  let accessCode = generateAccessCode(23);
-  const maxAttempts = 5;
-
-  for (let i = 0; i < maxAttempts; i++) {
-    const user = await verifyUser(accessCode);
-    if (user) {
-      accessCode = generateAccessCode(23);
-    } else {
-      return accessCode;
-    }
-  }
-
-  throw new Error(
-    "Não foi possível gerar um código de acesso único após várias tentativas."
-  );
-}
+} from "../../services/authServices";
 
 export default {
   async createUser(req: Request, res: Response) {

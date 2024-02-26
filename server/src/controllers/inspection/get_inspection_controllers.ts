@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { prisma } from "../../db";
+import { prisma } from "../../db/prismaClient";
 
-import { isString } from "../../interfaces/type_guards";
-import { verifyUser } from "../user/user_controllers";
+import { isString } from "../../interfaces/typeGuards";
+import { verifyUser } from "../../services/userServices";
 
-import { getErrorMessage } from "../../utils/error";
-import { formatDate, formatDataWithHours } from "../../utils/date_utils";
+import { getErrorMessage } from "../../utils/errorMessage";
+import { formatDate, formatDataWithHours } from "../../utils/formatDatetime";
 
-import { Inspection, Template, Item, Document } from "../../interfaces/types";
+import { Inspection, Document, Item } from "../../interfaces/types";
 
 export default {
   async listInspections(req: Request, res: Response) {
@@ -138,38 +138,12 @@ export default {
         });
       }
 
-      let template: Template | null;
-
-      try {
-        template = await prisma.template.findFirst({
-          where: {
-            inspection_id: inspection.id,
-          },
-        });
-      } catch (error) {
-        return res.status(500).json({
-          error: true,
-          status: 500,
-          message: getErrorMessage(error),
-          data: {},
-        });
-      }
-
-      if (!template) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Inspeção não encontrada!",
-          data: {},
-        });
-      }
-
       let items: Item[] | null;
 
       try {
         items = await prisma.item.findMany({
           where: {
-            template_id: template.id,
+            inspection_id: inspection.id,
           },
           include: {
             Trail: true,
