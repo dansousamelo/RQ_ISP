@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import FileServices from "../../services/fileServices";
-import { isMulterFilesArray } from "../../interfaces/typeGuards";
+import FileServices from "../services/fileServices";
+import { isMulterFilesArray } from "../interfaces/typeGuards";
 
 export default {
   async uploadFile(req: Request, res: Response) {
