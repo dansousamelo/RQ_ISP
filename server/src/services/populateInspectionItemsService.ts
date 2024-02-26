@@ -1,5 +1,5 @@
-import { Item } from "../../interfaces/types";
-import { USER_STORY, PRIVACY_REQUIREMENT } from "../../constants/constants";
+import { Item } from "../interfaces/types";
+import { USER_STORY, PRIVACY_REQUIREMENT } from "../constants/constants";
 
 export function inspectionTemplates(inspection_type: string) {
   let inspectionItems: Item[];

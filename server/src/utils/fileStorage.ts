@@ -5,7 +5,7 @@ import fs from "fs";
 
 import multerConfig from "../config/multer";
 
-const bucket = process.env.S3_BUCKET || "rqs-bucket";
+const bucket = process.env.S3_BUCKET || 'rqs-bucket-test';
 
 class S3Storage {
   private client: S3;
@@ -42,7 +42,6 @@ class S3Storage {
       const fileUrl = `https://${bucket}.s3.amazonaws.com/${fileName}`;
 
       return fileUrl;
-      
     } catch (error) {
       console.error("Erro ao salvar o arquivo:", error);
       throw error;

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import { generateToken } from "../../services/authServices";
+import { generateToken } from "../services/authServices";
 
 const secretKey =
   process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
