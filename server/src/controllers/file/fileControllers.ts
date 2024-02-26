@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import FileServices from "../../services/file/file_services";
-import { isMulterFilesArray } from "../../interfaces/type_guards";
-
+import FileServices from "../../services/fileServices";
+import { isMulterFilesArray } from "../../interfaces/typeGuards";
 
 export default {
   async uploadFile(req: Request, res: Response) {
@@ -18,10 +17,14 @@ export default {
 
       const fileServices = new FileServices();
 
-      const uploadedFiles = await Promise.all(files.map(async (file) => {
-        const { fileName, fileUrl, fileType } = await fileServices.uploadFile(file);
-        return { fileName, fileUrl, fileType };
-      }));
+      const uploadedFiles = await Promise.all(
+        files.map(async (file) => {
+          const { fileName, fileUrl, fileType } = await fileServices.uploadFile(
+            file
+          );
+          return { fileName, fileUrl, fileType };
+        })
+      );
 
       return res.status(200).json({
         error: false,

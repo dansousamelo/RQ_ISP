@@ -1,7 +1,8 @@
+import { USER_STORY, PRIVACY_REQUIREMENT } from "../../../constants/constants";
 import { DocumentItems } from "../../../interfaces/types";
 
 function isValidInspectionType(inspection_type: string) {
-  if (inspection_type !== "privacyRequirement" && inspection_type !== "userStory") {
+  if (inspection_type !== PRIVACY_REQUIREMENT && inspection_type !== USER_STORY) {
     throw new Error("O tipo de inspeção não é válido!");
   }
 

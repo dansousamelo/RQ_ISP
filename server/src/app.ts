@@ -2,10 +2,10 @@ import Express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import fileRoutes from "./routes/file/file_routes"
-import tokenRoutes from "./routes/token/token_routes"
-import userRoutes from "./routes/user/user_routes"
-import inspectionRoutes from "./routes/inspection/inspection_routes"
+import fileRoutes from "./routes/fileRoutes";
+import tokenRoutes from "./routes/tokenRoutes";
+import userRoutes from "./routes/userRoutes";
+import inspectionRoutes from "./routes/inspectionRoutes";
 
 dotenv.config();
 
