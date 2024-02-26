@@ -1,6 +1,6 @@
 .ck-content {
-  color: #fff; /* Cor do texto */
-  background-color: #181818 !important; /* Cor de fundo */
+  color: #fff;
+  background-color: #181818 !important;
   outline: none !important;
   max-height: 30rem !important;
   min-height: 10rem !important;
@@ -8,8 +8,8 @@
 }
 
 .ck {
-  color: #fff; /* Cor do texto */
-  background-color: #181818 !important; /* Cor de fundo */
+  color: #fff !important; 
+  background-color: #181818 !important;
   outline: none !important;
 }
 
@@ -31,4 +31,8 @@
 *:focus {
   outline: none !important;
   border-color: #FFF !important 
+}
+
+[data-cke-tooltip-text="Insert media"] {
+  display: none !important; 
 }

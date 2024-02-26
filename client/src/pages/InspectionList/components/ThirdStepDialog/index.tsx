@@ -18,8 +18,16 @@ import { ErrorToast, SuccessToast } from '../../../../components/Toast'
 import { AxiosError } from 'axios'
 import { getAccessToken } from '../../../../utils/cookies'
 import { Spinner } from '../../../../components/Spinner'
+import { InspectionItem } from '../../repository/getInspectionListRepository'
+import { formatDate } from '../../utils'
 
-export function ThirdStepDialog() {
+interface ThirdStepDialogProps {
+  handleUpdateInspections: (inspection: InspectionItem) => void
+}
+
+export function ThirdStepDialog({
+  handleUpdateInspections,
+}: ThirdStepDialogProps) {
   const [isCreatingInspection, setIsCreatingInspection] = useState(false)
 
   const { accessCode } = useParams()
@@ -55,14 +63,59 @@ export function ThirdStepDialog() {
     documents: convertToCustomFormat(filesUploaded),
     accessCode,
   }
+  const a = {
+    error: false,
+    status: 200,
+    message: 'Inspeção criada com sucesso!',
+    data: {
+      inspection: {
+        id: 'b2932e97-6811-4289-97a3-d0f80ec71500',
+        user_id: 'f886c348-f409-47db-8ad6-1296c7ed8179',
+        name: 'Inspeção Sabin',
+        responsible: 'daniel',
+        type: 'privacyRequirement',
+        recording_url: '',
+        participants: '',
+        responsible_email: '[b@mail.com](mailto:b@mail.com)',
+      },
+      documents: [
+        {
+          id: '2b345dd2-e388-4370-ba7f-e80516b5acac',
+          inspection_id: 'b2932e97-6811-4289-97a3-d0f80ec71500',
+          name: 'EDITAL CNU TI.pdf',
+          type: 'application/pdf',
+          url: 'https://rqs-bucket-test.s3.amazonaws.com/0406f093-f693-415d-9410-4240d84f9103_EDITAL CNU TI.pdf',
+        },
+        {
+          id: 'bdd5a2e8-8749-4e73-9250-b12ce1d054a5',
+          inspection_id: 'b2932e97-6811-4289-97a3-d0f80ec71500',
+          name: 'JORNADA-2.png',
+          type: 'image/png',
+          url: 'https://rqs-bucket-test.s3.amazonaws.com/fd319a7f-c399-4a65-b4fb-e516768bc0e5_JORNADA-2.png',
+        },
+      ],
+    },
+  }
 
   async function handleCreateInspection(dataToSend: any) {
     try {
       setIsCreatingInspection(true)
-      await postInspectionLoggedData({
+      const response = await postInspectionLoggedData({
         data: dataToSend,
         token,
       })
+
+      const inspectionCreated = response.data.data
+
+      const inspectionToUpdate: InspectionItem = {
+        id: inspectionCreated.inspection.id,
+        name: inspectionCreated.inspection.name,
+        type: inspectionCreated.inspection.type,
+        created_at: formatDate(inspectionCreated.inspection.created_at),
+        status: 'uninitiated',
+      }
+
+      handleUpdateInspections(inspectionToUpdate)
 
       SuccessToast('Inspeção criada com sucesso')
       setSecondStepData({} as SecondStepData)

@@ -1,21 +1,24 @@
 import { ReactNode } from 'react'
 import * as S from './styles'
 import { InspectionDialog } from '../..'
-import { MOCK_INFORMATIONS } from '../constants/mocks'
 import { calculateSituationPercentage } from '../../helpers'
+import { HeaderInspectionProps } from '../../repository/getInspectionHeaderRepository'
+import { TableDataProps } from '../../repository/getInspectionItemsRepository'
 
 interface HeaderProps {
   setDialogInspectionStep: (
     value: React.SetStateAction<InspectionDialog>,
   ) => void
   handleUpdateDialogControlled: (open: boolean) => void
-  tableData: any
+  tableData: TableDataProps[]
+  headerData: HeaderInspectionProps
 }
 
 export function Header({
   setDialogInspectionStep,
   handleUpdateDialogControlled,
   tableData,
+  headerData,
 }: HeaderProps) {
   function handleEditInformations() {
     handleUpdateDialogControlled(true)
@@ -56,36 +59,38 @@ export function Header({
     <S.Header>
       <S.WrapperTitleAndInfo>
         <S.WrapperTitleAndManagerdocument>
-          <S.Title>{MOCK_INFORMATIONS.name}</S.Title>
+          <S.Title>{headerData.name}</S.Title>
           <S.EditInfoButton onClick={handleEditInformations}>
             Editar informações{' '}
           </S.EditInfoButton>
         </S.WrapperTitleAndManagerdocument>
 
-        <S.WrapperInformation hasRecordLing={!!MOCK_INFORMATIONS.record_link}>
+        <S.WrapperInformation hasRecordLing={!!headerData.recording_url}>
           <S.InfoLabel>
-            <b>Responsável:</b> {MOCK_INFORMATIONS.responsable}
+            <b>Responsável:</b> {headerData.responsible}
           </S.InfoLabel>
           <S.InfoLabel>
-            <b>Contato:</b> {MOCK_INFORMATIONS.email}
+            <b>Contato:</b> {headerData.responsible_email}
           </S.InfoLabel>
-          {MOCK_INFORMATIONS.participants && (
+          {headerData.participants && (
             <S.InfoLabel>
-              <b>Participantes:</b> {MOCK_INFORMATIONS.participants}
+              <b>Participantes:</b> {headerData.participants}
             </S.InfoLabel>
           )}
         </S.WrapperInformation>
 
-        {MOCK_INFORMATIONS.record_link && (
-          <RecordLink title={MOCK_INFORMATIONS.record_link}>
+        {headerData.recording_url && (
+          <RecordLink title={headerData.recording_url}>
             <b>Gravação disponível em:</b>{' '}
-            <span>{truncateLink(MOCK_INFORMATIONS.record_link, 30)}</span>
+            <span>{truncateLink(headerData.recording_url, 30)}</span>
           </RecordLink>
         )}
       </S.WrapperTitleAndInfo>
 
       <S.WrapperManagerAndStatus>
-        <S.LastUpdate>Última atualização em 12/09/2023 às 14:00</S.LastUpdate>
+        <S.LastUpdate>
+          Última atualização em {headerData.updated_at}
+        </S.LastUpdate>
         <S.ManagerButton onClick={handleManagerDocuments}>
           Gerenciar Documentos
         </S.ManagerButton>

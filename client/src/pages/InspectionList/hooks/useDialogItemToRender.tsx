@@ -3,6 +3,7 @@ import { defaultTheme } from '../../../styles/themes/default'
 import { FirstStepDialog } from '../components/FirstStepDialog'
 import { SecondStepDialog } from '../components/SecondStepDialog'
 import { ThirdStepDialog } from '../components/ThirdStepDialog'
+import { InspectionItem } from '../repository/getInspectionListRepository'
 
 export interface ButtonProps {
   id: string
@@ -31,11 +32,13 @@ export interface DialogConfig {
 interface DialogItemToRenderProps {
   handleUpdateDialogControlled: (open: boolean) => void
   deleteInspectionDialog: () => void
+  handleUpdateInspections: (inspection: InspectionItem) => void
 }
 
 export function useDialogItemToRender({
   handleUpdateDialogControlled,
   deleteInspectionDialog,
+  handleUpdateInspections,
 }: DialogItemToRenderProps) {
   const { dialogInspectionStep, setDialogInspectionStep } =
     useLoggedInspectionContext()
@@ -73,7 +76,9 @@ export function useDialogItemToRender({
       title: 'Criar inspeção',
       description:
         'Anexe os seus documentos para fazer marcações de rastreabilidade, você também poderá adicionar em outro momento.',
-      component: <ThirdStepDialog />,
+      component: (
+        <ThirdStepDialog handleUpdateInspections={handleUpdateInspections} />
+      ),
       width: '32rem',
     },
     delete_inspection: {
