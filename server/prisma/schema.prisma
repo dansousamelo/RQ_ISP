@@ -34,7 +34,8 @@ model Inspection {
 
   User     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Document Document[]
-  Template Template?
+  Item     Item[]
+
 }
 
 enum Type {
@@ -60,31 +61,18 @@ model Document {
   Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
 }
 
-model Template {
+model Item {
   id            String   @id @default(uuid())
-  inspection_id String   @unique
-  name          String
+  inspection_id String
+  item_index    String
+  situation     String?
   description   String
+  observations  String
+  category      String?
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now()) @updatedAt
 
   Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
-
-  Item Item[]
-}
-
-model Item {
-  id           String   @id @default(uuid())
-  template_id  String
-  item_index   String
-  situation    String?
-  description  String
-  observations String
-  category     String?
-  created_at   DateTime @default(now())
-  updated_at   DateTime @default(now()) @updatedAt
-
-  Template Template @relation(fields: [template_id], references: [id], onDelete: Cascade)
 
   Trail Trail[]
 }

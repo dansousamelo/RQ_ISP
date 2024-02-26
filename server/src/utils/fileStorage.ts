@@ -1,5 +1,4 @@
-import { S3 } from "aws-sdk";
-import aws from "aws-sdk";
+import aws, { S3 } from "aws-sdk";
 import path from "path";
 import mime from "mime";
 import fs from "fs";
