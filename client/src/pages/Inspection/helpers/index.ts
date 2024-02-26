@@ -1,16 +1,12 @@
-interface Data {
-  id: string
-  situation: string | null
-  description: string
-  observations: string
-  trail: string | null
-}
+import { TableDataProps } from '../repository/getInspectionItemsRepository'
 
-export const calculateSituationPercentage = (data: Data[]): string => {
+export const calculateSituationPercentage = (
+  data: TableDataProps[],
+): string => {
   const totalItems = data.length
   const nonNullSituationCount = data.filter(
     (item) => item.situation !== null,
   ).length
-  const percentage = Math.round((nonNullSituationCount / totalItems) * 100) // Arredonda para o número inteiro mais próximo
+  const percentage = Math.round((nonNullSituationCount / totalItems) * 100)
   return percentage.toString()
 }

@@ -1,5 +1,5 @@
 export type InspectionItemType = 'privacyRequirement' | 'userStory'
-export interface InspectionItem {
+interface InspectionItem {
   id: string
   title: string
   type: InspectionItemType

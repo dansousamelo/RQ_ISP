@@ -5,6 +5,7 @@ import * as z from 'zod'
 import { Info } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { HeaderInspectionProps } from '../../repository/getInspectionHeaderRepository'
 
 const secondStepSchema = z.object({
   name: z.string().min(3, 'Por favor informe um nome válido'),
@@ -29,13 +30,15 @@ interface SecondStepSchemaProps {
 }
 
 interface EditInformationsDialogProps {
-  informations: SecondStepData
+  headerData: HeaderInspectionProps
   handleUpdateDialogControlled: (open: boolean) => void
+  setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
 }
 
 export function EditInformationsDialog({
-  informations,
+  headerData,
   handleUpdateDialogControlled,
+  setHeaderData,
 }: EditInformationsDialogProps) {
   const {
     handleSubmit,
@@ -46,15 +49,23 @@ export function EditInformationsDialog({
     criteriaMode: 'all',
     resolver: zodResolver(secondStepSchema),
     defaultValues: {
-      name: informations.name || '',
-      responsable: informations.responsable || '',
-      email: informations.email || '',
-      participants: informations.participants || '',
-      record_link: informations.record_link || '',
+      name: headerData.name || '',
+      responsable: headerData.responsible || '',
+      email: headerData.responsible_email || '',
+      participants: headerData.participants || '',
+      record_link: headerData.recording_url || '',
     },
   })
 
   const handleSubmitForm = (data: any) => {
+    setHeaderData((prev: any) => ({
+      ...prev,
+      name: data.name,
+      responsible: data.responsable,
+      email: data.email,
+      participants: data.participants,
+      recording_url: data.record_link,
+    }))
     console.log(data)
   }
 

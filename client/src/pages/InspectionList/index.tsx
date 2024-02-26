@@ -9,7 +9,10 @@ import * as S from './styles'
 import { useCallback, useState } from 'react'
 import { SuccessToast } from '../../components/Toast'
 import { TableSkeleton } from './components/TableSkeleton'
-import { getInspectionListRepository } from './repository/getInspectionListRepository'
+import {
+  InspectionItem,
+  getInspectionListRepository,
+} from './repository/getInspectionListRepository'
 import { getAccessToken } from '../../utils/cookies'
 
 export function InpectionList() {
@@ -25,6 +28,17 @@ export function InpectionList() {
     })
 
   const [idInspectionToDelete, setIdInspectionToDelete] = useState('')
+
+  const handleUpdateInspections = useCallback(
+    (inspection: InspectionItem) => {
+      setInspections((prev) => {
+        const newInspections = [...prev]
+        newInspections.unshift(inspection)
+        return newInspections
+      })
+    },
+    [setInspections],
+  )
 
   const {
     handleUpdateDialogControlled,
@@ -43,6 +57,7 @@ export function InpectionList() {
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
     deleteInspectionDialog,
+    handleUpdateInspections,
   })
 
   const handleDeleteInspection = useCallback(
