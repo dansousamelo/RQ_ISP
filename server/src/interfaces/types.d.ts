@@ -1,5 +1,3 @@
-import { Datetime } from "aws-sdk/clients/costoptimizationhub";
-
 export interface User {
   id: string;
   access_code: string;
@@ -18,13 +16,16 @@ export interface Inspection {
   created_at: Datetime;
   updated_at: Datetime;
   Document?: Document[];
+  Item?: Item[];
 }
-
-export interface Template {
+export interface Document {
   id: string;
   inspection_id: string;
   name: string;
-  description: string;
+  type: string;
+  url: string;
+  created_at: Datetime;
+  updated_at: Datetime;
 }
 export interface Item {
   item_index: string;
@@ -40,16 +41,6 @@ export interface Trail {
   item_id: string;
   page_number?: int | null;
   text: string;
-}
-
-export interface Document {
-  id: string;
-  inspection_id: string;
-  name: string;
-  type: string;
-  url: string;
-  created_at: Datetime;
-  updated_at: Datetime;
 }
 
 export type DocumentItems = {
