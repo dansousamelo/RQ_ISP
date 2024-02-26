@@ -51,6 +51,7 @@ interface DialogItemToRenderProps {
   headerData: HeaderInspectionProps
   setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
   backToInpsectionList: () => void
+  handleDeleteObservation: (id: string) => void
 }
 
 export function useDialogItemToRender({
@@ -72,6 +73,7 @@ export function useDialogItemToRender({
   backToInpsectionList,
   observationsData,
   setObservationsData,
+  handleDeleteObservation,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
@@ -189,7 +191,11 @@ export function useDialogItemToRender({
     },
     manager_documents: {
       title: 'Gerenciar documentos',
-      component: <ManagerDocumentsDialog />,
+      component: (
+        <ManagerDocumentsDialog
+          handleUpdateDialogControlled={handleUpdateDialogControlled}
+        />
+      ),
       width: '32rem',
     },
     document_trail_marks: {
@@ -255,6 +261,31 @@ export function useDialogItemToRender({
         },
       ],
     },
+    delete_observation: {
+      title: 'Excluir observação',
+      description:
+        'Tem certeza de que deseja excluir esta observação? Esta ação é irreversível e não será possível desfazê-la.',
+      width: '28rem',
+      buttonConfig: [
+        {
+          id: 'back',
+          label: 'Voltar',
+          variant: 'secondary',
+          action: () => handleUpdateDialogControlled(false),
+        },
+        {
+          id: 'delete',
+          label: 'Excluir',
+          variant: 'primary',
+          action: () => {
+            handleDeleteObservation(idDialogOpen)
+            handleUpdateDialogControlled(false)
+          },
+          backgroundColor: defaultTheme.colors.error700,
+          color: defaultTheme.colors.neutral,
+        },
+      ],
+    },
     cancel_inspection: {
       title: 'Cancelar',
       description:
@@ -282,10 +313,10 @@ export function useDialogItemToRender({
     },
     add_observation: {
       title: 'Adicionar observação',
-      width: '23rem',
+      width: '32rem',
       component: (
         <ObservationsDialog
-          item={itemSelectedObservation as TableDataProps}
+          observationsData={observationsData}
           setObservationsData={setObservationsData}
         />
       ),
@@ -306,6 +337,7 @@ export function useDialogItemToRender({
           action: () => {
             handleObservationsChange()
             handleUpdateDialogControlled(false)
+            setObservationsData('')
           },
         },
       ],

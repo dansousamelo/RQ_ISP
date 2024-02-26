@@ -151,8 +151,20 @@ export const ClickToSeeText = styled.div`
   color: ${({ theme }) => theme.colors.neutral400};
 `
 
-export const ObservationText = styled.div`
+export const NonObservationText = styled.div`
   font-style: italic;
   color: ${({ theme }) => theme.colors.neutral400};
   cursor: pointer;
 `
+
+export const ObservationText = styled.div`
+  cursor: pointer;
+  padding-top: 2px;
+
+  max-height: 139px;
+  overflow-y: auto !important;
+
+  text-align: left !important;
+`
+
+export const ObservationTextAndIconWrapper = styled.div``
