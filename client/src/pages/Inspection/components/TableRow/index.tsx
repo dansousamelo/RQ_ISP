@@ -18,6 +18,7 @@ interface TableRowProps {
   setEditorData: React.Dispatch<React.SetStateAction<string>>
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
   setIdDialogOpen: React.Dispatch<React.SetStateAction<string>>
+  setObservationsData: React.Dispatch<React.SetStateAction<string>>
 }
 
 const TableRow: React.FC<TableRowProps> = ({
@@ -30,6 +31,7 @@ const TableRow: React.FC<TableRowProps> = ({
   setTableData,
   tableData,
   setEditorData,
+  setObservationsData,
 }) => {
   const typeTrail = item.trail
     ? isArray(item.trail)
@@ -54,6 +56,12 @@ const TableRow: React.FC<TableRowProps> = ({
     setIdDialogOpen(id)
   }
 
+  function handleObservations() {
+    setDialogInspectionStep('add_observation')
+    handleUpdateDialogControlled(true)
+    setIdDialogOpen(item.item_index)
+  }
+
   const handleValueChange = useCallback(
     (value: string, id: string, situation: string | null) => {
       const newData = tableData.map((item) => {
@@ -76,6 +84,12 @@ const TableRow: React.FC<TableRowProps> = ({
   const openDeleteTrailDialog = (id: string) => {
     handleUpdateDialogControlled(true)
     setDialogInspectionStep('delete_mark')
+    setIdDialogOpen(id)
+  }
+
+  const openDeleteObservationsDialog = (id: string) => {
+    handleUpdateDialogControlled(true)
+    setDialogInspectionStep('delete_observation')
     setIdDialogOpen(id)
   }
 
@@ -104,16 +118,32 @@ const TableRow: React.FC<TableRowProps> = ({
         <S.Description>{item.description}</S.Description>
       </td>
       <td>
-        <S.ObservationText
-          onClick={() => {
-            setDialogInspectionStep('add_observation')
-            handleUpdateDialogControlled(true)
-            setIdDialogOpen(item.item_index)
-          }}
-        >
-          Insira aqui observações, justificativas ou ações corretivas referentes
-          ao item inspecionado
-        </S.ObservationText>
+        {!item.observations ? (
+          <S.NonObservationText
+            onClick={() => {
+              handleObservations()
+            }}
+          >
+            Insira aqui observações, justificativas ou ações corretivas
+            referentes ao item inspecionado
+          </S.NonObservationText>
+        ) : (
+          <S.ObservationTextAndIconWrapper>
+            <S.ObservationText
+              onClick={() => {
+                handleObservations()
+                setObservationsData(item.observations as string)
+              }}
+            >
+              {item.observations}
+            </S.ObservationText>
+            <S.CloseRouded
+              onClick={() => {
+                openDeleteObservationsDialog(item.item_index)
+              }}
+            />
+          </S.ObservationTextAndIconWrapper>
+        )}
       </td>
       <S.TrailTd>
         {isAvailableToTrail(item.situation) && !item.trail && (

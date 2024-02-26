@@ -13,7 +13,7 @@ export interface SecondStepData {
 
 export type ActiveUploadTab = 'upload_documents' | 'documents'
 
-type Files = {
+export type Files = {
   name: string
   url: string
 }[]

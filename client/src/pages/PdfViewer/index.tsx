@@ -47,8 +47,6 @@ const PdfViewer = () => {
   const [highlights, setHighlights] = useState<HighlightProps[]>([])
   const scrollViewerToRef = useRef<any>(null)
 
-  console.log('selectedValueDecoded: ', selectedValueDecoded)
-
   const resetHighlights = () => {
     setHighlights([])
   }

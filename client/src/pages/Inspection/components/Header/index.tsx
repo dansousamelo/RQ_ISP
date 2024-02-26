@@ -95,7 +95,7 @@ export function Header({
           Gerenciar Documentos
         </S.ManagerButton>
         <S.Status>
-          <b>Conclusão:</b> {calculateSituationPercentage(tableData)}%
+          <b>Concluído:</b> {calculateSituationPercentage(tableData)}%
         </S.Status>
       </S.WrapperManagerAndStatus>
     </S.Header>

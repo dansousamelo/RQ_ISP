@@ -1,14 +1,13 @@
-import { TableDataProps } from '../../repository/getInspectionItemsRepository'
 import * as S from './styles'
 
 interface ObservationsDialogProps {
   setObservationsData: React.Dispatch<React.SetStateAction<string>>
-  item: TableDataProps
+  observationsData: string
 }
 
 export function ObservationsDialog({
   setObservationsData,
-  item,
+  observationsData,
 }: ObservationsDialogProps) {
   return (
     <S.Container>
@@ -16,7 +15,7 @@ export function ObservationsDialog({
         placeholder="Insira aqui observações, justificativas ou ações corretivas referentes ao item inspecionado"
         rows={5}
         cols={20}
-        value={item.observations as string}
+        value={observationsData}
         onChange={(e) => setObservationsData(e.target.value)}
       />
     </S.Container>
