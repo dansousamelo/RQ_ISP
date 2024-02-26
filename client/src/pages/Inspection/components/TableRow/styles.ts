@@ -101,7 +101,22 @@ export const AddTrailButton = styled(PrimaryButton)`
   }
 `
 
-export const TrailTextAndIconWrapper = styled.div``
+export const TrailTextAndIconWrapper = styled.div`
+  .media {
+    width: 100%;
+    height: 100% !important;
+  }
+
+  .table {
+    tr {
+      border: 1px solid white; /* Define o fundo das linhas como branco */
+    }
+
+    td {
+      border: 1px solid white; /* Define o fundo das colunas como branco */
+    }
+  }
+`
 
 export const TrailText = styled.div`
   cursor: pointer;
@@ -134,4 +149,10 @@ export const ClickToSeeText = styled.div`
   font-style: italic;
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.neutral400};
+`
+
+export const ObservationText = styled.div`
+  font-style: italic;
+  color: ${({ theme }) => theme.colors.neutral400};
+  cursor: pointer;
 `

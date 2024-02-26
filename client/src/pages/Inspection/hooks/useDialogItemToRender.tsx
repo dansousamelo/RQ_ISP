@@ -4,7 +4,6 @@ import { useCallback, useState } from 'react'
 import { TextEditorTrailDialog } from '../components/TextEditorTrailDialog'
 import { ManagerDocumentsDialog } from '../components/ManagerDocumentsDialog'
 import { EditInformationsDialog } from '../components/EditInformationsDialog'
-import { MOCK_INFORMATIONS } from '../components/constants/mocks'
 import { DocumentMarkDialog } from '../components/DocumentMarkDialog'
 import { ChooseDocumentMarkDialog } from '../components/ChooseDocumentMarkDialog'
 import { defaultTheme } from '../../../styles/themes/default'
@@ -12,6 +11,8 @@ import { DialogConfig } from '../../InspectionList/hooks/useDialogItemToRender'
 import { ChooseTrailDialog } from '../components/ChooseTrailDialog'
 import { isArray, isArrayNotEmpty } from '../../../interfaces/typeGuards'
 import { TableDataProps } from '../repository/getInspectionItemsRepository'
+import { HeaderInspectionProps } from '../repository/getInspectionHeaderRepository'
+import { ObservationsDialog } from '../components/ObservationsDialog'
 
 export interface DocumentUploadedProps {
   label: string
@@ -38,6 +39,8 @@ interface DialogItemToRenderProps {
   idDialogOpen: string
   tableData: TableDataProps[]
   setTableData: React.Dispatch<React.SetStateAction<TableDataProps[]>>
+  observationsData: string
+  setObservationsData: React.Dispatch<React.SetStateAction<string>>
   editorData: string
   setEditorData: React.Dispatch<React.SetStateAction<string>>
   idEditing: boolean
@@ -45,6 +48,9 @@ interface DialogItemToRenderProps {
   handleDeleteTrail: (id: string) => void
   documentsUploaded: DocumentUploadedProps[]
   accessCode: string
+  headerData: HeaderInspectionProps
+  setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
+  backToInpsectionList: () => void
 }
 
 export function useDialogItemToRender({
@@ -61,6 +67,11 @@ export function useDialogItemToRender({
   handleDeleteTrail,
   documentsUploaded,
   accessCode,
+  headerData,
+  setHeaderData,
+  backToInpsectionList,
+  observationsData,
+  setObservationsData,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
@@ -72,6 +83,10 @@ export function useDialogItemToRender({
     setTrailType(value)
   }, [])
 
+  const itemSelectedObservation = tableData.find(
+    (item) => item.item_index === idDialogOpen,
+  )
+
   function handleWithTypeTrailChoosed() {
     if (trailType === 'text_editor') {
       setDialogInspectionStep('text_editor_trail')
@@ -79,6 +94,16 @@ export function useDialogItemToRender({
       setDialogInspectionStep('choose_document_mark')
     }
   }
+
+  const handleObservationsChange = useCallback(() => {
+    const newData = tableData.map((item) => {
+      if (item.item_index === idDialogOpen) {
+        return { ...item, observations: observationsData }
+      }
+      return item
+    })
+    setTableData(newData)
+  }, [idDialogOpen, observationsData, setTableData, tableData])
 
   function saveTextEditorTrail() {
     const newData = tableData.map((item) => {
@@ -156,7 +181,8 @@ export function useDialogItemToRender({
       component: (
         <EditInformationsDialog
           handleUpdateDialogControlled={handleUpdateDialogControlled}
-          informations={MOCK_INFORMATIONS}
+          headerData={headerData}
+          setHeaderData={setHeaderData}
         />
       ),
       width: '32rem',
@@ -226,6 +252,61 @@ export function useDialogItemToRender({
           },
           backgroundColor: defaultTheme.colors.error700,
           color: defaultTheme.colors.neutral,
+        },
+      ],
+    },
+    cancel_inspection: {
+      title: 'Cancelar',
+      description:
+        'Tem certeza de que quer cancelar? Se você fez alguma alteração, ela será perdida.',
+      width: '23rem',
+      buttonConfig: [
+        {
+          id: 'back',
+          label: 'Voltar',
+          variant: 'secondary',
+          action: () => handleUpdateDialogControlled(false),
+        },
+        {
+          id: 'delete',
+          label: 'Cancelar',
+          variant: 'primary',
+          action: () => {
+            handleUpdateDialogControlled(false)
+            backToInpsectionList()
+          },
+          backgroundColor: defaultTheme.colors.error700,
+          color: defaultTheme.colors.neutral,
+        },
+      ],
+    },
+    add_observation: {
+      title: 'Adicionar observação',
+      width: '23rem',
+      component: (
+        <ObservationsDialog
+          item={itemSelectedObservation as TableDataProps}
+          setObservationsData={setObservationsData}
+        />
+      ),
+      buttonConfig: [
+        {
+          id: 'back',
+          label: 'Voltar',
+          variant: 'secondary',
+          action: () => {
+            handleUpdateDialogControlled(false)
+            setObservationsData('')
+          },
+        },
+        {
+          id: 'continue',
+          label: 'Salvar',
+          variant: 'primary',
+          action: () => {
+            handleObservationsChange()
+            handleUpdateDialogControlled(false)
+          },
         },
       ],
     },

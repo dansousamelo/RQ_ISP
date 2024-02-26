@@ -40,19 +40,6 @@ export const TableStyled = styled.table`
         position: relative;
 
         word-wrap: break-word;
-
-        textarea {
-          background-color: ${({ theme }) => theme.colors.neutral700};
-          border: none;
-          color: ${({ theme }) => theme.colors.neutral};
-          resize: none;
-          width: 100%;
-        }
-
-        textarea::placeholder {
-          color: ${({ theme }) => theme.colors.neutral400};
-          font-style: italic;
-        }
       }
     }
   }

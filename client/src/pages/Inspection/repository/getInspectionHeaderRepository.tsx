@@ -2,20 +2,20 @@ import { useQuery } from 'react-query'
 import { useState } from 'react'
 import { getInspectionHeader } from '../services'
 
-type Situation = 'as_per' | 'incomplete' | 'non_compilant' | 'not_applicable'
-
-interface Mark {
-  text: string
-  pageNumber: number
-  id: string
+export type DocumentHeader = {
+  fileName: string
+  fileUrl: string
 }
-
-export interface TableDataProps {
-  item_index: string
-  situation: Situation | null
-  description: string | null
-  observations: string | null
-  trail: string | null | Mark[] | any
+export interface HeaderInspectionProps {
+  name: string
+  responsible: string
+  type: string
+  recording_url: string
+  participants: string
+  responsible_email: string
+  documents: DocumentHeader[]
+  status: string
+  updated_at: string
 }
 
 export function getInspectionHeaderRepository({
@@ -27,7 +27,9 @@ export function getInspectionHeaderRepository({
   token: string
   inspectionId: string
 }) {
-  const [headerData, setHeaderData] = useState<TableDataProps[]>([])
+  const [headerData, setHeaderData] = useState<HeaderInspectionProps>(
+    {} as HeaderInspectionProps,
+  )
 
   async function fetchHeaderInspection(): Promise<void> {
     const response = await getInspectionHeader({
@@ -39,7 +41,7 @@ export function getInspectionHeaderRepository({
     setHeaderData(response.data.data.inspection)
   }
 
-  const { isFetching: isInspectionItemsLoading } = useQuery(
+  const { isFetching: isInspectionHeaderLoading } = useQuery(
     [`inspection-header-${accessCode}-${inspectionId}`],
     fetchHeaderInspection,
     {
@@ -47,5 +49,5 @@ export function getInspectionHeaderRepository({
     },
   )
 
-  return { isInspectionItemsLoading, headerData, setHeaderData }
+  return { isInspectionHeaderLoading, headerData, setHeaderData }
 }

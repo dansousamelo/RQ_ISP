@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import './styles.css'
@@ -17,6 +16,7 @@ export function TextEditor({
       editor={ClassicEditor}
       config={{
         placeholder: 'Digite aqui...',
+
         toolbar: {
           removeItems: [
             'bulletedList',
@@ -25,7 +25,6 @@ export function TextEditor({
             'outdent',
             'indent',
             'link',
-            'insertTable',
             'uploadImage',
           ],
         },
