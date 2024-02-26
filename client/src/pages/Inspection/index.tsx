@@ -36,6 +36,7 @@ export type InspectionDialog =
   | 'choose_document_mark'
   | 'cancel_inspection'
   | 'add_observation'
+  | 'delete_observation'
   | ''
 
 export function Inspection() {
@@ -95,6 +96,16 @@ export function Inspection() {
     setTableData(newData)
   }
 
+  const handleDeleteObservation = (id: string) => {
+    const newData = tableData.map((item) => {
+      if (item.item_index === id) {
+        return { ...item, observations: null }
+      }
+      return item
+    })
+    setTableData(newData)
+  }
+
   function formattedDocumentHeader(documents: DocumentHeader[]) {
     return documents.map((document) => {
       return {
@@ -125,6 +136,7 @@ export function Inspection() {
     backToInpsectionList,
     observationsData,
     setObservationsData,
+    handleDeleteObservation,
   })
 
   const handleSaveAll = () => {
@@ -185,6 +197,7 @@ export function Inspection() {
                   setTableData={setTableData}
                   tableData={tableData}
                   setEditorData={setEditorData}
+                  setObservationsData={setObservationsData}
                 />
               ))}
             </tbody>

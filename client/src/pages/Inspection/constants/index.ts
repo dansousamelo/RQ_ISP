@@ -3,7 +3,7 @@ export const TRAIL_ITEMS = [
     value: 'text_editor',
     id: '1',
     label: 'Editor de Texto',
-    description: 'Permite a adição de textos, imagens e links externos.',
+    description: 'Permite a adição e formatação de textos.',
   },
   {
     value: 'mark_document',
