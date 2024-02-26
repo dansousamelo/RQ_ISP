@@ -282,7 +282,7 @@ export default {
         status: 201,
         message: "Inspeção criada com sucesso!",
         data: {
-          // inspectionsExists,
+          inspection: inspectionsExists.id,
           // documents: documentsExists,
           // items,
           token: access_token,
@@ -389,7 +389,7 @@ export default {
         status: 201,
         message: "Inspeção criada com sucesso!",
         data: {
-          // inspectionsExists,
+          inspection: inspectionsExists.id,
           // documents: documentsExists,
           // items,
         },
