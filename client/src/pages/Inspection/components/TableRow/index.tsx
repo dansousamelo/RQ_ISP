@@ -73,16 +73,6 @@ const TableRow: React.FC<TableRowProps> = ({
     [setTableData, tableData],
   )
 
-  const handleObservationsChange = (id: string, value: string) => {
-    const newData = tableData.map((item) => {
-      if (item.item_index === id) {
-        return { ...item, observations: value }
-      }
-      return item
-    })
-    setTableData(newData)
-  }
-
   const openDeleteTrailDialog = (id: string) => {
     handleUpdateDialogControlled(true)
     setDialogInspectionStep('delete_mark')
@@ -114,15 +104,16 @@ const TableRow: React.FC<TableRowProps> = ({
         <S.Description>{item.description}</S.Description>
       </td>
       <td>
-        <textarea
-          placeholder="Insira aqui observações, justificativas ou ações corretivas referentes ao item inspecionado"
-          rows={5}
-          cols={20}
-          value={item.observations as string}
-          onChange={(e) =>
-            handleObservationsChange(item.item_index, e.target.value)
-          }
-        />
+        <S.ObservationText
+          onClick={() => {
+            setDialogInspectionStep('add_observation')
+            handleUpdateDialogControlled(true)
+            setIdDialogOpen(item.item_index)
+          }}
+        >
+          Insira aqui observações, justificativas ou ações corretivas referentes
+          ao item inspecionado
+        </S.ObservationText>
       </td>
       <S.TrailTd>
         {isAvailableToTrail(item.situation) && !item.trail && (
