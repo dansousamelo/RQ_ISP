@@ -76,7 +76,7 @@ export function PrivateRoute({
 
   useEffect(() => {
     if (!accessToken || !refreshToken) {
-      navigate('/')
+      navigate('*')
       return
     }
 

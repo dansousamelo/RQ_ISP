@@ -1,13 +1,16 @@
 import { useEffect, useRef } from 'react'
 import lottie, { AnimationItem } from 'lottie-web'
-import notFoundAnimationData from './assets/not_found.json'
+import emptyAnimation from './assets/empty_animation.json'
 import * as S from './styles'
-import { TitleUpdater } from '../../components/TitleUpdater'
-import { useNavigate } from 'react-router-dom'
 
-export function PageNotFound() {
+export function Empty({
+  text,
+  hasFullHeight = false,
+}: {
+  text: string
+  hasFullHeight?: boolean
+}) {
   const container = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
 
   useEffect(() => {
     let anim: AnimationItem | undefined
@@ -15,7 +18,7 @@ export function PageNotFound() {
     if (container.current) {
       anim = lottie.loadAnimation({
         container: container.current,
-        animationData: notFoundAnimationData,
+        animationData: emptyAnimation,
         renderer: 'svg',
         loop: true,
         autoplay: true,
@@ -31,12 +34,9 @@ export function PageNotFound() {
 
   return (
     <>
-      <TitleUpdater title="Página não encontrada" />
       <S.Container>
-        <S.Animation ref={container} />
-        <S.GoBackButton onClick={() => navigate('/')}>
-          <S.BackIcon /> Voltar para o início
-        </S.GoBackButton>
+        <S.Animation ref={container} hasFullHeight={hasFullHeight} />
+        <S.NotFoundText hasFullHeight={hasFullHeight}>{text}</S.NotFoundText>
       </S.Container>
     </>
   )

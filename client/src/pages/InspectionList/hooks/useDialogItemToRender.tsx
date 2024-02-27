@@ -3,7 +3,6 @@ import { defaultTheme } from '../../../styles/themes/default'
 import { FirstStepDialog } from '../components/FirstStepDialog'
 import { SecondStepDialog } from '../components/SecondStepDialog'
 import { ThirdStepDialog } from '../components/ThirdStepDialog'
-import { InspectionItem } from '../repository/getInspectionListRepository'
 
 export interface ButtonProps {
   id: string
@@ -32,11 +31,13 @@ export interface DialogConfig {
 interface DialogItemToRenderProps {
   handleUpdateDialogControlled: (open: boolean) => void
   deleteInspectionDialog: () => void
+  handleLogout: () => void
 }
 
 export function useDialogItemToRender({
   handleUpdateDialogControlled,
   deleteInspectionDialog,
+  handleLogout,
 }: DialogItemToRenderProps) {
   const { dialogInspectionStep, setDialogInspectionStep } =
     useLoggedInspectionContext()
@@ -99,6 +100,33 @@ export function useDialogItemToRender({
           action: () => {
             deleteInspectionDialog()
             setDialogInspectionStep('')
+          },
+          backgroundColor: defaultTheme.colors.error700,
+          color: defaultTheme.colors.neutral,
+        },
+      ],
+    },
+    logout: {
+      title: 'Confirmar Saída',
+      description: 'Tem certeza de que deseja encerrar a sessão na plataforma?',
+      width: '20rem',
+      buttonConfig: [
+        {
+          id: 'back',
+          label: 'Voltar',
+          variant: 'secondary',
+          action: () => {
+            handleUpdateDialogControlled(false)
+            setDialogInspectionStep('')
+          },
+        },
+        {
+          id: 'delete',
+          label: 'Sair',
+          variant: 'primary',
+          action: () => {
+            handleLogout()
+            handleUpdateDialogControlled(false)
           },
           backgroundColor: defaultTheme.colors.error700,
           color: defaultTheme.colors.neutral,

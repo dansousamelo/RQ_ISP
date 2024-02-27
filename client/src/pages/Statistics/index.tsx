@@ -23,6 +23,7 @@ import { useReactToPrint } from 'react-to-print'
 import { GraphicsPDF } from './components/GraphicsPDF'
 import { createGlobalStyle } from 'styled-components'
 import { ItemsExport, ItensPDF } from './components/ItensPDF'
+import { TitleUpdater } from '../../components/TitleUpdater'
 
 export type DialogStep = '' | 'export_files'
 
@@ -86,6 +87,7 @@ export function Statistics() {
 
   return (
     <>
+      <TitleUpdater title="Estatísticas" />
       <S.Container>
         <Header
           handleUpdateDialogControlled={handleUpdateDialogControlled}

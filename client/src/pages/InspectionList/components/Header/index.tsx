@@ -1,5 +1,6 @@
 import { useLoggedInspectionContext } from '../../../../contexts/LoggedInspection'
 import { CreateInspectionIcon } from '../../assets/CreateInspectionIcon'
+import { LogoutIcon } from '../../assets/LogoutIcon'
 import * as S from './styles'
 
 export function Header() {
@@ -14,13 +15,26 @@ export function Header() {
     setDialogInspectionStep(dialogInspectionStep || 'first_step')
   }
 
+  function handleLogout() {
+    handleUpdateDialogControlled(true)
+    setDialogInspectionStep('logout')
+  }
+
   return (
     <S.StyledHeader>
       <S.Title>RQ_ISP</S.Title>
-      <S.PrimaryButtonStyled onClick={handleCreateInspection}>
-        <CreateInspectionIcon />
-        Criar inspeção
-      </S.PrimaryButtonStyled>
+
+      <S.WrrapperButtons>
+        <S.PrimaryButtonStyled onClick={handleCreateInspection}>
+          <CreateInspectionIcon />
+          Criar inspeção
+        </S.PrimaryButtonStyled>
+
+        <S.LogoutButtonStyled onClick={handleLogout}>
+          <LogoutIcon />
+          Sair
+        </S.LogoutButtonStyled>
+      </S.WrrapperButtons>
     </S.StyledHeader>
   )
 }

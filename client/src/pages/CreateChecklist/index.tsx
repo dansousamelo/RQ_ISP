@@ -6,6 +6,7 @@ import { MainContent } from '../../components/MainContent/components'
 import { Footer } from '../../components/Footer'
 import { highlightText } from '../../utils/highlightText'
 import { useHeaderContext } from '../../contexts/HeaderContext'
+import { TitleUpdater } from '../../components/TitleUpdater'
 
 export function CreateCheklist() {
   const navigate = useNavigate()
@@ -26,28 +27,34 @@ export function CreateCheklist() {
   })
 
   return (
-    <S.HomePageContainer>
-      <HeaderWithoutAuth />
-      <S.MainContainer
-        initial={hasAddAnimation ? { x: '100%' } : false}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-      >
-        <MainContent.Root>
-          <MainContent.Image
-            src={createChecklistPicture}
-            alt="Create checklist picture"
-          />
-          <S.ContentWrapper>
-            <MainContent.Heading>Começar uma inspeção</MainContent.Heading>
-            <MainContent.Paragraph>{highlightButtonText}</MainContent.Paragraph>
-            <Link to="/form">
-              <S.ButtonStyled>Iniciar inspeção</S.ButtonStyled>
-            </Link>
-          </S.ContentWrapper>
-        </MainContent.Root>
-      </S.MainContainer>
-      <Footer />
-    </S.HomePageContainer>
+    <>
+      <TitleUpdater title="Começar inspeção" />
+
+      <S.HomePageContainer>
+        <HeaderWithoutAuth />
+        <S.MainContainer
+          initial={hasAddAnimation ? { x: '100%' } : false}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+        >
+          <MainContent.Root>
+            <MainContent.Image
+              src={createChecklistPicture}
+              alt="Create checklist picture"
+            />
+            <S.ContentWrapper>
+              <MainContent.Heading>Começar uma inspeção</MainContent.Heading>
+              <MainContent.Paragraph>
+                {highlightButtonText}
+              </MainContent.Paragraph>
+              <Link to="/form">
+                <S.ButtonStyled>Iniciar inspeção</S.ButtonStyled>
+              </Link>
+            </S.ContentWrapper>
+          </MainContent.Root>
+        </S.MainContainer>
+        <Footer />
+      </S.HomePageContainer>
+    </>
   )
 }

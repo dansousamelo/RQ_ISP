@@ -6,6 +6,7 @@ import { SecondStep } from './components/SecondStep'
 import { useInitialInspectionContext } from '../../contexts/InitialInspectionContext'
 import { ThirdStep } from './components/ThirdStep'
 import { FourthStep } from './components/FourthStep'
+import { TitleUpdater } from '../../components/TitleUpdater'
 
 interface StepToRender {
   [key: number]: JSX.Element
@@ -21,10 +22,13 @@ export function Form() {
     3: <FourthStep />,
   }
   return (
-    <S.HomePageContainer>
-      <HeaderWithoutAuth />
-      {STEP_TO_RENDER[activeStep]}
-      <Footer />
-    </S.HomePageContainer>
+    <>
+      <TitleUpdater title="Criar inspeção" />
+      <S.HomePageContainer>
+        <HeaderWithoutAuth />
+        {STEP_TO_RENDER[activeStep]}
+        <Footer />
+      </S.HomePageContainer>
+    </>
   )
 }

@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { getInspectionHeader } from '../services'
 
 export type DocumentHeader = {
-  fileName: string
-  fileUrl: string
+  name: string
+  url: string
 }
 export interface HeaderInspectionProps {
   name: string
