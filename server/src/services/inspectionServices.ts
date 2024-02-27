@@ -12,13 +12,14 @@ import {
   DocumentResult,
   InspectionAttributesResult,
   InspectionType,
+  TrailResult,
 } from "./interfaces/types";
 
 export async function findInspectionsListByUserId(
   userId: string
-): Promise<InspectionsResult[]> {
+): Promise<InspectionsResult[] | null> {
   try {
-    const inspections = await prisma.inspection.findMany({
+    const inspections: Inspection[] = await prisma.inspection.findMany({
       where: {
         user_id: userId,
       },
@@ -26,13 +27,16 @@ export async function findInspectionsListByUserId(
         updated_at: "desc",
       },
     });
+
+    console.log(inspections)
+
     const inspectionsExists: InspectionsResult[] = inspections.map(
-      (inspections) => ({
-        id: inspections.id,
-        name: inspections.name,
-        created_at: formatDate(inspections.created_at),
-        type: inspections.type,
-        status: inspections.status,
+      (inspection: Inspection) => ({
+        id: inspection.id,
+        name: inspection.name,
+        created_at: formatDate(inspection.created_at),
+        type: inspection.type,
+        status: inspection.status,
       })
     );
 
@@ -42,7 +46,7 @@ export async function findInspectionsListByUserId(
   }
 }
 
-function getTrailData(trails: any[]) {
+function getTrailData(trails: TrailResult[]) {
   if (!trails || isArrayEmpty(trails)) {
     return null;
   }
