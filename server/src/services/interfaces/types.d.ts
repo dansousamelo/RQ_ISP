@@ -18,7 +18,7 @@ export interface ItemsResult {
 }
 
 export interface TrailResult {
-  traild_id: string;
+  id: string;
   text: string;
   page_number?: string | null;
 }

@@ -266,13 +266,11 @@ export default {
         inspectionsExists.id,
         documents
       );
-      console.log(documentsExists);
 
       const itemsExist = await createInspectionItems(
         inspectionsExists.id,
         inspection_type
       );
-      console.log(itemsExist);
 
       const access_token = await generateToken(userExists.id);
       const refreshToken = await generateRefreshToken(userExists.id);
@@ -360,10 +358,8 @@ export default {
         });
       }
 
-      const userExists = await createUser(accessCode);
-
       const inspectionsExists = await createInspection(
-        userExists.id,
+        user.id,
         name,
         responsible,
         inspection_type,
@@ -372,17 +368,15 @@ export default {
         responsible_email
       );
 
-      const documentsExists = await postDocuments(
+      await postDocuments(
         inspectionsExists.id,
         documents
       );
-      console.log(documentsExists);
 
-      const itemsExist = await createInspectionItems(
+      await createInspectionItems(
         inspectionsExists.id,
         inspection_type
       );
-      console.log(itemsExist);
 
       return res.status(201).json({
         error: false,
