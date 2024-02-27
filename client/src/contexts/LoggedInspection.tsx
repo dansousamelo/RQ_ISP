@@ -24,6 +24,7 @@ export type InspectionDialog =
   | 'second_step'
   | 'third_step'
   | 'delete_inspection'
+  | 'logout'
   | ''
 
 interface LoggedInspectionContextType {
