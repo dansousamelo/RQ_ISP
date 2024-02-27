@@ -29,17 +29,6 @@ export function InpectionList() {
 
   const [idInspectionToDelete, setIdInspectionToDelete] = useState('')
 
-  const handleUpdateInspections = useCallback(
-    (inspection: InspectionItem) => {
-      setInspections((prev) => {
-        const newInspections = [...prev]
-        newInspections.unshift(inspection)
-        return newInspections
-      })
-    },
-    [setInspections],
-  )
-
   const {
     handleUpdateDialogControlled,
     setDialogInspectionStep,
@@ -57,7 +46,6 @@ export function InpectionList() {
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
     deleteInspectionDialog,
-    handleUpdateInspections,
   })
 
   const handleDeleteInspection = useCallback(

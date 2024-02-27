@@ -11,26 +11,20 @@ import { SeeIcon } from '../../../Form/components/ThirdStep/icons/SeeIcon'
 import * as S from './styles'
 import { usePDFLoggedUploader } from './hooks/usePDFLoggedUploader'
 import { LoadingBars } from '../../../../components/LoadingBars'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { convertToCustomFormat } from '../../../Form/components/FourthStep/utils'
 import { postInspectionLoggedData } from '../../../Form/components/FourthStep/services'
 import { ErrorToast, SuccessToast } from '../../../../components/Toast'
 import { AxiosError } from 'axios'
 import { getAccessToken } from '../../../../utils/cookies'
 import { Spinner } from '../../../../components/Spinner'
-import { InspectionItem } from '../../repository/getInspectionListRepository'
-import { formatDate } from '../../utils'
 
-interface ThirdStepDialogProps {
-  handleUpdateInspections: (inspection: InspectionItem) => void
-}
-
-export function ThirdStepDialog({
-  handleUpdateInspections,
-}: ThirdStepDialogProps) {
+export function ThirdStepDialog() {
   const [isCreatingInspection, setIsCreatingInspection] = useState(false)
 
   const { accessCode } = useParams()
+
+  const navigate = useNavigate()
 
   const {
     updateActiveTabOnUpload,
@@ -105,17 +99,9 @@ export function ThirdStepDialog({
         token,
       })
 
-      const inspectionCreated = response.data.data
+      const { inspection } = response.data.data
 
-      const inspectionToUpdate: InspectionItem = {
-        id: inspectionCreated.inspection.id,
-        name: inspectionCreated.inspection.name,
-        type: inspectionCreated.inspection.type,
-        created_at: formatDate(inspectionCreated.inspection.created_at),
-        status: 'uninitiated',
-      }
-
-      handleUpdateInspections(inspectionToUpdate)
+      navigate(`/inspection/${inspection}/${accessCode}`)
 
       SuccessToast('Inspeção criada com sucesso')
       setSecondStepData({} as SecondStepData)
