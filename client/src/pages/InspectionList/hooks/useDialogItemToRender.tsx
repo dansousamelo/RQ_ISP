@@ -32,13 +32,11 @@ export interface DialogConfig {
 interface DialogItemToRenderProps {
   handleUpdateDialogControlled: (open: boolean) => void
   deleteInspectionDialog: () => void
-  handleUpdateInspections: (inspection: InspectionItem) => void
 }
 
 export function useDialogItemToRender({
   handleUpdateDialogControlled,
   deleteInspectionDialog,
-  handleUpdateInspections,
 }: DialogItemToRenderProps) {
   const { dialogInspectionStep, setDialogInspectionStep } =
     useLoggedInspectionContext()
@@ -76,9 +74,7 @@ export function useDialogItemToRender({
       title: 'Criar inspeção',
       description:
         'Anexe os seus documentos para fazer marcações de rastreabilidade, você também poderá adicionar em outro momento.',
-      component: (
-        <ThirdStepDialog handleUpdateInspections={handleUpdateInspections} />
-      ),
+      component: <ThirdStepDialog />,
       width: '32rem',
     },
     delete_inspection: {
