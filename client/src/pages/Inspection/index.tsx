@@ -20,6 +20,7 @@ import {
   getInspectionHeaderRepository,
 } from './repository/getInspectionHeaderRepository'
 import { BreadcrumbsSkeleton } from '../../components/Breadcrumb/skeleton'
+import { TitleUpdater } from '../../components/TitleUpdater'
 
 interface BreadcrumbItem {
   label: string
@@ -109,8 +110,8 @@ export function Inspection() {
   function formattedDocumentHeader(documents: DocumentHeader[]) {
     return documents.map((document) => {
       return {
-        label: document.fileName,
-        value: document.fileUrl,
+        label: document.name,
+        value: document.url,
       }
     })
   }
@@ -145,6 +146,7 @@ export function Inspection() {
 
   return (
     <>
+      <TitleUpdater title="Inspecionar" />
       <S.Container>
         {isLoadingInformations ? (
           <BreadcrumbsSkeleton />

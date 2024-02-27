@@ -52,16 +52,16 @@ export function App() {
                   />
                   <Route
                     path="/inspection/:id/:name/:type/:accessCode/statistics"
-                    element={<Statistics />}
+                    element={<PrivateRoute element={<Statistics />} />}
                   />
                   <Route
                     path="/inspection/:id/:accessCode"
-                    element={<Inspection />}
+                    element={<PrivateRoute element={<Inspection />} />}
                   />
 
                   <Route
                     path="/inspection/:id/:pdf/:amountOfItens/:idMark/:accessCode/mark"
-                    element={<PdfViewer />}
+                    element={<PrivateRoute element={<PdfViewer />} />}
                   />
                   <Route path="*" element={<PageNotFound />} />
                 </Routes>

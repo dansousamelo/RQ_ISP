@@ -19,6 +19,7 @@ import { Input } from '../../components/Input'
 import { Spinner } from '../../components/Spinner'
 import { Footer } from '../../components/Footer'
 import { api } from '../../lib/axios'
+import { TitleUpdater } from '../../components/TitleUpdater'
 
 const formSchema = z.object({
   accessCode: z.string().min(1, 'Campo obrigatório'),
@@ -68,77 +69,81 @@ export function ManagementChecklist() {
   }
 
   return (
-    <S.HomePageContainer>
-      <HeaderWithoutAuth />
-      <S.MainContainer
-        initial={{ x: '-100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-      >
-        <MainContent.Root>
-          <MainContent.Image
-            src={managerListPicture}
-            alt="Management Checklist Picture"
-          />
-          <S.ContentWrapper>
-            <MainContent.Heading>
-              Acessar lista de inspeções
-            </MainContent.Heading>
-            <MainContent.Paragraph>
-              Gerencie suas inspeções de forma eficiente, permitindo um controle
-              mais refinado e otimizado das suas tarefas e objetivos.
-            </MainContent.Paragraph>
-            <Input.Root>
-              <Input.Label>
-                Código de acesso
-                <Input.RequiredText
-                  variant={errors.accessCode || errorInRequest ? 'error' : ''}
-                >
-                  *
-                </Input.RequiredText>
-              </Input.Label>
-              <Input.Input
-                hasError={
-                  Boolean(errors.accessCode?.message) || Boolean(errorInRequest)
-                }
-                type="text"
-                {...register('accessCode')}
-                placeholder={'Digite o seu código de acesso'}
-                onChange={handleInputChange}
-              />
-              {errors.accessCode && (
-                <Input.ErrorMessageRoot>
-                  <Info color="#FF0000" />
-                  <Input.ErrorMessage>
-                    {errors.accessCode.message}
-                  </Input.ErrorMessage>
-                </Input.ErrorMessageRoot>
-              )}
+    <>
+      <TitleUpdater title="Acessar inspeções" />
+      <S.HomePageContainer>
+        <HeaderWithoutAuth />
+        <S.MainContainer
+          initial={{ x: '-100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+        >
+          <MainContent.Root>
+            <MainContent.Image
+              src={managerListPicture}
+              alt="Management Checklist Picture"
+            />
+            <S.ContentWrapper>
+              <MainContent.Heading>
+                Acessar lista de inspeções
+              </MainContent.Heading>
+              <MainContent.Paragraph>
+                Gerencie suas inspeções de forma eficiente, permitindo um
+                controle mais refinado e otimizado das suas tarefas e objetivos.
+              </MainContent.Paragraph>
+              <Input.Root>
+                <Input.Label>
+                  Código de acesso
+                  <Input.RequiredText
+                    variant={errors.accessCode || errorInRequest ? 'error' : ''}
+                  >
+                    *
+                  </Input.RequiredText>
+                </Input.Label>
+                <Input.Input
+                  hasError={
+                    Boolean(errors.accessCode?.message) ||
+                    Boolean(errorInRequest)
+                  }
+                  type="text"
+                  {...register('accessCode')}
+                  placeholder={'Digite o seu código de acesso'}
+                  onChange={handleInputChange}
+                />
+                {errors.accessCode && (
+                  <Input.ErrorMessageRoot>
+                    <Info color="#FF0000" />
+                    <Input.ErrorMessage>
+                      {errors.accessCode.message}
+                    </Input.ErrorMessage>
+                  </Input.ErrorMessageRoot>
+                )}
 
-              {errorInRequest && (
-                <Input.ErrorMessageRoot>
-                  <Info color="#FF0000" />
-                  <Input.ErrorMessage>{errorInRequest}</Input.ErrorMessage>
-                </Input.ErrorMessageRoot>
-              )}
-            </Input.Root>
-            <S.ButtonStyled
-              isLoading={isLoading}
-              onClick={handleSubmit(onSubmit)}
-            >
-              {isLoading ? (
-                <>
-                  <Spinner />
-                  Carregando
-                </>
-              ) : (
-                'Entrar'
-              )}
-            </S.ButtonStyled>
-          </S.ContentWrapper>
-        </MainContent.Root>
-      </S.MainContainer>
-      <Footer />
-    </S.HomePageContainer>
+                {errorInRequest && (
+                  <Input.ErrorMessageRoot>
+                    <Info color="#FF0000" />
+                    <Input.ErrorMessage>{errorInRequest}</Input.ErrorMessage>
+                  </Input.ErrorMessageRoot>
+                )}
+              </Input.Root>
+              <S.ButtonStyled
+                isLoading={isLoading}
+                onClick={handleSubmit(onSubmit)}
+              >
+                {isLoading ? (
+                  <>
+                    <Spinner />
+                    Carregando
+                  </>
+                ) : (
+                  'Entrar'
+                )}
+              </S.ButtonStyled>
+            </S.ContentWrapper>
+          </MainContent.Root>
+        </S.MainContainer>
+        <Footer />
+      </S.HomePageContainer>
+    </>
   )
 }

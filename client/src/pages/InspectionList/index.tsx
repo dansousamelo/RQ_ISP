@@ -2,18 +2,21 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { DialogControlled } from '../../components/DialogControlled'
 import { Footer } from '../../components/Footer'
 import { useLoggedInspectionContext } from '../../contexts/LoggedInspection'
-import { isNotUndefined } from '../../interfaces/typeGuards'
+import { isArrayNotEmpty, isNotUndefined } from '../../interfaces/typeGuards'
 import { Header } from './components/Header'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import * as S from './styles'
 import { useCallback, useState } from 'react'
 import { SuccessToast } from '../../components/Toast'
 import { TableSkeleton } from './components/TableSkeleton'
+import { getInspectionListRepository } from './repository/getInspectionListRepository'
 import {
-  InspectionItem,
-  getInspectionListRepository,
-} from './repository/getInspectionListRepository'
-import { getAccessToken } from '../../utils/cookies'
+  getAccessToken,
+  removeAccessToken,
+  removeRefreshToken,
+} from '../../utils/cookies'
+import { TitleUpdater } from '../../components/TitleUpdater'
+import { Empty } from '../../components/Empty'
 
 export function InpectionList() {
   const navigate = useNavigate()
@@ -43,9 +46,16 @@ export function InpectionList() {
     SuccessToast('Inspeção excluída com sucesso!')
   }, [handleUpdateDialogControlled, idInspectionToDelete, setInspections])
 
+  const handleLogout = useCallback(() => {
+    removeAccessToken()
+    removeRefreshToken()
+    navigate('/')
+  }, [navigate])
+
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
     deleteInspectionDialog,
+    handleLogout,
   })
 
   const handleDeleteInspection = useCallback(
@@ -100,8 +110,11 @@ export function InpectionList() {
     concluded: 'Concluído',
   }
 
+  const hasInspections = isArrayNotEmpty(inspections)
+
   return (
     <>
+      <TitleUpdater title="Inspeções" />
       <S.Container>
         <Header />
         <S.Title>Inspeções</S.Title>
@@ -111,46 +124,52 @@ export function InpectionList() {
           <TableSkeleton />
         ) : (
           <>
-            <S.TableContainer>
-              <S.TableHeader>Título</S.TableHeader>
-              <S.TableHeader>Data de criação</S.TableHeader>
-              <S.TableHeader>Status</S.TableHeader>
-              <S.TableHeader />
-            </S.TableContainer>
+            {hasInspections ? (
+              <>
+                <S.TableContainer>
+                  <S.TableHeader>Título</S.TableHeader>
+                  <S.TableHeader>Data de criação</S.TableHeader>
+                  <S.TableHeader>Status</S.TableHeader>
+                  <S.TableHeader />
+                </S.TableContainer>
 
-            <S.TableContentContainer>
-              {inspections.map((item) => {
-                const status = STATUS_OPTIONS[item.status]
-                return (
-                  <>
-                    <S.TableTitleCell title={item.name} key={item.id}>
-                      {item.name}
-                    </S.TableTitleCell>
+                <S.TableContentContainer>
+                  {inspections.map((item) => {
+                    const status = STATUS_OPTIONS[item.status]
+                    return (
+                      <>
+                        <S.TableTitleCell title={item.name} key={item.id}>
+                          {item.name}
+                        </S.TableTitleCell>
 
-                    <S.TableCell>{item.created_at}</S.TableCell>
-                    <S.TableCell>
-                      <S.WrapperStatusIndicator>
-                        <S.StatusIndicator status={item.status} />
-                        {status}
-                      </S.WrapperStatusIndicator>
-                    </S.TableCell>
-                    <S.TableCell hasGap={true}>
-                      {STATUS_ACTION_OPTIONS[item.status].map((action) => (
-                        <S.ButtonStyled
-                          onClick={() =>
-                            action.action(item.id, item.name, item.type)
-                          }
-                          label={action.label}
-                          key={action.label}
-                        >
-                          {action.label}
-                        </S.ButtonStyled>
-                      ))}
-                    </S.TableCell>
-                  </>
-                )
-              })}
-            </S.TableContentContainer>
+                        <S.TableCell>{item.created_at}</S.TableCell>
+                        <S.TableCell>
+                          <S.WrapperStatusIndicator>
+                            <S.StatusIndicator status={item.status} />
+                            {status}
+                          </S.WrapperStatusIndicator>
+                        </S.TableCell>
+                        <S.TableCell hasGap={true}>
+                          {STATUS_ACTION_OPTIONS[item.status].map((action) => (
+                            <S.ButtonStyled
+                              onClick={() =>
+                                action.action(item.id, item.name, item.type)
+                              }
+                              label={action.label}
+                              key={action.label}
+                            >
+                              {action.label}
+                            </S.ButtonStyled>
+                          ))}
+                        </S.TableCell>
+                      </>
+                    )
+                  })}
+                </S.TableContentContainer>
+              </>
+            ) : (
+              <Empty text={`Ainda não há inspeções criadas.`} />
+            )}
           </>
         )}
 
