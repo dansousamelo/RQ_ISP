@@ -57,12 +57,12 @@ export function FourthStep() {
       setIsCreatingInspection(true)
       const response = await postInspectionData(dataToSend)
 
-      const { token, refreshToken, id } = response.data.data
+      const { token, refreshToken, inspection } = response.data.data
 
       setAccessToken(token)
       setRefreshToken(refreshToken)
       createCookieWithExpiration()
-      navigate(`/inspection/${id}/${accessCode}`)
+      navigate(`/inspection/${inspection}/${accessCode}`)
 
       SuccessToast('Inspeção criada com sucesso')
     } catch (error: unknown) {
