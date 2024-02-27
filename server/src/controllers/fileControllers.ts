@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import FileServices from "../services/fileServices";
 import { isMulterFilesArray } from "../interfaces/typeGuards";
+import { getErrorMessage } from "../utils/errorMessage";
 
 export default {
   async uploadFile(req: Request, res: Response) {
@@ -33,11 +34,10 @@ export default {
         data: uploadedFiles,
       });
     } catch (error) {
-      console.error("Erro durante o upload ", error);
       return res.status(500).json({
         error: true,
         status: 500,
-        message: "Erro durante o upload",
+        message: getErrorMessage(error),
         data: {},
       });
     }

@@ -28,8 +28,6 @@ export async function findInspectionsListByUserId(
       },
     });
 
-    console.log(inspections)
-
     const inspectionsExists: InspectionsResult[] = inspections.map(
       (inspection: Inspection) => ({
         id: inspection.id,
