@@ -3,12 +3,16 @@ import {
   DialogControlled,
   useDialogControlled,
 } from '../../../../components/DialogControlled'
-import { isNotUndefined } from '../../../../interfaces/typeGuards'
+import {
+  isArrayNotEmpty,
+  isNotUndefined,
+} from '../../../../interfaces/typeGuards'
 import { HighlightProps } from '../../interfaces'
 import * as S from './styles'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import { useNavigate, useParams } from 'react-router-dom'
 import { HighlightSkeleton } from './components/HighlightSkeleton'
+import { Empty } from '../../../../components/Empty'
 
 const updateHash = (highlight: HighlightProps) => {
   document.location.hash = `highlight-${highlight.id}`
@@ -123,6 +127,8 @@ export function Sidebar({
     navigate(`/inspection/list/${accessCode}`)
   }
 
+  const hasHighlights = isArrayNotEmpty(highlights)
+
   const isLoading = false
 
   return (
@@ -136,33 +142,39 @@ export function Sidebar({
 
         <S.MarkTitle>Marcações</S.MarkTitle>
         <S.Description>
-          Crie marcações selecionando o texto ao lado. Ao criar as marcações,
-          você poderá gerenciá-las e, ao finalizar, salve suas alterações.
+          Crie marcações selecionando o pdf ao lado. Ao criar as marcações, você
+          poderá gerenciá-las e, ao finalizar, salve suas alterações.
         </S.Description>
 
         {isLoading ? (
           <HighlightSkeleton />
         ) : (
-          <S.MarkList>
-            {highlights.map((highlight, index) => (
-              <li
-                key={index}
-                className="sidebar__highlight"
-                onClick={() => {
-                  updateHash(highlight)
-                }}
-              >
-                <SidebarLiContent
-                  highlight={highlight}
-                  onDeleteHighlight={onDeleteHighlight}
-                />
-              </li>
-            ))}
-          </S.MarkList>
+          <>
+            {hasHighlights ? (
+              <S.MarkList>
+                {highlights.map((highlight, index) => (
+                  <li
+                    key={index}
+                    className="sidebar__highlight"
+                    onClick={() => {
+                      updateHash(highlight)
+                    }}
+                  >
+                    <SidebarLiContent
+                      highlight={highlight}
+                      onDeleteHighlight={onDeleteHighlight}
+                    />
+                  </li>
+                ))}
+              </S.MarkList>
+            ) : (
+              <Empty hasFullHeight text="Ainda não existem marcações." />
+            )}
+          </>
         )}
 
         <S.WrapperButtons>
-          {highlights.length > 0 && (
+          {hasHighlights && (
             <S.ResetButton onClick={onCleanHighlights}>
               Limpar marcações do documento
             </S.ResetButton>

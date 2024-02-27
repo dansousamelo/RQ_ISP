@@ -21,6 +21,7 @@ import {
 import { Sidebar } from './components/Sidebar'
 import Tip from './components/Tip'
 import { ErrorToast } from '../../components/Toast'
+import { TitleUpdater } from '../../components/TitleUpdater'
 
 const getNextId = () => String(Math.random()).slice(2)
 const parseIdFromHash = () => document.location.hash.slice('#highlight-'.length)
@@ -108,96 +109,99 @@ const PdfViewer = () => {
   }, [highlights])
 
   return (
-    <div className="App" style={{ display: 'flex', height: '100vh' }}>
-      <Sidebar
-        highlights={highlights}
-        resetHighlights={resetHighlights}
-        deleteHighlight={deleteHighlight}
-      />
-      <div style={{ height: '100vh', width: '75vw', position: 'relative' }}>
-        <PdfLoader url={selectedValueDecoded} beforeLoad={<Spinner />}>
-          {(pdfDocument) => (
-            <PdfHighlighter
-              pdfDocument={pdfDocument}
-              enableAreaSelection={() => false}
-              onScrollChange={resetHash}
-              scrollRef={(scrollTo) => {
-                scrollViewerToRef.current = scrollTo
-                scrollToHighlightFromHash()
-              }}
-              onSelectionFinished={(
-                position,
-                content,
-                hideTipAndSelection,
-                transformSelection,
-              ) => (
-                <Tip
-                  idMark={idMark as string}
-                  onOpen={() => {
-                    transformSelection()
-                  }}
-                  onConfirm={(comment) => {
-                    if (verifyIfItemWasFilled(comment)) {
-                      addHighlight({ content, position, comment })
-                      hideTipAndSelection()
-                    } else {
-                      ErrorToast(
-                        'Não é possível atribuir o número digitado a esta marcação. O limite máximo é 20.',
-                      )
-                    }
-                  }}
-                />
-              )}
-              highlightTransform={(
-                highlight,
-                index,
-                setTip,
-                hideTip,
-                viewportToScaled,
-                screenshot,
-                isScrolledTo,
-              ) => {
-                const isTextHighlight = !(
-                  highlight.content && highlight.content.image
-                )
-                const component = isTextHighlight ? (
-                  <Highlight
-                    isScrolledTo={isScrolledTo}
-                    position={highlight.position}
-                    comment={highlight.comment}
-                  />
-                ) : (
-                  <AreaHighlight
-                    isScrolledTo={isScrolledTo}
-                    highlight={highlight}
-                    onChange={(boundingRect) => {
-                      updateHighlight(
-                        highlight.id,
-                        { boundingRect: viewportToScaled(boundingRect) },
-                        { image: screenshot(boundingRect) },
-                      )
+    <>
+      <TitleUpdater title="Marcação" />
+      <div className="App" style={{ display: 'flex', height: '100vh' }}>
+        <Sidebar
+          highlights={highlights}
+          resetHighlights={resetHighlights}
+          deleteHighlight={deleteHighlight}
+        />
+        <div style={{ height: '100vh', width: '75vw', position: 'relative' }}>
+          <PdfLoader url={selectedValueDecoded} beforeLoad={<Spinner />}>
+            {(pdfDocument) => (
+              <PdfHighlighter
+                pdfDocument={pdfDocument}
+                enableAreaSelection={() => false}
+                onScrollChange={resetHash}
+                scrollRef={(scrollTo) => {
+                  scrollViewerToRef.current = scrollTo
+                  scrollToHighlightFromHash()
+                }}
+                onSelectionFinished={(
+                  position,
+                  content,
+                  hideTipAndSelection,
+                  transformSelection,
+                ) => (
+                  <Tip
+                    idMark={idMark as string}
+                    onOpen={() => {
+                      transformSelection()
+                    }}
+                    onConfirm={(comment) => {
+                      if (verifyIfItemWasFilled(comment)) {
+                        addHighlight({ content, position, comment })
+                        hideTipAndSelection()
+                      } else {
+                        ErrorToast(
+                          'Não é possível atribuir o número digitado a esta marcação. O limite máximo é 20.',
+                        )
+                      }
                     }}
                   />
-                )
-                return (
-                  <Popup
-                    popupContent={<HighlightPopup {...highlight} />}
-                    onMouseOver={(popupContent) =>
-                      setTip(highlight, () => popupContent)
-                    }
-                    onMouseOut={hideTip}
-                    key={index}
-                  >
-                    {component}
-                  </Popup>
-                )
-              }}
-              highlights={highlights}
-            />
-          )}
-        </PdfLoader>
+                )}
+                highlightTransform={(
+                  highlight,
+                  index,
+                  setTip,
+                  hideTip,
+                  viewportToScaled,
+                  screenshot,
+                  isScrolledTo,
+                ) => {
+                  const isTextHighlight = !(
+                    highlight.content && highlight.content.image
+                  )
+                  const component = isTextHighlight ? (
+                    <Highlight
+                      isScrolledTo={isScrolledTo}
+                      position={highlight.position}
+                      comment={highlight.comment}
+                    />
+                  ) : (
+                    <AreaHighlight
+                      isScrolledTo={isScrolledTo}
+                      highlight={highlight}
+                      onChange={(boundingRect) => {
+                        updateHighlight(
+                          highlight.id,
+                          { boundingRect: viewportToScaled(boundingRect) },
+                          { image: screenshot(boundingRect) },
+                        )
+                      }}
+                    />
+                  )
+                  return (
+                    <Popup
+                      popupContent={<HighlightPopup {...highlight} />}
+                      onMouseOver={(popupContent) =>
+                        setTip(highlight, () => popupContent)
+                      }
+                      onMouseOut={hideTip}
+                      key={index}
+                    >
+                      {component}
+                    </Popup>
+                  )
+                }}
+                highlights={highlights}
+              />
+            )}
+          </PdfLoader>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
