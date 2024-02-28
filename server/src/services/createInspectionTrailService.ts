@@ -5,24 +5,17 @@ import { PositionRect, TrailData } from "./interfaces/types";
 
 export async function createInspectionTrail(
   inspectionId: string,
-  trailData: TrailData[]
+  trailData: TrailData
 ) {
   try {
-    const createdTrails = await Promise.all(
-      trailData.map(async (data) => {
-        const trail = await createTrailInstance(inspectionId, data);
+    const trail = await createTrailInstance(inspectionId, trailData);
 
-        const rects = await Promise.all([
-          createTrailBoundingRect(trail.id, data.position.boundingRect),
-          createTrailRects(trail.id, data.position.rects),
-        ]);
+    await Promise.all([
+      createTrailBoundingRect(trail.id, trailData.position.boundingRect),
+      createTrailRects(trail.id, trailData.position.rects),
+    ]);
 
-        return trail.id;
-      })
-    );
-
-    return createdTrails;
-
+    return trail.id;
   } catch (error) {
     throw new Error(getErrorMessage(error));
   }
@@ -43,7 +36,6 @@ async function createTrailInstance(inspectionId: string, trail: TrailData) {
     });
 
     return createdTrail;
-
   } catch (error) {
     throw new Error("Não foi possível inserir um objeto na tabela marcação!");
   }
@@ -68,7 +60,6 @@ async function createTrailBoundingRect(
     });
 
     return createdBoundingRect;
-
   } catch (error) {
     throw new Error(getErrorMessage(error));
   }
@@ -94,7 +85,6 @@ async function createTrailRects(trailId: string, rects: PositionRect[]) {
     const createdRects = await Promise.all(createRectPromises);
 
     return createdRects;
-    
   } catch (error) {
     throw new Error(getErrorMessage(error));
   }

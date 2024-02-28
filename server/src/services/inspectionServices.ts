@@ -13,6 +13,7 @@ import {
   InspectionAttributesResult,
   InspectionType
 } from "./interfaces/types";
+import { isArrayNotEmpty } from "../interfaces/typeGuards";
 
 export async function findInspection(
   inspectionId: string,
@@ -105,15 +106,16 @@ export async function findInspectionItemsByInspectionId(
     }
 
     const itemsExists: ItemsResult[] = inspection.Item.map((item: any) => {
+      const trails = inspection.Trail.filter((trail) => trail.item_id === item.item_index);
+      const trailTexts = isArrayNotEmpty(trailscls) ? trails.map((trail) => trail.text) : null;
+    
       return {
         item_index: item.item_index,
         situation: item.situation,
         category: item.category,
         description: item.description,
         observations: item.observations,
-        trail: inspection.Trail.filter(
-          (trail) => trail.item_id === item.item_index
-        ).map((trail) => trail.text),
+        trail: trailTexts,
       };
     });
 
