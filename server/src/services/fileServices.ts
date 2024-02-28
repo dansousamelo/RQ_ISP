@@ -1,9 +1,9 @@
-import { DocumentItem } from "aws-sdk/clients/marketplaceagreement";
 import { prisma } from "../db/prismaClient";
 
 import { DocumentItems } from "../interfaces/types";
 
 import S3Storage from "../utils/fileStorage";
+import { DocumentResult } from "./interfaces/types";
 
 class FileServices {
   async uploadFile(file: Express.Multer.File): Promise<DocumentItems> {
@@ -28,25 +28,37 @@ class FileServices {
   async deleteFile(): Promise<void> {}
 }
 
-export async function postDocuments(inspectionId: string, inpectionDocuments: DocumentItems[] ) {
+export async function postDocuments(
+  inspectionId: string,
+  inpectionDocuments: DocumentItems[]
+) {
   try {
-    const documents = await Promise.all(inpectionDocuments.map(async (doc: DocumentItems) => {
-      const { fileName, fileUrl, fileType } = doc;
-      const document = await prisma.document.create({
-        data: {
-          inspection_id: inspectionId,
-          name: fileName,
-          type: fileType,
-          url: fileUrl,
-        },
-      });
+    const documents = await Promise.all(
+      inpectionDocuments.map(async (doc: DocumentItems) => {
+        const { fileName, fileUrl, fileType } = doc;
+        const document = await prisma.document.create({
+          data: {
+            inspection_id: inspectionId,
+            name: fileName,
+            type: fileType,
+            url: fileUrl,
+          },
+        });
 
-      return document;
+        return document;
+      })
+    );
 
-    }));
+    const documentsData: DocumentResult[] = documents.map(
+      (document: DocumentResult) => ({
+        id: document.id,
+        name: document.name,
+        url: document.url,
+        type: document.type,
+      })
+    );
 
-    return documents;
-
+    return documentsData;
   } catch (error) {
     throw new Error("Erro ao enviar documentos!");
   }
