@@ -7,10 +7,7 @@ import {
 } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
 import { findUser } from "../services/userServices";
-import {
-  findInspection,
-  findInspectionsListByUserId,
-} from "../services/inspectionServices";
+import { findInspection } from "../services/inspectionServices";
 
 export default {
   async uploadFile(req: Request, res: Response) {
@@ -115,10 +112,9 @@ export default {
         status: 200,
         message: "Arquivos submetidos com sucesso!",
         data: {
-          documents: documents
+          documents: documents,
         },
       });
-      
     } catch (error) {
       return res.status(500).json({
         error: true,
