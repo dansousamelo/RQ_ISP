@@ -17,6 +17,12 @@ router.post(
   inspectionControllers.createInspection
 );
 
+router.post(
+  "/create-trail", 
+  verifyToken, 
+  inspectionControllers.createTrail
+);
+
 // Get routes
 router.get(
   "/list-inspections",

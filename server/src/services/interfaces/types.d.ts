@@ -6,6 +6,7 @@ export interface InspectionsResult {
   created_at: string;
   type: Type;
   status: Status;
+  trail?: TrailResult[] | null;
 }
 
 export interface ItemsResult {
@@ -14,7 +15,6 @@ export interface ItemsResult {
   category?: string;
   description: string;
   observations: string | null;
-  trail?: TrailResult[] | null;
 }
 
 export interface TrailResult {
@@ -42,3 +42,35 @@ export interface InspectionAttributesResult {
 }
 
 export type InspectionType = typeof USER_STORY | typeof PRIVACY_REQUIREMENT;
+
+export interface PositionRect {
+  x1: string;
+  y1: string;
+  x2: string;
+  y2: string;
+  width: string;
+  height: string;
+  pageNumber: number;
+}
+
+export interface Position {
+  boundingRect: PositionRect;
+  rects: PositionRect[];
+  pageNumber: number;
+}
+
+export interface Comment {
+  text: string;
+  emoji: string;
+}
+
+export interface Content {
+  text: string;
+}
+
+export interface TrailData {
+  id: string,
+  content: Content,
+  comment: Comment,
+  position: Position
+}
