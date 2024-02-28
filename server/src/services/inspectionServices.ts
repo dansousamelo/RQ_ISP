@@ -4,16 +4,37 @@ import { inspectionTemplates } from "./populateInspectionItemsService";
 
 import { formatDataWithHours, formatDate } from "../utils/formatDatetime";
 
-import { isArrayEmpty } from "../interfaces/typeGuards";
-import { DocumentItems, Inspection } from "../interfaces/types";
+
+import { Inspection } from "../interfaces/types";
 import {
   InspectionsResult,
   ItemsResult,
   DocumentResult,
   InspectionAttributesResult,
-  InspectionType,
-  TrailResult,
+  InspectionType
 } from "./interfaces/types";
+
+export async function findInspection(
+  inspectionId: string,
+  userId: string,
+): Promise<string | null> {
+  try {
+    const inspection = await prisma.inspection.findFirst({
+      where: {
+        id: inspectionId,
+        user_id: userId,
+      },
+    });
+
+    if (!inspection) {
+      return null;
+    }
+
+    return inspection.id || null;
+  } catch (error) {
+    throw new Error("Não foi possível fazer a consulta de inspeções");
+  }
+}
 
 export async function findInspectionsListByUserId(
   userId: string
@@ -44,39 +65,38 @@ export async function findInspectionsListByUserId(
   }
 }
 
-function getTrailData(trails: TrailResult[]) {
-  if (!trails || isArrayEmpty(trails)) {
-    return null;
-  }
+// function getTrailData(trails: TrailResult) {
+//   if (!trails || isArrayEmpty(trails)) {
+//     return null;
+//   }
 
-  return trails.map((trail) => {
-    const trailData: any = {
-      trail_id: trail.id,
-      text: trail.text,
-    };
+//   return trails.map((trail) => {
+//     const trailData: any = {
+//       trail_id: trail.id,
+//       text: trail.text,
+//     };
 
-    if (trail.page_number) {
-      trailData.page_number = trail.page_number;
-    }
+//     if (trail.page_number) {
+//       trailData.page_number = trail.page_number;
+//     }
 
-    return trailData;
-  });
-}
+//     return trailData;
+//   });
+// }
 
 export async function findInspectionItemsByInspectionId(
-  inspectionId: string
+  inspectionId: string,
+  userId: string,
 ): Promise<ItemsResult[] | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
+        user_id: userId
       },
       include: {
-        Item: {
-          include: {
-            Trail: true,
-          },
-        },
+        Item: true,
+        Trail: true,
       },
     });
 
@@ -85,15 +105,15 @@ export async function findInspectionItemsByInspectionId(
     }
 
     const itemsExists: ItemsResult[] = inspection.Item.map((item: any) => {
-      const trailData = getTrailData(item.trail);
-
       return {
         item_index: item.item_index,
         situation: item.situation,
         category: item.category,
         description: item.description,
         observations: item.observations,
-        trail: trailData,
+        trail: inspection.Trail.filter(
+          (trail) => trail.item_id === item.item_index
+        ).map((trail) => trail.text),
       };
     });
 
@@ -106,12 +126,14 @@ export async function findInspectionItemsByInspectionId(
 }
 
 export async function findInspectionAttributes(
-  inspectionId: string
+  inspectionId: string,
+  userId: string
 ): Promise<InspectionAttributesResult | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
+        user_id: userId
       },
       include: {
         Document: true,
@@ -124,6 +146,7 @@ export async function findInspectionAttributes(
 
     const documentsExists: DocumentResult[] = inspection.Document.map(
       (document: DocumentResult) => ({
+        id: document.id,
         name: document.name,
         url: document.url,
         type: document.type,
@@ -204,5 +227,17 @@ export async function createInspectionItems(
     return items;
   } catch (error) {
     throw new Error("Não foi possível inserir itens em uma inspeção!");
+  }
+}
+
+export async function destroiInspection(inspectionId: string) {
+  try {
+    await prisma.inspection.delete({
+      where: {
+        id: inspectionId,
+      },
+    });
+  } catch (error) {
+    throw new Error("Não foi possível excluir uma inspeção uma inspeção!");
   }
 }
