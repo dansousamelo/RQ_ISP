@@ -22,10 +22,10 @@ export async function findInspection(
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-      }
+      },
     });
 
-    if(!inspection){
+    if (!inspection) {
       return null;
     }
 
@@ -221,5 +221,17 @@ export async function createInspectionItems(
     return items;
   } catch (error) {
     throw new Error("Não foi possível inserir itens em uma inspeção!");
+  }
+}
+
+export async function destroiInspection(inspectionId: string) {
+  try {
+    await prisma.inspection.delete({
+      where: {
+        id: inspectionId,
+      },
+    });
+  } catch (error) {
+    throw new Error("Não foi possível excluir uma inspeção uma inspeção!");
   }
 }
