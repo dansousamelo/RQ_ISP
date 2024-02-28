@@ -24,6 +24,7 @@ export interface TrailResult {
 }
 
 export interface DocumentResult {
+  id: string;
   name: string;
   url: string;
   type: string;
@@ -69,8 +70,8 @@ export interface Content {
 }
 
 export interface TrailData {
-  id: string,
-  content: Content,
-  comment: Comment,
-  position: Position
+  id: string;
+  content: Content;
+  comment: Comment;
+  position: Position;
 }

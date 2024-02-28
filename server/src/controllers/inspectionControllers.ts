@@ -112,7 +112,8 @@ export default {
       }
 
       const inspectionItems = await findInspectionItemsByInspectionId(
-        inspectionId
+        inspectionId,
+        user.id
       );
 
       if (!inspectionItems) {
@@ -175,7 +176,10 @@ export default {
         });
       }
 
-      const inspectionAttributes = await findInspectionAttributes(inspectionId);
+      const inspectionAttributes = await findInspectionAttributes(
+        inspectionId,
+        user.id
+      );
 
       if (!inspectionAttributes) {
         return res.status(404).json({
@@ -442,7 +446,16 @@ export default {
 
   async deleteInspection(req: Request, res: Response) {
     try {
-      const { inspectionId } = req.query;
+      const { accessCode, inspectionId } = req.query;
+
+      if (!isString(accessCode)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um código de acesso válido!",
+          data: {},
+        });
+      }
 
       if (!isString(inspectionId)) {
         return res.status(400).json({
@@ -453,9 +466,20 @@ export default {
         });
       }
 
-      const inspectionsExists = findInspection(inspectionId);
+      const user = await findUser(accessCode);
 
-      if(!inspectionsExists) {
+      if (!user) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Usuário não encontrado!",
+          data: {},
+        });
+      }
+
+      const inspectionsExists = await findInspection(inspectionId, user.id);
+
+      if (!inspectionsExists) {
         return res.status(404).json({
           error: true,
           status: 404,
@@ -470,8 +494,8 @@ export default {
         error: false,
         status: 200,
         messsage: "Inspeção excluída com sucesso!",
-        data: {}
-      })
+        data: {},
+      });
     } catch (error) {
       return res.status(500).json({
         error: true,
