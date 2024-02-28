@@ -35,7 +35,7 @@ model Inspection {
   User     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Document Document[]
   Item     Item[]
-
+  Trail    Trail[]
 }
 
 enum Type {
@@ -73,17 +73,50 @@ model Item {
   updated_at    DateTime @default(now()) @updatedAt
 
   Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
-
-  Trail Trail[]
 }
 
 model Trail {
+  id            String   @id @default(uuid())
+  inspection_id String
+  item_id       String
+  text          String
+  page_number   Int?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now()) @updatedAt
+
+  Inspection    Inspection?    @relation(fields: [inspection_id], references: [id])
+  Bouding_React Bouding_Rect[]
+  TrailRects    Trail_Rects[]
+}
+
+model Bouding_Rect {
   id          String   @id @default(uuid())
-  item_id     String
-  page_number Int?
-  text        String
+  trail_id    String
+  x1          String
+  x2          String
+  y1          String
+  y2          String
+  width       String
+  height      Int
+  page_number Int
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now()) @updatedAt
 
-  Item Item @relation(fields: [item_id], references: [id], onDelete: Cascade)
+  Trail Trail @relation(fields: [trail_id], references: [id], onDelete: Cascade)
+}
+
+model Trail_Rects {
+  id          String   @id @default(uuid())
+  trail_id    String
+  x1          String
+  x2          String
+  y1          String
+  y2          String
+  width       String
+  height      Int
+  page_number Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  Trail Trail @relation(fields: [trail_id], references: [id], onDelete: Cascade)
 }

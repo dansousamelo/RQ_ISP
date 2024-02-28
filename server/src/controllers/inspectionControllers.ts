@@ -20,6 +20,7 @@ import {
   isValidInspectionEmail,
   isValidInspectionDocument,
 } from "./interfaces/typeGuards";
+import { createInspectionTrail } from "../services/createInspectionTrailService";
 
 export default {
   async listInspections(req: Request, res: Response) {
@@ -397,4 +398,51 @@ export default {
       });
     }
   },
+
+  async createTrail(req: Request, res: Response) {
+    try {
+
+      const { trailData, inspectionId, accessCode }  = req.body;
+
+      if(!isString(accessCode)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um código de acesso válido!",
+          data: {}
+        })
+      }
+
+      const user = await findUser(accessCode);
+
+      if(!user){
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Usuário não encontrado!",
+          data: {}
+        })
+      }
+
+      const trail = await createInspectionTrail(inspectionId, trailData);
+
+      return res.status(201).json({
+        error: false,
+        status: 201,
+        message: "Marcação criada com sucesso",
+        data: {
+          inspection: inspectionId,
+          trail
+        }
+      })
+
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  }
 };
