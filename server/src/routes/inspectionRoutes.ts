@@ -17,11 +17,7 @@ router.post(
   inspectionControllers.createInspection
 );
 
-router.post(
-  "/create-trail", 
-  verifyToken, 
-  inspectionControllers.createTrail
-);
+router.post("/create-trail", verifyToken, inspectionControllers.createTrail);
 
 // Get routes
 router.get(
@@ -38,6 +34,13 @@ router.get(
   "/find-inspection-attribute",
   verifyToken,
   inspectionControllers.findInspectionAttributes
+);
+
+// Delete Routes
+router.delete(
+  "/delete-inspection",
+  verifyToken,
+  inspectionControllers.deleteInspection
 );
 
 export default router;

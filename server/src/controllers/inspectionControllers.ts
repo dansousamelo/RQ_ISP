@@ -9,6 +9,8 @@ import {
   findInspectionAttributes,
   createInspectionItems,
   createInspection,
+  destroiInspection,
+  findInspection,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -369,15 +371,9 @@ export default {
         responsible_email
       );
 
-      await postDocuments(
-        inspectionsExists.id,
-        documents
-      );
+      await postDocuments(inspectionsExists.id, documents);
 
-      await createInspectionItems(
-        inspectionsExists.id,
-        inspection_type
-      );
+      await createInspectionItems(inspectionsExists.id, inspection_type);
 
       return res.status(201).json({
         error: false,
@@ -401,27 +397,26 @@ export default {
 
   async createTrail(req: Request, res: Response) {
     try {
+      const { trailData, inspectionId, accessCode } = req.body;
 
-      const { trailData, inspectionId, accessCode }  = req.body;
-
-      if(!isString(accessCode)) {
+      if (!isString(accessCode)) {
         return res.status(400).json({
           error: true,
           status: 400,
           message: "Fornaça um código de acesso válido!",
-          data: {}
-        })
+          data: {},
+        });
       }
 
       const user = await findUser(accessCode);
 
-      if(!user){
+      if (!user) {
         return res.status(404).json({
           error: true,
           status: 404,
           message: "Usuário não encontrado!",
-          data: {}
-        })
+          data: {},
+        });
       }
 
       const trail = await createInspectionTrail(inspectionId, trailData);
@@ -432,10 +427,9 @@ export default {
         message: "Marcação criada com sucesso",
         data: {
           inspection: inspectionId,
-          trail
-        }
-      })
-
+          trail,
+        },
+      });
     } catch (error) {
       return res.status(500).json({
         error: true,
@@ -444,5 +438,47 @@ export default {
         data: {},
       });
     }
-  }
+  },
+
+  async deleteInspection(req: Request, res: Response) {
+    try {
+      const { inspectionId } = req.query;
+
+      if (!isString(inspectionId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um id inspeção válido!",
+          data: {},
+        });
+      }
+
+      const inspectionsExists = findInspection(inspectionId);
+
+      if(!inspectionsExists) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Inspeção não encontrada!",
+          data: {},
+        });
+      }
+
+      await destroiInspection(inspectionId);
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        messsage: "Inspeção excluída com sucesso!",
+        data: {}
+      })
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
 };
