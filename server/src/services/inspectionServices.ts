@@ -4,24 +4,25 @@ import { inspectionTemplates } from "./populateInspectionItemsService";
 
 import { formatDataWithHours, formatDate } from "../utils/formatDatetime";
 
-import { isArrayEmpty } from "../interfaces/typeGuards";
-import { DocumentItems, Inspection } from "../interfaces/types";
+
+import { Inspection } from "../interfaces/types";
 import {
   InspectionsResult,
   ItemsResult,
   DocumentResult,
   InspectionAttributesResult,
-  InspectionType,
-  TrailResult,
+  InspectionType
 } from "./interfaces/types";
 
 export async function findInspection(
-  inspectionId: string
+  inspectionId: string,
+  userId: string,
 ): Promise<string | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
+        user_id: userId,
       },
     });
 
@@ -84,12 +85,14 @@ export async function findInspectionsListByUserId(
 // }
 
 export async function findInspectionItemsByInspectionId(
-  inspectionId: string
+  inspectionId: string,
+  userId: string,
 ): Promise<ItemsResult[] | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
+        user_id: userId
       },
       include: {
         Item: true,
@@ -123,12 +126,14 @@ export async function findInspectionItemsByInspectionId(
 }
 
 export async function findInspectionAttributes(
-  inspectionId: string
+  inspectionId: string,
+  userId: string
 ): Promise<InspectionAttributesResult | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
+        user_id: userId
       },
       include: {
         Document: true,
@@ -141,6 +146,7 @@ export async function findInspectionAttributes(
 
     const documentsExists: DocumentResult[] = inspection.Document.map(
       (document: DocumentResult) => ({
+        id: document.id,
         name: document.name,
         url: document.url,
         type: document.type,
