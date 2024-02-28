@@ -9,6 +9,8 @@ import {
   findInspectionAttributes,
   createInspectionItems,
   createInspection,
+  destroiInspection,
+  findInspection,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -20,6 +22,7 @@ import {
   isValidInspectionEmail,
   isValidInspectionDocument,
 } from "./interfaces/typeGuards";
+import { createInspectionTrail } from "../services/createInspectionTrailService";
 
 export default {
   async listInspections(req: Request, res: Response) {
@@ -109,7 +112,8 @@ export default {
       }
 
       const inspectionItems = await findInspectionItemsByInspectionId(
-        inspectionId
+        inspectionId,
+        user.id
       );
 
       if (!inspectionItems) {
@@ -172,7 +176,10 @@ export default {
         });
       }
 
-      const inspectionAttributes = await findInspectionAttributes(inspectionId);
+      const inspectionAttributes = await findInspectionAttributes(
+        inspectionId,
+        user.id
+      );
 
       if (!inspectionAttributes) {
         return res.status(404).json({
@@ -368,15 +375,9 @@ export default {
         responsible_email
       );
 
-      await postDocuments(
-        inspectionsExists.id,
-        documents
-      );
+      await postDocuments(inspectionsExists.id, documents);
 
-      await createInspectionItems(
-        inspectionsExists.id,
-        inspection_type
-      );
+      await createInspectionItems(inspectionsExists.id, inspection_type);
 
       return res.status(201).json({
         error: false,
@@ -387,6 +388,113 @@ export default {
           // documents: documentsExists,
           // items,
         },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
+
+  async createTrail(req: Request, res: Response) {
+    try {
+      const { trailData, inspectionId, accessCode } = req.body;
+
+      if (!isString(accessCode)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um código de acesso válido!",
+          data: {},
+        });
+      }
+
+      const user = await findUser(accessCode);
+
+      if (!user) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Usuário não encontrado!",
+          data: {},
+        });
+      }
+
+      const trail = await createInspectionTrail(inspectionId, trailData);
+
+      return res.status(201).json({
+        error: false,
+        status: 201,
+        message: "Marcação criada com sucesso",
+        data: {
+          inspection: inspectionId,
+          trail,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
+
+  async deleteInspection(req: Request, res: Response) {
+    try {
+      const { accessCode, inspectionId } = req.query;
+
+      if (!isString(accessCode)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um código de acesso válido!",
+          data: {},
+        });
+      }
+
+      if (!isString(inspectionId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um id inspeção válido!",
+          data: {},
+        });
+      }
+
+      const user = await findUser(accessCode);
+
+      if (!user) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Usuário não encontrado!",
+          data: {},
+        });
+      }
+
+      const inspectionsExists = await findInspection(inspectionId, user.id);
+
+      if (!inspectionsExists) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Inspeção não encontrada!",
+          data: {},
+        });
+      }
+
+      await destroiInspection(inspectionId);
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        messsage: "Inspeção excluída com sucesso!",
+        data: {},
       });
     } catch (error) {
       return res.status(500).json({
