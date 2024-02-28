@@ -76,7 +76,7 @@ export default {
         });
       }
 
-      const inspectionsExists = await findInspection(inspectionId);
+      const inspectionsExists = await findInspection(inspectionId, user.id);
 
       if (!inspectionsExists) {
         return res.status(404).json({
@@ -115,7 +115,7 @@ export default {
         status: 200,
         message: "Arquivos submetidos com sucesso!",
         data: {
-          inspectionId
+          documents: documents
         },
       });
       
