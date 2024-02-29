@@ -7,7 +7,7 @@ import { Header } from './components/Header'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import * as S from './styles'
 import { useCallback, useState } from 'react'
-import { SuccessToast } from '../../components/Toast'
+import { ErrorToast, SuccessToast } from '../../components/Toast'
 import { TableSkeleton } from './components/TableSkeleton'
 import { getInspectionListRepository } from './repository/getInspectionListRepository'
 import {
@@ -17,8 +17,10 @@ import {
 } from '../../utils/cookies'
 import { TitleUpdater } from '../../components/TitleUpdater'
 import { Empty } from '../../components/Empty'
+import { deleteInspection } from './services'
 
 export function InpectionList() {
+  const [isDeleting, setIsDeleting] = useState(false)
   const navigate = useNavigate()
 
   const { accessCode } = useParams()
@@ -38,19 +40,41 @@ export function InpectionList() {
     isDialogControlledOpen,
   } = useLoggedInspectionContext()
 
-  const deleteInspectionDialog = useCallback(() => {
-    setInspections((inspections) =>
-      inspections.filter((item) => item.id !== idInspectionToDelete),
-    )
-    handleUpdateDialogControlled(false)
-    SuccessToast('Inspeção excluída com sucesso!')
-  }, [handleUpdateDialogControlled, idInspectionToDelete, setInspections])
-
   const handleLogout = useCallback(() => {
     removeAccessToken()
     removeRefreshToken()
     navigate('/')
   }, [navigate])
+
+  const deleteInspectionDialog = useCallback(() => {
+    setIsDeleting(true)
+    try {
+      setIdInspectionToDelete(idInspectionToDelete)
+      deleteInspection({
+        accessCode: accessCode as string,
+        inspectionId: idInspectionToDelete,
+        token,
+      })
+
+      setInspections((inspections) =>
+        inspections.filter((item) => item.id !== idInspectionToDelete),
+      )
+      handleUpdateDialogControlled(false)
+      SuccessToast('Inspeção excluída com sucesso!')
+    } catch (e) {
+      ErrorToast(
+        'Não foi possível excluir a inspeção, tente novamente mais tarde.',
+      )
+    } finally {
+      setIsDeleting(false)
+    }
+  }, [
+    accessCode,
+    handleUpdateDialogControlled,
+    idInspectionToDelete,
+    setInspections,
+    token,
+  ])
 
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
@@ -180,7 +204,7 @@ export function InpectionList() {
           isDialogControlledOpen={isDialogControlledOpen}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
-          isLoadingRequisition={false}
+          isLoadingRequisition={isDeleting}
           onClose={() => setDialogInspectionStep('')}
         />
       )}
