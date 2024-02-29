@@ -97,7 +97,7 @@ model Bouding_Rect {
   y1          String
   y2          String
   width       String
-  height      Int
+  height      String
   page_number Int
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now()) @updatedAt
@@ -113,7 +113,7 @@ model Trail_Rects {
   y1          String
   y2          String
   width       String
-  height      Int
+  height      String
   page_number Int
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now()) @updatedAt
