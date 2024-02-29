@@ -15,3 +15,34 @@ export function uploadFile(pdfFiles: FileList | File[]) {
     },
   })
 }
+
+interface RequestUploadFileLogged {
+  pdfFiles: FileList | File[]
+  accessCode: string
+  inspectionId: string
+  token: string
+}
+
+export function uploadFileLogged({
+  accessCode,
+  inspectionId,
+  pdfFiles,
+  token,
+}: RequestUploadFileLogged) {
+  const formData = new FormData()
+  const filesArray = Array.from(pdfFiles)
+
+  formData.append('accessCode', accessCode)
+  formData.append('inspectionId', inspectionId)
+
+  filesArray.forEach((file: File) => {
+    formData.append('files', file)
+  })
+
+  return api.post('/logged-upload-file', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}

@@ -13,3 +13,20 @@ export async function getInspectionList({
     headers: { Authorization: `Bearer ${token}` },
   })
 }
+
+export async function deleteInspection({
+  accessCode,
+  token,
+  inspectionId,
+}: {
+  accessCode: string
+  token: string
+  inspectionId: string
+}) {
+  const params = { accessCode, inspectionId }
+
+  return await api.delete('/delete-inspection', {
+    params,
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
