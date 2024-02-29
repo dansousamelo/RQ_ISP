@@ -13,6 +13,7 @@ import { isArray, isArrayNotEmpty } from '../../../interfaces/typeGuards'
 import { TableDataProps } from '../repository/getInspectionItemsRepository'
 import { HeaderInspectionProps } from '../repository/getInspectionHeaderRepository'
 import { ObservationsDialog } from '../components/ObservationsDialog'
+import { getAccessToken } from '../../../utils/cookies'
 
 export interface DocumentUploadedProps {
   label: string
@@ -77,6 +78,8 @@ export function useDialogItemToRender({
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
+  const token = getAccessToken()
+
   const itemSelected = tableData.find(
     (item) => item.item_index === idDialogOpen,
   )?.trail
@@ -84,10 +87,6 @@ export function useDialogItemToRender({
   const updateTrailType = useCallback((value: TrailType) => {
     setTrailType(value)
   }, [])
-
-  const itemSelectedObservation = tableData.find(
-    (item) => item.item_index === idDialogOpen,
-  )
 
   function handleWithTypeTrailChoosed() {
     if (trailType === 'text_editor') {
@@ -194,6 +193,11 @@ export function useDialogItemToRender({
       component: (
         <ManagerDocumentsDialog
           handleUpdateDialogControlled={handleUpdateDialogControlled}
+          headerData={headerData}
+          setHeaderData={setHeaderData}
+          accessCode={accessCode}
+          inspectionId={id}
+          token={token as string}
         />
       ),
       width: '32rem',

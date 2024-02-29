@@ -6,17 +6,30 @@ import { ActiveUploadTab } from '../../../../contexts/LoggedInspection'
 import { SeeIcon } from '../../../Form/components/ThirdStep/icons/SeeIcon'
 import * as S from './styles'
 import { LoadingBars } from '../../../../components/LoadingBars'
-import { Files } from '../../../../contexts/InitialInspectionContext'
 import { useFileUpload } from './hooks/useFileUpload'
+import { HeaderInspectionProps } from '../../repository/getInspectionHeaderRepository'
+import { Files } from '../../../../contexts/InitialInspectionContext'
 
 interface ManagerDocumentsDialogProps {
+  accessCode: string
+  inspectionId: string
+  token: string
   handleUpdateDialogControlled: (open: boolean) => void
+  headerData: HeaderInspectionProps
+  setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
 }
 
 export function ManagerDocumentsDialog({
   handleUpdateDialogControlled,
+  headerData,
+  setHeaderData,
+  accessCode,
+  inspectionId,
+  token,
 }: ManagerDocumentsDialogProps) {
-  const [filesUploaded, setFilesUploaded] = useState<Files>([])
+  const [filesUploaded, setFilesUploaded] = useState<Files>(
+    headerData.documents,
+  )
   const [activeTab, setActiveTab] =
     useState<ActiveUploadTab>('upload_documents')
 
@@ -24,8 +37,17 @@ export function ManagerDocumentsDialog({
     setActiveTab(value)
   }, [])
 
+  console.log('headerData: ', headerData)
   const { getInputProps, loadingFiles, getRootProps, onClearFile } =
-    useFileUpload({ filesUploaded, setFilesUploaded, updateActiveTabOnUpload })
+    useFileUpload({
+      filesUploaded: headerData.documents,
+      setHeaderData,
+      updateActiveTabOnUpload,
+      accessCode,
+      inspectionId,
+      token,
+      setFilesUploaded,
+    })
 
   const handleTabChange = (tab: ActiveUploadTab) => {
     updateActiveTabOnUpload(tab)
@@ -37,11 +59,6 @@ export function ManagerDocumentsDialog({
     },
     [onClearFile],
   )
-
-  function handleSubmit() {
-    console.log({ filesUploaded })
-    handleUpdateDialogControlled(false)
-  }
 
   const tabs = [
     {
@@ -109,7 +126,9 @@ export function ManagerDocumentsDialog({
         <S.BackButtonStyled onClick={() => handleUpdateDialogControlled(false)}>
           Voltar
         </S.BackButtonStyled>
-        <S.ButtonStyled onClick={handleSubmit}>Salvar</S.ButtonStyled>
+        <S.ButtonStyled onClick={() => handleUpdateDialogControlled(false)}>
+          Concluir
+        </S.ButtonStyled>
       </S.WrapperButton>
     </S.ContentWrapper>
   )

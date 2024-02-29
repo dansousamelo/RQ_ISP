@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Accept, useDropzone } from 'react-dropzone'
-import { uploadFile } from '../../../../../components/FileUploader/services'
+import { uploadFileLogged } from '../../../../../components/FileUploader/services'
 import { ErrorToast } from '../../../../../components/Toast'
 import {
   ActiveUploadTab,
   Files,
 } from '../../../../../contexts/InitialInspectionContext'
+import { HeaderInspectionProps } from '../../../repository/getInspectionHeaderRepository'
 
 interface ValidatorProps {
   message: string
@@ -18,8 +19,12 @@ export interface useFileUploadProps {
   maxFiles?: number
   validator?: (file: File) => ValidatorProps | null
   updateActiveTabOnUpload: (value: ActiveUploadTab) => void
-  setFilesUploaded: React.Dispatch<React.SetStateAction<Files>>
+  setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
   filesUploaded: Files
+  accessCode: string
+  inspectionId: string
+  token: string
+  setFilesUploaded: React.Dispatch<React.SetStateAction<Files>>
 }
 
 export function useFileUpload({
@@ -29,25 +34,37 @@ export function useFileUpload({
   maxFiles = 5,
   validator,
   filesUploaded,
-  setFilesUploaded,
+  setHeaderData,
   updateActiveTabOnUpload,
+  accessCode,
+  inspectionId,
+  token,
+  setFilesUploaded,
 }: useFileUploadProps) {
   const [loadingFiles, setLoadingFiles] = useState(false)
   const firstRender = useRef(true)
 
-  const uploadImage = async (file: File[]) => {
-    try {
-      setLoadingFiles(true)
-      const response = await uploadFile(file)
-      return response
-    } catch (error) {
-      ErrorToast(
-        'Não foi possível enviar o arquivo. Tente novamente mais tarde',
-      )
-    } finally {
-      setLoadingFiles(false)
-    }
-  }
+  const uploadImage = useCallback(
+    async (file: File[]) => {
+      try {
+        setLoadingFiles(true)
+        const response = await uploadFileLogged({
+          pdfFiles: file,
+          accessCode,
+          inspectionId,
+          token,
+        })
+        return response
+      } catch (error) {
+        ErrorToast(
+          'Não foi possível enviar o arquivo. Tente novamente mais tarde',
+        )
+      } finally {
+        setLoadingFiles(false)
+      }
+    },
+    [accessCode, inspectionId, token],
+  )
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
@@ -66,16 +83,18 @@ export function useFileUpload({
       const response = await uploadImage(acceptedFiles)
 
       if (response?.status === 200) {
-        setFilesUploaded((prevFiles) =>
-          prevFiles.concat(
-            acceptedFiles.map((file) => ({
-              name: file.name,
-              url: response.data.data.find(
-                (item: any) => item.fileName === file.name,
-              ).fileUrl,
-            })),
-          ),
+        const filesFormatted = filesUploaded.concat(
+          acceptedFiles.map((file) => ({
+            name: file.name,
+            url: response.data.data.documents.find(
+              (item: any) => item.name === file.name,
+            ).url,
+          })),
         )
+
+        setFilesUploaded(filesFormatted)
+        setHeaderData((prev) => ({ ...prev, documents: filesFormatted }))
+
         updateActiveTabOnUpload('documents')
       } else {
         ErrorToast(
@@ -83,7 +102,13 @@ export function useFileUpload({
         )
       }
     },
-    [filesUploaded, setFilesUploaded, updateActiveTabOnUpload],
+    [
+      filesUploaded,
+      setFilesUploaded,
+      setHeaderData,
+      updateActiveTabOnUpload,
+      uploadImage,
+    ],
   )
 
   const { getRootProps, getInputProps, isDragAccept, acceptedFiles } =
@@ -95,11 +120,13 @@ export function useFileUpload({
     })
 
   const onClearFile = (name: string) => {
+    const filesFormatted = filesUploaded.filter((file) => file.name !== name)
     setFilesUploaded((prevFiles) =>
       prevFiles.filter((file) => file.name !== name),
     )
-  }
 
+    setHeaderData((prev) => ({ ...prev, documents: filesFormatted }))
+  }
   useEffect(() => {
     firstRender.current = false
   }, [])
