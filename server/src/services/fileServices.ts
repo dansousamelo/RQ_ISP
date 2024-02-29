@@ -1,8 +1,8 @@
 import { prisma } from "../db/prismaClient";
 
-import { DocumentItems } from "../interfaces/types";
-
 import S3Storage from "../utils/fileStorage";
+
+import { DocumentItems } from "../interfaces/types";
 import { DocumentResult } from "./interfaces/types";
 
 class FileServices {
@@ -10,13 +10,13 @@ class FileServices {
     try {
       const s3Storage = new S3Storage();
 
-      const { filename } = file;
+      const { filename, originalname, mimetype } = file;
 
       const fileUrl = await s3Storage.saveFile(filename);
 
-      const fileName = file.originalname;
+      const fileName = Buffer.from(originalname, 'latin1').toString('utf8');
 
-      const fileType = file.mimetype;
+      const fileType = mimetype;
 
       return { fileName, fileUrl, fileType };
     } catch (error) {
