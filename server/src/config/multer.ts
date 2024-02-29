@@ -9,7 +9,7 @@ export default {
   storage: multer.diskStorage({
     destination: tmpFolder,
     filename(request, file, callback) {
-      const filename = `${uuidv4()}_${file.originalname}`;
+      const filename = `${uuidv4()}_${Buffer.from(file.originalname, 'latin1').toString('utf8')}`;
 
       return callback(null, filename);
     },
