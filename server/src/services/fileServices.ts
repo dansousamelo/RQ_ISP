@@ -38,7 +38,7 @@ export async function postDocuments(
         const { fileName, fileUrl, fileType } = doc;
         const document = await prisma.document.create({
           data: {
-            inspection_id: inspectionId,
+            inspectionId: inspectionId,
             name: fileName,
             type: fileType,
             url: fileUrl,

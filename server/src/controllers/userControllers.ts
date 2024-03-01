@@ -97,7 +97,7 @@ export default {
         data: {
           user: {
             id: userExists.id,
-            access_code: userExists.access_code,
+            accessCode: userExists.accessCode,
           },
           token,
           refreshToken,
