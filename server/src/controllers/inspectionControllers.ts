@@ -11,6 +11,8 @@ import {
   createInspection,
   destroiInspection,
   findInspection,
+  findDocumentTrail,
+  destroiDocumentTrail,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -22,7 +24,10 @@ import {
   isValidInspectionEmail,
   isValidInspectionDocument,
 } from "./interfaces/typeGuards";
-import { createInspectionTrail } from "../services/createInspectionTrailService";
+import {
+  createDocumentTrail,
+  createTextTrail,
+} from "../services/createInspectionTrailService";
 
 export default {
   async listInspections(req: Request, res: Response) {
@@ -401,7 +406,7 @@ export default {
 
   async createTrail(req: Request, res: Response) {
     try {
-      const { trailData, inspectionId, accessCode } = req.body;
+      const { trailData, inspectionId, documentId, accessCode } = req.body;
 
       if (!isString(accessCode)) {
         return res.status(400).json({
@@ -423,7 +428,11 @@ export default {
         });
       }
 
-      const trail = await createInspectionTrail(inspectionId, trailData);
+      const trail = await createDocumentTrail(
+        inspectionId,
+        documentId,
+        trailData
+      );
 
       return res.status(201).json({
         error: false,
@@ -494,6 +503,77 @@ export default {
         error: false,
         status: 200,
         messsage: "Inspeção excluída com sucesso!",
+        data: {},
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
+
+  async deleteDocumentTrail(req: Request, res: Response) {
+    try {
+      const { accessCode, trailId, inspectionId } = req.query;
+
+      if (!isString(accessCode)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um código de acesso válido!",
+          data: {},
+        });
+      }
+
+      if (!isString(trailId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um id inspeção válido!",
+          data: {},
+        });
+      }
+
+      if (!isString(inspectionId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um id inspeção válido!",
+          data: {},
+        });
+      }
+
+      const user = await findUser(accessCode);
+
+      if (!user) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Usuário não encontrado!",
+          data: {},
+        });
+      }
+
+      const documentTrailExists = await findDocumentTrail(trailId, inspectionId, user.id);
+
+      if (!documentTrailExists) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Inspeção não encontrada!",
+          data: {},
+        });
+      }
+
+      await destroiDocumentTrail(trailId);
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        messsage: "Rastro excluído com sucesso!",
         data: {},
       });
     } catch (error) {
