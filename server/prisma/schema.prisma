@@ -11,31 +11,32 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  access_code String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now()) @updatedAt
+  id         String   @id @default(uuid())
+  accessCode String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  Inspection Inspection[]
+  inspection Inspection[]
 }
 
 model Inspection {
-  id                String   @id @default(uuid())
-  user_id           String
-  name              String
-  responsible       String
-  type              Type
-  recording_url     String?
-  participants      String?
-  responsible_email String
-  status            Status   @default(uninitiated)
-  created_at        DateTime @default(now())
-  updated_at        DateTime @default(now()) @updatedAt
+  id               String   @id @default(uuid())
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
+  name             String
+  responsible      String
+  type             Type
+  recordingUrl     String?
+  participants     String?
+  responsibleEmail String
+  status           Status   @default(uninitiated)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
-  User     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  Document Document[]
-  Item     Item[]
-  Trail    Trail[]
+  document      Document[]
+  item          Item[]
+  textTrail     TextTrail[]
+  documentTrail DocumentTrail[]
 }
 
 enum Type {
@@ -50,73 +51,90 @@ enum Status {
 }
 
 model Document {
-  id            String   @id @default(uuid())
-  inspection_id String
-  name          String
-  type          String
-  url           String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @default(now()) @updatedAt
-
-  Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
+  id           String     @id @default(uuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  name         String
+  type         String
+  url          String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Item {
-  id            String   @id @default(uuid())
-  inspection_id String
-  item_index    String
-  situation     String?
-  description   String
-  observations  String
-  category      String?
-  created_at    DateTime @default(now())
-  updated_at    DateTime @default(now()) @updatedAt
-
-  Inspection Inspection @relation(fields: [inspection_id], references: [id], onDelete: Cascade)
+  id           String     @id @default(uuid())
+  Inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  itemIndex    String
+  situation    String?
+  description  String
+  observations String
+  category     String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
-model Trail {
-  id            String   @id @default(uuid())
-  inspection_id String
-  item_id       String
-  text          String
-  page_number   Int?
-  created_at    DateTime @default(now())
-  updated_at    DateTime @default(now()) @updatedAt
-
-  Inspection    Inspection?    @relation(fields: [inspection_id], references: [id])
-  Bouding_React Bouding_Rect[]
-  TrailRects    Trail_Rects[]
+model TextTrail {
+  id           String     @id @default(uuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  itemIndex    String
+  text         String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
-model Bouding_Rect {
-  id          String   @id @default(uuid())
-  trail_id    String
-  x1          String
-  x2          String
-  y1          String
-  y2          String
-  width       String
-  height      String
-  page_number Int
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now()) @updatedAt
+model DocumentTrail {
+  id           String     @id @default(uuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  itemIndex    String
+  documentId   String
+  text         String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
-  Trail Trail @relation(fields: [trail_id], references: [id], onDelete: Cascade)
+  documentTrailPostion DocumentTrailPosition?
 }
 
-model Trail_Rects {
-  id          String   @id @default(uuid())
-  trail_id    String
-  x1          String
-  x2          String
-  y1          String
-  y2          String
-  width       String
-  height      String
-  page_number Int
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now()) @updatedAt
+model DocumentTrailPosition {
+  id              String        @id @default(uuid())
+  documentTrail   DocumentTrail @relation(fields: [documentTrailId], references: [id], onDelete: Cascade)
+  documentTrailId String        @unique
+  pageNumber      Int
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
-  Trail Trail @relation(fields: [trail_id], references: [id], onDelete: Cascade)
+  documentTrailPositionBoudingReact DocumentTrailPositionBoudingRect?
+  documentTrailPositionRect         DocumentTrailPositionRect[]
+}
+
+model DocumentTrailPositionBoudingRect {
+  id                      String                @id @default(uuid())
+  documentTrailPosition   DocumentTrailPosition @relation(fields: [documentTrailPositionId], references: [id], onDelete: Cascade)
+  documentTrailPositionId String                @unique
+  x1                      String
+  x2                      String
+  y1                      String
+  y2                      String
+  width                   String
+  height                  String
+  pageNumber              Int
+  createdAt               DateTime              @default(now())
+  updatedAt               DateTime              @updatedAt
+}
+
+model DocumentTrailPositionRect {
+  id                      String                @id @default(uuid())
+  documentTrailPosition   DocumentTrailPosition @relation(fields: [documentTrailPositionId], references: [id], onDelete: Cascade)
+  documentTrailPositionId String
+  x1                      String
+  x2                      String
+  y1                      String
+  y2                      String
+  width                   String
+  height                  String
+  pageNumber             Int
+  createdAt               DateTime              @default(now())
+  updatedAt               DateTime              @updatedAt
 }

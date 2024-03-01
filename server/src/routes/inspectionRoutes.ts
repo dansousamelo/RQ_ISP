@@ -42,5 +42,10 @@ router.delete(
   verifyToken,
   inspectionControllers.deleteInspection
 );
+router.delete(
+  "/delete-document-trail",
+  verifyToken,
+  inspectionControllers.deleteDocumentTrail
+);
 
 export default router;
