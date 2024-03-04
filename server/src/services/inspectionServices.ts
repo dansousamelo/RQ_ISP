@@ -12,7 +12,7 @@ import {
   InspectionAttributesResult,
   InspectionType,
 } from "./interfaces/types";
-import { isArrayEmpty, isArrayNotEmpty } from "../interfaces/typeGuards";
+import { isArrayEmpty, isArrayNotEmpty, isNotUndefined } from "../interfaces/typeGuards";
 
 export async function findInspection(
   inspectionId: string
@@ -97,7 +97,7 @@ export async function findInspectionItemsByInspectionId(
         documentTrail: {
           include: {
             documentTrailPostion: true,
-          }
+          },
         },
       },
     });
@@ -233,6 +233,47 @@ export async function createInspectionItems(
     return items;
   } catch (error) {
     throw new Error("Não foi possível inserir itens em uma inspeção!");
+  }
+}
+
+export async function updateInspectionAttributes(
+  inspectionId: string,
+  name: string,
+  responsible: string,
+  recordingUrl: string,
+  participants: string,
+  responsibleEmail: string
+) {
+  try {
+    const dataToUpdate: Record<string, any> = {};
+    
+    if (isNotUndefined(name)) dataToUpdate.name = name;
+    if (isNotUndefined(responsibleEmail)) dataToUpdate.responsibleEmail = responsibleEmail;
+    if (isNotUndefined(responsible)) dataToUpdate.responsible = responsible;
+    if (isNotUndefined(recordingUrl)) dataToUpdate.recordingUrl = recordingUrl;
+    if (isNotUndefined(participants)) dataToUpdate.participants = participants;
+
+    const inspection = await prisma.inspection.update({
+      where: {
+        id: inspectionId,
+      },
+      data: dataToUpdate,
+    });
+
+    if (!inspection) {
+      return null;
+    }
+
+    return {
+      name: inspection.name,
+      responsibleEmail: inspection.responsibleEmail,
+      responsible: inspection.responsible,
+      recordingUrl: inspection.recordingUrl,
+      participants: inspection.participants,
+    }
+
+  } catch (error) {
+    throw error;
   }
 }
 
