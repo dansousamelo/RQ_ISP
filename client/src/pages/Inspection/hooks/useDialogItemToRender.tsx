@@ -16,6 +16,7 @@ import { ObservationsDialog } from '../components/ObservationsDialog'
 import { getAccessToken } from '../../../utils/cookies'
 
 export interface DocumentUploadedProps {
+  id: string
   label: string
   value: string
 }
@@ -236,6 +237,7 @@ export function useDialogItemToRender({
           amountOfItens={tableData.length}
           idMark={idDialogOpen}
           accessCode={accessCode}
+          inspectionId={id}
         />
       ),
       width: '28rem',

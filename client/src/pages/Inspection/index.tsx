@@ -110,6 +110,7 @@ export function Inspection() {
   function formattedDocumentHeader(documents: DocumentHeader[]) {
     return documents.map((document) => {
       return {
+        id: document.id,
         label: document.name,
         value: document.url,
       }

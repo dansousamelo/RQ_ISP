@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { getInspectionHeader } from '../services'
 
 export type DocumentHeader = {
+  id: string
   name: string
   url: string
 }

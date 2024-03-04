@@ -54,7 +54,7 @@ async function createTrailBoundingRect(
         y1: boundingRect.y1.toString(),
         y2: boundingRect.y2.toString(),
         width: boundingRect.width.toString(),
-        height: boundingRect.height.toString() as unknown as number,
+        height: boundingRect.height.toString(),
         page_number: boundingRect.pageNumber,
       },
     });
@@ -76,7 +76,7 @@ async function createTrailRects(trailId: string, rects: PositionRect[]) {
           y1: rect.y1.toString(),
           y2: rect.y2.toString(),
           width: rect.width.toString(),
-          height: rect.height.toString() as unknown as number,
+          height: rect.height.toString(),
           page_number: rect.pageNumber,
         },
       });

@@ -13,6 +13,7 @@ import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import { useNavigate, useParams } from 'react-router-dom'
 import { HighlightSkeleton } from './components/HighlightSkeleton'
 import { Empty } from '../../../../components/Empty'
+import { Spinner } from '../../../../components/Spinner'
 
 const updateHash = (highlight: HighlightProps) => {
   document.location.hash = `highlight-${highlight.id}`
@@ -22,6 +23,7 @@ interface SidebarProps {
   deleteHighlight: (id: string) => void
   highlights: HighlightProps[]
   resetHighlights: () => void
+  isLoadingTrail: boolean
 }
 
 export type InspectionMarkDialog =
@@ -33,31 +35,31 @@ export type InspectionMarkDialog =
 interface SidebarLiContent {
   highlight: HighlightProps
   onDeleteHighlight?(highlight: HighlightProps): void
+  isLoadingTrail: boolean
 }
 
 export function SidebarLiContent({
   onDeleteHighlight,
   highlight,
+  isLoadingTrail,
 }: SidebarLiContent) {
   return (
     <>
       <div>
         <S.WrapperTitleCloe>
           <strong>{highlight.comment.text}</strong>
-          {!!onDeleteHighlight && (
-            <S.Close onClick={() => onDeleteHighlight(highlight)} />
-          )}
+          {!!onDeleteHighlight &&
+            (isLoadingTrail ? (
+              <Spinner />
+            ) : (
+              <S.Close onClick={() => onDeleteHighlight(highlight)} />
+            ))}
         </S.WrapperTitleCloe>
 
         {highlight.content.text && (
           <blockquote style={{ marginTop: '0.5rem' }}>
             {`${highlight.content.text.slice(0, 90).trim()}…`}
           </blockquote>
-        )}
-        {highlight.content.image && (
-          <div className="highlight__image" style={{ marginTop: '0.5rem' }}>
-            <img src={highlight.content.image} alt={'Screenshot'} />
-          </div>
         )}
       </div>
       <S.HighlightLocation>
@@ -71,6 +73,7 @@ export function Sidebar({
   highlights,
   resetHighlights,
   deleteHighlight,
+  isLoadingTrail,
 }: SidebarProps) {
   const [dialogInspectionStep, setDialogInspectionStep] =
     useState<InspectionMarkDialog>('')
@@ -161,6 +164,7 @@ export function Sidebar({
                     }}
                   >
                     <SidebarLiContent
+                      isLoadingTrail={isLoadingTrail}
                       highlight={highlight}
                       onDeleteHighlight={onDeleteHighlight}
                     />
@@ -182,7 +186,7 @@ export function Sidebar({
 
           <S.CancelButton onClick={onCancelAction}>Cancelar</S.CancelButton>
 
-          <S.SaveButton onClick={() => 'salvou'}>Salvar</S.SaveButton>
+          <S.SaveButton onClick={backToInspection}>Concluir</S.SaveButton>
         </S.WrapperButtons>
       </S.Container>
 

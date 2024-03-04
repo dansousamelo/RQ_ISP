@@ -8,6 +8,7 @@ import * as S from './styles'
 import { InspectionDialog } from '../..'
 
 interface ChooseDocumentMark {
+  id: string
   value: string
   label: string
 }
@@ -30,6 +31,7 @@ interface ChooseDocumentMarkDialogProps {
   amountOfItens: number
   idMark: string
   accessCode: string
+  inspectionId: string
 }
 
 export function ChooseDocumentMarkDialog({
@@ -40,6 +42,7 @@ export function ChooseDocumentMarkDialog({
   idMark,
   amountOfItens,
   accessCode,
+  inspectionId,
 }: ChooseDocumentMarkDialogProps) {
   const {
     control,
@@ -52,9 +55,13 @@ export function ChooseDocumentMarkDialog({
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const idItemSelected = items.find(
+      (item) => item.value === data.selectedValue,
+    )?.id
+
     const selectedValueEncoded = data.selectedValue.replace(/\//g, '%2F')
     navigate(
-      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${accessCode}/mark`,
+      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${accessCode}/${inspectionId}/${idItemSelected}/mark`,
     )
   }
   return (
