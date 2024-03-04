@@ -10,8 +10,8 @@ import {
   createInspectionItems,
   createInspection,
   destroiInspection,
-  findInspection,
   updateInspectionAttributes,
+  findInspectionById,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -421,7 +421,7 @@ export default {
         });
       }
 
-      const inspectionsExists = await findInspection(inspectionId);
+      const inspectionsExists = await findInspectionById(inspectionId);
 
       if (!inspectionsExists) {
         return res.status(404).json({

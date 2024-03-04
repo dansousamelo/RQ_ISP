@@ -14,7 +14,7 @@ import {
 } from "./interfaces/types";
 import { isArrayEmpty, isArrayNotEmpty, isNotUndefined } from "../interfaces/typeGuards";
 
-export async function findInspection(
+export async function findInspectionById(
   inspectionId: string
 ): Promise<string | null> {
   try {
