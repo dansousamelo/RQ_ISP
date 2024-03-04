@@ -5,12 +5,12 @@ interface FileObject {
 
 export function convertToCustomFormat(
   files: FileObject[],
-): { fileName: string; fileUrl: string; fileType: string }[] {
+): { name: string; url: string; type: string }[] {
   return files.map((file) => {
     return {
-      fileName: file.name,
-      fileUrl: file.url,
-      fileType: 'application/pdf',
+      name: file.name,
+      url: file.url,
+      type: 'application/pdf',
     }
   })
 }

@@ -127,6 +127,7 @@ export function useDialogItemToRender({
           action: () => {
             handleLogout()
             handleUpdateDialogControlled(false)
+            setDialogInspectionStep('')
           },
           backgroundColor: defaultTheme.colors.error700,
           color: defaultTheme.colors.neutral,

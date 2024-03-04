@@ -66,9 +66,9 @@ export function ThirdStepDialog() {
         token,
       })
 
-      const { inspection, user } = response.data.data
+      const { inspection } = response.data.data
 
-      navigate(`/inspection/${inspection}/${user}`)
+      navigate(`/inspection/${inspection}/${userId}`)
 
       SuccessToast('Inspeção criada com sucesso')
       setSecondStepData({} as SecondStepData)
