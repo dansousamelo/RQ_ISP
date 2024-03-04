@@ -5,6 +5,7 @@ interface RequestPostTrail {
   userId: string
   token: string
   inspectionId: string
+  documentId: string
 }
 
 export function postTrail({
@@ -12,13 +13,15 @@ export function postTrail({
   inspectionId,
   token,
   trailData,
+  documentId,
 }: RequestPostTrail) {
   return api.post(
-    '/create-trail',
+    '/create-document-trail',
     {
       userId,
       inspectionId,
       trailData,
+      documentId,
     },
     {
       headers: {
@@ -27,4 +30,34 @@ export function postTrail({
       },
     },
   )
+}
+
+export async function getListTrails({
+  documentId,
+  token,
+}: {
+  documentId: string
+  token: string
+}) {
+  const params = { documentId }
+
+  return await api.get('/find-document-trails', {
+    params,
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+export async function deleteTrail({
+  trailId,
+  token,
+}: {
+  trailId: string
+  token: string
+}) {
+  const params = { trailId }
+
+  return await api.delete('/delete-document-trail', {
+    params,
+    headers: { Authorization: `Bearer ${token}` },
+  })
 }

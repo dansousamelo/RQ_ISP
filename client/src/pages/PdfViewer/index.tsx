@@ -22,7 +22,7 @@ import { Sidebar } from './components/Sidebar'
 import Tip from './components/Tip'
 import { ErrorToast } from '../../components/Toast'
 import { TitleUpdater } from '../../components/TitleUpdater'
-import { postTrail } from './services'
+import { deleteTrail, postTrail } from './services'
 import { getAccessToken } from '../../utils/cookies'
 import {
   InspectionPDFMarkDialog,
@@ -33,6 +33,7 @@ import {
   useDialogControlled,
 } from '../../components/DialogControlled'
 import { isNotUndefined } from '../../interfaces/typeGuards'
+import { getHighlightsRepository } from './repositories/getHighlightsRepository'
 
 const parseIdFromHash = () => document.location.hash.slice('#highlight-'.length)
 const resetHash = () => {
@@ -54,13 +55,19 @@ const PdfViewer = () => {
   const { pdf, amountOfItens, idMark, userId, inspectionId, documentId } =
     useParams()
 
-  const selectedValueDecoded = decodeURIComponent(pdf as string)
-
-  const [highlights, setHighlights] = useState<HighlightProps[]>([])
   const [isCreatingHighlight, setIsCreatingHighlight] = useState(false)
 
   const [dialogInspectionStep, setDialogInspectionStep] =
     useState<InspectionPDFMarkDialog>('')
+
+  const selectedValueDecoded = decodeURIComponent(pdf as string)
+  const token = getAccessToken() as string
+
+  const { highlights, setHighlights, isHighlightListLoading } =
+    getHighlightsRepository({
+      documentId: documentId as string,
+      token,
+    })
 
   const [hightlightToCreate, setHightlightToCreate] = useState(
     {} as Omit<HighlightProps, 'id'>,
@@ -75,17 +82,20 @@ const PdfViewer = () => {
     setHighlights([])
   }
 
-  const deleteHighlight = useCallback((id: string) => {
-    setHighlights((prevHighlights) =>
-      prevHighlights.filter((highlight) => highlight.id !== id),
-    )
-  }, [])
+  const deleteHighlight = useCallback(
+    (id: string) => {
+      deleteTrail({ token, trailId: id })
+
+      setHighlights((prevHighlights) =>
+        prevHighlights.filter((highlight) => highlight.id !== id),
+      )
+    },
+    [setHighlights, token],
+  )
 
   const getHighlightById = (id: string) => {
     return highlights.find((highlight) => highlight.id === id)
   }
-
-  const token = getAccessToken() as string
 
   const createHighlight = useCallback(async () => {
     try {
@@ -95,6 +105,7 @@ const PdfViewer = () => {
         inspectionId: inspectionId as string,
         token,
         trailData: { ...hightlightToCreate },
+        documentId: documentId as string,
       })
       setHighlights([
         { ...hightlightToCreate, id: response.data.data.trail },
@@ -105,7 +116,7 @@ const PdfViewer = () => {
     } finally {
       setIsCreatingHighlight(false)
     }
-  }, [userId, highlights, hightlightToCreate, inspectionId, token])
+  }, [userId, highlights, hightlightToCreate, inspectionId, token, documentId])
 
   const { dialogItemToRender } = useDialogItemToRender({
     dialogInspectionStep,
@@ -170,7 +181,7 @@ const PdfViewer = () => {
           highlights={highlights}
           resetHighlights={resetHighlights}
           deleteHighlight={deleteHighlight}
-          isLoadingTrail={isCreatingHighlight}
+          isLoadingTrail={isHighlightListLoading}
         />
         <div style={{ height: '100vh', width: '75vw', position: 'relative' }}>
           <PdfLoader url={selectedValueDecoded} beforeLoad={<Spinner />}>
@@ -266,7 +277,7 @@ const PdfViewer = () => {
           isDialogControlledOpen={isDialogControlledOpen}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
-          isLoadingRequisition={isCreatingHighlight}
+          isLoadingRequisition={isCreatingHighlight || isHighlightListLoading}
           onClose={() => {
             setHightlightToCreate({} as any)
             setDialogInspectionStep('')

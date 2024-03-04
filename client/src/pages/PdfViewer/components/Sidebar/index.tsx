@@ -13,7 +13,6 @@ import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import { useNavigate, useParams } from 'react-router-dom'
 import { HighlightSkeleton } from './components/HighlightSkeleton'
 import { Empty } from '../../../../components/Empty'
-import { Spinner } from '../../../../components/Spinner'
 
 const updateHash = (highlight: HighlightProps) => {
   document.location.hash = `highlight-${highlight.id}`
@@ -35,25 +34,20 @@ export type InspectionMarkDialog =
 interface SidebarLiContent {
   highlight: HighlightProps
   onDeleteHighlight?(highlight: HighlightProps): void
-  isLoadingTrail: boolean
 }
 
 export function SidebarLiContent({
   onDeleteHighlight,
   highlight,
-  isLoadingTrail,
 }: SidebarLiContent) {
   return (
     <>
       <div>
         <S.WrapperTitleCloe>
           <strong>{highlight.comment.text}</strong>
-          {!!onDeleteHighlight &&
-            (isLoadingTrail ? (
-              <Spinner />
-            ) : (
-              <S.Close onClick={() => onDeleteHighlight(highlight)} />
-            ))}
+          {!!onDeleteHighlight && (
+            <S.Close onClick={() => onDeleteHighlight(highlight)} />
+          )}
         </S.WrapperTitleCloe>
 
         {highlight.content.text && (
@@ -132,8 +126,6 @@ export function Sidebar({
 
   const hasHighlights = isArrayNotEmpty(highlights)
 
-  const isLoading = false
-
   return (
     <>
       <S.Container>
@@ -149,7 +141,7 @@ export function Sidebar({
           poderá gerenciá-las e, ao finalizar, salve suas alterações.
         </S.Description>
 
-        {isLoading ? (
+        {isLoadingTrail ? (
           <HighlightSkeleton />
         ) : (
           <>
@@ -164,7 +156,6 @@ export function Sidebar({
                     }}
                   >
                     <SidebarLiContent
-                      isLoadingTrail={isLoadingTrail}
                       highlight={highlight}
                       onDeleteHighlight={onDeleteHighlight}
                     />
