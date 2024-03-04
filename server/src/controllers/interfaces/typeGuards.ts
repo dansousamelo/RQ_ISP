@@ -40,9 +40,9 @@ function isValidInspectionEmail(email: string) {
 function isValidInspectionDocument(obj: any): obj is DocumentItems {
   return (
     obj &&
-    typeof obj.fileName === "string" &&
-    typeof obj.fileUrl === "string" &&
-    typeof obj.fileType === "string"
+    typeof obj.name === "string" &&
+    typeof obj.url === "string" &&
+    typeof obj.type === "string"
   );
 }
 
