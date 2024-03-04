@@ -6,6 +6,7 @@ import {
   isString,
 } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
+import { findUser, findUserById } from "../services/userServices";
 import { findInspectionById } from "../services/inspectionServices";
 
 export default {
