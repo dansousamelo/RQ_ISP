@@ -7,7 +7,7 @@ import {
 } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
 import { findUser, findUserById } from "../services/userServices";
-import { findInspection } from "../services/inspectionServices";
+import { findInspectionById } from "../services/inspectionServices";
 
 export default {
   async uploadFile(req: Request, res: Response) {
@@ -62,7 +62,7 @@ export default {
         });
       }
 
-      const inspection = await findInspection(inspectionId);
+      const inspection = await findInspectionById(inspectionId);
 
       if (!inspection) {
         return res.status(404).json({
