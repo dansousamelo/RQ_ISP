@@ -60,7 +60,7 @@ export function App() {
                   />
 
                   <Route
-                    path="/inspection/:id/:pdf/:amountOfItens/:idMark/:accessCode/mark"
+                    path="/inspection/:id/:pdf/:amountOfItens/:idMark/:accessCode/:inspectionId/:documentId/mark"
                     element={<PrivateRoute element={<PdfViewer />} />}
                   />
                   <Route path="*" element={<PageNotFound />} />

@@ -22,8 +22,18 @@ import { Sidebar } from './components/Sidebar'
 import Tip from './components/Tip'
 import { ErrorToast } from '../../components/Toast'
 import { TitleUpdater } from '../../components/TitleUpdater'
+import { postTrail } from './services'
+import { getAccessToken } from '../../utils/cookies'
+import {
+  InspectionPDFMarkDialog,
+  useDialogItemToRender,
+} from './hooks/useDialogItemToRender'
+import {
+  DialogControlled,
+  useDialogControlled,
+} from '../../components/DialogControlled'
+import { isNotUndefined } from '../../interfaces/typeGuards'
 
-const getNextId = () => String(Math.random()).slice(2)
 const parseIdFromHash = () => document.location.hash.slice('#highlight-'.length)
 const resetHash = () => {
   document.location.hash = ''
@@ -41,11 +51,26 @@ const HighlightPopup = ({ comment }: HighlightPopUp) =>
   ) : null
 
 const PdfViewer = () => {
-  const { pdf, amountOfItens, idMark } = useParams()
+  const { pdf, amountOfItens, idMark, accessCode, inspectionId, documentId } =
+    useParams()
 
   const selectedValueDecoded = decodeURIComponent(pdf as string)
 
   const [highlights, setHighlights] = useState<HighlightProps[]>([])
+  const [isCreatingHighlight, setIsCreatingHighlight] = useState(false)
+
+  const [dialogInspectionStep, setDialogInspectionStep] =
+    useState<InspectionPDFMarkDialog>('')
+
+  const [hightlightToCreate, setHightlightToCreate] = useState(
+    {} as Omit<HighlightProps, 'id'>,
+  )
+
+  console.log('documentId: ', documentId)
+
+  const { handleUpdateDialogControlled, isDialogControlledOpen } =
+    useDialogControlled()
+
   const scrollViewerToRef = useRef<any>(null)
 
   const resetHighlights = () => {
@@ -62,8 +87,39 @@ const PdfViewer = () => {
     return highlights.find((highlight) => highlight.id === id)
   }
 
-  const addHighlight = (highlight: Omit<HighlightProps, 'id'>) => {
-    setHighlights([{ ...highlight, id: getNextId() }, ...highlights])
+  const token = getAccessToken() as string
+
+  const createHighlight = useCallback(async () => {
+    try {
+      setIsCreatingHighlight(true)
+      const response = await postTrail({
+        accessCode: accessCode as string,
+        inspectionId: inspectionId as string,
+        token,
+        trailData: { ...hightlightToCreate },
+      })
+      setHighlights([
+        { ...hightlightToCreate, id: response.data.data.trail },
+        ...highlights,
+      ])
+    } catch (err) {
+      ErrorToast('Não foi possível criar a marcação')
+    } finally {
+      setIsCreatingHighlight(false)
+    }
+  }, [accessCode, highlights, hightlightToCreate, inspectionId, token])
+
+  const { dialogItemToRender } = useDialogItemToRender({
+    dialogInspectionStep,
+    handleUpdateDialogControlled,
+    createHighlight,
+    hightlightToCreate,
+  })
+
+  const addHighlight = async (highlight: Omit<HighlightProps, 'id'>) => {
+    setHightlightToCreate(highlight)
+    handleUpdateDialogControlled(true)
+    setDialogInspectionStep('confirm_highlight')
   }
 
   const updateHighlight = (
@@ -116,6 +172,7 @@ const PdfViewer = () => {
           highlights={highlights}
           resetHighlights={resetHighlights}
           deleteHighlight={deleteHighlight}
+          isLoadingTrail={isCreatingHighlight}
         />
         <div style={{ height: '100vh', width: '75vw', position: 'relative' }}>
           <PdfLoader url={selectedValueDecoded} beforeLoad={<Spinner />}>
@@ -141,11 +198,16 @@ const PdfViewer = () => {
                     }}
                     onConfirm={(comment) => {
                       if (verifyIfItemWasFilled(comment)) {
-                        addHighlight({ content, position, comment })
+                        const highlightFormatted: Omit<HighlightProps, 'id'> = {
+                          content,
+                          comment,
+                          position,
+                        }
+                        addHighlight(highlightFormatted)
                         hideTipAndSelection()
                       } else {
                         ErrorToast(
-                          'Não é possível atribuir o número digitado a esta marcação. O limite máximo é 20.',
+                          `Não é possível atribuir o número digitado a esta marcação. O limite máximo é ${amountOfItens}.`,
                         )
                       }
                     }}
@@ -195,12 +257,24 @@ const PdfViewer = () => {
                     </Popup>
                   )
                 }}
-                highlights={highlights}
+                highlights={highlights as any}
               />
             )}
           </PdfLoader>
         </div>
       </div>
+      {isDialogControlledOpen && isNotUndefined(dialogItemToRender) && (
+        <DialogControlled
+          isDialogControlledOpen={isDialogControlledOpen}
+          handleUpdateDialogControlled={handleUpdateDialogControlled}
+          dialogItemToRender={dialogItemToRender}
+          isLoadingRequisition={isCreatingHighlight}
+          onClose={() => {
+            setHightlightToCreate({} as any)
+            setDialogInspectionStep('')
+          }}
+        />
+      )}
     </>
   )
 }

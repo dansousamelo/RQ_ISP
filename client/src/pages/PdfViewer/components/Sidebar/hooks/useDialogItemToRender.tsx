@@ -38,7 +38,10 @@ export function useDialogItemToRender({
         <>
           <span>Deseja realmente excluir a marcação?</span>
           <Container>
-            <SidebarLiContent highlight={hightlightToDelete} />
+            <SidebarLiContent
+              highlight={hightlightToDelete}
+              isLoadingTrail={false}
+            />
           </Container>
         </>
       ),

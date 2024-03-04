@@ -107,7 +107,7 @@ export async function findInspectionItemsByInspectionId(
 
     const itemsExists: ItemsResult[] = inspection.Item.map((item: any) => {
       const trails = inspection.Trail.filter((trail) => trail.item_id === item.item_index);
-      const trailTexts = isArrayNotEmpty(trailscls) ? trails.map((trail) => trail.text) : null;
+      const trailTexts = isArrayNotEmpty(trails) ? trails.map((trail) => trail.text) : null;
     
       return {
         item_index: item.item_index,
