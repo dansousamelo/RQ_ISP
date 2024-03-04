@@ -11,6 +11,7 @@ import {
   createInspection,
   destroiInspection,
   findInspection,
+  updateInspectionAttributes,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -125,9 +126,7 @@ export default {
         });
       }
 
-      const inspectionAttributes = await findInspectionAttributes(
-        inspectionId
-      );
+      const inspectionAttributes = await findInspectionAttributes(inspectionId);
 
       if (!inspectionAttributes) {
         return res.status(404).json({
@@ -327,6 +326,76 @@ export default {
         message: "Inspeção criada com sucesso!",
         data: {
           inspection: inspection.id,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
+
+  async updateInspectionAttributes(req: Request, res: Response) {
+    try {
+      const {
+        inspectionId,
+        name,
+        responsible,
+        recordingUrl,
+        participants,
+        responsibleEmail,
+      } = req.body;
+
+      if (!isString(inspectionId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um id de inspeção válido!",
+          data: {},
+        });
+      }
+
+      try {
+        isValidInspectionName(name);
+        isValidInspectionResponsible(responsible);
+        isValidInspectionEmail(responsibleEmail);
+      } catch (error) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: getErrorMessage(error),
+          data: {},
+        });
+      }
+
+      const inspection = await updateInspectionAttributes(
+        inspectionId,
+        name,
+        responsible,
+        recordingUrl,
+        participants,
+        responsibleEmail
+      );
+
+      if (!inspection) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message:
+            "Não foi possível encontrar uma inspeção com o id fornecido!",
+          data: {},
+        });
+      }
+
+      return res.status(200).json({
+        error: true,
+        status: 200,
+        message: "Atributos da inspeção atualizados com sucesso",
+        data: {
+          inspection,
         },
       });
     } catch (error) {

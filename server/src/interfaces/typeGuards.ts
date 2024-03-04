@@ -4,6 +4,10 @@ export function isString(value: unknown): value is string {
   return typeof value === "string" && value !== "";
 }
 
+export function isNotUndefined<T>(value: T | undefined): value is T {
+  return value !== undefined;
+}
+
 export function isArray(value: any): value is any[] {
   return Array.isArray(value)
 }
