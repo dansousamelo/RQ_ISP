@@ -17,8 +17,6 @@ router.post(
   inspectionControllers.createInspection
 );
 
-
-
 // Get routes
 router.get(
   "/find-user-inspections",
@@ -34,6 +32,13 @@ router.get(
   "/find-inspection-attributes",
   verifyToken,
   inspectionControllers.findInspectionAttributes
+);
+
+// Update Routes
+router.put(
+  "/update-inspection-attributes",
+  verifyToken,
+  inspectionControllers.updateInspectionAttributes
 );
 
 // Delete Routes
