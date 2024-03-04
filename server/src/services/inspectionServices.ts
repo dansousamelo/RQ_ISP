@@ -12,7 +12,11 @@ import {
   InspectionAttributesResult,
   InspectionType,
 } from "./interfaces/types";
-import { isArrayEmpty, isArrayNotEmpty, isNotUndefined } from "../interfaces/typeGuards";
+import {
+  isArrayEmpty,
+  isArrayNotEmpty,
+  isNotUndefined,
+} from "../interfaces/typeGuards";
 
 export async function findInspectionById(
   inspectionId: string
@@ -245,19 +249,17 @@ export async function updateInspectionAttributes(
   responsibleEmail: string
 ) {
   try {
-    const dataToUpdate: Record<string, any> = {};
-    
-    if (isNotUndefined(name)) dataToUpdate.name = name;
-    if (isNotUndefined(responsibleEmail)) dataToUpdate.responsibleEmail = responsibleEmail;
-    if (isNotUndefined(responsible)) dataToUpdate.responsible = responsible;
-    if (isNotUndefined(recordingUrl)) dataToUpdate.recordingUrl = recordingUrl;
-    if (isNotUndefined(participants)) dataToUpdate.participants = participants;
-
     const inspection = await prisma.inspection.update({
       where: {
         id: inspectionId,
       },
-      data: dataToUpdate,
+      data: {
+        name: name,
+        responsible: responsible,
+        recordingUrl: recordingUrl,
+        participants: participants,
+        responsibleEmail: responsibleEmail,
+      },
     });
 
     if (!inspection) {
@@ -271,8 +273,7 @@ export async function updateInspectionAttributes(
       responsible: inspection.responsible,
       recordingUrl: inspection.recordingUrl,
       participants: inspection.participants,
-    }
-
+    };
   } catch (error) {
     throw error;
   }
