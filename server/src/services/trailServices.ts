@@ -22,9 +22,10 @@ async function findTextTrail(inspectionId: string, itemIndex: string) {
     throw error;
   }
 }
+
 function mapDocumentTrail(docTrail: any) {
   const documentTrailRects =
-    docTrail.documentTrailPostion?.documentTrailPositionRect.map(
+    docTrail.documentTrailPostion.documentTrailPositionRect.map(
       mapDocumentTrailRect
     );
 
@@ -39,35 +40,35 @@ function mapDocumentTrail(docTrail: any) {
     },
     position: {
       boundingRect: mapBoundingRect(
-        docTrail.documentTrailPostion?.documentTrailPositionBoudingReact
+        docTrail.documentTrailPostion.documentTrailPositionBoudingRect
       ),
       rects: documentTrailRects,
-      pageNumber: docTrail.documentTrailPostion?.pageNumber,
+      pageNumber: docTrail.documentTrailPostion.pageNumber,
     },
+  };
+}
+
+function mapBoundingRect(docTrailBoundingRect: any) {
+  return {
+    x1: parseFloat(docTrailBoundingRect.x1),
+    y1: parseFloat(docTrailBoundingRect.y1),
+    x2: parseFloat(docTrailBoundingRect.x2),
+    y2: parseFloat(docTrailBoundingRect.y2),
+    width: parseFloat(docTrailBoundingRect.width),
+    height: parseFloat(docTrailBoundingRect.height),
+    pageNumber: docTrailBoundingRect.pageNumber,
   };
 }
 
 function mapDocumentTrailRect(docTrailRects: any) {
   return {
-    x1: docTrailRects.x1,
-    y1: docTrailRects.y1,
-    x2: docTrailRects.x2,
-    y2: docTrailRects.y2,
-    width: docTrailRects.width,
-    height: docTrailRects.height,
+    x1: parseFloat(docTrailRects.x1),
+    y1: parseFloat(docTrailRects.y1),
+    x2: parseFloat(docTrailRects.x2),
+    y2: parseFloat(docTrailRects.y2),
+    width: parseFloat(docTrailRects.width),
+    height: parseFloat(docTrailRects.height),
     pageNumber: docTrailRects.pageNumber,
-  };
-}
-
-function mapBoundingRect(boundingRect: any) {
-  return {
-    x1: boundingRect?.x1,
-    y1: boundingRect?.y1,
-    x2: boundingRect?.x2,
-    y2: boundingRect?.y2,
-    width: boundingRect?.width,
-    height: boundingRect?.height,
-    pageNumber: boundingRect?.pageNumber,
   };
 }
 
