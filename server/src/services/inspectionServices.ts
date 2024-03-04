@@ -265,6 +265,7 @@ export async function updateInspectionAttributes(
     }
 
     return {
+      id: inspection.id,
       name: inspection.name,
       responsibleEmail: inspection.responsibleEmail,
       responsible: inspection.responsible,

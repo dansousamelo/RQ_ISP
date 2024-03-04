@@ -341,15 +341,15 @@ export default {
   async updateInspectionAttributes(req: Request, res: Response) {
     try {
       const {
-        inspectionId,
+        id,
         name,
         responsible,
         recordingUrl,
         participants,
         responsibleEmail,
-      } = req.body;
+      } = req.body.inspection;
 
-      if (!isString(inspectionId)) {
+      if (!isString(id)) {
         return res.status(400).json({
           error: true,
           status: 400,
@@ -372,7 +372,7 @@ export default {
       }
 
       const inspection = await updateInspectionAttributes(
-        inspectionId,
+        id,
         name,
         responsible,
         recordingUrl,
