@@ -6,7 +6,7 @@ import {
   isString,
 } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
-import { findUser } from "../services/userServices";
+import { findUser, findUserById } from "../services/userServices";
 import { findInspection } from "../services/inspectionServices";
 
 export default {
@@ -26,10 +26,8 @@ export default {
 
       const uploadedFiles = await Promise.all(
         files.map(async (file) => {
-          const { fileName, fileUrl, fileType } = await fileServices.uploadFile(
-            file
-          );
-          return { fileName, fileUrl, fileType };
+          const { name, url, type } = await fileServices.uploadFile(file);
+          return { name, url, type };
         })
       );
 
@@ -37,7 +35,9 @@ export default {
         error: false,
         status: 200,
         message: "Arquivos submetidos com sucesso!",
-        data: uploadedFiles,
+        data: {
+          documents: uploadedFiles,
+        },
       });
     } catch (error) {
       return res.status(500).json({
@@ -51,9 +51,9 @@ export default {
 
   async loggedUploadFile(req: Request, res: Response) {
     try {
-      const { accessCode, inspectionId } = req.body;
+      const { inspectionId } = req.body;
 
-      if (!isString(accessCode) && !isString(inspectionId)) {
+      if (!isString(inspectionId)) {
         return res.status(400).json({
           error: true,
           status: 400,
@@ -62,20 +62,9 @@ export default {
         });
       }
 
-      const user = await findUser(accessCode);
+      const inspection = await findInspection(inspectionId);
 
-      if (!user) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "",
-          data: {},
-        });
-      }
-
-      const inspectionsExists = await findInspection(inspectionId, user.id);
-
-      if (!inspectionsExists) {
+      if (!inspection) {
         return res.status(404).json({
           error: true,
           status: 404,
@@ -98,14 +87,12 @@ export default {
 
       const uploadedFiles = await Promise.all(
         files.map(async (file) => {
-          const { fileName, fileUrl, fileType } = await fileServices.uploadFile(
-            file
-          );
-          return { fileName, fileUrl, fileType };
+          const { name, url, type } = await fileServices.uploadFile(file);
+          return { name, url, type };
         })
       );
 
-      const documents = await postDocuments(inspectionsExists, uploadedFiles);
+      const documents = await postDocuments(inspection, uploadedFiles);
 
       return res.status(200).json({
         error: false,

@@ -5,7 +5,7 @@ import token_controllers from "../controllers/tokenControllers";
 const router = express.Router();
 
 // Post Routes
-router.post("/refresh-token", token_controllers.generateRefreshToken);
+router.post("/generate-token", token_controllers.generateToken);
 
 // Get Routes
 

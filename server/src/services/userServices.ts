@@ -19,9 +19,27 @@ export async function findUser(accessCode: string | null) {
   return userExists || null;
 }
 
-export async function createUser(accessCode: string) : Promise<User> {
+export async function findUserById(userId: string) {
   try {
-    if(!isString(accessCode)){
+    const userExists = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!userExists) {
+      return null;
+    }
+
+    return userExists;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createUser(accessCode: string): Promise<User> {
+  try {
+    if (!isString(accessCode)) {
       throw new Error("Fornaça um código de acesso válido!");
     }
 
@@ -34,8 +52,7 @@ export async function createUser(accessCode: string) : Promise<User> {
     });
 
     return user;
-
   } catch (error) {
-    throw new Error("Não foi possível criar um usuário!")
+    throw new Error("Não foi possível criar um usuário!");
   }
-};
+}
