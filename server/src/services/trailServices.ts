@@ -1,4 +1,5 @@
 import { prisma } from "../db/prismaClient";
+import { isArrayEmpty } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
 
 import { PositionRect, TrailData } from "./interfaces/types";
@@ -21,8 +22,104 @@ async function findTextTrail(inspectionId: string, itemIndex: string) {
     throw error;
   }
 }
+function mapDocumentTrail(docTrail: any) {
+  const documentTrailRects =
+    docTrail.documentTrailPostion?.documentTrailPositionRect.map(
+      mapDocumentTrailRect
+    );
 
-export async function createTextTrail(inspectionId: string, itemIndex: string, trailData: string) {
+  return {
+    id: docTrail.id,
+    content: {
+      text: docTrail.text,
+    },
+    comment: {
+      text: docTrail.itemIndex,
+      emoji: "",
+    },
+    position: {
+      boundingRect: mapBoundingRect(
+        docTrail.documentTrailPostion?.documentTrailPositionBoudingReact
+      ),
+      rects: documentTrailRects,
+      pageNumber: docTrail.documentTrailPostion?.pageNumber,
+    },
+  };
+}
+
+function mapDocumentTrailRect(docTrailRects: any) {
+  return {
+    x1: docTrailRects.x1,
+    y1: docTrailRects.y1,
+    x2: docTrailRects.x2,
+    y2: docTrailRects.y2,
+    width: docTrailRects.width,
+    height: docTrailRects.height,
+    pageNumber: docTrailRects.pageNumber,
+  };
+}
+
+function mapBoundingRect(boundingRect: any) {
+  return {
+    x1: boundingRect?.x1,
+    y1: boundingRect?.y1,
+    x2: boundingRect?.x2,
+    y2: boundingRect?.y2,
+    width: boundingRect?.width,
+    height: boundingRect?.height,
+    pageNumber: boundingRect?.pageNumber,
+  };
+}
+
+export async function findDocumentTrails(documentId: string) {
+  try {
+    const documentTrails = await prisma.documentTrail.findMany({
+      where: {
+        documentId,
+      },
+      include: {
+        documentTrailPostion: {
+          include: {
+            documentTrailPositionBoudingRect: true,
+            documentTrailPositionRect: true,
+          },
+        },
+      },
+    });
+
+    if (!documentTrails || isArrayEmpty(documentTrails)) {
+      return null;
+    }
+
+    return documentTrails.map(mapDocumentTrail);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function findDocumentTrailById(trailId: string) {
+  try {
+    const documentTrail = await prisma.documentTrail.findFirst({
+      where: {
+        id: trailId,
+      },
+    });
+
+    if (!documentTrail) {
+      return null;
+    }
+
+    return documentTrail;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createTextTrail(
+  inspectionId: string,
+  itemIndex: string,
+  trailData: string
+) {
   try {
     const trail = await prisma.textTrail.create({
       data: {
@@ -38,7 +135,11 @@ export async function createTextTrail(inspectionId: string, itemIndex: string, t
   }
 }
 
-export async function createDocumentTrail(inspectionId: string,documentId: string, trailData: TrailData) {
+export async function createDocumentTrail(
+  inspectionId: string,
+  documentId: string,
+  trailData: TrailData
+) {
   try {
     const itemIndex = trailData.comment.text;
     const findedTextTrail = await findTextTrail(inspectionId, itemIndex);
@@ -47,16 +148,24 @@ export async function createDocumentTrail(inspectionId: string,documentId: strin
       await destroiTextTrail(findedTextTrail);
     }
 
-    const documentTrail = await createDocumentTrailInstance(inspectionId, documentId,itemIndex, trailData.content.text);
+    const documentTrail = await createDocumentTrailInstance(
+      inspectionId,
+      documentId,
+      itemIndex,
+      trailData.content.text
+    );
 
-    const documentTrailPosition = await createDocumentTrailPosition(documentTrail,trailData.position.pageNumber);
+    const documentTrailPosition = await createDocumentTrailPosition(
+      documentTrail.id,
+      trailData.position.pageNumber
+    );
 
     await Promise.all([
       createTrailBoundingRect(
-        documentTrailPosition,
+        documentTrailPosition.id,
         trailData.position.boundingRect
       ),
-      createTrailRects(documentTrailPosition, trailData.position.rects),
+      createTrailRects(documentTrailPosition.id, trailData.position.rects),
     ]);
 
     return documentTrail;
@@ -69,10 +178,9 @@ async function createDocumentTrailInstance(
   inspectionId: string,
   documentId: string,
   itemIndex: string,
-  text: string,
+  text: string
 ) {
   try {
-
     const createdTrail = await prisma.documentTrail.create({
       data: {
         inspectionId: inspectionId,
@@ -82,7 +190,7 @@ async function createDocumentTrailInstance(
       },
     });
 
-    return createdTrail.id;
+    return createdTrail;
   } catch (error) {
     throw new Error("Não foi possível inserir um objeto na tabela marcação!");
   }
@@ -101,7 +209,7 @@ async function createDocumentTrailPosition(
         },
       });
 
-    return createdDocumentTrailPosition.id;
+    return createdDocumentTrailPosition;
   } catch (error) {
     throw error;
   }
@@ -162,6 +270,18 @@ async function destroiTextTrail(textTrailId: string) {
     await prisma.textTrail.delete({
       where: {
         id: textTrailId,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function destroiDocumentTrail(documentTrailId: string) {
+  try {
+    await prisma.documentTrail.delete({
+      where: {
+        id: documentTrailId,
       },
     });
   } catch (error) {

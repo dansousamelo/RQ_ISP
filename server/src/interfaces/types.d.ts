@@ -44,7 +44,7 @@ export interface Trail {
 }
 
 export type DocumentItems = {
-  fileName: string;
-  fileUrl: string;
-  fileType: string;
+  name: string;
+  url: string;
+  type: string;
 };

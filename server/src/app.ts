@@ -6,6 +6,7 @@ import fileRoutes from "./routes/fileRoutes";
 import tokenRoutes from "./routes/tokenRoutes";
 import userRoutes from "./routes/userRoutes";
 import inspectionRoutes from "./routes/inspectionRoutes";
+import trailRoutes from "./routes/trailRoutes"
 
 dotenv.config();
 
@@ -31,6 +32,9 @@ app.use("/", fileRoutes);
 
 // Rotas de inspeção
 app.use("/", inspectionRoutes);
+
+// Rotas de rastro
+app.use("/", trailRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);

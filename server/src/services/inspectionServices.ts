@@ -15,14 +15,12 @@ import {
 import { isArrayEmpty, isArrayNotEmpty } from "../interfaces/typeGuards";
 
 export async function findInspection(
-  inspectionId: string,
-  userId: string
+  inspectionId: string
 ): Promise<string | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-        userId: userId,
       },
     });
 
@@ -65,38 +63,42 @@ export async function findInspectionsListByUserId(
   }
 }
 
-function getTrailData(trails: any) {
+function getTrailData(trails: any[]) {
   if (!trails || isArrayEmpty(trails)) {
     return null;
   }
 
-  if (trails[0]?.documentId) {
-    return trails.map((trail: any) => ({
-      id: trail.id,
-      text: trail.text,
-      pageNumber: trail.pageNumber,
-    }));
-  } else {
-    return trails.map((trail: any) => ({
-      trail: trail.text,
-    }));
-  }
+  return trails.map((trail: any) => {
+    if (trail.documentTrailPostion && trail.documentTrailPostion.pageNumber) {
+      return {
+        id: trail.id,
+        text: trail.text,
+        pageNumber: trail.documentTrailPostion.pageNumber,
+      };
+    } else {
+      return {
+        trail: trail.text,
+      };
+    }
+  });
 }
 
 export async function findInspectionItemsByInspectionId(
-  inspectionId: string,
-  userId: string
+  inspectionId: string
 ): Promise<ItemsResult[] | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-        userId: userId,
       },
       include: {
         item: true,
         textTrail: true,
-        documentTrail: true,
+        documentTrail: {
+          include: {
+            documentTrailPostion: true,
+          }
+        },
       },
     });
 
@@ -132,14 +134,12 @@ export async function findInspectionItemsByInspectionId(
 }
 
 export async function findInspectionAttributes(
-  inspectionId: string,
-  userId: string
+  inspectionId: string
 ): Promise<InspectionAttributesResult | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-        userId: userId,
       },
       include: {
         document: true,
@@ -172,28 +172,6 @@ export async function findInspectionAttributes(
     };
   } catch (error) {
     throw new Error("Não foi possível fazer a consulta de inspeções");
-  }
-}
-
-export async function findDocumentTrail(documentId: string, inspectionId: string, userId: string) {
-  try {
-    const documentTrail = await prisma.documentTrail.findFirst({
-      where: {
-        id: documentId,
-        inspection: {
-          id: inspectionId,
-          userId: userId,
-        },
-      },
-    });
-
-    if (!documentTrail) {
-      return null;
-    }
-
-    return documentTrail.id;
-  } catch (error) {
-    throw error;
   }
 }
 
@@ -267,18 +245,5 @@ export async function destroiInspection(inspectionId: string) {
     });
   } catch (error) {
     throw new Error("Não foi possível excluir uma inspeção uma inspeção!");
-  }
-}
-
-export async function destroiDocumentTrail(documentTrailId: string) {
-  try {
-    await prisma.documentTrail.delete({
-      where: {
-        id: documentTrailId,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-    throw error;
   }
 }
