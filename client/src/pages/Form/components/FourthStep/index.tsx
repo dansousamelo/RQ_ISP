@@ -40,12 +40,12 @@ export function FourthStep() {
   const { accessCode, isAccessCodeFetching } = getAccessCodeRepository()
 
   const dataToSend = {
-    inspection_type: inspectionChecklistType,
-    responsible: secondStepData.responsable,
-    recording_url: secondStepData.record_link,
-    participants: secondStepData.participants,
+    inspectionType: inspectionChecklistType,
     name: secondStepData.name,
-    responsible_email: secondStepData.email,
+    responsible: secondStepData.responsable,
+    responsibleEmail: secondStepData.email,
+    recordingUrl: secondStepData.record_link,
+    participants: secondStepData.participants,
     documents: convertToCustomFormat(filesUploaded),
     accessCode,
   }
@@ -57,12 +57,12 @@ export function FourthStep() {
       setIsCreatingInspection(true)
       const response = await postInspectionData(dataToSend)
 
-      const { token, refreshToken, inspection } = response.data.data
+      const { token, refreshToken, inspection, user } = response.data.data
 
       setAccessToken(token)
       setRefreshToken(refreshToken)
       createCookieWithExpiration()
-      navigate(`/inspection/${inspection}/${accessCode}`)
+      navigate(`/inspection/${inspection}/${user}`)
 
       SuccessToast('Inspeção criada com sucesso')
     } catch (error: unknown) {

@@ -11,7 +11,7 @@ interface Mark {
 }
 
 export interface TableDataProps {
-  item_index: string
+  itemIndex: string
   situation: Situation | null
   description: string | null
   observations: string | null
@@ -19,11 +19,11 @@ export interface TableDataProps {
 }
 
 export function getInspectionItemsRepository({
-  accessCode,
+  userId,
   token,
   inspectionId,
 }: {
-  accessCode: string
+  userId: string
   token: string
   inspectionId: string
 }) {
@@ -31,7 +31,7 @@ export function getInspectionItemsRepository({
 
   async function fetchInspectionItems(): Promise<void> {
     const response = await getInspectionItemList({
-      accessCode,
+      userId,
       token,
       inspectionId,
     })
@@ -40,7 +40,7 @@ export function getInspectionItemsRepository({
   }
 
   const { isFetching: isInspectionItemsLoading } = useQuery(
-    [`inspection-item-${accessCode}-${inspectionId}`],
+    [`inspection-item-${userId}-${inspectionId}`],
     fetchInspectionItems,
     {
       refetchOnWindowFocus: false,

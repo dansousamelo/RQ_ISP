@@ -62,9 +62,9 @@ export function useFileUpload({
           prevFiles.concat(
             acceptedFiles.map((file) => ({
               name: file.name,
-              url: response.data.data.find(
-                (item: any) => item.fileName === file.name,
-              ).fileUrl,
+              url: response.data.data.documents.find(
+                (item: any) => item.name === file.name,
+              ).url,
             })),
           ),
         )

@@ -21,7 +21,7 @@ export interface useFileUploadProps {
   updateActiveTabOnUpload: (value: ActiveUploadTab) => void
   setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
   filesUploaded: Files
-  accessCode: string
+  userId: string
   inspectionId: string
   token: string
   setFilesUploaded: React.Dispatch<React.SetStateAction<Files>>
@@ -36,7 +36,7 @@ export function useFileUpload({
   filesUploaded,
   setHeaderData,
   updateActiveTabOnUpload,
-  accessCode,
+  userId,
   inspectionId,
   token,
   setFilesUploaded,
@@ -50,7 +50,7 @@ export function useFileUpload({
         setLoadingFiles(true)
         const response = await uploadFileLogged({
           pdfFiles: file,
-          accessCode,
+          userId,
           inspectionId,
           token,
         })
@@ -63,7 +63,7 @@ export function useFileUpload({
         setLoadingFiles(false)
       }
     },
-    [accessCode, inspectionId, token],
+    [userId, inspectionId, token],
   )
 
   const onDrop = useCallback(
@@ -89,8 +89,11 @@ export function useFileUpload({
             url: response.data.data.documents.find(
               (item: any) => item.name === file.name,
             ).url,
+            id: response.data.data.documents.find(
+              (item: any) => item.name === file.name,
+            ).id,
           })),
-        )
+        ) as any
 
         setFilesUploaded(filesFormatted)
         setHeaderData((prev) => ({ ...prev, documents: filesFormatted }))
@@ -120,7 +123,9 @@ export function useFileUpload({
     })
 
   const onClearFile = (name: string) => {
-    const filesFormatted = filesUploaded.filter((file) => file.name !== name)
+    const filesFormatted = filesUploaded.filter(
+      (file) => file.name !== name,
+    ) as any
     setFilesUploaded((prevFiles) =>
       prevFiles.filter((file) => file.name !== name),
     )

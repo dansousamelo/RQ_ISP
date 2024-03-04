@@ -65,12 +65,12 @@ export function Header({
           </S.EditInfoButton>
         </S.WrapperTitleAndManagerdocument>
 
-        <S.WrapperInformation hasRecordLing={!!headerData.recording_url}>
+        <S.WrapperInformation hasRecordLing={!!headerData.recordingUrl}>
           <S.InfoLabel>
             <b>Responsável:</b> {headerData.responsible}
           </S.InfoLabel>
           <S.InfoLabel>
-            <b>Contato:</b> {headerData.responsible_email}
+            <b>Contato:</b> {headerData.responsibleEmail}
           </S.InfoLabel>
           {headerData.participants && (
             <S.InfoLabel>
@@ -79,17 +79,17 @@ export function Header({
           )}
         </S.WrapperInformation>
 
-        {headerData.recording_url && (
-          <RecordLink title={headerData.recording_url}>
+        {headerData.recordingUrl && (
+          <RecordLink title={headerData.recordingUrl}>
             <b>Gravação disponível em:</b>{' '}
-            <span>{truncateLink(headerData.recording_url, 30)}</span>
+            <span>{truncateLink(headerData.recordingUrl, 30)}</span>
           </RecordLink>
         )}
       </S.WrapperTitleAndInfo>
 
       <S.WrapperManagerAndStatus>
         <S.LastUpdate>
-          Última atualização em {headerData.updated_at}
+          Última atualização em {headerData.updatedAt}
         </S.LastUpdate>
         <S.ManagerButton onClick={handleManagerDocuments}>
           Gerenciar Documentos

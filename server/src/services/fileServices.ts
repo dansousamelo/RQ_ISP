@@ -12,13 +12,11 @@ class FileServices {
 
       const { filename, originalname, mimetype } = file;
 
-      const fileUrl = await s3Storage.saveFile(filename);
+      const name = Buffer.from(originalname, "latin1").toString("utf8");
+      const url = await s3Storage.saveFile(filename);
+      const type = mimetype;
 
-      const fileName = Buffer.from(originalname, 'latin1').toString('utf8');
-
-      const fileType = mimetype;
-
-      return { fileName, fileUrl, fileType };
+      return { name, url, type };
     } catch (error) {
       console.error("Erro ao fazer upload do arquivo:", error);
       throw error;
@@ -35,13 +33,13 @@ export async function postDocuments(
   try {
     const documents = await Promise.all(
       inpectionDocuments.map(async (doc: DocumentItems) => {
-        const { fileName, fileUrl, fileType } = doc;
+        const { name, url, type } = doc;
         const document = await prisma.document.create({
           data: {
-            inspection_id: inspectionId,
-            name: fileName,
-            type: fileType,
-            url: fileUrl,
+            inspectionId: inspectionId,
+            name,
+            url,
+            type,
           },
         });
 
