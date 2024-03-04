@@ -12,16 +12,34 @@ export async function findUser(accessCode: string | null) {
   const users = await prisma.user.findMany();
 
   const userExists = users.find((user: User) => {
-    const isMatch = bcrypt.compareSync(accessCode, user.access_code);
+    const isMatch = bcrypt.compareSync(accessCode, user.accessCode);
     return isMatch;
   });
 
   return userExists || null;
 }
 
-export async function createUser(accessCode: string) : Promise<User> {
+export async function findUserById(userId: string) {
   try {
-    if(!isString(accessCode)){
+    const userExists = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!userExists) {
+      return null;
+    }
+
+    return userExists;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createUser(accessCode: string): Promise<User> {
+  try {
+    if (!isString(accessCode)) {
       throw new Error("Fornaça um código de acesso válido!");
     }
 
@@ -29,13 +47,12 @@ export async function createUser(accessCode: string) : Promise<User> {
 
     const user = await prisma.user.create({
       data: {
-        access_code: hashedAccessCode,
+        accessCode: hashedAccessCode,
       },
     });
 
     return user;
-
   } catch (error) {
-    throw new Error("Não foi possível criar um usuário!")
+    throw new Error("Não foi possível criar um usuário!");
   }
-};
+}

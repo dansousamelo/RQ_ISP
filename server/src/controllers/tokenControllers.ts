@@ -7,7 +7,7 @@ const secretKey =
   process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
 
 export default {
-  async generateRefreshToken(req: Request, res: Response) {
+  async generateToken(req: Request, res: Response) {
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
@@ -21,10 +21,10 @@ export default {
 
     try {
       const decoded = jwt.verify(refreshToken, secretKey) as
-        | { user_id: string }
+        | { userId: string }
         | undefined;
 
-      if (!decoded || !decoded.user_id) {
+      if (!decoded || !decoded.userId) {
         return res.status(401).json({
           error: true,
           status: 201,
@@ -33,12 +33,12 @@ export default {
         });
       }
 
-      const newToken = generateToken(decoded.user_id);
+      const newToken = generateToken(decoded.userId);
 
       return res.status(200).json({
         error: false,
         status: 200,
-        message: "Novo refreshToken gerado!",
+        message: "Novo token gerado!",
         data: {
           token: newToken,
         },

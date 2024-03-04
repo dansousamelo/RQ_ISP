@@ -18,13 +18,13 @@ export function uploadFile(pdfFiles: FileList | File[]) {
 
 interface RequestUploadFileLogged {
   pdfFiles: FileList | File[]
-  accessCode: string
+  userId: string
   inspectionId: string
   token: string
 }
 
 export function uploadFileLogged({
-  accessCode,
+  userId,
   inspectionId,
   pdfFiles,
   token,
@@ -32,7 +32,7 @@ export function uploadFileLogged({
   const formData = new FormData()
   const filesArray = Array.from(pdfFiles)
 
-  formData.append('accessCode', accessCode)
+  formData.append('userId', userId)
   formData.append('inspectionId', inspectionId)
 
   filesArray.forEach((file: File) => {

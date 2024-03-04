@@ -3,14 +3,14 @@ import { USER_STORY, PRIVACY_REQUIREMENT } from "../../constants/constants";
 export interface InspectionsResult {
   id: string;
   name: string;
-  created_at: string;
+  createdAt: string;
   type: Type;
   status: Status;
   trail?: TrailResult[] | null;
 }
 
 export interface ItemsResult {
-  item_index: string;
+  itemIndex: string;
   situation: string | null;
   category?: string;
   description: string;
@@ -20,7 +20,7 @@ export interface ItemsResult {
 export interface TrailResult {
   id: string;
   text: string;
-  page_number?: string | null;
+  pageNumber?: string | null;
 }
 
 export interface DocumentResult {
@@ -34,11 +34,11 @@ export interface InspectionAttributesResult {
   name: string;
   responsible: string;
   type: Type;
-  recording_url?: string | null;
+  recordingUrl?: string | null;
   participants?: string | null;
-  responsible_email: string;
+  responsibleEmail: string;
   status: Status;
-  updated_at: Datetime;
+  updatedAt: Datetime;
   documents?: DocumentResult[] | null;
 }
 

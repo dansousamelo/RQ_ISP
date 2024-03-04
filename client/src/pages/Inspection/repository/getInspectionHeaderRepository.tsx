@@ -11,20 +11,20 @@ export interface HeaderInspectionProps {
   name: string
   responsible: string
   type: string
-  recording_url: string
+  recordingUrl: string
   participants: string
-  responsible_email: string
+  responsibleEmail: string
   documents: DocumentHeader[]
   status: string
-  updated_at: string
+  updatedAt: string
 }
 
 export function getInspectionHeaderRepository({
-  accessCode,
+  userId,
   token,
   inspectionId,
 }: {
-  accessCode: string
+  userId: string
   token: string
   inspectionId: string
 }) {
@@ -34,7 +34,7 @@ export function getInspectionHeaderRepository({
 
   async function fetchHeaderInspection(): Promise<void> {
     const response = await getInspectionHeader({
-      accessCode,
+      userId,
       token,
       inspectionId,
     })
@@ -43,7 +43,7 @@ export function getInspectionHeaderRepository({
   }
 
   const { isFetching: isInspectionHeaderLoading } = useQuery(
-    [`inspection-header-${accessCode}-${inspectionId}`],
+    [`inspection-header-${userId}-${inspectionId}`],
     fetchHeaderInspection,
     {
       refetchOnWindowFocus: false,

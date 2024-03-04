@@ -47,20 +47,20 @@ export function App() {
                   <Route path="/form" element={<Form />} />
 
                   <Route
-                    path="/inspection/list/:accessCode"
+                    path="/inspection/list/:userId"
                     element={<PrivateRoute element={<InpectionList />} />}
                   />
                   <Route
-                    path="/inspection/:id/:name/:type/:accessCode/statistics"
+                    path="/inspection/:id/:name/:type/:userId/statistics"
                     element={<PrivateRoute element={<Statistics />} />}
                   />
                   <Route
-                    path="/inspection/:id/:accessCode"
+                    path="/inspection/:id/:userId"
                     element={<PrivateRoute element={<Inspection />} />}
                   />
 
                   <Route
-                    path="/inspection/:id/:pdf/:amountOfItens/:idMark/:accessCode/:inspectionId/:documentId/mark"
+                    path="/inspection/:id/:pdf/:amountOfItens/:idMark/:userId/:inspectionId/:documentId/mark"
                     element={<PrivateRoute element={<PdfViewer />} />}
                   />
                   <Route path="*" element={<PageNotFound />} />
