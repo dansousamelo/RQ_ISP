@@ -11,7 +11,7 @@ import { HeaderInspectionProps } from '../../repository/getInspectionHeaderRepos
 import { Files } from '../../../../contexts/InitialInspectionContext'
 
 interface ManagerDocumentsDialogProps {
-  accessCode: string
+  userId: string
   inspectionId: string
   token: string
   handleUpdateDialogControlled: (open: boolean) => void
@@ -23,7 +23,7 @@ export function ManagerDocumentsDialog({
   handleUpdateDialogControlled,
   headerData,
   setHeaderData,
-  accessCode,
+  userId,
   inspectionId,
   token,
 }: ManagerDocumentsDialogProps) {
@@ -37,13 +37,12 @@ export function ManagerDocumentsDialog({
     setActiveTab(value)
   }, [])
 
-  console.log('headerData: ', headerData)
   const { getInputProps, loadingFiles, getRootProps, onClearFile } =
     useFileUpload({
       filesUploaded: headerData.documents,
       setHeaderData,
       updateActiveTabOnUpload,
-      accessCode,
+      userId,
       inspectionId,
       token,
       setFilesUploaded,

@@ -45,7 +45,7 @@ const TableRow: React.FC<TableRowProps> = ({
 
   function handleClickOpenMarksDocument() {
     handleUpdateDialogControlled(true)
-    setIdDialogOpen(item.item_index)
+    setIdDialogOpen(item.itemIndex)
     setDialogInspectionStep('document_trail_marks')
   }
 
@@ -59,13 +59,13 @@ const TableRow: React.FC<TableRowProps> = ({
   function handleObservations() {
     setDialogInspectionStep('add_observation')
     handleUpdateDialogControlled(true)
-    setIdDialogOpen(item.item_index)
+    setIdDialogOpen(item.itemIndex)
   }
 
   const handleValueChange = useCallback(
     (value: string, id: string, situation: string | null) => {
       const newData = tableData.map((item) => {
-        if (item.item_index === id) {
+        if (item.itemIndex === id) {
           return {
             ...item,
             situation: value,
@@ -94,7 +94,7 @@ const TableRow: React.FC<TableRowProps> = ({
   }
 
   return (
-    <tr key={item.item_index}>
+    <tr key={item.itemIndex}>
       <S.ItemTd status={item.situation}>{index + 1}</S.ItemTd>
       <td
         style={{
@@ -106,7 +106,7 @@ const TableRow: React.FC<TableRowProps> = ({
           defaultValue={item.situation}
           items={SITUATION_OPTIONS}
           handleValueChange={(value) =>
-            handleValueChange(value, item.item_index, item.situation)
+            handleValueChange(value, item.itemIndex, item.situation)
           }
         />
       </td>
@@ -139,7 +139,7 @@ const TableRow: React.FC<TableRowProps> = ({
             </S.ObservationText>
             <S.CloseRouded
               onClick={() => {
-                openDeleteObservationsDialog(item.item_index)
+                openDeleteObservationsDialog(item.itemIndex)
               }}
             />
           </S.ObservationTextAndIconWrapper>
@@ -147,7 +147,7 @@ const TableRow: React.FC<TableRowProps> = ({
       </td>
       <S.TrailTd>
         {isAvailableToTrail(item.situation) && !item.trail && (
-          <S.AddTrailButton onClick={() => handleChooseTrail(item.item_index)}>
+          <S.AddTrailButton onClick={() => handleChooseTrail(item.itemIndex)}>
             Adicionar rastro
           </S.AddTrailButton>
         )}
@@ -161,14 +161,14 @@ const TableRow: React.FC<TableRowProps> = ({
                   handleUpdateDialogControlled(true)
                   setEditorData(item.trail ?? '')
                   setDialogInspectionStep('text_editor_trail')
-                  setIdDialogOpen(item.item_index)
+                  setIdDialogOpen(item.itemIndex)
                   setIsEditing(true)
                 }}
                 dangerouslySetInnerHTML={{ __html: item.trail }}
               />
               <S.CloseRouded
                 onClick={() => {
-                  openDeleteTrailDialog(item.item_index)
+                  openDeleteTrailDialog(item.itemIndex)
                 }}
               />
             </S.TrailTextAndIconWrapper>
@@ -183,7 +183,7 @@ const TableRow: React.FC<TableRowProps> = ({
               </S.DocumentTypeText>
               <S.CloseRouded
                 onClick={() => {
-                  openDeleteTrailDialog(item.item_index)
+                  openDeleteTrailDialog(item.itemIndex)
                 }}
               />
               <S.ClickToSeeText onClick={handleClickOpenMarksDocument}>

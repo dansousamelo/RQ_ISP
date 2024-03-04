@@ -84,14 +84,21 @@ export function DialogControlled({
       size: button.size || 'sm',
       disabled: button.disabled || isLoadingRequisition,
       children: canShowSpinnerLoading ? (
-        <>
+        <div
+          style={{
+            display: 'flex',
+            gap: '4px',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Carregando
           <Spinner
             customColor={
               button.id === 'delete' ? defaultTheme.colors.error700 : ''
             }
           />
-          Carregando
-        </>
+        </div>
       ) : (
         <>
           {button?.icon && button.icon}

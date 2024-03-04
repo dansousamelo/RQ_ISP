@@ -4,26 +4,23 @@ import { inspectionTemplates } from "./populateInspectionItemsService";
 
 import { formatDataWithHours, formatDate } from "../utils/formatDatetime";
 
-
 import { Inspection } from "../interfaces/types";
 import {
   InspectionsResult,
   ItemsResult,
   DocumentResult,
   InspectionAttributesResult,
-  InspectionType
+  InspectionType,
 } from "./interfaces/types";
-import { isArrayNotEmpty } from "../interfaces/typeGuards";
+import { isArrayEmpty, isArrayNotEmpty, isNotUndefined } from "../interfaces/typeGuards";
 
-export async function findInspection(
-  inspectionId: string,
-  userId: string,
+export async function findInspectionById(
+  inspectionId: string
 ): Promise<string | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-        user_id: userId,
       },
     });
 
@@ -43,10 +40,10 @@ export async function findInspectionsListByUserId(
   try {
     const inspections: Inspection[] = await prisma.inspection.findMany({
       where: {
-        user_id: userId,
+        userId: userId,
       },
       orderBy: {
-        updated_at: "desc",
+        updatedAt: "desc",
       },
     });
 
@@ -54,7 +51,7 @@ export async function findInspectionsListByUserId(
       (inspection: Inspection) => ({
         id: inspection.id,
         name: inspection.name,
-        created_at: formatDate(inspection.created_at),
+        createdAt: formatDate(inspection.createdAt),
         type: inspection.type,
         status: inspection.status,
       })
@@ -66,38 +63,42 @@ export async function findInspectionsListByUserId(
   }
 }
 
-// function getTrailData(trails: TrailResult) {
-//   if (!trails || isArrayEmpty(trails)) {
-//     return null;
-//   }
+function getTrailData(trails: any[]) {
+  if (!trails || isArrayEmpty(trails)) {
+    return null;
+  }
 
-//   return trails.map((trail) => {
-//     const trailData: any = {
-//       trail_id: trail.id,
-//       text: trail.text,
-//     };
-
-//     if (trail.page_number) {
-//       trailData.page_number = trail.page_number;
-//     }
-
-//     return trailData;
-//   });
-// }
+  return trails.map((trail: any) => {
+    if (trail.documentTrailPostion && trail.documentTrailPostion.pageNumber) {
+      return {
+        id: trail.id,
+        text: trail.text,
+        pageNumber: trail.documentTrailPostion.pageNumber,
+      };
+    } else {
+      return {
+        trail: trail.text,
+      };
+    }
+  });
+}
 
 export async function findInspectionItemsByInspectionId(
-  inspectionId: string,
-  userId: string,
+  inspectionId: string
 ): Promise<ItemsResult[] | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-        user_id: userId
       },
       include: {
-        Item: true,
-        Trail: true,
+        item: true,
+        textTrail: true,
+        documentTrail: {
+          include: {
+            documentTrailPostion: true,
+          },
+        },
       },
     });
 
@@ -105,21 +106,26 @@ export async function findInspectionItemsByInspectionId(
       return null;
     }
 
-    const itemsExists: ItemsResult[] = inspection.Item.map((item: any) => {
-      const trails = inspection.Trail.filter((trail) => trail.item_id === item.item_index);
-      const trailTexts = isArrayNotEmpty(trails) ? trails.map((trail) => trail.text) : null;
-    
+    const trails = isArrayNotEmpty(inspection.textTrail)
+      ? inspection.textTrail
+      : inspection.documentTrail;
+
+    const itemsExists: ItemsResult[] = inspection.item.map((item: any) => {
+      const itemTrails = getTrailData(
+        trails.filter((trail: any) => trail.itemIndex === item.itemIndex)
+      );
+
       return {
-        item_index: item.item_index,
+        itemIndex: item.itemIndex,
         situation: item.situation,
         category: item.category,
         description: item.description,
         observations: item.observations,
-        trail: trailTexts,
+        trail: itemTrails,
       };
     });
 
-    itemsExists.sort((a, b) => parseInt(a.item_index) - parseInt(b.item_index));
+    itemsExists.sort((a, b) => parseInt(a.itemIndex) - parseInt(b.itemIndex));
 
     return itemsExists || null;
   } catch (error) {
@@ -128,17 +134,15 @@ export async function findInspectionItemsByInspectionId(
 }
 
 export async function findInspectionAttributes(
-  inspectionId: string,
-  userId: string
+  inspectionId: string
 ): Promise<InspectionAttributesResult | null> {
   try {
     const inspection = await prisma.inspection.findFirst({
       where: {
         id: inspectionId,
-        user_id: userId
       },
       include: {
-        Document: true,
+        document: true,
       },
     });
 
@@ -146,7 +150,7 @@ export async function findInspectionAttributes(
       return null;
     }
 
-    const documentsExists: DocumentResult[] = inspection.Document.map(
+    const documentsExists: DocumentResult[] = inspection.document.map(
       (document: DocumentResult) => ({
         id: document.id,
         name: document.name,
@@ -159,12 +163,12 @@ export async function findInspectionAttributes(
       name: inspection.name,
       responsible: inspection.responsible,
       type: inspection.type,
-      recording_url: inspection.recording_url,
+      recordingUrl: inspection.recordingUrl,
       participants: inspection.participants,
-      responsible_email: inspection.responsible_email,
+      responsibleEmail: inspection.responsibleEmail,
       documents: documentsExists,
       status: inspection.status,
-      updated_at: formatDataWithHours(inspection.updated_at),
+      updatedAt: formatDataWithHours(inspection.updatedAt),
     };
   } catch (error) {
     throw new Error("Não foi possível fazer a consulta de inspeções");
@@ -183,13 +187,13 @@ export async function createInspection(
   try {
     const inspection = await prisma.inspection.create({
       data: {
-        user_id: userId,
+        userId: userId,
         name: inspectionName,
         responsible: inspectionResponsible,
         type: inspectionType,
-        recording_url: inspectionRecordingUrl,
+        recordingUrl: inspectionRecordingUrl,
         participants: inspectionParticipants,
-        responsible_email: inspectionResponsibleEmail,
+        responsibleEmail: inspectionResponsibleEmail,
       },
     });
 
@@ -214,8 +218,8 @@ export async function createInspectionItems(
       inspectionItemsData.inspectionItems.map(async (item) => {
         const createdItem = await prisma.item.create({
           data: {
-            inspection_id: inspectionId,
-            item_index: item.item_index,
+            inspectionId: inspectionId,
+            itemIndex: item.itemIndex,
             description: item.description,
             situation: item.situation,
             observations: item.observations,
@@ -229,6 +233,48 @@ export async function createInspectionItems(
     return items;
   } catch (error) {
     throw new Error("Não foi possível inserir itens em uma inspeção!");
+  }
+}
+
+export async function updateInspectionAttributes(
+  inspectionId: string,
+  name: string,
+  responsible: string,
+  recordingUrl: string,
+  participants: string,
+  responsibleEmail: string
+) {
+  try {
+    const dataToUpdate: Record<string, any> = {};
+    
+    if (isNotUndefined(name)) dataToUpdate.name = name;
+    if (isNotUndefined(responsibleEmail)) dataToUpdate.responsibleEmail = responsibleEmail;
+    if (isNotUndefined(responsible)) dataToUpdate.responsible = responsible;
+    if (isNotUndefined(recordingUrl)) dataToUpdate.recordingUrl = recordingUrl;
+    if (isNotUndefined(participants)) dataToUpdate.participants = participants;
+
+    const inspection = await prisma.inspection.update({
+      where: {
+        id: inspectionId,
+      },
+      data: dataToUpdate,
+    });
+
+    if (!inspection) {
+      return null;
+    }
+
+    return {
+      id: inspection.id,
+      name: inspection.name,
+      responsibleEmail: inspection.responsibleEmail,
+      responsible: inspection.responsible,
+      recordingUrl: inspection.recordingUrl,
+      participants: inspection.participants,
+    }
+
+  } catch (error) {
+    throw error;
   }
 }
 

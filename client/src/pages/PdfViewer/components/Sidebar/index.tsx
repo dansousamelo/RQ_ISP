@@ -84,7 +84,7 @@ export function Sidebar({
 
   const navigate = useNavigate()
 
-  const { id, accessCode } = useParams()
+  const { id, userId } = useParams()
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
     useDialogControlled()
@@ -114,7 +114,7 @@ export function Sidebar({
   }, [handleUpdateDialogControlled])
 
   function backToInspection() {
-    navigate(`/inspection/${id}/${accessCode}`)
+    navigate(`/inspection/${id}/${userId}`)
   }
 
   const { dialogItemToRender } = useDialogItemToRender({
@@ -127,7 +127,7 @@ export function Sidebar({
   })
 
   function backToInspectionList() {
-    navigate(`/inspection/list/${accessCode}`)
+    navigate(`/inspection/list/${userId}`)
   }
 
   const hasHighlights = isArrayNotEmpty(highlights)

@@ -1,34 +1,34 @@
 export interface User {
   id: string;
-  access_code: string;
+  accessCode: string;
 }
 
 export interface Inspection {
   id: string;
-  user_id: string;
+  userId: string;
   name: string;
   responsible: string;
   type: Type;
-  recording_url?: string | null;
+  recordingUrl?: string | null;
   participants?: string | null;
-  responsible_email: string;
+  responsibleEmail: string;
   status: Status;
-  created_at: Datetime;
-  updated_at: Datetime;
+  createdAt: Datetime;
+  updatedAt: Datetime;
   documents?: Document[];
-  Item?: Item[];
+  item?: Item[];
 }
 export interface Document {
   id: string;
-  inspection_id: string;
+  inspectionId: string;
   name: string;
   type: string;
   url: string;
-  created_at: Datetime;
-  updated_at: Datetime;
+  createdAt: Datetime;
+  updatedAt: Datetime;
 }
 export interface Item {
-  item_index: string;
+  itemIndex: string;
   description: string;
   situation: string | null;
   observations: string;
@@ -44,7 +44,7 @@ export interface Trail {
 }
 
 export type DocumentItems = {
-  fileName: string;
-  fileUrl: string;
-  fileType: string;
+  name: string;
+  url: string;
+  type: string;
 };

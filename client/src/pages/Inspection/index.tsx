@@ -42,13 +42,14 @@ export type InspectionDialog =
   | ''
 
 export function Inspection() {
-  const { id, accessCode } = useParams()
+  const [isUpdating, setIsUpdating] = useState(false)
+  const { id, userId } = useParams()
   const navigate = useNavigate()
 
   const token = getAccessToken()
 
   const paramsToFetch = {
-    accessCode: accessCode as string,
+    userId: userId as string,
     inspectionId: id as string,
     token: token as string,
   }
@@ -72,7 +73,7 @@ export function Inspection() {
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
       label: 'Inspeções',
-      action: () => navigate(`/inspection/list/${accessCode}`),
+      action: () => navigate(`/inspection/list/${userId}`),
     },
     {
       label: headerData.name,
@@ -81,15 +82,15 @@ export function Inspection() {
   ]
 
   const backToInpsectionList = useCallback(() => {
-    navigate(`/inspection/list/${accessCode}`)
-  }, [accessCode, navigate])
+    navigate(`/inspection/list/${userId}`)
+  }, [userId, navigate])
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
     useDialogControlled()
 
   const handleDeleteTrail = (id: string) => {
     const newData = tableData.map((item) => {
-      if (item.item_index === id) {
+      if (item.itemIndex === id) {
         return { ...item, trail: null }
       }
       return item
@@ -99,7 +100,7 @@ export function Inspection() {
 
   const handleDeleteObservation = (id: string) => {
     const newData = tableData.map((item) => {
-      if (item.item_index === id) {
+      if (item.itemIndex === id) {
         return { ...item, observations: null }
       }
       return item
@@ -132,13 +133,15 @@ export function Inspection() {
     documentsUploaded: headerData?.documents
       ? formattedDocumentHeader(headerData.documents)
       : [],
-    accessCode: accessCode as string,
+    userId: userId as string,
     headerData,
     setHeaderData,
     backToInpsectionList,
     observationsData,
     setObservationsData,
     handleDeleteObservation,
+    isUpdating,
+    setIsUpdating,
   })
 
   const handleSaveAll = () => {
@@ -195,7 +198,7 @@ export function Inspection() {
               {tableData.map((item, index) => (
                 <TableRow
                   item={item}
-                  key={item.item_index}
+                  key={item.itemIndex}
                   index={index}
                   setIsEditing={setIsEditing}
                   setDialogInspectionStep={setDialogInspectionStep}
@@ -233,7 +236,7 @@ export function Inspection() {
           isDialogControlledOpen={isDialogControlledOpen}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
-          isLoadingRequisition={false}
+          isLoadingRequisition={isUpdating}
           onClose={() => {
             setEditorData('')
             setObservationsData('')

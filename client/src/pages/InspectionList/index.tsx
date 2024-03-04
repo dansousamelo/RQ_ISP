@@ -23,12 +23,12 @@ export function InpectionList() {
   const [isDeleting, setIsDeleting] = useState(false)
   const navigate = useNavigate()
 
-  const { accessCode } = useParams()
+  const { userId } = useParams()
   const token = getAccessToken() as string
 
   const { inspections, isInspectionListLoading, setInspections } =
     getInspectionListRepository({
-      accessCode: accessCode as string,
+      userId: userId as string,
       token,
     })
 
@@ -51,7 +51,7 @@ export function InpectionList() {
     try {
       setIdInspectionToDelete(idInspectionToDelete)
       deleteInspection({
-        accessCode: accessCode as string,
+        userId: userId as string,
         inspectionId: idInspectionToDelete,
         token,
       })
@@ -69,7 +69,7 @@ export function InpectionList() {
       setIsDeleting(false)
     }
   }, [
-    accessCode,
+    userId,
     handleUpdateDialogControlled,
     idInspectionToDelete,
     setInspections,
@@ -95,7 +95,7 @@ export function InpectionList() {
     uninitiated: [
       {
         label: 'Inspecionar',
-        action: (id: string) => navigate(`/inspection/${id}/${accessCode}`),
+        action: (id: string) => navigate(`/inspection/${id}/${userId}`),
       },
       {
         label: 'Excluir',
@@ -105,21 +105,19 @@ export function InpectionList() {
     initiated: [
       {
         label: 'Continuar',
-        action: (id: string) => navigate(`/inspection/${id}/${accessCode}`),
+        action: (id: string) => navigate(`/inspection/${id}/${userId}`),
       },
       { label: 'Excluir', action: (id: string) => handleDeleteInspection(id) },
     ],
     concluded: [
       {
         label: 'Visualizar',
-        action: (id: string) => navigate(`/inspection/${id}/${accessCode}`),
+        action: (id: string) => navigate(`/inspection/${id}/${userId}`),
       },
       {
         label: 'Estatísticas',
         action: (id: string, name: string, type: string) =>
-          navigate(
-            `/inspection/${id}/${name}/${type}/${accessCode}/statistics`,
-          ),
+          navigate(`/inspection/${id}/${name}/${type}/${userId}/statistics`),
       },
       {
         label: 'Excluir',
@@ -166,7 +164,7 @@ export function InpectionList() {
                           {item.name}
                         </S.TableTitleCell>
 
-                        <S.TableCell>{item.created_at}</S.TableCell>
+                        <S.TableCell>{item.createdAt}</S.TableCell>
                         <S.TableCell>
                           <S.WrapperStatusIndicator>
                             <S.StatusIndicator status={item.status} />

@@ -34,8 +34,6 @@ export function useDialogItemToRender({
   hightlightToCreate,
   createHighlight,
 }: DialogItemToRenderProps) {
-  console.log('hightlightToCreate: ', hightlightToCreate)
-
   const dialogConfig: DialogConfig = {
     confirm_highlight: {
       title: 'Revisar marcação',

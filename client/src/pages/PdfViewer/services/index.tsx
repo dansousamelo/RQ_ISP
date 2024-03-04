@@ -2,13 +2,13 @@ import { api } from '../../../lib/axios'
 
 interface RequestPostTrail {
   trailData: any
-  accessCode: string
+  userId: string
   token: string
   inspectionId: string
 }
 
 export function postTrail({
-  accessCode,
+  userId,
   inspectionId,
   token,
   trailData,
@@ -16,7 +16,7 @@ export function postTrail({
   return api.post(
     '/create-trail',
     {
-      accessCode,
+      userId,
       inspectionId,
       trailData,
     },

@@ -49,11 +49,13 @@ interface DialogItemToRenderProps {
   id: string
   handleDeleteTrail: (id: string) => void
   documentsUploaded: DocumentUploadedProps[]
-  accessCode: string
+  userId: string
   headerData: HeaderInspectionProps
   setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
   backToInpsectionList: () => void
   handleDeleteObservation: (id: string) => void
+  isUpdating: boolean
+  setIsUpdating: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function useDialogItemToRender({
@@ -69,20 +71,22 @@ export function useDialogItemToRender({
   id,
   handleDeleteTrail,
   documentsUploaded,
-  accessCode,
+  userId,
   headerData,
   setHeaderData,
   backToInpsectionList,
   observationsData,
   setObservationsData,
   handleDeleteObservation,
+  isUpdating,
+  setIsUpdating,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
   const token = getAccessToken()
 
   const itemSelected = tableData.find(
-    (item) => item.item_index === idDialogOpen,
+    (item) => item.itemIndex === idDialogOpen,
   )?.trail
 
   const updateTrailType = useCallback((value: TrailType) => {
@@ -99,7 +103,7 @@ export function useDialogItemToRender({
 
   const handleObservationsChange = useCallback(() => {
     const newData = tableData.map((item) => {
-      if (item.item_index === idDialogOpen) {
+      if (item.itemIndex === idDialogOpen) {
         return { ...item, observations: observationsData }
       }
       return item
@@ -109,7 +113,7 @@ export function useDialogItemToRender({
 
   function saveTextEditorTrail() {
     const newData = tableData.map((item) => {
-      if (item.item_index === idDialogOpen) {
+      if (item.itemIndex === idDialogOpen) {
         return { ...item, trail: editorData }
       }
       return item
@@ -182,6 +186,9 @@ export function useDialogItemToRender({
       title: 'Editar informações',
       component: (
         <EditInformationsDialog
+          inspectionId={id}
+          isUpdating={isUpdating}
+          setIsUpdating={setIsUpdating}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           headerData={headerData}
           setHeaderData={setHeaderData}
@@ -196,7 +203,7 @@ export function useDialogItemToRender({
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           headerData={headerData}
           setHeaderData={setHeaderData}
-          accessCode={accessCode}
+          userId={userId}
           inspectionId={id}
           token={token as string}
         />
@@ -236,7 +243,7 @@ export function useDialogItemToRender({
           }
           amountOfItens={tableData.length}
           idMark={idDialogOpen}
-          accessCode={accessCode}
+          userId={userId}
           inspectionId={id}
         />
       ),

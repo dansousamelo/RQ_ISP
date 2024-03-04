@@ -47,12 +47,12 @@ export function ManagementChecklist() {
         },
       })
 
-      const { token, refreshToken } = response.data.data
+      const { token, refreshToken, user } = response.data.data
 
       setAccessToken(token)
       setRefreshToken(refreshToken)
       createCookieWithExpiration()
-      navigate(`/inspection/list/${data.accessCode}`)
+      navigate(`/inspection/list/${user}`)
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         setErrorInRequest(error.response?.data.message)
