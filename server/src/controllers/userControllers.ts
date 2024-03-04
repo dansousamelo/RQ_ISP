@@ -32,7 +32,7 @@ export default {
         status: 201,
         message: "Usuário criado com sucesso!",
         data: {
-          // accessCode,
+          user: user.id,
           token,
           refreshToken,
         },
@@ -72,33 +72,37 @@ export default {
 
   async findUser(req: Request, res: Response) {
     try {
-      const accessCode = isString(req.query.accessCode)
-        ? req.query.accessCode
-        : null;
+      const  { accessCode } = req.query;
 
-      const userExists = await findUser(accessCode);
-
-      if (!userExists) {
-        return res.status(500).json({
+      if(!isString(accessCode)){
+        return res.status(400).json({
           error: true,
-          status: 500,
+          status: 400,
           message: "O código de acesso fornecido é inválido!",
           data: {},
         });
       }
 
-      const token = await generateToken(userExists.id);
-      const refreshToken = await generateRefreshToken(userExists.id);
+      const user = await findUser(accessCode);
+
+      if (!user) {
+        return res.status(404).json({
+          error: true,
+          status: 404,
+          message: "Não foi encontrado um usuário com esse código de acesso!",
+          data: {},
+        });
+      }
+
+      const token = await generateToken(user.id);
+      const refreshToken = await generateRefreshToken(user.id);
 
       return res.status(200).json({
         error: false,
         status: 200,
         message: "Usuário encontrado!",
         data: {
-          user: {
-            id: userExists.id,
-            accessCode: userExists.accessCode,
-          },
+          user: user.id,
           token,
           refreshToken,
         },
