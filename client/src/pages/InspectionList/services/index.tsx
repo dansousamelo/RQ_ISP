@@ -1,29 +1,29 @@
 import { api } from '../../../lib/axios'
 
 export async function getInspectionList({
-  accessCode,
+  userId,
   token,
 }: {
-  accessCode: string
+  userId: string
   token: string
 }) {
-  const params = { accessCode }
-  return await api.get('/list-inspections', {
+  const params = { userId }
+  return await api.get('/find-user-inspections', {
     params,
     headers: { Authorization: `Bearer ${token}` },
   })
 }
 
 export async function deleteInspection({
-  accessCode,
+  userId,
   token,
   inspectionId,
 }: {
-  accessCode: string
+  userId: string
   token: string
   inspectionId: string
 }) {
-  const params = { accessCode, inspectionId }
+  const params = { userId, inspectionId }
 
   return await api.delete('/delete-inspection', {
     params,

@@ -10,7 +10,7 @@ export const LABELS = [
   'Não conforme',
   'Não se aplica',
 ]
-export const VALUES = [12, 19, 3, 5, 2]
+export const VALUES = [12, 19, 3, 5]
 
 export const MOCK_SUBTYPES_DATA = [
   {

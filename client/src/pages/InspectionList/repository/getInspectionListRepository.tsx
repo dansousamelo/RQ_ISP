@@ -7,26 +7,26 @@ export interface InspectionItem {
   id: string
   name: string
   type: InspectionItemType
-  created_at: string
+  createdAt: string
   status: 'uninitiated' | 'initiated' | 'concluded'
 }
 
 export function getInspectionListRepository({
-  accessCode,
+  userId,
   token,
 }: {
-  accessCode: string
+  userId: string
   token: string
 }) {
   const [inspections, setInspections] = useState<InspectionItem[]>([])
   async function fetchInspectionList(): Promise<void> {
-    const response = await getInspectionList({ accessCode, token })
+    const response = await getInspectionList({ userId, token })
 
     setInspections(response.data.data.inspections)
   }
 
   const { isFetching: isInspectionListLoading } = useQuery(
-    [`inspectionList-${accessCode}`],
+    [`inspectionList-${userId}`],
     fetchInspectionList,
     {
       refetchOnWindowFocus: false,

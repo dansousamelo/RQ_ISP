@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { findUser, createUser } from "../services/userServices";
+import { findUser, createUser, findUserById } from "../services/userServices";
 import { postDocuments } from "../services/fileServices";
 import { generateToken, generateRefreshToken } from "../services/authServices";
 import {
@@ -10,7 +10,8 @@ import {
   createInspectionItems,
   createInspection,
   destroiInspection,
-  findInspection,
+  updateInspectionAttributes,
+  findInspectionById,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -22,23 +23,22 @@ import {
   isValidInspectionEmail,
   isValidInspectionDocument,
 } from "./interfaces/typeGuards";
-import { createInspectionTrail } from "../services/createInspectionTrailService";
 
 export default {
-  async listInspections(req: Request, res: Response) {
+  async findUserInspections(req: Request, res: Response) {
     try {
-      const { accessCode } = req.query;
+      const { userId } = req.query;
 
-      if (!isString(accessCode)) {
+      if (!isString(userId)) {
         return res.status(400).json({
           error: true,
           status: 400,
-          message: "Fornaça um código de acesso válido!",
+          message: "Fornaça um id de usuário válido!",
           data: {},
         });
       }
 
-      const user = await findUser(accessCode);
+      const user = await findUserById(userId);
 
       if (!user) {
         return res.status(404).json({
@@ -50,15 +50,6 @@ export default {
       }
 
       const inspections = await findInspectionsListByUserId(user.id);
-
-      if (!inspections) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Inspeções não encontradas!",
-          data: {},
-        });
-      }
 
       return res.status(200).json({
         error: false,
@@ -80,27 +71,7 @@ export default {
 
   async findInspectionItems(req: Request, res: Response) {
     try {
-      const { accessCode, inspectionId } = req.query;
-
-      if (!isString(accessCode)) {
-        return res.status(400).json({
-          error: true,
-          status: 400,
-          message: "Forneça um código de acesso válido!",
-          data: {},
-        });
-      }
-
-      const user = await findUser(accessCode);
-
-      if (!user) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Usuário não encontrado!",
-          data: {},
-        });
-      }
+      const { inspectionId } = req.query;
 
       if (!isString(inspectionId)) {
         return res.status(400).json({
@@ -112,8 +83,7 @@ export default {
       }
 
       const inspectionItems = await findInspectionItemsByInspectionId(
-        inspectionId,
-        user.id
+        inspectionId
       );
 
       if (!inspectionItems) {
@@ -145,27 +115,7 @@ export default {
 
   async findInspectionAttributes(req: Request, res: Response) {
     try {
-      const { accessCode, inspectionId } = req.query;
-
-      if (!isString(accessCode)) {
-        return res.status(400).json({
-          error: true,
-          status: 400,
-          message: "Forneça um código de acesso válido!",
-          data: {},
-        });
-      }
-
-      const user = await findUser(accessCode);
-
-      if (!user) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Usuário não encontrado!",
-          data: {},
-        });
-      }
+      const { inspectionId } = req.query;
 
       if (!isString(inspectionId)) {
         return res.status(400).json({
@@ -176,10 +126,7 @@ export default {
         });
       }
 
-      const inspectionAttributes = await findInspectionAttributes(
-        inspectionId,
-        user.id
-      );
+      const inspectionAttributes = await findInspectionAttributes(inspectionId);
 
       if (!inspectionAttributes) {
         return res.status(404).json({
@@ -207,18 +154,20 @@ export default {
       });
     }
   },
+
   async createFirstInspection(req: Request, res: Response) {
     try {
       const {
-        inspection_type,
+        inspectionType,
         name,
         responsible,
-        responsible_email,
+        responsibleEmail,
         participants,
-        recording_url,
+        recordingUrl,
         documents,
         accessCode,
       } = req.body;
+
 
       if ((await findUser(accessCode)) !== null) {
         return res.status(400).json({
@@ -232,8 +181,8 @@ export default {
       try {
         isValidInspectionName(name);
         isValidInspectionResponsible(responsible);
-        isValidInspectionEmail(responsible_email);
-        isValidInspectionType(inspection_type);
+        isValidInspectionEmail(responsibleEmail);
+        isValidInspectionType(inspectionType);
       } catch (error) {
         return res.status(400).json({
           error: true,
@@ -257,40 +206,33 @@ export default {
         }
       }
 
-      const userExists = await createUser(accessCode);
+      const user = await createUser(accessCode);
 
-      const inspectionsExists = await createInspection(
-        userExists.id,
+      const inspection = await createInspection(
+        user.id,
         name,
         responsible,
-        inspection_type,
-        recording_url,
+        inspectionType,
+        recordingUrl,
         participants,
-        responsible_email
+        responsibleEmail
       );
 
-      const documentsExists = await postDocuments(
-        inspectionsExists.id,
-        documents
-      );
+      await postDocuments(inspection.id, documents);
 
-      const itemsExist = await createInspectionItems(
-        inspectionsExists.id,
-        inspection_type
-      );
+      await createInspectionItems(inspection.id, inspectionType);
 
-      const access_token = await generateToken(userExists.id);
-      const refreshToken = await generateRefreshToken(userExists.id);
+      const accessToken = await generateToken(user.id);
+      const refreshToken = await generateRefreshToken(user.id);
 
       return res.status(201).json({
         error: false,
         status: 201,
         message: "Inspeção criada com sucesso!",
         data: {
-          inspection: inspectionsExists.id,
-          // documents: documentsExists,
-          // items,
-          token: access_token,
+          user: user.id,
+          inspection: inspection.id,
+          token: accessToken,
           refreshToken,
         },
       });
@@ -307,21 +249,21 @@ export default {
   async createInspection(req: Request, res: Response) {
     try {
       const {
-        inspection_type,
+        inspectionType,
         name,
         responsible,
-        responsible_email,
+        responsibleEmail,
         participants,
-        recording_url,
+        recordingUrl,
         documents,
-        accessCode,
+        userId,
       } = req.body;
 
       try {
         isValidInspectionName(name);
         isValidInspectionResponsible(responsible);
-        isValidInspectionEmail(responsible_email);
-        isValidInspectionType(inspection_type);
+        isValidInspectionEmail(responsibleEmail);
+        isValidInspectionType(inspectionType);
       } catch (error) {
         return res.status(400).json({
           error: true,
@@ -331,16 +273,16 @@ export default {
         });
       }
 
-      if (!isString(accessCode)) {
+      if (!isString(userId)) {
         return res.status(400).json({
           error: true,
           status: 400,
-          message: "Fornaça um código de acesso válido!",
+          message: "Fornaça um id de usuário válido!",
           data: {},
         });
       }
 
-      if (documents && documents.length > 0) {
+      if (documents && isArrayNotEmpty(documents)) {
         const isValidDocuments = documents.every(isValidInspectionDocument);
 
         if (!isValidDocuments) {
@@ -354,7 +296,7 @@ export default {
         }
       }
 
-      const user = await findUser(accessCode);
+      const user = await findUserById(userId);
 
       if (!user) {
         return res.status(404).json({
@@ -365,28 +307,26 @@ export default {
         });
       }
 
-      const inspectionsExists = await createInspection(
+      const inspection = await createInspection(
         user.id,
         name,
         responsible,
-        inspection_type,
-        recording_url,
+        inspectionType,
+        recordingUrl,
         participants,
-        responsible_email
+        responsibleEmail
       );
 
-      await postDocuments(inspectionsExists.id, documents);
+      await postDocuments(inspection.id, documents);
 
-      await createInspectionItems(inspectionsExists.id, inspection_type);
+      await createInspectionItems(inspection.id, inspectionType);
 
       return res.status(201).json({
         error: false,
         status: 201,
         message: "Inspeção criada com sucesso!",
         data: {
-          inspection: inspectionsExists.id,
-          // documents: documentsExists,
-          // items,
+          inspection: inspection.id,
         },
       });
     } catch (error) {
@@ -399,39 +339,64 @@ export default {
     }
   },
 
-  async createTrail(req: Request, res: Response) {
+  async updateInspectionAttributes(req: Request, res: Response) {
     try {
-      const { trailData, inspectionId, accessCode } = req.body;
+      const {
+        id,
+        name,
+        responsible,
+        recordingUrl,
+        participants,
+        responsibleEmail,
+      } = req.body.inspection;
 
-      if (!isString(accessCode)) {
+      if (!isString(id)) {
         return res.status(400).json({
           error: true,
           status: 400,
-          message: "Fornaça um código de acesso válido!",
+          message: "Fornaça um id de inspeção válido!",
           data: {},
         });
       }
 
-      const user = await findUser(accessCode);
+      try {
+        isValidInspectionName(name);
+        isValidInspectionResponsible(responsible);
+        isValidInspectionEmail(responsibleEmail);
+      } catch (error) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: getErrorMessage(error),
+          data: {},
+        });
+      }
 
-      if (!user) {
+      const inspection = await updateInspectionAttributes(
+        id,
+        name,
+        responsible,
+        recordingUrl,
+        participants,
+        responsibleEmail
+      );
+
+      if (!inspection) {
         return res.status(404).json({
           error: true,
           status: 404,
-          message: "Usuário não encontrado!",
+          message:
+            "Não foi possível encontrar uma inspeção com o id fornecido!",
           data: {},
         });
       }
 
-      const trail = await createInspectionTrail(inspectionId, trailData);
-
-      return res.status(201).json({
-        error: false,
-        status: 201,
-        message: "Marcação criada com sucesso",
+      return res.status(200).json({
+        error: true,
+        status: 200,
+        message: "Atributos da inspeção atualizados com sucesso",
         data: {
-          inspection: inspectionId,
-          trail,
+          inspection,
         },
       });
     } catch (error) {
@@ -446,16 +411,7 @@ export default {
 
   async deleteInspection(req: Request, res: Response) {
     try {
-      const { accessCode, inspectionId } = req.query;
-
-      if (!isString(accessCode)) {
-        return res.status(400).json({
-          error: true,
-          status: 400,
-          message: "Fornaça um código de acesso válido!",
-          data: {},
-        });
-      }
+      const { inspectionId } = req.query;
 
       if (!isString(inspectionId)) {
         return res.status(400).json({
@@ -466,18 +422,7 @@ export default {
         });
       }
 
-      const user = await findUser(accessCode);
-
-      if (!user) {
-        return res.status(404).json({
-          error: true,
-          status: 404,
-          message: "Usuário não encontrado!",
-          data: {},
-        });
-      }
-
-      const inspectionsExists = await findInspection(inspectionId, user.id);
+      const inspectionsExists = await findInspectionById(inspectionId);
 
       if (!inspectionsExists) {
         return res.status(404).json({

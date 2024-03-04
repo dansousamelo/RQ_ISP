@@ -30,7 +30,7 @@ interface ChooseDocumentMarkDialogProps {
   id: string
   amountOfItens: number
   idMark: string
-  accessCode: string
+  userId: string
   inspectionId: string
 }
 
@@ -41,7 +41,7 @@ export function ChooseDocumentMarkDialog({
   hasTrailFilled,
   idMark,
   amountOfItens,
-  accessCode,
+  userId,
   inspectionId,
 }: ChooseDocumentMarkDialogProps) {
   const {
@@ -61,7 +61,7 @@ export function ChooseDocumentMarkDialog({
 
     const selectedValueEncoded = data.selectedValue.replace(/\//g, '%2F')
     navigate(
-      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${accessCode}/${inspectionId}/${idItemSelected}/mark`,
+      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${userId}/${inspectionId}/${idItemSelected}/mark`,
     )
   }
   return (

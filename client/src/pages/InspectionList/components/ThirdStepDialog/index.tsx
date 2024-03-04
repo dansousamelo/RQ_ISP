@@ -22,7 +22,7 @@ import { Spinner } from '../../../../components/Spinner'
 export function ThirdStepDialog() {
   const [isCreatingInspection, setIsCreatingInspection] = useState(false)
 
-  const { accessCode } = useParams()
+  const { userId } = useParams()
 
   const navigate = useNavigate()
 
@@ -48,47 +48,14 @@ export function ThirdStepDialog() {
   const token = getAccessToken()
 
   const dataToSend = {
-    inspection_type: inspectionChecklistType,
-    responsible: secondStepData.responsable,
-    recording_url: secondStepData.record_link,
-    participants: secondStepData.participants,
+    inspectionType: inspectionChecklistType,
     name: secondStepData.name,
-    responsible_email: secondStepData.email,
+    responsible: secondStepData.responsable,
+    responsibleEmail: secondStepData.email,
+    participants: secondStepData.participants,
+    recordingUrl: secondStepData.record_link,
     documents: convertToCustomFormat(filesUploaded),
-    accessCode,
-  }
-  const a = {
-    error: false,
-    status: 200,
-    message: 'Inspeção criada com sucesso!',
-    data: {
-      inspection: {
-        id: 'b2932e97-6811-4289-97a3-d0f80ec71500',
-        user_id: 'f886c348-f409-47db-8ad6-1296c7ed8179',
-        name: 'Inspeção Sabin',
-        responsible: 'daniel',
-        type: 'privacyRequirement',
-        recording_url: '',
-        participants: '',
-        responsible_email: '[b@mail.com](mailto:b@mail.com)',
-      },
-      documents: [
-        {
-          id: '2b345dd2-e388-4370-ba7f-e80516b5acac',
-          inspection_id: 'b2932e97-6811-4289-97a3-d0f80ec71500',
-          name: 'EDITAL CNU TI.pdf',
-          type: 'application/pdf',
-          url: 'https://rqs-bucket-test.s3.amazonaws.com/0406f093-f693-415d-9410-4240d84f9103_EDITAL CNU TI.pdf',
-        },
-        {
-          id: 'bdd5a2e8-8749-4e73-9250-b12ce1d054a5',
-          inspection_id: 'b2932e97-6811-4289-97a3-d0f80ec71500',
-          name: 'JORNADA-2.png',
-          type: 'image/png',
-          url: 'https://rqs-bucket-test.s3.amazonaws.com/fd319a7f-c399-4a65-b4fb-e516768bc0e5_JORNADA-2.png',
-        },
-      ],
-    },
+    userId,
   }
 
   async function handleCreateInspection(dataToSend: any) {
@@ -99,9 +66,9 @@ export function ThirdStepDialog() {
         token,
       })
 
-      const { inspection } = response.data.data
+      const { inspection, user } = response.data.data
 
-      navigate(`/inspection/${inspection}/${accessCode}`)
+      navigate(`/inspection/${inspection}/${user}`)
 
       SuccessToast('Inspeção criada com sucesso')
       setSecondStepData({} as SecondStepData)

@@ -51,7 +51,7 @@ const HighlightPopup = ({ comment }: HighlightPopUp) =>
   ) : null
 
 const PdfViewer = () => {
-  const { pdf, amountOfItens, idMark, accessCode, inspectionId, documentId } =
+  const { pdf, amountOfItens, idMark, userId, inspectionId, documentId } =
     useParams()
 
   const selectedValueDecoded = decodeURIComponent(pdf as string)
@@ -65,8 +65,6 @@ const PdfViewer = () => {
   const [hightlightToCreate, setHightlightToCreate] = useState(
     {} as Omit<HighlightProps, 'id'>,
   )
-
-  console.log('documentId: ', documentId)
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
     useDialogControlled()
@@ -93,7 +91,7 @@ const PdfViewer = () => {
     try {
       setIsCreatingHighlight(true)
       const response = await postTrail({
-        accessCode: accessCode as string,
+        userId: userId as string,
         inspectionId: inspectionId as string,
         token,
         trailData: { ...hightlightToCreate },
@@ -107,7 +105,7 @@ const PdfViewer = () => {
     } finally {
       setIsCreatingHighlight(false)
     }
-  }, [accessCode, highlights, hightlightToCreate, inspectionId, token])
+  }, [userId, highlights, hightlightToCreate, inspectionId, token])
 
   const { dialogItemToRender } = useDialogItemToRender({
     dialogInspectionStep,

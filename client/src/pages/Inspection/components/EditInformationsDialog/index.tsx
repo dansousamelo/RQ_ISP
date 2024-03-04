@@ -1,11 +1,14 @@
 import { Input } from '../../../../components/Input'
-import { SecondStepData } from '../../../../contexts/LoggedInspection'
 import * as S from './styles'
 import * as z from 'zod'
 import { Info } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { HeaderInspectionProps } from '../../repository/getInspectionHeaderRepository'
+import { putInspectionHeader } from '../../services'
+import { getAccessToken } from '../../../../utils/cookies'
+import { ErrorToast } from '../../../../components/Toast'
+import { Spinner } from '../../../../components/Spinner'
 
 const secondStepSchema = z.object({
   name: z.string().min(3, 'Por favor informe um nome válido'),
@@ -31,15 +34,23 @@ interface SecondStepSchemaProps {
 
 interface EditInformationsDialogProps {
   headerData: HeaderInspectionProps
+  inspectionId: string
   handleUpdateDialogControlled: (open: boolean) => void
   setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
+  isUpdating: boolean
+  setIsUpdating: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function EditInformationsDialog({
   headerData,
   handleUpdateDialogControlled,
   setHeaderData,
+  inspectionId,
+  setIsUpdating,
+  isUpdating,
 }: EditInformationsDialogProps) {
+  const token = getAccessToken()
+
   const {
     handleSubmit,
     register,
@@ -51,22 +62,40 @@ export function EditInformationsDialog({
     defaultValues: {
       name: headerData.name || '',
       responsable: headerData.responsible || '',
-      email: headerData.responsible_email || '',
+      email: headerData.responsibleEmail || '',
       participants: headerData.participants || '',
-      record_link: headerData.recording_url || '',
+      record_link: headerData.recordingUrl || '',
     },
   })
 
-  const handleSubmitForm = (data: any) => {
-    setHeaderData((prev: any) => ({
-      ...prev,
+  const handleSubmitForm = async (data: any) => {
+    const dataToUpdate = {
       name: data.name,
       responsible: data.responsable,
-      email: data.email,
+      responsibleEmail: data.email,
       participants: data.participants,
-      recording_url: data.record_link,
-    }))
-    console.log(data)
+      recordingUrl: data.record_link,
+    }
+    setIsUpdating(true)
+    try {
+      await putInspectionHeader({
+        inspection: {
+          ...dataToUpdate,
+          id: inspectionId,
+        },
+        token: token as string,
+      })
+
+      setHeaderData((prev) => ({
+        ...prev,
+        ...dataToUpdate,
+      }))
+    } catch (err) {
+      ErrorToast('Não foi possível atualizar, tente novamente mais tarde.')
+    } finally {
+      setIsUpdating(false)
+      handleUpdateDialogControlled(false)
+    }
   }
 
   const INPUT_OPTIONS = [
@@ -144,10 +173,31 @@ export function EditInformationsDialog({
       </S.InputWrapper>
 
       <S.WrapperButton>
-        <S.BackButtonStyled onClick={() => handleUpdateDialogControlled(false)}>
+        <S.BackButtonStyled
+          type="button"
+          onClick={
+            !isUpdating ? () => handleUpdateDialogControlled(false) : undefined
+          }
+        >
           Voltar
         </S.BackButtonStyled>
-        <S.ButtonStyled type="submit">Salvar</S.ButtonStyled>
+        <S.ButtonStyled disabled={isUpdating} type="submit">
+          {isUpdating ? (
+            <div
+              style={{
+                display: 'flex',
+                gap: '4px',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              Carregando
+              <Spinner />
+            </div>
+          ) : (
+            'Salvar'
+          )}
+        </S.ButtonStyled>
       </S.WrapperButton>
     </form>
   )

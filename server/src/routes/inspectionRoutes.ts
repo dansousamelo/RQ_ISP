@@ -17,23 +17,28 @@ router.post(
   inspectionControllers.createInspection
 );
 
-router.post("/create-trail", verifyToken, inspectionControllers.createTrail);
-
 // Get routes
 router.get(
-  "/list-inspections",
+  "/find-user-inspections",
   verifyToken,
-  inspectionControllers.listInspections
+  inspectionControllers.findUserInspections
 );
 router.get(
-  "/find-inspection",
+  "/find-inspection-items",
   verifyToken,
   inspectionControllers.findInspectionItems
 );
 router.get(
-  "/find-inspection-attribute",
+  "/find-inspection-attributes",
   verifyToken,
   inspectionControllers.findInspectionAttributes
+);
+
+// Update Routes
+router.put(
+  "/update-inspection-attributes",
+  verifyToken,
+  inspectionControllers.updateInspectionAttributes
 );
 
 // Delete Routes
