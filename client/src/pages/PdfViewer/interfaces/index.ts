@@ -25,7 +25,7 @@ export interface ContentProps {
 
 export interface HighlightProps {
   content: ContentProps
-  position: any
+  position: PositionProps
   comment: CommentProps
   id: string
 }
