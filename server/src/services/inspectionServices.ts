@@ -4,7 +4,7 @@ import { inspectionTemplates } from "./populateInspectionItemsService";
 
 import { formatDataWithHours, formatDate } from "../utils/formatDatetime";
 
-import { Inspection } from "../interfaces/types";
+import { Inspection, InspectionStatus } from "../interfaces/types";
 import {
   InspectionsResult,
   ItemsResult,
@@ -15,8 +15,9 @@ import {
 import {
   isArrayEmpty,
   isArrayNotEmpty,
-  isNotUndefined,
+  isString,
 } from "../interfaces/typeGuards";
+import { createOrUpdateTextTrail } from "./trailServices";
 
 export async function findInspectionById(
   inspectionId: string
@@ -67,24 +68,40 @@ export async function findInspectionsListByUserId(
   }
 }
 
-function getTrailData(trails: any[]) {
-  if (!trails || isArrayEmpty(trails)) {
-    return null;
+async function findTrailByItemIndex(
+  inspectionId: string,
+  itemIndex: string
+): Promise<any | null> {
+  const textTrail = await prisma.textTrail.findFirst({
+    where: {
+      inspectionId,
+      itemIndex,
+    },
+  });
+
+  if (textTrail) {
+    return textTrail.text;
   }
 
-  return trails.map((trail: any) => {
-    if (trail.documentTrailPostion && trail.documentTrailPostion.pageNumber) {
-      return {
-        id: trail.id,
-        text: trail.text,
-        pageNumber: trail.documentTrailPostion.pageNumber,
-      };
-    } else {
-      return {
-        trail: trail.text,
-      };
-    }
+  const documentTrails = await prisma.documentTrail.findMany({
+    where: {
+      inspectionId,
+      itemIndex,
+    },
+    include: {
+      documentTrailPostion: true,
+    },
   });
+
+  if (isArrayNotEmpty(documentTrails)) {
+    return documentTrails.map((documentTrail: any) => ({
+      id: documentTrail.id,
+      text: documentTrail.text,
+      pageNumber: documentTrail.documentTrailPostion.pageNumber,
+    }));
+  }
+
+  return null;
 }
 
 export async function findInspectionItemsByInspectionId(
@@ -97,12 +114,6 @@ export async function findInspectionItemsByInspectionId(
       },
       include: {
         item: true,
-        textTrail: true,
-        documentTrail: {
-          include: {
-            documentTrailPostion: true,
-          },
-        },
       },
     });
 
@@ -110,24 +121,23 @@ export async function findInspectionItemsByInspectionId(
       return null;
     }
 
-    const trails = isArrayNotEmpty(inspection.textTrail)
-      ? inspection.textTrail
-      : inspection.documentTrail;
+    const itemsExists: ItemsResult[] = await Promise.all(
+      inspection.item.map(async (item: any) => {
+        const itemTrails = await findTrailByItemIndex(
+          inspectionId,
+          item.itemIndex
+        );
 
-    const itemsExists: ItemsResult[] = inspection.item.map((item: any) => {
-      const itemTrails = getTrailData(
-        trails.filter((trail: any) => trail.itemIndex === item.itemIndex)
-      );
-
-      return {
-        itemIndex: item.itemIndex,
-        situation: item.situation,
-        category: item.category,
-        description: item.description,
-        observations: item.observations,
-        trail: itemTrails,
-      };
-    });
+        return {
+          itemIndex: item.itemIndex,
+          situation: item.situation,
+          category: item.category,
+          description: item.description,
+          observations: item.observations,
+          trail: itemTrails,
+        };
+      })
+    );
 
     itemsExists.sort((a, b) => parseInt(a.itemIndex) - parseInt(b.itemIndex));
 
@@ -274,6 +284,118 @@ export async function updateInspectionAttributes(
       recordingUrl: inspection.recordingUrl,
       participants: inspection.participants,
     };
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteTrailOnSavingInspection(
+  inspectionId: string,
+  itemIndex: string
+) {
+  try {
+    const existingDocumentTrails = await prisma.documentTrail.findMany({
+      where: {
+        inspectionId,
+        itemIndex,
+      },
+    });
+    
+    if (isArrayNotEmpty(existingDocumentTrails)) {
+      await prisma.documentTrail.deleteMany({
+        where: {
+          id: {
+            in: existingDocumentTrails.map((trail) => trail.id),
+          },
+        },
+      });
+    }
+
+    const existingTextTrail = await prisma.textTrail.findFirst({
+      where: {
+        inspectionId,
+        itemIndex,
+      },
+    });
+
+    if (existingTextTrail) {
+      await prisma.textTrail.delete({
+        where: {
+          id: existingTextTrail.id,
+        },
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function updateInspectionItems(
+  itemsData: any[],
+  inspectionStatus: InspectionStatus,
+  inspectionId: string
+) {
+  try {
+    const existingInspection = await prisma.inspection.findUnique({
+      where: {
+        id: inspectionId,
+      },
+    });
+
+    if (!existingInspection) {
+      throw new Error("Inspeção não encontrada.");
+    }
+
+    await prisma.inspection.update({
+      where: {
+        id: existingInspection.id,
+      },
+      data: {
+        status: inspectionStatus,
+      },
+    });
+
+    await Promise.all(
+      itemsData.map(async (item) => {
+        const existingItem = await prisma.item.findFirst({
+          where: {
+            inspectionId,
+            itemIndex: item.itemIndex,
+          },
+        });
+
+        if (!existingItem) {
+          throw new Error(
+            `Item com itemIndex ${item.itemIndex} não encontrado.`
+          );
+        }
+
+        await prisma.item.update({
+          where: {
+            id: existingItem.id,
+          },
+          data: {
+            situation: item.situation,
+            observations: item.observations,
+          },
+        });
+
+
+        if (item.trail === null) {
+          await deleteTrailOnSavingInspection(inspectionId, item.itemIndex);
+        }
+
+        if (isString(item.trail)) {
+          const a = await createOrUpdateTextTrail(
+            inspectionId,
+            item.itemIndex,
+            item.trail
+          );
+        }
+      })
+    );
+
+    return "Itens da inspeção atualizados com sucesso.";
   } catch (error) {
     throw error;
   }
