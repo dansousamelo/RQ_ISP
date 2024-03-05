@@ -16,7 +16,6 @@ export default {
       const { documentId } = req.query;
 
       if (!isString(documentId)) {
-        console.log(documentId);
         return res.status(400).json({
           error: true,
           status: 400,
@@ -25,8 +24,6 @@ export default {
         });
       }
       const trails = await findDocumentTrails(documentId);
-
-      console.log(trails);
 
       return res.status(200).json({
         error: false,
