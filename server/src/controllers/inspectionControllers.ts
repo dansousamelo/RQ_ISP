@@ -12,6 +12,7 @@ import {
   destroiInspection,
   updateInspectionAttributes,
   findInspectionById,
+  updateInspectionItems,
 } from "../services/inspectionServices";
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -23,6 +24,7 @@ import {
   isValidInspectionEmail,
   isValidInspectionDocument,
 } from "./interfaces/typeGuards";
+import { handleInspectionStatus } from "../utils/handleInspectionStatus";
 
 export default {
   async findUserInspections(req: Request, res: Response) {
@@ -167,7 +169,6 @@ export default {
         documents,
         accessCode,
       } = req.body;
-
 
       if ((await findUser(accessCode)) !== null) {
         return res.status(400).json({
@@ -398,6 +399,48 @@ export default {
         data: {
           inspection,
         },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
+
+  async saveInspection(req: Request, res: Response) {
+    try {
+      const { items, inspectionId, inspectionStatus } = req.body;
+
+      if (!isString(inspectionId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um id de inspeção válido!",
+          data: {},
+        });
+      }
+
+      if(!isString(inspectionStatus)){
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Fornaça um status de inspeção válido!",
+          data: {},
+        });
+      }
+
+      const handledInspectionStatus = handleInspectionStatus(inspectionStatus);
+
+      await updateInspectionItems(items, handledInspectionStatus, inspectionId);
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        message: "Itens da inspeção atualizados com sucesso",
+        data: {},
       });
     } catch (error) {
       return res.status(500).json({

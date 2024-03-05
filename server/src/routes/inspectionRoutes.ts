@@ -40,6 +40,11 @@ router.put(
   verifyToken,
   inspectionControllers.updateInspectionAttributes
 );
+router.put(
+  "/save-inspection",
+  verifyToken,
+  inspectionControllers.saveInspection
+);
 
 // Delete Routes
 router.delete(

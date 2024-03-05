@@ -1,3 +1,5 @@
+import { CONCLUDED, INITIATED, UNINITIATED } from "../constants/constants";
+
 export interface User {
   id: string;
   accessCode: string;
@@ -48,3 +50,5 @@ export type DocumentItems = {
   url: string;
   type: string;
 };
+
+export type InspectionStatus = typeof UNINITIATED | typeof INITIATED | typeof CONCLUDED;
