@@ -181,13 +181,15 @@ async function createDocumentTrailInstance(
   itemIndex: string,
   text: string
 ) {
+  const cleanedText = text.replace(/\u0000/g, '');
+
   try {
     const createdTrail = await prisma.documentTrail.create({
       data: {
         inspectionId: inspectionId,
         documentId: documentId,
         itemIndex: itemIndex,
-        text: text,
+        text: cleanedText, 
       },
     });
 
