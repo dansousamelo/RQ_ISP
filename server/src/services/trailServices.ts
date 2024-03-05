@@ -116,25 +116,46 @@ export async function findDocumentTrailById(trailId: string) {
   }
 }
 
-export async function createTextTrail(
+export async function createOrUpdateTextTrail(
   inspectionId: string,
   itemIndex: string,
   trailData: string
 ) {
   try {
-    const trail = await prisma.textTrail.create({
-      data: {
+    const existingTextTrail = await prisma.textTrail.findFirst({
+      where: {
         inspectionId: inspectionId,
         itemIndex: itemIndex,
-        text: trailData,
       },
     });
 
-    return trail.id;
+    if (existingTextTrail) {
+      const updatedTextTrail = await prisma.textTrail.update({
+        where: {
+          id: existingTextTrail.id,
+        },
+        data: {
+          text: trailData,
+        },
+      });
+
+      return updatedTextTrail.id;
+    } else {
+      const newTextTrail = await prisma.textTrail.create({
+        data: {
+          inspectionId: inspectionId,
+          itemIndex: itemIndex,
+          text: trailData,
+        },
+      });
+
+      return newTextTrail.id;
+    }
   } catch (error) {
     throw error;
   }
 }
+
 
 export async function createDocumentTrail(
   inspectionId: string,
