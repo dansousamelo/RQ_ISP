@@ -44,6 +44,7 @@ export const Description = styled.p`
 
 export const SaveButton = styled(PrimaryButton)`
   position: relative;
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.neutral} !important;
   background-color: ${({ theme }) => theme.colors.blue500} !important;
   text-align: center !important;
@@ -59,7 +60,7 @@ export const SaveButton = styled(PrimaryButton)`
 
 export const CancelButton = styled(PrimaryButton)`
   position: relative;
-
+  cursor: pointer;
   background-color: inherit;
   text-align: center !important;
   color: ${({ theme }) => theme.colors.error700} !important;
