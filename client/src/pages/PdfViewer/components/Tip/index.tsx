@@ -55,6 +55,11 @@ export class Tip extends Component<Props, State> {
               onConfirm({ text, emoji })
             }}
           >
+            <div style={{ marginBottom: '16px' }}>
+              <span style={{ fontWeight: '500' }}>
+                Número do item da inspeção
+              </span>
+            </div>
             <div>
               <textarea
                 placeholder="Digite o número do seu item"

@@ -32,6 +32,7 @@ interface ChooseDocumentMarkDialogProps {
   idMark: string
   userId: string
   inspectionId: string
+  handleSaveAll: () => Promise<void>
 }
 
 export function ChooseDocumentMarkDialog({
@@ -42,6 +43,7 @@ export function ChooseDocumentMarkDialog({
   idMark,
   amountOfItens,
   userId,
+  handleSaveAll,
   inspectionId,
 }: ChooseDocumentMarkDialogProps) {
   const {
@@ -63,6 +65,8 @@ export function ChooseDocumentMarkDialog({
     navigate(
       `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${userId}/${inspectionId}/${idItemSelected}/mark`,
     )
+
+    handleSaveAll()
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

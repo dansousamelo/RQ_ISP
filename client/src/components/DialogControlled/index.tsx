@@ -38,7 +38,7 @@ export function DialogControlled({
     dialogItemToRender.marginTopWrapperButton || '32px'
 
   function handleOutsideClick() {
-    if (onClose) onClose()
+    if (onClose && !isLoadingRequisition) onClose()
     if (!isLoadingRequisition) {
       handleUpdateDialogControlled(false)
     }
@@ -78,6 +78,7 @@ export function DialogControlled({
 
   const renderButton = (button: ButtonProps) => {
     const canShowSpinnerLoading = isLoadingRequisition && button.id !== 'back'
+
     const commonButtonProps = {
       key: button.id,
       variant: button.variant,

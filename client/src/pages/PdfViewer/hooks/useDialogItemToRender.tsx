@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 import { DialogConfig } from '../../InspectionList/hooks/useDialogItemToRender'
 import { HighlightProps } from '../interfaces'
+import { defaultTheme } from '../../../styles/themes/default'
 
 export type InspectionPDFMarkDialog = 'confirm_highlight' | ''
 
@@ -49,6 +50,7 @@ export function useDialogItemToRender({
         </Container>
       ),
       width: '27rem',
+
       buttonConfig: [
         {
           id: 'back',
