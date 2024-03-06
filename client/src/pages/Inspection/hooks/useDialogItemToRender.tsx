@@ -14,6 +14,9 @@ import { TableDataProps } from '../repository/getInspectionItemsRepository'
 import { HeaderInspectionProps } from '../repository/getInspectionHeaderRepository'
 import { ObservationsDialog } from '../components/ObservationsDialog'
 import { getAccessToken } from '../../../utils/cookies'
+import { DialogStatus } from '../../../components/DialogStatus'
+import { useTitleDialogStatus } from '../../../components/DialogStatus/hooks/useTitleDialogStatus'
+import { calculateSituationPercentage } from '../helpers'
 
 export interface DocumentUploadedProps {
   id: string
@@ -56,6 +59,7 @@ interface DialogItemToRenderProps {
   handleDeleteObservation: (id: string) => void
   isUpdating: boolean
   setIsUpdating: React.Dispatch<React.SetStateAction<boolean>>
+  handleSaveAll: () => Promise<void>
 }
 
 export function useDialogItemToRender({
@@ -80,8 +84,12 @@ export function useDialogItemToRender({
   handleDeleteObservation,
   isUpdating,
   setIsUpdating,
+  handleSaveAll,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
+
+  const isInspectionCompleted =
+    calculateSituationPercentage(tableData) === '100'
 
   const token = getAccessToken()
 
@@ -122,6 +130,11 @@ export function useDialogItemToRender({
     setEditorData('')
     handleUpdateDialogControlled(false)
   }
+
+  const titleFormatted = useTitleDialogStatus({
+    fullString: 'Inspeção salva com sucesso!',
+    substring: 'sucesso!',
+  })
 
   const dialogConfig: DialogConfig = {
     choose_trail: {
@@ -222,7 +235,7 @@ export function useDialogItemToRender({
         },
         {
           id: 'continue',
-          label: 'Adicionar marcação',
+          label: 'Gerenciar marcação',
           variant: 'primary',
           action: () => {
             setDialogInspectionStep('choose_document_mark')
@@ -245,6 +258,7 @@ export function useDialogItemToRender({
           idMark={idDialogOpen}
           userId={userId}
           inspectionId={id}
+          handleSaveAll={handleSaveAll}
         />
       ),
       width: '28rem',
@@ -321,6 +335,33 @@ export function useDialogItemToRender({
           },
           backgroundColor: defaultTheme.colors.error700,
           color: defaultTheme.colors.neutral,
+        },
+      ],
+    },
+    save_inspection: {
+      component: (
+        <DialogStatus.Root>
+          <DialogStatus.AnimatedCheckIcon />
+          <DialogStatus.Title>
+            <div dangerouslySetInnerHTML={{ __html: titleFormatted }} />
+          </DialogStatus.Title>
+          <DialogStatus.Description>
+            {isInspectionCompleted
+              ? 'Parabéns! Você concluiu a inspeção. Para visualizar as estatísticas, retorne à lista de inspeções e acesse a seção de estatísticas.'
+              : `Você pode prosseguir com a inspeção agora ou retomar a inspeção
+            posteriormente.`}
+          </DialogStatus.Description>
+        </DialogStatus.Root>
+      ),
+      hideCloseButton: true,
+      width: 'inherit',
+      marginTopWrapperButton: '24px',
+      buttonConfig: [
+        {
+          id: 'understand',
+          label: 'Ok',
+          variant: 'primary',
+          action: () => handleUpdateDialogControlled(false),
         },
       ],
     },
