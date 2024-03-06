@@ -51,4 +51,23 @@ export const StyledButton = styled.button<ButtonProps>`
   }
 
   ${({ variant }) => variant === 'secondary' && secondaryButtonStyle}
+
+  ${({ disabled, variant }) =>
+    disabled &&
+    variant === 'primary' &&
+    css`
+      background-color: ${({ theme }) => theme.colors.neutral400};
+      cursor: not-allowed;
+      color: white;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.neutral400};
+        color: white;
+        svg {
+          path {
+            fill: ${({ theme }) => theme.colors.neutral};
+          }
+        }
+      }
+    `}
 `

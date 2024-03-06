@@ -116,7 +116,15 @@ const PdfViewer = () => {
     } finally {
       setIsCreatingHighlight(false)
     }
-  }, [userId, highlights, hightlightToCreate, inspectionId, token, documentId])
+  }, [
+    userId,
+    inspectionId,
+    token,
+    hightlightToCreate,
+    documentId,
+    setHighlights,
+    highlights,
+  ])
 
   const { dialogItemToRender } = useDialogItemToRender({
     dialogInspectionStep,

@@ -60,3 +60,27 @@ export async function getInspectionHeader({
     headers: { Authorization: `Bearer ${token}` },
   })
 }
+
+export async function postInspection<T>({
+  inspectionStatus,
+  token,
+  inspectionId,
+  items,
+}: {
+  inspectionStatus: string
+  token: string
+  inspectionId: string
+  items: T
+}) {
+  return await api.put(
+    '/save-inspection',
+    {
+      inspectionStatus,
+      inspectionId,
+      items,
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  )
+}
