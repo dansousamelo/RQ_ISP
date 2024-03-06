@@ -169,14 +169,6 @@ export function Sidebar({
         )}
 
         <S.WrapperButtons>
-          {hasHighlights && (
-            <S.ResetButton onClick={onCleanHighlights}>
-              Limpar marcações do documento
-            </S.ResetButton>
-          )}
-
-          <S.CancelButton onClick={onCancelAction}>Cancelar</S.CancelButton>
-
           <S.SaveButton onClick={backToInspection}>Concluir</S.SaveButton>
         </S.WrapperButtons>
       </S.Container>

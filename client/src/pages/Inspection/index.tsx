@@ -13,7 +13,10 @@ import TableRow from './components/TableRow'
 import { useParams, useNavigate } from 'react-router-dom'
 import { InspectionTableSkeleton } from './components/InspectionTableSkeleton'
 import { HeaderSkeleton } from './components/HeaderSkeleton'
-import { getInspectionItemsRepository } from './repository/getInspectionItemsRepository'
+import {
+  TableDataProps,
+  getInspectionItemsRepository,
+} from './repository/getInspectionItemsRepository'
 import { getAccessToken } from '../../utils/cookies'
 import {
   DocumentHeader,
@@ -21,6 +24,10 @@ import {
 } from './repository/getInspectionHeaderRepository'
 import { BreadcrumbsSkeleton } from '../../components/Breadcrumb/skeleton'
 import { TitleUpdater } from '../../components/TitleUpdater'
+import { ErrorToast } from '../../components/Toast'
+import { postInspection } from './services'
+import { calculateSituationPercentage } from './helpers'
+import { Spinner } from '../../components/Spinner'
 
 interface BreadcrumbItem {
   label: string
@@ -39,6 +46,7 @@ export type InspectionDialog =
   | 'cancel_inspection'
   | 'add_observation'
   | 'delete_observation'
+  | 'save_inspection'
   | ''
 
 export function Inspection() {
@@ -118,6 +126,41 @@ export function Inspection() {
     })
   }
 
+  const handleSaveAll = useCallback(async () => {
+    try {
+      await postInspection<TableDataProps[]>({
+        inspectionId: id as string,
+        inspectionStatus: calculateSituationPercentage(tableData),
+        token: token as string,
+        items: tableData,
+      })
+    } catch (e) {
+      ErrorToast(
+        'Não foi possível salvar os itens, tente novamente mais tarde!',
+      )
+    }
+  }, [id, tableData, token])
+
+  const handleSaveItems = useCallback(async () => {
+    setIsSaveItems(true)
+    try {
+      await postInspection<TableDataProps[]>({
+        inspectionId: id as string,
+        inspectionStatus: calculateSituationPercentage(tableData),
+        token: token as string,
+        items: tableData,
+      })
+      handleUpdateDialogControlled(true)
+      setDialogInspectionStep('save_inspection')
+    } catch (e) {
+      ErrorToast(
+        'Não foi possível salvar os itens, tente novamente mais tarde!',
+      )
+    } finally {
+      setIsSaveItems(false)
+    }
+  }, [id, tableData, token])
+
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
     dialogInspectionStep,
@@ -142,11 +185,10 @@ export function Inspection() {
     handleDeleteObservation,
     isUpdating,
     setIsUpdating,
+    handleSaveAll,
   })
 
-  const handleSaveAll = () => {
-    console.log('Informações da tabela:', tableData)
-  }
+  const [isSavingItems, setIsSaveItems] = useState(false)
 
   return (
     <>
@@ -224,10 +266,24 @@ export function Inspection() {
             Cancelar
           </S.CancelInspectionButton>
           <S.SaveInspectionButton
-            disabled={isLoadingInformations}
-            onClick={handleSaveAll}
+            disabled={isLoadingInformations || isSavingItems}
+            onClick={handleSaveItems}
           >
-            Salvar
+            {isSavingItems ? (
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '4px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Salvando
+                <Spinner />
+              </div>
+            ) : (
+              'Salvar'
+            )}
           </S.SaveInspectionButton>
         </S.WrapperSaveAndCancel>
       </S.Container>
