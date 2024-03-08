@@ -8,6 +8,7 @@ import {
   Files,
 } from '../../../../../contexts/InitialInspectionContext'
 import { HeaderInspectionProps } from '../../../repository/getInspectionHeaderRepository'
+import { deleteDocument } from '../../../services'
 
 interface ValidatorProps {
   message: string
@@ -126,6 +127,13 @@ export function useFileUpload({
     const filesFormatted = filesUploaded.filter(
       (file) => file.name !== name,
     ) as any
+
+    const documentToDelete = filesUploaded.find(
+      (file) => file.name === name,
+    ) as any
+
+    deleteDocument({ documentId: documentToDelete?.id, token })
+
     setFilesUploaded((prevFiles) =>
       prevFiles.filter((file) => file.name !== name),
     )

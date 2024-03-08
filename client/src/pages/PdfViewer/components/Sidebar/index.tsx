@@ -13,6 +13,7 @@ import { useDialogItemToRender } from './hooks/useDialogItemToRender'
 import { useNavigate, useParams } from 'react-router-dom'
 import { HighlightSkeleton } from './components/HighlightSkeleton'
 import { Empty } from '../../../../components/Empty'
+import { getAccessToken } from '../../../../utils/cookies'
 
 const updateHash = (highlight: HighlightProps) => {
   document.location.hash = `highlight-${highlight.id}`
@@ -78,7 +79,8 @@ export function Sidebar({
 
   const navigate = useNavigate()
 
-  const { id, userId } = useParams()
+  const { id, userId, documentId } = useParams()
+  const token = getAccessToken() as string
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
     useDialogControlled()
@@ -97,11 +99,6 @@ export function Sidebar({
     [handleUpdateDialogControlled],
   )
 
-  const onCancelAction = useCallback(() => {
-    handleUpdateDialogControlled(true)
-    setDialogInspectionStep('cancel_mark')
-  }, [handleUpdateDialogControlled])
-
   const onCleanHighlights = useCallback(() => {
     handleUpdateDialogControlled(true)
     setDialogInspectionStep('clean_highlights')
@@ -118,6 +115,8 @@ export function Sidebar({
     hightlightToDelete,
     resetHighlights,
     backToInspection,
+    documentId: documentId as string,
+    token,
   })
 
   function backToInspectionList() {
@@ -169,6 +168,12 @@ export function Sidebar({
         )}
 
         <S.WrapperButtons>
+          {hasHighlights && (
+            <S.ResetButton onClick={onCleanHighlights}>
+              Limpar marcações do documento
+            </S.ResetButton>
+          )}
+
           <S.SaveButton onClick={backToInspection}>Concluir</S.SaveButton>
         </S.WrapperButtons>
       </S.Container>
