@@ -156,7 +156,6 @@ export async function createOrUpdateTextTrail(
   }
 }
 
-
 export async function createDocumentTrail(
   inspectionId: string,
   documentId: string,
@@ -205,6 +204,18 @@ async function createDocumentTrailInstance(
   const cleanedText = text.replace(/\u0000/g, '');
 
   try {
+
+    const item = await prisma.item.findFirst({
+      where:{
+        id: inspectionId,
+        itemIndex: itemIndex,
+      }
+    })
+
+    if(item?.situation === "non_compilant" || item?.situation === "not_applicable"){
+      throw new Error(`Não foi possível marcar neste item pois ele está marcado como ${item.situation}`)
+    }
+
     const createdTrail = await prisma.documentTrail.create({
       data: {
         inspectionId: inspectionId,
@@ -310,5 +321,17 @@ export async function destroiDocumentTrail(documentTrailId: string) {
     });
   } catch (error) {
     throw error;
+  }
+}
+
+export async function destroiManyDocumentTrail(documentId: string){
+  try {
+    await prisma.documentTrail.deleteMany({
+      where:{
+        documentId: documentId
+      }
+    })
+  } catch (error) {
+    throw error
   }
 }
