@@ -26,4 +26,10 @@ router.delete(
   trailControllers.deleteDocumentTrail
 );
 
+router.delete(
+  "/delete-all-document-trails", 
+  verifyToken, 
+  trailControllers.deleteAllDocumentTrail
+)
+
 export default router;
