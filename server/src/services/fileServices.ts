@@ -62,4 +62,15 @@ export async function postDocuments(
   }
 }
 
+export async function destroiDocument(documentId: string) {
+  try {
+    await prisma.document.delete({
+      where: {
+        id: documentId,
+      }
+    })
+  } catch (error) {
+    throw error
+  }
+}
 export default FileServices;
