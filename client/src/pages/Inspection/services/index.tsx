@@ -84,3 +84,18 @@ export async function postInspection<T>({
     },
   )
 }
+
+export async function deleteDocument({
+  documentId,
+  token,
+}: {
+  documentId: string
+  token: string
+}) {
+  const params = { documentId }
+
+  return await api.delete('/delete-document', {
+    params,
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
