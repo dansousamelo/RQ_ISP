@@ -5,6 +5,7 @@ import {
   createDocumentTrail,
   destroiDocumentTrail,
   findDocumentTrails,
+  destroiManyDocumentTrail,
 } from "../services/trailServices";
 
 import { getErrorMessage } from "../utils/errorMessage";
@@ -131,4 +132,35 @@ export default {
       });
     }
   },
+
+  async deleteAllDocumentTrail(req: Request, res: Response) {
+    try {
+      const { documentId } = req.query;
+
+      if(!isString(documentId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Forneça um id de documento válido!"
+        })
+      }
+
+      await destroiManyDocumentTrail(documentId);
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        message: "Rastros de documento apagados com sucesso!",
+        data: {}
+      })
+      
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  }
 };
