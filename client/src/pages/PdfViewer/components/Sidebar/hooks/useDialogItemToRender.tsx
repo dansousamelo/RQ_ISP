@@ -3,6 +3,7 @@ import { InspectionMarkDialog, SidebarLiContent } from '..'
 import { defaultTheme } from '../../../../../styles/themes/default'
 import { DialogConfig } from '../../../../InspectionList/hooks/useDialogItemToRender'
 import { HighlightProps } from '../../../interfaces'
+import { deleteDocumentsMark } from '../../../services'
 
 interface DialogItemToRenderProps {
   handleUpdateDialogControlled: (open: boolean) => void
@@ -11,6 +12,8 @@ interface DialogItemToRenderProps {
   hightlightToDelete: HighlightProps
   resetHighlights: () => void
   backToInspection(): void
+  token: string
+  documentId: string
 }
 
 const Container = styled.div`
@@ -30,6 +33,8 @@ export function useDialogItemToRender({
   hightlightToDelete,
   resetHighlights,
   backToInspection,
+  token,
+  documentId,
 }: DialogItemToRenderProps) {
   const dialogConfig: DialogConfig = {
     delete_highlight: {
@@ -38,10 +43,7 @@ export function useDialogItemToRender({
         <>
           <span>Deseja realmente excluir a marcação?</span>
           <Container>
-            <SidebarLiContent
-              highlight={hightlightToDelete}
-              isLoadingTrail={false}
-            />
+            <SidebarLiContent highlight={hightlightToDelete} />
           </Container>
         </>
       ),
@@ -81,6 +83,10 @@ export function useDialogItemToRender({
           variant: 'primary',
           action: () => {
             resetHighlights()
+            deleteDocumentsMark({
+              documentId: documentId as string,
+              token,
+            })
             handleUpdateDialogControlled(false)
           },
           backgroundColor: defaultTheme.colors.error700,

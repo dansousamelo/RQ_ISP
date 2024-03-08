@@ -61,3 +61,18 @@ export async function deleteTrail({
     headers: { Authorization: `Bearer ${token}` },
   })
 }
+
+export async function deleteDocumentsMark({
+  documentId,
+  token,
+}: {
+  documentId: string
+  token: string
+}) {
+  const params = { documentId }
+
+  return await api.delete('/delete-all-document-trails', {
+    params,
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
