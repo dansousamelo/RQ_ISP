@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import FileServices, { postDocuments } from "../services/fileServices";
+import FileServices, { destroiDocument, postDocuments } from "../services/fileServices";
 import {
   isArrayEmpty,
   isMulterFilesArray,
@@ -111,4 +111,36 @@ export default {
       });
     }
   },
+
+  async deleteFile(req: Request, res: Response) {
+    try {
+      const { documentId } = req.query;
+
+      if(!isString(documentId)) {
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Forneça um id de documento válido!",
+          data: {}
+        })
+      }
+
+      await destroiDocument(documentId)
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        message: "Documento excluído com sucesso!",
+        data: {}
+      })
+      
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  }
 };
