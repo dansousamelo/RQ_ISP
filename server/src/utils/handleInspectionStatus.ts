@@ -13,7 +13,10 @@ export function handleInspectionStatus(status: string): InspectionStatus {
     return UNINITIATED;
   } else if (parsedStatus === ONE_HUNDRED) {
     return CONCLUDED;
-  } else {
+  } else if(parsedStatus > ZERO && parsedStatus < ONE_HUNDRED){
     return INITIATED;
+  }
+  else{
+    throw new Error("Status de inspeção inválido")
   }
 }
