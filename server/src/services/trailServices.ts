@@ -169,6 +169,17 @@ export async function createDocumentTrail(
       await destroiTextTrail(findedTextTrail);
     }
 
+    const item = await prisma.item.findFirst({
+      where:{
+        inspectionId: inspectionId,
+        itemIndex: itemIndex,
+      }
+    })
+
+    if(item?.situation === "non_compilant" || item?.situation === "not_applicable"){
+      throw new Error(`Não foi possível marcar neste item pois a situação dele é: ${item.situation}`)
+    }
+
     const documentTrail = await createDocumentTrailInstance(
       inspectionId,
       documentId,
@@ -202,20 +213,7 @@ async function createDocumentTrailInstance(
   text: string
 ) {
   const cleanedText = text.replace(/\u0000/g, '');
-
   try {
-
-    const item = await prisma.item.findFirst({
-      where:{
-        id: inspectionId,
-        itemIndex: itemIndex,
-      }
-    })
-
-    if(item?.situation === "non_compilant" || item?.situation === "not_applicable"){
-      throw new Error(`Não foi possível marcar neste item pois ele está marcado como ${item.situation}`)
-    }
-
     const createdTrail = await prisma.documentTrail.create({
       data: {
         inspectionId: inspectionId,
