@@ -16,6 +16,7 @@ interface ManagerDocumentsDialogProps {
   token: string
   handleUpdateDialogControlled: (open: boolean) => void
   headerData: HeaderInspectionProps
+  reloadItems: () => void
   setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
 }
 
@@ -26,6 +27,7 @@ export function ManagerDocumentsDialog({
   userId,
   inspectionId,
   token,
+  reloadItems,
 }: ManagerDocumentsDialogProps) {
   const [filesUploaded, setFilesUploaded] = useState<Files>(
     headerData.documents,
@@ -55,8 +57,9 @@ export function ManagerDocumentsDialog({
   const onDeleteFile = useCallback(
     (name: string) => {
       onClearFile(name)
+      reloadItems()
     },
-    [onClearFile],
+    [onClearFile, reloadItems],
   )
 
   const tabs = [
