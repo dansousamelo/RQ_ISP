@@ -60,6 +60,7 @@ interface DialogItemToRenderProps {
   isUpdating: boolean
   setIsUpdating: React.Dispatch<React.SetStateAction<boolean>>
   handleSaveAll: () => Promise<void>
+  reloadItems: () => void
 }
 
 export function useDialogItemToRender({
@@ -85,6 +86,7 @@ export function useDialogItemToRender({
   isUpdating,
   setIsUpdating,
   handleSaveAll,
+  reloadItems,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
@@ -219,6 +221,7 @@ export function useDialogItemToRender({
           userId={userId}
           inspectionId={id}
           token={token as string}
+          reloadItems={reloadItems}
         />
       ),
       width: '32rem',
