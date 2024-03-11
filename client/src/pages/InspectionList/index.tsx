@@ -18,6 +18,10 @@ import {
 import { TitleUpdater } from '../../components/TitleUpdater'
 import { Empty } from '../../components/Empty'
 import { deleteInspection } from './services'
+import { useInitialInspectionContext } from '../../contexts/InitialInspectionContext'
+import { queryClient } from '../../App'
+
+// Get QueryClient from the context
 
 export function InpectionList() {
   const [isDeleting, setIsDeleting] = useState(false)
@@ -38,13 +42,19 @@ export function InpectionList() {
     handleUpdateDialogControlled,
     setDialogInspectionStep,
     isDialogControlledOpen,
+    clearLoggedInspectionContext,
   } = useLoggedInspectionContext()
+
+  const { clearInitialInspectionContext } = useInitialInspectionContext()
 
   const handleLogout = useCallback(() => {
     removeAccessToken()
     removeRefreshToken()
     navigate('/')
-  }, [navigate])
+    clearInitialInspectionContext()
+    clearLoggedInspectionContext()
+    queryClient.resetQueries()
+  }, [clearInitialInspectionContext, clearLoggedInspectionContext, navigate])
 
   const deleteInspectionDialog = useCallback(() => {
     setIsDeleting(true)

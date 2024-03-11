@@ -42,6 +42,7 @@ interface LoggedInspectionContextType {
   >
   isDialogControlledOpen: boolean
   handleUpdateDialogControlled: (open: boolean) => void
+  clearLoggedInspectionContext: () => void
   setSecondStepData: React.Dispatch<React.SetStateAction<SecondStepData>>
 }
 
@@ -86,6 +87,14 @@ export function LoggedInspectionProvider({
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
     useDialogControlled()
 
+  const clearLoggedInspectionContext = useCallback(() => {
+    setInspectionChecklistType('privacyRequirement')
+    setActiveTab('upload_documents')
+    setFilesUploaded([])
+    setSecondStepData({} as SecondStepData)
+    setDialogInspectionStep('')
+  }, [])
+
   return (
     <LoggedInspectionContext.Provider
       value={{
@@ -102,6 +111,7 @@ export function LoggedInspectionProvider({
         handleUpdateDialogControlled,
         isDialogControlledOpen,
         setSecondStepData,
+        clearLoggedInspectionContext,
       }}
     >
       {children}

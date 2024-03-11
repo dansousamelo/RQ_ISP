@@ -34,6 +34,7 @@ import {
 } from '../../components/DialogControlled'
 import { isNotUndefined } from '../../interfaces/typeGuards'
 import { getHighlightsRepository } from './repositories/getHighlightsRepository'
+import { AxiosError } from 'axios'
 
 const parseIdFromHash = () => document.location.hash.slice('#highlight-'.length)
 const resetHash = () => {
@@ -111,8 +112,8 @@ const PdfViewer = () => {
         { ...hightlightToCreate, id: response.data.data.trail },
         ...highlights,
       ])
-    } catch (err) {
-      ErrorToast('Não foi possível criar a marcação')
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) ErrorToast(error.response?.data.message)
     } finally {
       setIsCreatingHighlight(false)
     }

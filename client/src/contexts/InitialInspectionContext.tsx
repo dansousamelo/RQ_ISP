@@ -31,6 +31,7 @@ interface InitialInspectionContextType {
   filesUploaded: Files
   setFilesUploaded: React.Dispatch<React.SetStateAction<Files>>
   setActiveStep: React.Dispatch<React.SetStateAction<number>>
+  clearInitialInspectionContext: () => void
 }
 
 interface InitialInspectionProviderProps {
@@ -45,6 +46,7 @@ export function InitialInspectionProvider({
   children,
 }: InitialInspectionProviderProps) {
   const [activeStep, setActiveStep] = useState<number>(0)
+
   const [inspectionChecklistType, setInspectionChecklistType] =
     useState<InspectionChecklistType>('privacyRequirement')
 
@@ -77,6 +79,14 @@ export function InitialInspectionProvider({
     setSecondStepData({ ...data })
   }, [])
 
+  const clearInitialInspectionContext = useCallback(() => {
+    setActiveStep(0)
+    setInspectionChecklistType('privacyRequirement')
+    setActiveTab('upload_documents')
+    setFilesUploaded([])
+    setSecondStepData({} as SecondStepData)
+  }, [])
+
   return (
     <InitialInspectionContext.Provider
       value={{
@@ -92,6 +102,7 @@ export function InitialInspectionProvider({
         filesUploaded,
         setFilesUploaded,
         setActiveStep,
+        clearInitialInspectionContext,
       }}
     >
       {children}

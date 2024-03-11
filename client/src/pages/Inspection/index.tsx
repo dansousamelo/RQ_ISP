@@ -1,4 +1,3 @@
-// import { useParams } from 'react-router-dom'
 import * as S from './styles'
 import { Breadcrumb } from '../../components/Breadcrumb'
 import { Header } from './components/Header'
@@ -62,7 +61,7 @@ export function Inspection() {
     token: token as string,
   }
 
-  const { tableData, isInspectionItemsLoading, setTableData } =
+  const { tableData, isInspectionItemsLoading, setTableData, refetchItems } =
     getInspectionItemsRepository(paramsToFetch)
 
   const { headerData, isInspectionHeaderLoading, setHeaderData } =
@@ -159,7 +158,11 @@ export function Inspection() {
     } finally {
       setIsSaveItems(false)
     }
-  }, [id, tableData, token])
+  }, [handleUpdateDialogControlled, id, tableData, token])
+
+  const reloadItems = useCallback(() => {
+    refetchItems()
+  }, [refetchItems])
 
   const { dialogItemToRender } = useDialogItemToRender({
     handleUpdateDialogControlled,
@@ -186,6 +189,7 @@ export function Inspection() {
     isUpdating,
     setIsUpdating,
     handleSaveAll,
+    reloadItems,
   })
 
   const [isSavingItems, setIsSaveItems] = useState(false)

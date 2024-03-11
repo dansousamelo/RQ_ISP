@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 import { lightenColor } from '../../../../utils/colors'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 
@@ -21,15 +21,33 @@ export const WrapperButton = styled.div`
   }
 `
 
-export const ButtonStyled = styled(PrimaryButton)`
-  background-color: ${({ theme }) => theme.colors.neutral} !important;
-  color: ${({ theme }) => theme.colors.neutral900}!important;
+export const MarkButton = styled(PrimaryButton)`
+  position: relative;
+  color: ${({ theme }) => theme.colors.neutral} !important;
+  background-color: ${({ theme }) => theme.colors.blue500} !important;
+  text-align: center !important;
+  font-weight: ${({ theme }) => theme.fontWeights.bold} !important;
+
   &:hover {
+    background-color: inherit !important;
+    color: ${({ theme }) => theme.colors.neutral} !important;
     background-color: ${({ theme }) =>
       lightenColor(theme.colors.blue500, 0.2)} !important;
-    color: ${({ theme }) => theme.colors.neutral}!important;
-    font-weight: ${({ theme }) => theme.fontWeights.medium} !important;
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+
+      background-color: ${({ theme }) => theme.colors.neutral400} !important;
+      color: ${({ theme }) => theme.colors.neutral}!important;
+      font-weight: ${({ theme }) => theme.fontWeights.bold};
+      &:hover {
+        background-color: ${({ theme }) =>
+          lightenColor(theme.colors.neutral400, 0.2)} !important;
+      }
+    `}
 `
 
 export const BackButtonStyled = styled(PrimaryButton)`
