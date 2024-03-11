@@ -18,7 +18,7 @@ import PdfViewer from './pages/PdfViewer'
 import { Statistics } from './pages/Statistics'
 import { PageNotFound } from './pages/PageNotFound'
 
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 export function App() {
   return (

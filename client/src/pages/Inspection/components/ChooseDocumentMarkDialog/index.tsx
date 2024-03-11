@@ -6,6 +6,8 @@ import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 import { InspectionDialog } from '../..'
+import { useState } from 'react'
+import { Spinner } from '../../../../components/Spinner'
 
 interface ChooseDocumentMark {
   id: string
@@ -54,19 +56,27 @@ export function ChooseDocumentMarkDialog({
     resolver: zodResolver(schema),
   })
 
+  const [isSubmiting, setIsSubmiting] = useState(false)
+
   const navigate = useNavigate()
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const idItemSelected = items.find(
       (item) => item.value === data.selectedValue,
     )?.id
 
-    const selectedValueEncoded = data.selectedValue.replace(/\//g, '%2F')
-    navigate(
-      `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${userId}/${inspectionId}/${idItemSelected}/mark`,
-    )
-
-    handleSaveAll()
+    try {
+      setIsSubmiting(true)
+      await handleSaveAll()
+      const selectedValueEncoded = data.selectedValue.replace(/\//g, '%2F')
+      navigate(
+        `/inspection/${id}/${selectedValueEncoded}/${amountOfItens}/${idMark}/${userId}/${inspectionId}/${idItemSelected}/mark`,
+      )
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setIsSubmiting(false)
+    }
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -121,7 +131,23 @@ export function ChooseDocumentMarkDialog({
         >
           Voltar
         </S.BackButtonStyled>
-        <S.ButtonStyled type="submit">Marcar</S.ButtonStyled>
+        <S.MarkButton disabled={isSubmiting} type="submit">
+          {isSubmiting ? (
+            <div
+              style={{
+                display: 'flex',
+                gap: '4px',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              Carregando
+              <Spinner />
+            </div>
+          ) : (
+            'Marcar'
+          )}
+        </S.MarkButton>
       </S.WrapperButton>
     </form>
   )

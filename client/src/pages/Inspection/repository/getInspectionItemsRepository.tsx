@@ -39,13 +39,14 @@ export function getInspectionItemsRepository({
     setTableData(response.data.data.items)
   }
 
-  const { isFetching: isInspectionItemsLoading } = useQuery(
-    [`inspection-item-${userId}-${inspectionId}`],
-    fetchInspectionItems,
-    {
-      refetchOnWindowFocus: false,
-    },
-  )
+  const { isFetching: isInspectionItemsLoading, refetch: refetchItems } =
+    useQuery(
+      [`inspection-item-${userId}-${inspectionId}`],
+      fetchInspectionItems,
+      {
+        refetchOnWindowFocus: false,
+      },
+    )
 
-  return { isInspectionItemsLoading, tableData, setTableData }
+  return { isInspectionItemsLoading, tableData, setTableData, refetchItems }
 }
