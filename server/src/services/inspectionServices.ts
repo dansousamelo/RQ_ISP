@@ -18,6 +18,8 @@ import {
   isString,
 } from "../interfaces/typeGuards";
 import { createOrUpdateTextTrail } from "./trailServices";
+import { CONCLUDED } from "../constants/constants";
+import { error } from "console";
 
 export async function findInspectionById(
   inspectionId: string
@@ -116,7 +118,6 @@ export async function findInspectionItemsByInspectionId(
         item: true,
       },
     });
-
     if (!inspection) {
       return null;
     }
@@ -330,6 +331,34 @@ async function deleteTrailOnSavingInspection(
   }
 }
 
+async function updateInspectionStatus(inspectionId: string, inspectionStatus: InspectionStatus) {
+  try {
+    if(inspectionStatus === CONCLUDED) {
+      const actualDate = new Date().toISOString()
+      await prisma.inspection.update({
+        where: {
+          id: inspectionId,
+        },
+        data: {
+          status: inspectionStatus,
+          finishedAt: actualDate,
+        }
+      })
+    } else {
+      await prisma.inspection.update({
+        where: {
+          id: inspectionId,
+        },
+        data: {
+          status: inspectionStatus,
+        }
+    }) 
+  }
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function updateInspectionItems(
   itemsData: any[],
   inspectionStatus: InspectionStatus,
@@ -346,15 +375,8 @@ export async function updateInspectionItems(
       throw new Error("Inspeção não encontrada.");
     }
 
-    await prisma.inspection.update({
-      where: {
-        id: existingInspection.id,
-      },
-      data: {
-        status: inspectionStatus,
-      },
-    });
-
+    await updateInspectionStatus(inspectionId, inspectionStatus);
+    
     await Promise.all(
       itemsData.map(async (item) => {
         const existingItem = await prisma.item.findFirst({

@@ -32,6 +32,7 @@ model Inspection {
   status           Status   @default(uninitiated)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  finishedAt      DateTime?
 
   document      Document[]
   item          Item[]
