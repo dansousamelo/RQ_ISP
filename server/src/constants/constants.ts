@@ -8,3 +8,7 @@ export const PRIVACY_REQUIREMENT = "privacyRequirement";
 export const UNINITIATED = "uninitiated";
 export const INITIATED = "initiated";
 export const CONCLUDED = "concluded";
+export const AS_PER = "as_per"
+export const INCOMPLETE = "incomplete"
+export const NON_COMPILANT = "non_compilant"
+export const NOT_APPLICABLE = "not_applicable"
