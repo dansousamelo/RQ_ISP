@@ -37,7 +37,6 @@ model Inspection {
   document      Document[]
   item          Item[]
   textTrail     TextTrail[]
-  documentTrail DocumentTrail[]
 }
 
 enum Type {
@@ -56,10 +55,13 @@ model Document {
   inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   inspectionId String
   name         String
+  s3Name       String
   type         String
   url          String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
+
+  documentTrail DocumentTrail[]
 }
 
 model Item {
@@ -87,10 +89,10 @@ model TextTrail {
 
 model DocumentTrail {
   id           String     @id @default(uuid())
-  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  document     Document   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId   String
   inspectionId String
   itemIndex    String
-  documentId   String
   text         String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
