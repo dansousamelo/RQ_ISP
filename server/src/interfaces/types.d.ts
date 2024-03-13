@@ -47,6 +47,7 @@ export interface Trail {
 
 export type DocumentItems = {
   name: string;
+  s3Name: string;
   url: string;
   type: string;
 };
