@@ -16,7 +16,7 @@ class S3Storage {
     });
   }
 
-  async saveFile(fileName: string): Promise<string> {
+  async saveFile(fileName: string){
     const originalPath = path.resolve(multerConfig.directory, fileName);
     try {
       const ContentType = mime.getType(originalPath);
@@ -41,10 +41,21 @@ class S3Storage {
 
       const fileUrl = `https://${bucket}.s3.amazonaws.com/${fileName}`;
 
-      return fileUrl;
+      return { url: fileUrl, s3Name: fileName };
     } catch (error) {
       console.error("Erro ao salvar o arquivo:", error);
       throw error;
+    }
+  }
+
+  async deleteFile(fileName: string): Promise<void> {
+    try {
+      this.client.deleteObject({
+        Bucket: bucket,
+        Key: fileName,
+      }).promise() 
+    } catch(error) {
+      throw new Error("Erro ao apagar o arquivo!")
     }
   }
 }
