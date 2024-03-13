@@ -36,6 +36,9 @@ export async function findItemsCategoriesByInspectionId(inspectionId: string) {
         return acc;
       }, {});
       
+      // category to display all of them
+      translatedCategories['general'] = "Geral"
+
       const categories = Object.keys(translatedCategories).map((key) => ({
         value: key,
         label: translatedCategories[key]
