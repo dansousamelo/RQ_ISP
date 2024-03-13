@@ -7,6 +7,7 @@ import tokenRoutes from "./routes/tokenRoutes";
 import userRoutes from "./routes/userRoutes";
 import inspectionRoutes from "./routes/inspectionRoutes";
 import trailRoutes from "./routes/trailRoutes"
+import chartRoutes from "./routes/chartRoutes"
 
 dotenv.config();
 
@@ -35,6 +36,9 @@ app.use("/", inspectionRoutes);
 
 // Rotas de rastro
 app.use("/", trailRoutes)
+
+// Rotas de gráfico
+app.use("/", chartRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}.............`);

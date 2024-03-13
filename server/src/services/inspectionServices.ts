@@ -13,13 +13,11 @@ import {
   InspectionType,
 } from "./interfaces/types";
 import {
-  isArrayEmpty,
   isArrayNotEmpty,
   isString,
 } from "../interfaces/typeGuards";
 import { createOrUpdateTextTrail } from "./trailServices";
 import { CONCLUDED } from "../constants/constants";
-import { error } from "console";
 
 export async function findInspectionById(
   inspectionId: string
