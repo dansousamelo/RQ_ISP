@@ -1,6 +1,7 @@
 import { prisma } from "../db/prismaClient";
 import { isArrayEmpty } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
+import { translateItemSituation } from "../utils/translateItemSituationName";
 
 import { PositionRect, TrailData } from "./interfaces/types";
 
@@ -176,8 +177,13 @@ export async function createDocumentTrail(
       }
     })
 
-    if(item?.situation === "non_compilant" || item?.situation === "not_applicable"){
-      throw new Error(`Não foi possível marcar neste item pois a situação dele é: ${item.situation}`)
+    if(!item){
+      throw new Error("Não foi possível encontrar este item")
+    }
+
+    if(item.situation === "non_compilant" || item.situation === "not_applicable"){
+      const itemSituationTranslated = translateItemSituation(item.situation);
+      throw new Error(`Não foi possível marcar neste item pois a situação dele é "${itemSituationTranslated}"`)
     }
 
     const documentTrail = await createDocumentTrailInstance(
