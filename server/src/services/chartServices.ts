@@ -6,36 +6,36 @@ import { translateCategory } from "../utils/handleItemCategory";
 
 export async function findItemsCategoriesByInspectionId(inspectionId: string) {
   try {
-      const items = await prisma.item.findMany({
-          where: {
-              inspectionId: inspectionId
-          }
-      });
+    const items = await prisma.item.findMany({
+        where: {
+            inspectionId: inspectionId
+        }
+    });
 
-      if (!items) {
-          throw new Error("Não foi possível encontrar itens com este id de inspeção");
-      }
+    if (!items) {
+        throw new Error("Não foi possível encontrar itens com este id de inspeção");
+    }
 
-      const translatedCategories = items.reduce((acc: { [key: string]: string }, item) => {
-          if (item.category !== null && !(item.category in acc)) {
-              acc[item.category] = translateCategory(item.category);
-          }
-          return acc;
-      }, {});
+    const translatedCategories = items.reduce((acc: { [key: string]: string }, item) => {
+        if (item.category !== null && !(item.category in acc)) {
+            acc[item.category] = translateCategory(item.category);
+        }
+        return acc;
+    }, {});
 
-      translatedCategories['general'] = "Geral";
+    translatedCategories['general'] = "Geral";
 
-      const categories = Object.keys(translatedCategories)
-          .map((key) => ({
-              value: key,
-              label: translatedCategories[key]
-          }))
-          .sort((a, b) => {
-              if (a.value === 'general') return -1;
-              return a.label.localeCompare(b.label);
-          });
+    const categories = Object.keys(translatedCategories)
+        .map((key) => ({
+            value: key,
+            label: translatedCategories[key]
+        }))
+        .sort((a, b) => {
+            if (a.value === 'general') return -1;
+            return a.label.localeCompare(b.label);
+        });
 
-      return categories;
+    return categories;
   } catch (error) {
       throw error;
   }
@@ -92,92 +92,103 @@ export async function findItemsSituationStatisticsByInspectionId(inspectionId: s
 }
 
 export async function findInspectionStatisticsAndAttributesByInspectionId(inspectionId: string) {
-  try {
-      const inspection = await prisma.inspection.findUnique({
-          where: {
-              id: inspectionId
-          },
-          include: {
-              item: true
-          }
-      });
-
-      if (!inspection) {
-          throw new Error("Não foi possível encontrar uma inspeção com este id!");
-      }
-
-      if (!inspection.finishedAt) {
-          throw new Error("Essa inspeção não está concluída, conclua para que seja possível gerar as estatísticas!");
-      }
-
-      const inspectionAttributes = {
-          id: inspection.id,
-          name: inspection.name,
-          resposible: inspection.responsible,
-          responsibleEmail: inspection.responsibleEmail,
-          participants: inspection.participants,
-          recordingUrl: inspection.recordingUrl,
-          createdAt: formatDate(inspection.createdAt),
-          finishedAt: formatDate(inspection.finishedAt),
-          type: inspection.type,
-          status: inspection.status
-      };
-
-    const situationOptions = [
-      { value: 'as_per', label: 'Conforme' },
-      { value: 'incomplete', label: 'Incompleto' },
-      { value: 'non_compilant', label: 'Não conforme' },
-      { value: 'not_applicable', label: 'Não se aplica' },
-    ];
-    
-    const labels = situationOptions.map(option => option.value);
-    const labelsTranslated = situationOptions.map(option => option.label)
-
-    let categories: any[] = [];
-
-    if (inspection.item.length > 0) {
-        const categoryMap = new Map<string, number[]>();
-
-        inspection.item.forEach((item: Item) => {
-            if (!item.situation) return;
-
-            const values = Array(labels.length).fill(0);
-
-            item.situation.split(',').forEach((situation: string) => {
-                const index = labels.findIndex(label => label === situation.trim());
-                if (index !== -1) {
-                    values[index]++;
-                }
-            });
-
-            const categoryName = item.category || "Geral";
-
-            if (!categoryMap.has(categoryName)) {
-                categoryMap.set(categoryName, values);
-            } else {
-                const existingValues = categoryMap.get(categoryName);
-                if (existingValues) {
-                    existingValues.forEach((value, index) => {
-                        existingValues[index] += values[index];
-                    });
-                    categoryMap.set(categoryName, existingValues);
-                }
+    try {
+        const inspection = await prisma.inspection.findUnique({
+            where: {
+                id: inspectionId
+            },
+            include: {
+                item: true
             }
         });
 
-        categories = Array.from(categoryMap.entries()).map(([name, values]) => ({
-            name,
-            values
+        if (!inspection) {
+            throw new Error("Não foi possível encontrar uma inspeção com este id!");
+        }
+
+        if (!inspection.finishedAt) {
+            throw new Error("Essa inspeção não está concluída, conclua para que seja possível gerar as estatísticas!");
+        }
+
+        const inspectionAttributes = {
+            id: inspection.id,
+            name: inspection.name,
+            resposible: inspection.responsible,
+            responsibleEmail: inspection.responsibleEmail,
+            participants: inspection.participants,
+            recordingUrl: inspection.recordingUrl,
+            createdAt: formatDate(inspection.createdAt),
+            finishedAt: formatDate(inspection.finishedAt),
+            type: inspection.type,
+            status: inspection.status
+        };
+
+        const situationOptions = [
+            { value: 'as_per', label: 'Conforme' },
+            { value: 'incomplete', label: 'Incompleto' },
+            { value: 'non_compilant', label: 'Não conforme' },
+            { value: 'not_applicable', label: 'Não se aplica' },
+        ];
+
+        const labels = situationOptions.map(option => option.value);
+        const labelsTranslated = situationOptions.map(option => option.label)
+
+        let categories: any[] = [];
+
+        if (inspection.item.length > 0) {
+            const categoryMap = new Map<string, number[]>();
+
+            inspection.item.forEach((item: any) => {
+                if (!item.situation) return;
+
+                const values = Array(labels.length).fill(0);
+
+                item.situation.split(',').forEach((situation: string) => {
+                    const index = labels.findIndex(label => label === situation.trim());
+                    if (index !== -1) {
+                        values[index]++;
+                    }
+                });
+
+                const categoryName = item.category || "Geral";
+
+                if (!categoryMap.has(categoryName)) {
+                    categoryMap.set(categoryName, values);
+                } else {
+                    const existingValues = categoryMap.get(categoryName);
+                    if (existingValues) {
+                        existingValues.forEach((value, index) => {
+                            existingValues[index] += values[index];
+                        });
+                        categoryMap.set(categoryName, existingValues);
+                    }
+                }
+            });
+
+            const geralValues = Array(labels.length).fill(0);
+            categoryMap.forEach((values: number[]) => {
+                values.forEach((value, index) => {
+                    geralValues[index] += value;
+                });
+            });
+            categories.push({ name: "Geral", values: geralValues });
+
+            categories = categories.concat(Array.from(categoryMap.entries()).map(([name, values]) => ({
+                name,
+                values
+            })));
+        } else {
+            const values = Array(labels.length).fill(0);
+            categories.push({ name: "Geral", values });
+        }
+
+        categories = categories.map(category => ({
+            ...category,
+            name: translateCategory(category.name)
         }));
-    } else {
-        const values = Array(labels.length).fill(0);
-        categories.push({ name: "Geral", values });
+
+        return { inspectionAttributes, labels: labelsTranslated, categories };
+    } catch (error) {
+        throw error;
     }
-
-    const translatedCategories = categories.map((category) => translateCategory(category))
-
-    return { inspectionAttributes, labels: labelsTranslated, categories: translatedCategories };
-  } catch (error) {
-      throw error;
-  }
 }
