@@ -127,18 +127,24 @@ export function GraphicsPDF({
         <S.LabelText>
           <b>Término da inspeção:</b> {inspectionInformation.finishedAt}
         </S.LabelText>
-        {/* <S.LabelText>
-          <b>Responsável:</b> {inspectionInformation.}
+        <S.LabelText>
+          <b>Responsável:</b> {inspectionInformation.resposible}
         </S.LabelText>
         <S.LabelText>
-          <b>Contato:</b> {data.information.email}
+          <b>Contato:</b> {inspectionInformation.responsibleEmail}
         </S.LabelText>
-        <S.LabelText>
-          <b>Gravação disponível em:</b> {data.information.record_link}
-        </S.LabelText>
-        <S.LabelText>
-          <b>Participantes:</b> {data.information.participants}
-        </S.LabelText> */}
+
+        {!!inspectionInformation.recordingUrl && (
+          <S.LabelText>
+            <b>Gravação disponível em:</b> {inspectionInformation.recordingUrl}
+          </S.LabelText>
+        )}
+
+        {!!inspectionInformation.participants && (
+          <S.LabelText>
+            <b>Participantes:</b> {inspectionInformation.participants}
+          </S.LabelText>
+        )}
       </S.WrapperTitle>
       <S.Description>{textFormatted}</S.Description>
       <Bar data={data} options={options} />

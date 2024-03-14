@@ -50,6 +50,10 @@ export type InspectionInformation = {
   finishedAt: string
   type: string
   status: string
+  participants: string
+  recordingUrl: string | null
+  responsibleEmail: string
+  resposible: string
 }
 
 export async function getExportGraphics({
