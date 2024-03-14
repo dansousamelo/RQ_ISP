@@ -26,8 +26,8 @@ export default {
 
       const uploadedFiles = await Promise.all(
         files.map(async (file) => {
-          const { name, url, type } = await fileServices.uploadFile(file);
-          return { name, url, type };
+          const { name, s3Name, url, type } = await fileServices.uploadFile(file);
+          return { name, s3Name, url, type };
         })
       );
 
@@ -87,8 +87,8 @@ export default {
 
       const uploadedFiles = await Promise.all(
         files.map(async (file) => {
-          const { name, url, type } = await fileServices.uploadFile(file);
-          return { name, url, type };
+          const { name, s3Name, url, type } = await fileServices.uploadFile(file);
+          return { name, s3Name, url, type };
         })
       );
 
