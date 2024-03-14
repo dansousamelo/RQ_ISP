@@ -13,17 +13,21 @@ class FileServices {
       const { filename, originalname, mimetype } = file;
 
       const name = Buffer.from(originalname, "latin1").toString("utf8");
-      const url = await s3Storage.saveFile(filename);
+      const { url, s3Name }  = await s3Storage.saveFile(filename);
       const type = mimetype;
 
-      return { name, url, type };
+      return { name, s3Name, url , type };
     } catch (error) {
       console.error("Erro ao fazer upload do arquivo:", error);
       throw error;
     }
   }
 
-  async deleteFile(): Promise<void> {}
+  async deleteFile(filename: string): Promise<void> {
+    const s3Storage = new S3Storage();
+
+    await s3Storage.deleteFile(filename)
+  }
 }
 
 export async function postDocuments(
@@ -33,11 +37,12 @@ export async function postDocuments(
   try {
     const documents = await Promise.all(
       inpectionDocuments.map(async (doc: DocumentItems) => {
-        const { name, url, type } = doc;
+        const { name, s3Name, url, type } = doc;
         const document = await prisma.document.create({
           data: {
             inspectionId: inspectionId,
             name,
+            s3Name,
             url,
             type,
           },
@@ -58,19 +63,37 @@ export async function postDocuments(
 
     return documentsData;
   } catch (error) {
+    console.log(error)
     throw new Error("Erro ao enviar documentos!");
   }
 }
 
 export async function destroiDocument(documentId: string) {
   try {
-    await prisma.document.delete({
+    const document = await prisma.document.findUnique({
       where: {
         id: documentId,
+      }
+    })
+
+    if(!document) {
+      throw new Error("Não foi possível encontrar um documento com este id!")
+    }
+
+    const documentS3Name = document.s3Name
+
+    const deleteFileService = new FileServices()
+
+    await deleteFileService.deleteFile(documentS3Name);
+
+    await prisma.document.delete({
+      where: {
+        id: document.id,
       }
     })
   } catch (error) {
     throw error
   }
 }
+
 export default FileServices;

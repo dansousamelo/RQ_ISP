@@ -32,3 +32,21 @@ export function isMulterFilesArray(
     files.every((file) => typeof file === "object" && "fieldname" in file)
   );
 }
+
+export function isCategoryValid(category: string) {
+  const validCategories = [
+    "purpose",
+    "adequacy",
+    "needs",
+    "openAcess",
+    "transparency",
+    "dataQuality",
+    "prevention",
+    "accountabilityAndLegalReporting",
+    "security",
+    "nonDiscrimination",
+    "general"
+  ];
+
+  return validCategories.includes(category);
+}
