@@ -183,7 +183,7 @@ export async function findInspectionStatisticsAndAttributesByInspectionId(inspec
         categories.push({ name: "Geral", values });
     }
 
-    return { inspectionAttributes, labelsTranslated, categories };
+    return { inspectionAttributes, labels: labelsTranslated, categories };
   } catch (error) {
       throw error;
   }
