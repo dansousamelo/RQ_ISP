@@ -18,6 +18,7 @@ import {
 } from "../interfaces/typeGuards";
 import { createOrUpdateTextTrail } from "./trailServices";
 import { CONCLUDED } from "../constants/constants";
+import { handleItemSituation } from "../utils/handleItemSituation";
 
 export async function findInspectionById(
   inspectionId: string
@@ -89,6 +90,7 @@ async function findTrailByItemIndex(
       itemIndex,
     },
     include: {
+      document: true,
       documentTrailPostion: true,
     },
   });
@@ -97,6 +99,7 @@ async function findTrailByItemIndex(
     return documentTrails.map((documentTrail: any) => ({
       id: documentTrail.id,
       text: documentTrail.text,
+      documentName: documentTrail.document.name,
       pageNumber: documentTrail.documentTrailPostion.pageNumber,
     }));
   }
@@ -127,13 +130,26 @@ export async function findInspectionItemsByInspectionId(
           item.itemIndex
         );
 
+        let trailResult;
+        if (isArrayNotEmpty(itemTrails)) {
+          trailResult = itemTrails.map((trail: any) => {
+            if (trail.documentName) {
+              const { documentName, ...rest } = trail;
+              return rest;
+            }
+            return trail;
+          });
+        } else {
+          trailResult = itemTrails;
+        }
+
         return {
           itemIndex: item.itemIndex,
           situation: item.situation,
           category: item.category,
           description: item.description,
           observations: item.observations,
-          trail: itemTrails,
+          trail: trailResult,
         };
       })
     );
@@ -185,6 +201,61 @@ export async function findInspectionAttributes(
     };
   } catch (error) {
     throw new Error("Não foi possível fazer a consulta de inspeções");
+  }
+}
+
+export async function findInspectionAttributesAndItemsToExport(inspectionId: string){
+  try {
+    const inspection = await prisma.inspection.findUnique({
+      where: {
+        id: inspectionId
+      },
+      include: {
+        item: true,
+        document: true,
+      }
+    })
+    
+    if(!inspection){
+      throw new Error("Não foi possível encontrar uma inspeção com este id!")
+    }
+
+    if (!inspection.finishedAt) {
+      throw new Error("Essa inspeção não está concluída, conclua para que seja possível gerar as estatísticas!");
+    }
+
+    const inspectionAttributes = {
+      id: inspection.id,
+      name: inspection.name,
+      createdAt: formatDate(inspection.createdAt),
+      finishedAt: formatDate(inspection.finishedAt),
+      type: inspection.type,
+      status: inspection.status
+    };
+
+    const itemsExists: ItemsResult[] = await Promise.all(
+      inspection.item.map(async (item: any) => {
+        const itemTrails = await findTrailByItemIndex(
+          inspectionId,
+          item.itemIndex
+        );
+
+        return {
+          itemIndex: item.itemIndex,
+          situation: handleItemSituation(item.situation),
+          category: item.category,
+          description: item.description,
+          observations: item.observations,
+          trail: itemTrails,
+        };
+      })
+    );
+
+    itemsExists.sort((a, b) => parseInt(a.itemIndex) - parseInt(b.itemIndex));
+
+    return {inspectionAttributes, items: itemsExists}
+  } catch (error) {
+    throw error
   }
 }
 
