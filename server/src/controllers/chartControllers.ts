@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-import { findItemsCategoriesByInspectionId, findItemsSituationStatisticsByInspectionId } from "../services/chartServices";
+import { findInspectionStatisticsAndAttributesByInspectionId, findItemsCategoriesByInspectionId, findItemsSituationStatisticsByInspectionId } from "../services/chartServices";
 
 import { getErrorMessage } from "../utils/errorMessage";
 
@@ -25,7 +25,7 @@ export default {
             return res.status(200).json({
                 error: false,
                 status: 200,
-                message: "Categorias encontradas com sucesso",
+                message: "Categorias da inspeção encontradas com sucesso!",
                 data: {
                     categories
                 }
@@ -68,13 +68,49 @@ export default {
             return res.status(200).json({
                 error: false,
                 status: 200,
-                message: "",
+                message: "Estatísticas da inspeção encontradas com sucesso!",
                 data: {
                     category: category,
                     statistics
                 }
             })
             
+        } catch (error) {
+            return res.status(500).json({
+                error: true,
+                status: 500,
+                message: getErrorMessage(error),
+                data: {},
+            });
+        }
+    },
+
+    async findInspectionStatisticsAndAttributes(req: Request, res: Response) {
+        try {
+            const { inspectionId } = req.query
+
+            if(!isString(inspectionId)){
+                return res.status(400).json({
+                    error: true,
+                    status: 400,
+                    message: "Forneça um id de inspeção válido!",
+                    data: {}
+                })
+            }
+
+            const inspectionData = await findInspectionStatisticsAndAttributesByInspectionId(inspectionId);
+            
+            console.log(inspectionData);
+
+            return res.status(200).json({
+                error: false,
+                status: 200,
+                message: "Estatísticas e atributos da inspeção encontrados com sucesso!",
+                data: {
+                    inspectionData
+                }
+            })
+
         } catch (error) {
             return res.status(500).json({
                 error: true,
