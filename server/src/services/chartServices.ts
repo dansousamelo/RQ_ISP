@@ -2,7 +2,7 @@ import { CONCLUDED } from "../constants/constants";
 import { prisma } from "../db/prismaClient";
 import { Item } from "../interfaces/types";
 import { formatDate } from "../utils/formatDatetime";
-import { translateCategory } from "../utils/handleCategoryName";
+import { translateCategory } from "../utils/handleItemCategory";
 
 export async function findItemsCategoriesByInspectionId(inspectionId: string) {
   try {
