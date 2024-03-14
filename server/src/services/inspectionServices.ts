@@ -19,6 +19,7 @@ import {
 import { createOrUpdateTextTrail } from "./trailServices";
 import { CONCLUDED } from "../constants/constants";
 import { handleItemSituation } from "../utils/handleItemSituation";
+import { translateCategory } from "../utils/handleCategoryName";
 
 export async function findInspectionById(
   inspectionId: string
@@ -227,6 +228,10 @@ export async function findInspectionAttributesAndItemsToExport(inspectionId: str
     const inspectionAttributes = {
       id: inspection.id,
       name: inspection.name,
+      resposible: inspection.responsible,
+      responsibleEmail: inspection.responsibleEmail,
+      participants: inspection.participants,
+      recordingUrl: inspection.recordingUrl,
       createdAt: formatDate(inspection.createdAt),
       finishedAt: formatDate(inspection.finishedAt),
       type: inspection.type,
@@ -243,7 +248,7 @@ export async function findInspectionAttributesAndItemsToExport(inspectionId: str
         return {
           itemIndex: item.itemIndex,
           situation: item.situation,
-          category: item.category,
+          category: translateCategory(item.category),
           description: item.description,
           observations: item.observations,
           trail: itemTrails,

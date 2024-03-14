@@ -1,57 +1,44 @@
-import { String } from "aws-sdk/clients/cloudtrail";
-import { CONCLUDED, GENERAL } from "../constants/constants";
+import { CONCLUDED } from "../constants/constants";
 import { prisma } from "../db/prismaClient";
 import { Item } from "../interfaces/types";
 import { formatDate } from "../utils/formatDatetime";
-
-function translateCategory(category: string): string {
-    const translations: Record<string, string> = {
-      "accountabilityAndLegalReporting": "Responsabilização e prestação de contas",
-      "needs": "Necessidades",
-      "purpose": "Finalidade",
-      "openAcess": "Livre acesso",
-      "dataQuality": "Qualidade de Dados",
-      "transparency": "Transparência",
-      "adequacy": "Adequação",
-      "security": "Segurança",
-      "prevention": "Prevenção",
-      "nonDiscrimination": "Não Discriminação"
-    };
-  
-    return translations[category] || category;
-  }
+import { translateCategory } from "../utils/handleCategoryName";
 
 export async function findItemsCategoriesByInspectionId(inspectionId: string) {
-    try {
+  try {
       const items = await prisma.item.findMany({
-        where: {
-          inspectionId: inspectionId
-        }
-      })
-  
-      if(!items) {
-        throw new Error ("Não foi possível encontrar itens com este id de inspeção")
-      }
-  
-      const translatedCategories = items.reduce((acc: { [key: string]: string }, item) => {
-        if (item.category !== null && !(item.category in acc)) {
-          acc[item.category] = translateCategory(item.category);
-        }
-        return acc;
-      }, {});
-      
-      // category to display all of them
-      translatedCategories['general'] = "Geral"
+          where: {
+              inspectionId: inspectionId
+          }
+      });
 
-      const categories = Object.keys(translatedCategories).map((key) => ({
-        value: key,
-        label: translatedCategories[key]
-      }));
-      
+      if (!items) {
+          throw new Error("Não foi possível encontrar itens com este id de inspeção");
+      }
+
+      const translatedCategories = items.reduce((acc: { [key: string]: string }, item) => {
+          if (item.category !== null && !(item.category in acc)) {
+              acc[item.category] = translateCategory(item.category);
+          }
+          return acc;
+      }, {});
+
+      translatedCategories['general'] = "Geral";
+
+      const categories = Object.keys(translatedCategories)
+          .map((key) => ({
+              value: key,
+              label: translatedCategories[key]
+          }))
+          .sort((a, b) => {
+              if (a.value === 'general') return -1;
+              return a.label.localeCompare(b.label);
+          });
+
       return categories;
-    } catch (error) {
-      throw error
-    }
+  } catch (error) {
+      throw error;
+  }
 }
 
 export async function findItemsSituationStatisticsByInspectionId(inspectionId: string, category: string) {
@@ -126,6 +113,10 @@ export async function findInspectionStatisticsAndAttributesByInspectionId(inspec
       const inspectionAttributes = {
           id: inspection.id,
           name: inspection.name,
+          resposible: inspection.responsible,
+          responsibleEmail: inspection.responsibleEmail,
+          participants: inspection.participants,
+          recordingUrl: inspection.recordingUrl,
           createdAt: formatDate(inspection.createdAt),
           finishedAt: formatDate(inspection.finishedAt),
           type: inspection.type,
@@ -183,7 +174,9 @@ export async function findInspectionStatisticsAndAttributesByInspectionId(inspec
         categories.push({ name: "Geral", values });
     }
 
-    return { inspectionAttributes, labels: labelsTranslated, categories };
+    const translatedCategories = categories.map((category) => translateCategory(category))
+
+    return { inspectionAttributes, labels: labelsTranslated, categories: translatedCategories };
   } catch (error) {
       throw error;
   }
