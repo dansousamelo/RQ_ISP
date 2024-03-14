@@ -4,8 +4,8 @@ import { DialogConfig } from '../../InspectionList/hooks/useDialogItemToRender'
 interface DialogItemToRenderProps {
   dialogStep: DialogStep
   handleGraphicPrint: any
-  handleItensPrint: any
   handleUpdateDialogControlled: (open: boolean) => void
+  handleItensPrint: any
 }
 
 export function useDialogItemToRender({
@@ -25,8 +25,8 @@ export function useDialogItemToRender({
           id: 'export_graphic',
           label: 'Exportar gráfico',
           variant: 'primary',
-          action: () => {
-            handleGraphicPrint()
+          action: async () => {
+            await handleGraphicPrint()
             handleUpdateDialogControlled(false)
           },
         },
@@ -34,8 +34,8 @@ export function useDialogItemToRender({
           id: 'export_items',
           label: 'Exportar itens',
           variant: 'primary',
-          action: () => {
-            handleItensPrint()
+          action: async () => {
+            await handleItensPrint()
             handleUpdateDialogControlled(false)
           },
         },

@@ -242,7 +242,7 @@ export async function findInspectionAttributesAndItemsToExport(inspectionId: str
 
         return {
           itemIndex: item.itemIndex,
-          situation: handleItemSituation(item.situation),
+          situation: item.situation,
           category: item.category,
           description: item.description,
           observations: item.observations,

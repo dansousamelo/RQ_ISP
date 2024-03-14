@@ -4,18 +4,12 @@ import {
   useDialogControlled,
 } from '../../components/DialogControlled'
 import { Footer } from '../../components/Footer'
-import { isNotUndefined } from '../../interfaces/typeGuards'
+import { isArrayNotEmpty, isNotUndefined } from '../../interfaces/typeGuards'
 import { BarChart } from './components/BarChar'
 import { Header } from './components/Header'
 import { SelectSubTypes } from './components/SelectSubTypes'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
-import {
-  LABELS,
-  MOCK_ITENS_EXPORT,
-  MOCK_SUBTYPES_DATA,
-  SUBTYPES_OPTIONS,
-  VALUES,
-} from './mocks'
+import { LABELS, MOCK_ITENS_EXPORT, SUBTYPES_OPTIONS } from './mocks'
 import * as S from './styles'
 import { Breadcrumb, BreadcrumbItem } from '../../components/Breadcrumb'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -24,6 +18,11 @@ import { GraphicsPDF } from './components/GraphicsPDF'
 import { createGlobalStyle } from 'styled-components'
 import { ItemsExport, ItensPDF } from './components/ItensPDF'
 import { TitleUpdater } from '../../components/TitleUpdater'
+import { getItemsCategoriesRepository } from './repositories/getItemsCategoriesRepository'
+import { getAccessToken } from '../../utils/cookies'
+import { getGraphicValuesRepository } from './repositories/getGraphicValuesRepository'
+import { getExportGraphicsRepository } from './repositories/getExportGraphicsRepository'
+import { getExportItemsRepository } from './repositories/getExportItemsRepository'
 
 export type DialogStep = '' | 'export_files'
 
@@ -36,34 +35,69 @@ export function Statistics() {
   
 `
 
-  const isLoading = false
-
-  const { name, type, accessCode } = useParams()
+  const { name, type, userId, id } = useParams()
   const navigate = useNavigate()
   const graphicsRef = useRef<HTMLDivElement | null>(null)
   const itensRef = useRef<HTMLDivElement | null>(null)
+
+  const token = getAccessToken()
+
+  const { itemsCategories, isItemsCategoriesLoading } =
+    getItemsCategoriesRepository({
+      token: token as string,
+      inspectionId: id as string,
+    })
+
+  const [title, setTitle] = useState('general')
 
   const handleGraphicPrint = useReactToPrint({
     content: () => graphicsRef.current,
   })
 
+  const { handleUpdateDialogControlled, isDialogControlledOpen } =
+    useDialogControlled()
+
+  const {
+    graphicLabels,
+    categoriesValues,
+    inspectionInformation,
+    isExportingGraphic,
+  } = getExportGraphicsRepository({
+    inspectionId: id as string,
+    token: token as string,
+  })
+
+  const { isExportingItems, items } = getExportItemsRepository({
+    inspectionId: id as string,
+    token: token as string,
+  })
+
+  const { graphicValue, isGraphicValueLoading, category } =
+    getGraphicValuesRepository({
+      token: token as string,
+      inspectionId: id as string,
+      category: title,
+    })
+
+  const isStatisticsLoading =
+    isExportingItems ||
+    isExportingGraphic ||
+    isItemsCategoriesLoading ||
+    isGraphicValueLoading
+
   const handleItensPrint = useReactToPrint({
     content: () => itensRef.current,
   })
 
-  const [title, setTitle] = useState('general')
   const [dialogStep, setDialogStep] = useState<DialogStep>('')
-
-  const { handleUpdateDialogControlled, isDialogControlledOpen } =
-    useDialogControlled()
 
   const hasSubtypes = type !== 'userStory'
 
   const { dialogItemToRender } = useDialogItemToRender({
     dialogStep,
-    handleGraphicPrint,
     handleItensPrint,
     handleUpdateDialogControlled,
+    handleGraphicPrint,
   })
 
   const titleFormatted = SUBTYPES_OPTIONS.find(
@@ -77,7 +111,7 @@ export function Statistics() {
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
       label: 'Inspeções',
-      action: () => navigate(`/inspection/list/${accessCode}`),
+      action: () => navigate(`/inspection/list/${userId}`),
     },
     {
       label: name as string,
@@ -92,7 +126,7 @@ export function Statistics() {
         <Header
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           setDialogStep={setDialogStep}
-          isLoading={isLoading}
+          isLoading={isStatisticsLoading}
         />
         <Breadcrumb items={BREADCRUMBS} />
         <S.Title>{name}</S.Title>
@@ -104,12 +138,12 @@ export function Statistics() {
 
         {hasSubtypes ? (
           <S.WrapperSelectAndGraphics>
-            {isLoading ? (
+            {isStatisticsLoading ? (
               <S.SelectSkeleton />
             ) : (
               <SelectSubTypes
-                defaultValue={'general'}
-                items={SUBTYPES_OPTIONS}
+                defaultValue={category}
+                items={itemsCategories}
                 handleValueChange={onValueChange}
               />
             )}
@@ -121,12 +155,12 @@ export function Statistics() {
                 margin: '16px 0',
               }}
             >
-              {isLoading ? (
+              {isStatisticsLoading ? (
                 <S.BarSkeleton />
               ) : (
                 <BarChart
                   labels={LABELS}
-                  values={VALUES}
+                  values={graphicValue}
                   title={titleFormatted as string}
                 />
               )}
@@ -134,12 +168,12 @@ export function Statistics() {
           </S.WrapperSelectAndGraphics>
         ) : (
           <S.WrapperChartBar>
-            {isLoading ? (
+            {isStatisticsLoading ? (
               <S.BarSkeleton />
             ) : (
               <BarChart
                 labels={LABELS}
-                values={VALUES}
+                values={graphicValue}
                 title={name as string}
               />
             )}
@@ -151,33 +185,34 @@ export function Statistics() {
 
       <GlobalStyle />
 
-      <S.PrintComponent>
-        <GraphicsPDF
-          componentRef={graphicsRef}
-          labels={LABELS}
-          subtypesData={MOCK_SUBTYPES_DATA}
-          valuesGeneral={VALUES}
-          hasSubtypes={hasSubtypes}
-          nameInspection={name as string}
-          finalDate="20/01/2024"
-          initialDate="15/01/2024"
-        />
-      </S.PrintComponent>
+      {isArrayNotEmpty(graphicLabels) && (
+        <S.PrintComponent>
+          <GraphicsPDF
+            componentRef={graphicsRef}
+            labels={graphicLabels}
+            subtypesData={categoriesValues}
+            hasSubtypes={hasSubtypes}
+            inspectionInformation={inspectionInformation}
+          />
+        </S.PrintComponent>
+      )}
 
-      <S.PrintComponent>
-        <ItensPDF
-          data={MOCK_ITENS_EXPORT as ItemsExport}
-          inspectionName={name as string}
-          componentRef={itensRef}
-        />
-      </S.PrintComponent>
+      {isArrayNotEmpty(items) && (
+        <S.PrintComponent>
+          <ItensPDF
+            items={items}
+            componentRef={itensRef}
+            inspectionInformation={inspectionInformation}
+          />
+        </S.PrintComponent>
+      )}
 
       {isDialogControlledOpen && isNotUndefined(dialogItemToRender) && (
         <DialogControlled
           isDialogControlledOpen={isDialogControlledOpen}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
-          isLoadingRequisition={false}
+          isLoadingRequisition={isExportingGraphic}
         />
       )}
     </>
