@@ -7,10 +7,16 @@ export const Content = styled.div`
   position: absolute;
 `
 
-export const Title = styled.h2`
+export const TitleInspection = styled.span`
   color: black;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 24px;
   margin-bottom: 1rem;
+`
+
+export const LabelText = styled.span`
+  font-size: 12px;
+  color: black;
 `
 
 export const DateText = styled.span`
@@ -29,6 +35,12 @@ export const WrapperTitle = styled.div`
 export const Description = styled.span`
   font-size: 12px;
   color: black;
+`
+
+export const DescriptionWithCategory = styled.span`
+  font-size: 12px;
+  color: black;
+  margin: 16px 0;
 `
 
 export const SubType = styled.h2`
