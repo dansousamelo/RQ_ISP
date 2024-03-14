@@ -106,9 +106,7 @@ export default {
                 error: false,
                 status: 200,
                 message: "Estatísticas e atributos da inspeção encontrados com sucesso!",
-                data: {
-                    inspectionData
-                }
+                data: inspectionData
             })
 
         } catch (error) {
