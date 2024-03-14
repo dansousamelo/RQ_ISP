@@ -1,6 +1,6 @@
 import { AS_PER, INCOMPLETE, NON_COMPILANT, NOT_APPLICABLE } from "../constants/constants";
 
-export function handleItemSituation(situation: string) {
+export function translateItemSituation(situation: string) {
     if(situation === AS_PER) {
         return "Conforme"
     } else if (situation === INCOMPLETE) {
