@@ -22,36 +22,40 @@ function translateCategory(category: string): string {
   }
 
 export async function findItemsCategoriesByInspectionId(inspectionId: string) {
-    try {
+  try {
       const items = await prisma.item.findMany({
-        where: {
-          inspectionId: inspectionId
-        }
-      })
-  
-      if(!items) {
-        throw new Error ("Não foi possível encontrar itens com este id de inspeção")
-      }
-  
-      const translatedCategories = items.reduce((acc: { [key: string]: string }, item) => {
-        if (item.category !== null && !(item.category in acc)) {
-          acc[item.category] = translateCategory(item.category);
-        }
-        return acc;
-      }, {});
-      
-      // category to display all of them
-      translatedCategories['general'] = "Geral"
+          where: {
+              inspectionId: inspectionId
+          }
+      });
 
-      const categories = Object.keys(translatedCategories).map((key) => ({
-        value: key,
-        label: translatedCategories[key]
-      }));
-      
+      if (!items) {
+          throw new Error("Não foi possível encontrar itens com este id de inspeção");
+      }
+
+      const translatedCategories = items.reduce((acc: { [key: string]: string }, item) => {
+          if (item.category !== null && !(item.category in acc)) {
+              acc[item.category] = translateCategory(item.category);
+          }
+          return acc;
+      }, {});
+
+      translatedCategories['general'] = "Geral";
+
+      const categories = Object.keys(translatedCategories)
+          .map((key) => ({
+              value: key,
+              label: translatedCategories[key]
+          }))
+          .sort((a, b) => {
+              if (a.value === 'general') return -1;
+              return a.label.localeCompare(b.label);
+          });
+
       return categories;
-    } catch (error) {
-      throw error
-    }
+  } catch (error) {
+      throw error;
+  }
 }
 
 export async function findItemsSituationStatisticsByInspectionId(inspectionId: string, category: string) {
