@@ -1,25 +1,8 @@
-import { String } from "aws-sdk/clients/cloudtrail";
-import { CONCLUDED, GENERAL } from "../constants/constants";
+import { CONCLUDED } from "../constants/constants";
 import { prisma } from "../db/prismaClient";
 import { Item } from "../interfaces/types";
 import { formatDate } from "../utils/formatDatetime";
-
-function translateCategory(category: string): string {
-    const translations: Record<string, string> = {
-      "accountabilityAndLegalReporting": "Responsabilização e prestação de contas",
-      "needs": "Necessidades",
-      "purpose": "Finalidade",
-      "openAcess": "Livre acesso",
-      "dataQuality": "Qualidade de Dados",
-      "transparency": "Transparência",
-      "adequacy": "Adequação",
-      "security": "Segurança",
-      "prevention": "Prevenção",
-      "nonDiscrimination": "Não Discriminação"
-    };
-  
-    return translations[category] || category;
-  }
+import { translateCategory } from "../utils/handleCategoryName";
 
 export async function findItemsCategoriesByInspectionId(inspectionId: string) {
   try {
@@ -130,6 +113,10 @@ export async function findInspectionStatisticsAndAttributesByInspectionId(inspec
       const inspectionAttributes = {
           id: inspection.id,
           name: inspection.name,
+          resposible: inspection.responsible,
+          responsibleEmail: inspection.responsibleEmail,
+          participants: inspection.participants,
+          recordingUrl: inspection.recordingUrl,
           createdAt: formatDate(inspection.createdAt),
           finishedAt: formatDate(inspection.finishedAt),
           type: inspection.type,
@@ -187,7 +174,9 @@ export async function findInspectionStatisticsAndAttributesByInspectionId(inspec
         categories.push({ name: "Geral", values });
     }
 
-    return { inspectionAttributes, labels: labelsTranslated, categories };
+    const translatedCategories = categories.map((category) => translateCategory(category))
+
+    return { inspectionAttributes, labels: labelsTranslated, categories: translatedCategories };
   } catch (error) {
       throw error;
   }
