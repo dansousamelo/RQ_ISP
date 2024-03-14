@@ -33,6 +33,11 @@ router.get(
   verifyToken,
   inspectionControllers.findInspectionAttributes
 );
+router.get(
+  "/export-inspection", 
+  verifyToken, 
+  inspectionControllers.findInspectionAttributesAndItems
+)
 
 // Update Routes
 router.put(
