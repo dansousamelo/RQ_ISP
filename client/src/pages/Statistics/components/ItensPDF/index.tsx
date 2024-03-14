@@ -61,18 +61,23 @@ export function ItensPDF({
       <S.LabelText>
         <b>Término da inspeção:</b> {inspectionInformation.finishedAt}
       </S.LabelText>
-      {/* <S.LabelText>
-        <b>Responsável:</b> {inspectionInformation.responsable}
+      <S.LabelText>
+        <b>Responsável:</b> {inspectionInformation.resposible}
       </S.LabelText>
       <S.LabelText>
-        <b>Contato:</b> {inspectionInformation.email}
+        <b>Contato:</b> {inspectionInformation.responsibleEmail}
       </S.LabelText>
-      <S.LabelText>
-        <b>Gravação disponível em:</b> {inspectionInformation.record_link}
-      </S.LabelText>
-      <S.LabelText>
-        <b>Participantes:</b> {inspectionInformation.participants}
-      </S.LabelText> */}
+      {!!inspectionInformation.recordingUrl && (
+        <S.LabelText>
+          <b>Gravação disponível em:</b> {inspectionInformation.recordingUrl}
+        </S.LabelText>
+      )}
+
+      {!!inspectionInformation.participants && (
+        <S.LabelText>
+          <b>Participantes:</b> {inspectionInformation.participants}
+        </S.LabelText>
+      )}
       <S.Description>
         Abaixo, você pode visualizar a análise dos itens do artefato{' '}
         {inspectionInformation.name}.
@@ -119,7 +124,7 @@ export function ItensPDF({
               item.trail.map((trail, index) => (
                 <S.LabelText key={trail.id}>
                   <b>Rastro {String(index + 1).padStart(2, '0')}:</b>{' '}
-                  {trail.text}
+                  {trail.text}. <i>({trail.documentName})</i>.
                 </S.LabelText>
               ))}
 

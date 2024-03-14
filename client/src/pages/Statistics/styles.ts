@@ -37,6 +37,11 @@ export const WrapperChartBar = styled.div`
 
 export const PrintComponent = styled.div`
   visibility: hidden;
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
 `
 
 export const SelectSkeleton = styled(Skeleton)`
