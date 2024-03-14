@@ -109,7 +109,8 @@ export function ItensPDF({
             )} */}
             {isString(item.trail) && Boolean(item.trail) && (
               <S.LabelText>
-                <b>Rastro:</b> {item.trail}
+                <b>Rastro:</b>
+                <div dangerouslySetInnerHTML={{ __html: item.trail }} />
               </S.LabelText>
             )}
 
