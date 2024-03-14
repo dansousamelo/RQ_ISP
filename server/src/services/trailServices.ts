@@ -1,7 +1,7 @@
 import { prisma } from "../db/prismaClient";
 import { isArrayEmpty } from "../interfaces/typeGuards";
 import { getErrorMessage } from "../utils/errorMessage";
-import { translateItemSituation } from "../utils/translateItemSituationName";
+import { translateItemSituation } from "../utils/handleItemSituation";
 
 import { PositionRect, TrailData } from "./interfaces/types";
 
