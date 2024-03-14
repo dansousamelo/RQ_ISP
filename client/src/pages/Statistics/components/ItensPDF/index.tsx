@@ -1,5 +1,7 @@
 import { isArray, isString } from '../../../../interfaces/typeGuards'
 import { SITUATION_OPTIONS } from '../../../Inspection/components/constants/mocks'
+import { InspectionItem } from '../../repositories/getExportItemsRepository'
+import { InspectionInformation } from '../../services'
 import * as S from './styles'
 
 type ItemSituation =
@@ -34,58 +36,57 @@ interface Information {
 }
 
 export interface ItemsExport {
-  information: Information
   itens: Item[]
 }
 
 interface ItensPDFProps {
-  data: ItemsExport
-  inspectionName: string
+  items: InspectionItem[]
+  inspectionInformation: InspectionInformation
   componentRef: React.MutableRefObject<HTMLDivElement | null>
 }
 
 export function ItensPDF({
-  data,
-  inspectionName,
+  items,
+  inspectionInformation,
   componentRef,
 }: ItensPDFProps) {
   return (
     <S.Container ref={componentRef}>
       <S.TitleInspection>
-        Análise de itens da Inspeção - {inspectionName}
+        Análise de itens da Inspeção - {inspectionInformation.name}
       </S.TitleInspection>
       <S.LabelText>
-        <b>Início da Inspeção:</b> {data.information.start_date}
+        <b>Início da Inspeção:</b> {inspectionInformation.createdAt}
       </S.LabelText>
       <S.LabelText>
-        <b>Término da inspeção:</b> {data.information.final_date}
+        <b>Término da inspeção:</b> {inspectionInformation.finishedAt}
+      </S.LabelText>
+      {/* <S.LabelText>
+        <b>Responsável:</b> {inspectionInformation.responsable}
       </S.LabelText>
       <S.LabelText>
-        <b>Responsável:</b> {data.information.responsable}
+        <b>Contato:</b> {inspectionInformation.email}
       </S.LabelText>
       <S.LabelText>
-        <b>Contato:</b> {data.information.email}
+        <b>Gravação disponível em:</b> {inspectionInformation.record_link}
       </S.LabelText>
       <S.LabelText>
-        <b>Gravação disponível em:</b> {data.information.record_link}
-      </S.LabelText>
-      <S.LabelText>
-        <b>Participantes:</b> {data.information.participants}
-      </S.LabelText>
+        <b>Participantes:</b> {inspectionInformation.participants}
+      </S.LabelText> */}
       <S.Description>
         Abaixo, você pode visualizar a análise dos itens do artefato{' '}
-        {inspectionName}.
+        {inspectionInformation.name}.
       </S.Description>
 
-      {data.itens.map((item) => {
+      {items.map((item) => {
         const formattedSituation = SITUATION_OPTIONS.find(
           (situation) => situation.value === item.situation,
         )?.label.toLowerCase()
 
         return (
-          <S.WrapperItem key={item.id}>
+          <S.WrapperItem key={item.itemIndex}>
             <S.WrapperTitleAndSituation>
-              <S.TitleItem>Item {String(item.id).padStart(2, '0')}</S.TitleItem>
+              <S.TitleItem>Item {item.itemIndex.padStart(2, '0')}</S.TitleItem>
               <S.Situation status={item.situation}>
                 {formattedSituation}
               </S.Situation>
@@ -100,12 +101,12 @@ export function ItensPDF({
               <b>Descrição:</b> {item.description}
             </S.LabelText>
 
-            {Boolean(item.documents) && (
+            {/* {Boolean(item.documents) && (
               <S.LabelText>
                 <b>Documento marcados (s):</b>
                 {item.documents}
               </S.LabelText>
-            )}
+            )} */}
             {isString(item.trail) && Boolean(item.trail) && (
               <S.LabelText>
                 <b>Rastro:</b> {item.trail}

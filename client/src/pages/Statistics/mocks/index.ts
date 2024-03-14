@@ -16,22 +16,18 @@ export const MOCK_SUBTYPES_DATA = [
   {
     name: 'Adequação',
     values: VALUES,
-    labels: LABELS,
   },
   {
     name: 'Necessidade',
     values: VALUES,
-    labels: LABELS,
   },
   {
     name: 'Necessidade 2',
     values: VALUES,
-    labels: LABELS,
   },
   {
     name: 'Necessidade 3',
     values: VALUES,
-    labels: LABELS,
   },
 ]
 

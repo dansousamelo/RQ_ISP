@@ -12,22 +12,19 @@ import {
 import * as S from './styles'
 import { defaultTheme } from '../../../../styles/themes/default'
 import { lightenColor } from '../../../../utils/colors'
+import { InspectionInformation } from '../../services'
 
 interface SubtypesData {
   name: string
   values: number[]
-  labels: string[]
 }
 
 interface GraphicsPDFProps {
   componentRef: React.MutableRefObject<HTMLDivElement | null>
   labels: string[]
-  valuesGeneral: number[]
   subtypesData: SubtypesData[]
   hasSubtypes: boolean
-  nameInspection: string
-  initialDate: string
-  finalDate: string
+  inspectionInformation: InspectionInformation
 }
 
 ChartJS.register(
@@ -43,12 +40,9 @@ ChartJS.register(
 export function GraphicsPDF({
   componentRef,
   labels,
-  valuesGeneral,
   subtypesData,
   hasSubtypes,
-  nameInspection,
-  finalDate,
-  initialDate,
+  inspectionInformation,
 }: GraphicsPDFProps) {
   const backgroundColors = [
     defaultTheme.colors.success400,
@@ -84,7 +78,7 @@ export function GraphicsPDF({
         backgroundColor: backgroundColors,
         borderColor: backgroundColors.map((color) => lightenColor(color, 0.5)),
         borderWidth: 1,
-        data: valuesGeneral,
+        data: subtypesData[0].values,
       },
     ],
   }
@@ -114,25 +108,46 @@ export function GraphicsPDF({
     },
   }
 
-  const textFormatted = hasSubtypes
-    ? `Abaixo, você pode visualizar a análise geral e por categorias dos itens
-  do artefato ${nameInspection}, classificados como Conforme, Incompleto, Não Conforme e Não se aplica.`
-    : `Abaixo, você pode visualizar a análise geral dos itens
-    do artefato ${nameInspection}, classificados como Conforme, Incompleto, Não Conforme e Não se aplica.`
+  const textFormatted = `Abaixo, você pode visualizar a análise gráfica Geral dos itens
+    do artefato ${inspectionInformation.name}, classificados como Conforme, Incompleto, Não Conforme e Não se aplica.`
+
+  const textForCategories = `A seguir encontram-se os gráficos de acordo com as categorias da inspeção.`
+
+  const textTitle = hasSubtypes ? `Gráficos da Inspeção` : `Gráfico da Inspeção`
 
   return (
     <S.Content ref={componentRef}>
       <S.WrapperTitle>
-        <S.Title>Gráfico de Inspeção</S.Title>
-        <S.DateText>
-          <b>Início da Inspeção:</b> {initialDate}
-        </S.DateText>
-        <S.DateText>
-          <b>Término da inspeção:</b> {finalDate}
-        </S.DateText>
+        <S.TitleInspection>
+          {textTitle} - {inspectionInformation.name}
+        </S.TitleInspection>
+        <S.LabelText>
+          <b>Início da Inspeção:</b> {inspectionInformation.createdAt}
+        </S.LabelText>
+        <S.LabelText>
+          <b>Término da inspeção:</b> {inspectionInformation.finishedAt}
+        </S.LabelText>
+        {/* <S.LabelText>
+          <b>Responsável:</b> {inspectionInformation.}
+        </S.LabelText>
+        <S.LabelText>
+          <b>Contato:</b> {data.information.email}
+        </S.LabelText>
+        <S.LabelText>
+          <b>Gravação disponível em:</b> {data.information.record_link}
+        </S.LabelText>
+        <S.LabelText>
+          <b>Participantes:</b> {data.information.participants}
+        </S.LabelText> */}
       </S.WrapperTitle>
       <S.Description>{textFormatted}</S.Description>
       <Bar data={data} options={options} />
+
+      {hasSubtypes && (
+        <S.DescriptionWithCategory>
+          {textForCategories}
+        </S.DescriptionWithCategory>
+      )}
 
       <div
         style={{
