@@ -99,8 +99,6 @@ export default {
             }
 
             const inspectionData = await findInspectionStatisticsAndAttributesByInspectionId(inspectionId);
-            
-            console.log(inspectionData);
 
             return res.status(200).json({
                 error: false,
