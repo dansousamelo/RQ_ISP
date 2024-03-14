@@ -7,5 +7,6 @@ const router = Router()
 
 // Get Routes
 router.get("/inspection-items-categories", verifyToken, chartControllers.findInspectionCategories)
+router.get("/inspection-items-statistics", verifyToken, chartControllers.findInspectionItemsSituationsStatistics)
 
 export default router;
