@@ -18,8 +18,7 @@ import {
 } from "../interfaces/typeGuards";
 import { createOrUpdateTextTrail } from "./trailServices";
 import { CONCLUDED } from "../constants/constants";
-import { handleItemSituation } from "../utils/handleItemSituation";
-import { translateCategory } from "../utils/handleCategoryName";
+import { translateCategory } from "../utils/handleItemCategory";
 
 export async function findInspectionById(
   inspectionId: string
@@ -131,26 +130,13 @@ export async function findInspectionItemsByInspectionId(
           item.itemIndex
         );
 
-        let trailResult;
-        if (isArrayNotEmpty(itemTrails)) {
-          trailResult = itemTrails.map((trail: any) => {
-            if (trail.documentName) {
-              const { documentName, ...rest } = trail;
-              return rest;
-            }
-            return trail;
-          });
-        } else {
-          trailResult = itemTrails;
-        }
-
         return {
           itemIndex: item.itemIndex,
           situation: item.situation,
           category: item.category,
           description: item.description,
           observations: item.observations,
-          trail: trailResult,
+          trail: itemTrails,
         };
       })
     );
@@ -159,6 +145,7 @@ export async function findInspectionItemsByInspectionId(
 
     return itemsExists || null;
   } catch (error) {
+    console.log(error)
     throw new Error("Não foi possível fazer a consulta de inspeções!");
   }
 }
