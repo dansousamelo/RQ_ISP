@@ -46,3 +46,11 @@ export function uploadFileLogged({
     },
   })
 }
+
+export async function deleteFileInCloud({ s3Name }: { s3Name: string }) {
+  const params = { s3Name }
+
+  return await api.delete('/delete-file-from-s3', {
+    params,
+  })
+}
