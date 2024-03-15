@@ -21,6 +21,7 @@ router.post(
 );
 
 // Delete
+router.delete("/delete-file-from-s3", fileController.deleteFileFromS3)
 router.delete("/delete-document", verifyToken, fileController.deleteFile)
 
 export default router;
