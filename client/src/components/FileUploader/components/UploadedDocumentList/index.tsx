@@ -3,11 +3,12 @@ import * as S from './styles'
 type DocumetProps = {
   name: string
   url: string
+  s3Name: string
 }
 
 interface UploadedDocumentListProps {
   documents: DocumetProps[]
-  onDeleteFile: (name: string) => void
+  onDeleteFile: (name: string, documentInCloud: string) => void
 }
 
 export function UploadedDocumentList({
@@ -22,7 +23,9 @@ export function UploadedDocumentList({
             <S.DocumentUploaderContainer>
               <S.Label>{document.name}</S.Label>
             </S.DocumentUploaderContainer>
-            <S.CloseButton onClick={() => onDeleteFile(document.name)} />
+            <S.CloseButton
+              onClick={() => onDeleteFile(document.name, document.s3Name)}
+            />
           </S.Container>
         )
       })}
