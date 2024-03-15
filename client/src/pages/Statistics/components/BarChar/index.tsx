@@ -45,6 +45,7 @@ export const BarChart = ({ labels, values, title }: BarChartProps) => {
         borderColor: backgroundColors.map((color) => lightenColor(color, 0.5)),
         borderWidth: 1,
         data: values,
+        borderRadius: 8,
       },
     ],
   }
