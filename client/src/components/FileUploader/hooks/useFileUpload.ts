@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Accept, useDropzone } from 'react-dropzone'
 import { useInitialInspectionContext } from '../../../contexts/InitialInspectionContext'
 import { ErrorToast } from '../../Toast'
-import { uploadFile } from '../services'
+import { deleteFileInCloud, uploadFile } from '../services'
 
 interface ValidatorProps {
   message: string
@@ -89,10 +89,11 @@ export function useFileUpload({
       validator,
     })
 
-  const onClearFile = (name: string) => {
+  const onClearFile = (name: string, documentInCloud: string) => {
     setFilesUploaded((prevFiles) =>
       prevFiles.filter((file) => file.name !== name),
     )
+    deleteFileInCloud({ s3Name: documentInCloud })
   }
 
   useEffect(() => {
