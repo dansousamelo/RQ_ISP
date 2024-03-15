@@ -21,8 +21,6 @@ import { deleteInspection } from './services'
 import { useInitialInspectionContext } from '../../contexts/InitialInspectionContext'
 import { queryClient } from '../../App'
 
-// Get QueryClient from the context
-
 export function InpectionList() {
   const [isDeleting, setIsDeleting] = useState(false)
   const navigate = useNavigate()

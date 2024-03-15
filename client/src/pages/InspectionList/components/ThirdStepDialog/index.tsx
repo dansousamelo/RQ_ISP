@@ -83,8 +83,8 @@ export function ThirdStepDialog() {
   }
 
   const onDeleteFile = useCallback(
-    (name: string) => {
-      onClearFile(name)
+    (name: string, documentInCloud: string) => {
+      onClearFile(name, documentInCloud)
     },
     [onClearFile],
   )
