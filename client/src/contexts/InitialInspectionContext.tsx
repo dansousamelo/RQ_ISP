@@ -16,6 +16,7 @@ export type ActiveUploadTab = 'upload_documents' | 'documents'
 export type Files = {
   name: string
   url: string
+  s3Name: string
 }[]
 
 interface InitialInspectionContextType {

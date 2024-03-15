@@ -65,6 +65,9 @@ export function useFileUploaderLogged({
               url: response.data.data.documents.find(
                 (item: any) => item.name === file.name,
               ).url,
+              s3Name: response.data.data.documents.find(
+                (item: any) => item.name === file.name,
+              ).s3Name,
             })),
           ),
         )

@@ -17,6 +17,7 @@ export type ActiveUploadTab = 'upload_documents' | 'documents'
 type Files = {
   name: string
   url: string
+  s3Name: string
 }[]
 
 export type InspectionDialog =

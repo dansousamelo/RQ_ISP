@@ -4,6 +4,7 @@ interface DocumentMark {
   text: string
   pageNumber: number
   id: string
+  documentName: string
 }
 
 interface DocumentMarkDialogProps {
@@ -16,7 +17,9 @@ export function DocumentMarkDialog({ items }: DocumentMarkDialogProps) {
       {items.map((item) => (
         <S.ItemContainer key={item.id}>
           <blockquote style={{ marginTop: '0.5rem' }}>{item.text}</blockquote>
-          <S.HighlightLocation>Page {item.pageNumber}</S.HighlightLocation>
+          <S.HighlightLocation>
+            {item.documentName} • Page {item.pageNumber}
+          </S.HighlightLocation>
         </S.ItemContainer>
       ))}
     </S.Container>

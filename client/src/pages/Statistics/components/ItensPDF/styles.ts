@@ -4,7 +4,7 @@ import { darkenColor } from '../../../../utils/colors'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1cm 2.65cm;
+  padding: 1cm 2cm;
   position: absolute;
 `
 
@@ -18,6 +18,16 @@ export const TitleInspection = styled.span`
 export const LabelText = styled.span`
   font-size: 12px;
   color: black;
+
+  .table {
+    tr {
+      border: 1px solid black;
+    }
+
+    td {
+      border: 1px solid black;
+    }
+  }
 `
 export const TitleItem = styled.span`
   color: black;

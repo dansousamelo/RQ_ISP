@@ -10,6 +10,19 @@ export const LABELS = [
   'Não conforme',
   'Não se aplica',
 ]
+
+export const PAGE_PRINT_STYLE = `
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+  @page {
+    size: A4;
+    margin: 200mm !important;
+  }
+}
+`
+
 export const VALUES = [12, 19, 3, 5]
 
 export const MOCK_SUBTYPES_DATA = [
