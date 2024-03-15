@@ -109,11 +109,11 @@ export const TrailTextAndIconWrapper = styled.div`
 
   .table {
     tr {
-      border: 1px solid white; /* Define o fundo das linhas como branco */
+      border: 1px solid white;
     }
 
     td {
-      border: 1px solid white; /* Define o fundo das colunas como branco */
+      border: 1px solid white;
     }
   }
 `

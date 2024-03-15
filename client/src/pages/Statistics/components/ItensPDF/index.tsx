@@ -106,12 +106,6 @@ export function ItensPDF({
               <b>Descrição:</b> {item.description}
             </S.LabelText>
 
-            {/* {Boolean(item.documents) && (
-              <S.LabelText>
-                <b>Documento marcados (s):</b>
-                {item.documents}
-              </S.LabelText>
-            )} */}
             {isString(item.trail) && Boolean(item.trail) && (
               <S.LabelText>
                 <b>Rastro:</b>

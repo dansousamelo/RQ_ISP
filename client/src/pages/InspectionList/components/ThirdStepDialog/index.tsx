@@ -158,7 +158,7 @@ export function ThirdStepDialog() {
           Voltar
         </S.BackButtonStyled>
         <S.ButtonStyled
-          disabled={isCreatingInspection}
+          disabled={isCreatingInspection || loadingFiles}
           onClick={() => handleCreateInspection(dataToSend)}
         >
           {!isCreatingInspection
