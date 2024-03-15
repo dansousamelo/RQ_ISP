@@ -24,9 +24,14 @@ class FileServices {
   }
 
   async deleteFile(filename: string): Promise<void> {
-    const s3Storage = new S3Storage();
+    try {
+      const s3Storage = new S3Storage();
 
-    await s3Storage.deleteFile(filename)
+      await s3Storage.deleteFile(filename)
+    } catch(error) {
+      console.error("Erro ao remover arquivo: ", error)
+      throw error
+    }
   }
 }
 
@@ -63,7 +68,6 @@ export async function postDocuments(
 
     return documentsData;
   } catch (error) {
-    console.log(error)
     throw new Error("Erro ao enviar documentos!");
   }
 }

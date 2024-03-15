@@ -57,7 +57,7 @@ export default {
         return res.status(400).json({
           error: true,
           status: 400,
-          message: "",
+          message: "Forneça um id de inspeção válido!",
           data: {},
         });
       }
@@ -134,6 +134,40 @@ export default {
         data: {}
       })
       
+    } catch (error) {
+      return res.status(500).json({
+        error: true,
+        status: 500,
+        message: getErrorMessage(error),
+        data: {},
+      });
+    }
+  },
+
+  async deleteFileFromS3(req: Request, res: Response) {
+    try {
+      const { s3Name } = req.query
+
+      if(!isString(s3Name)){ 
+        return res.status(400).json({
+          error: true,
+          status: 400,
+          message: "Forneça um nome de documento válido!",
+          data: {},
+        });
+      }
+
+      const fileService = new FileServices()
+
+      await fileService.deleteFile(s3Name);
+
+      return res.status(200).json({
+        error: false,
+        status: 200,
+        message: "Arquivo removido da nuvem com sucesso!",
+        data: {}
+      })
+
     } catch (error) {
       return res.status(500).json({
         error: true,
