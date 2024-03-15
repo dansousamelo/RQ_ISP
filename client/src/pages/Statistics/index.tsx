@@ -9,7 +9,7 @@ import { BarChart } from './components/BarChar'
 import { Header } from './components/Header'
 import { SelectSubTypes } from './components/SelectSubTypes'
 import { useDialogItemToRender } from './hooks/useDialogItemToRender'
-import { LABELS } from './mocks'
+import { LABELS, PAGE_PRINT_STYLE } from './mocks'
 import * as S from './styles'
 import { Breadcrumb, BreadcrumbItem } from '../../components/Breadcrumb'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -31,8 +31,6 @@ export function Statistics() {
   * {
     overflow-y: hidden;
   }
-
-  
 `
 
   const { name, type, userId, id } = useParams()
@@ -52,6 +50,7 @@ export function Statistics() {
 
   const handleGraphicPrint = useReactToPrint({
     content: () => graphicsRef.current,
+    pageStyle: PAGE_PRINT_STYLE,
   })
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
@@ -87,6 +86,7 @@ export function Statistics() {
 
   const handleItensPrint = useReactToPrint({
     content: () => itensRef.current,
+    pageStyle: PAGE_PRINT_STYLE,
   })
 
   const [dialogStep, setDialogStep] = useState<DialogStep>('')

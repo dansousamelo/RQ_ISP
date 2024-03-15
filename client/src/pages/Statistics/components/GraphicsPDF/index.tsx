@@ -108,10 +108,10 @@ export function GraphicsPDF({
     },
   }
 
-  const textFormatted = `Abaixo, você pode visualizar a análise gráfica Geral dos itens
-    do artefato ${inspectionInformation.name}, classificados como Conforme, Incompleto, Não Conforme e Não se aplica.`
+  const textFormatted = `Abaixo, você pode visualizar a análise gráfica <b>geral</b> dos itens
+    do artefato ${inspectionInformation.name}, classificados como <b>Conforme</b>, <b>Incompleto</b>, <b>Não Conforme</b> e <b>Não se aplica</b>.`
 
-  const textForCategories = `A seguir encontram-se os gráficos de acordo com as categorias da inspeção.`
+  const textForCategories = `A seguir encontram-se os gráficos de acordo com as <b>categorias</b> da inspeção.`
 
   const textTitle = hasSubtypes ? `Gráficos da Inspeção` : `Gráfico da Inspeção`
 
@@ -146,13 +146,13 @@ export function GraphicsPDF({
           </S.LabelText>
         )}
       </S.WrapperTitle>
-      <S.Description>{textFormatted}</S.Description>
+      <S.Description dangerouslySetInnerHTML={{ __html: textFormatted }} />
       <Bar data={data} options={options} />
 
       {hasSubtypes && (
-        <S.DescriptionWithCategory>
-          {textForCategories}
-        </S.DescriptionWithCategory>
+        <S.DescriptionWithCategory
+          dangerouslySetInnerHTML={{ __html: textForCategories }}
+        />
       )}
 
       <div
@@ -164,10 +164,10 @@ export function GraphicsPDF({
         }}
       >
         {hasSubtypes &&
-          subtypesData.map((subtype) => {
+          subtypesData.slice(1).map((subtype) => {
             return (
               <S.WrapperSubTypes key={subtype.name}>
-                <S.SubType>Categoria: {subtype.name}</S.SubType>
+                <S.SubType>{subtype.name}</S.SubType>
 
                 <Bar
                   data={generateData(subtype.name, subtype.values)}
