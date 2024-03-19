@@ -18,6 +18,7 @@ O objetivo deste documento é introduzir diretrizes de usabilidade com foco nas 
 | ---------- | ---------------------------- | ------ | ----------------------------------------------- |
 | 23/09/2020 | Daniel Veras e Paulo Almeida | 1.0    | Criando documento de heurísticas de usabilidade |
 
+
 ## Heurísticas de Nielsen
 
 <div align="justify">
@@ -80,7 +81,7 @@ Por exemplo, na Figura 3, encontramos o ícone de arraste, que proporciona aos u
 <div align="justify">
 
 Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
-Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de erro.
+Essa heurística enfatiza a importância de manter os usuários informados sobre o estado do sistema em tempo real, notificando-os sobre erros ou eventos relevantes, ao mesmo tempo que possibilita a livre navegação pelo sistema para proporcionar a sensação de controle. O uso de toasts e diálogos de erro contribui para manter os usuários informados sobre o estado do sistema e aprimora a usabilidade, permitindo que eles reconheçam e compreendam problemas rapidamente. A Figura 5 representa de forma eficaz essa ideia ao oferecer ao usuário a opção de retornar à página anterior, enquanto a Figura 6 mostra os toasts e a Figura 7 apresenta um diálogo de sucesso.
 
 </div>
 
@@ -100,8 +101,8 @@ Essa heurística enfatiza a importância de manter os usuários informados sobre
 
 <br/>
 <div align="center">
-    <figure>Figura 7: Diálogo de erro.</figure>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/ERROMODAL.png" />
+    <figure>Figura 7: Diálogo de sucesso.</figure>
+    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/SUCESSOMODAL.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
