@@ -13,7 +13,8 @@ Neste documento, é apresentado de forma detalhada a condução do <i>Lean Incep
 | Data       | Autor                        | Versão | Alteração                           |
 | ---------- | ---------------------------- | ------ | ----------------------------------- |
 | 26/11/2023 | Daniel Veras e Paulo Almeida | 1.0    | Criando documento do Lean Inception |
-| 28/11/2023 | Daniel Veras e Paulo Almeida | 1.0    | Corrigindo sequênciador |
+| 28/11/2023 | Daniel Veras e Paulo Almeida | 1.1    | Corrigindo sequênciador |
+| 19/03/2023 | Daniel Veras e Paulo Almeida | 1.2    | Melhorando qualidade das imagens |
 
 ## Introdução
 
