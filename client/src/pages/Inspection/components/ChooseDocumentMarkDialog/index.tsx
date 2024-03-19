@@ -6,7 +6,6 @@ import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 import { InspectionDialog } from '../..'
-import { useState } from 'react'
 import { Spinner } from '../../../../components/Spinner'
 
 interface ChooseDocumentMark {
@@ -35,6 +34,8 @@ interface ChooseDocumentMarkDialogProps {
   userId: string
   inspectionId: string
   handleSaveAll: () => Promise<void>
+  isSubmitingForMarkTrail: boolean
+  setIsSubmitingForMarkTrail: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function ChooseDocumentMarkDialog({
@@ -47,6 +48,8 @@ export function ChooseDocumentMarkDialog({
   userId,
   handleSaveAll,
   inspectionId,
+  isSubmitingForMarkTrail,
+  setIsSubmitingForMarkTrail,
 }: ChooseDocumentMarkDialogProps) {
   const {
     control,
@@ -56,8 +59,6 @@ export function ChooseDocumentMarkDialog({
     resolver: zodResolver(schema),
   })
 
-  const [isSubmiting, setIsSubmiting] = useState(false)
-
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -66,7 +67,7 @@ export function ChooseDocumentMarkDialog({
     )?.id
 
     try {
-      setIsSubmiting(true)
+      setIsSubmitingForMarkTrail(true)
       await handleSaveAll()
       const selectedValueEncoded = data.selectedValue.replace(/\//g, '%2F')
       navigate(
@@ -75,7 +76,7 @@ export function ChooseDocumentMarkDialog({
     } catch (err) {
       console.error(err)
     } finally {
-      setIsSubmiting(false)
+      setIsSubmitingForMarkTrail(false)
     }
   }
   return (
@@ -131,8 +132,8 @@ export function ChooseDocumentMarkDialog({
         >
           Voltar
         </S.BackButtonStyled>
-        <S.MarkButton disabled={isSubmiting} type="submit">
-          {isSubmiting ? (
+        <S.MarkButton disabled={isSubmitingForMarkTrail} type="submit">
+          {isSubmitingForMarkTrail ? (
             <div
               style={{
                 display: 'flex',

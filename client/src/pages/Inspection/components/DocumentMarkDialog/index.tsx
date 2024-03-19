@@ -18,7 +18,7 @@ export function DocumentMarkDialog({ items }: DocumentMarkDialogProps) {
         <S.ItemContainer key={item.id}>
           <blockquote style={{ marginTop: '0.5rem' }}>{item.text}</blockquote>
           <S.HighlightLocation>
-            {item.documentName} • Page {item.pageNumber}
+            {item.documentName} • Página {item.pageNumber}
           </S.HighlightLocation>
         </S.ItemContainer>
       ))}

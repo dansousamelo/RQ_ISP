@@ -98,6 +98,7 @@ export function Statistics() {
     handleItensPrint,
     handleUpdateDialogControlled,
     handleGraphicPrint,
+    hasSubtypes,
   })
 
   const onValueChange = useCallback((value: string) => {

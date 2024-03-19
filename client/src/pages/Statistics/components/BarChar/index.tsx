@@ -65,11 +65,6 @@ export const BarChart = ({ labels, values, title }: BarChartProps) => {
       },
     },
     plugins: {
-      // title: {
-      //   display: true,
-      //   text: title,
-      //   color: 'white',
-      // },
       legend: {
         labels: {
           color: defaultTheme.colors.neutral900,
