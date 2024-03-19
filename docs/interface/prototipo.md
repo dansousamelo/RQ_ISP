@@ -13,107 +13,16 @@ Protótipos de alta fidelidade são uma peça central no design e desenvolviment
 | Data | Autor | Versão | Alteração |   
 | ---- | ------ | ------ | ------ |
 | 25/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Adicionando protótipo de alta fidelidade |
+| 25/11/2023 | Daniel Veras e Paulo Almeida | 1.1 | Melhorando visibilidade do protótipo |
 
 
 ## Telas
 <div align="justify">
-&emsp;&emsp;Abaixo encontram-se todas as telas do sistema.
+&emsp;&emsp;Abaixo encontram-se o protótipo completo da aplicação desenvolvido no Figma, uma poderosa ferramenta de design colaborativo. O Figma permite que equipes trabalhem simultaneamente em projetos, facilitando a criação de interfaces de usuário intuitivas e agradáveis. Com sua interface amigável e recursos robustos, o Figma é amplamente utilizado por designers e equipes de desenvolvimento em todo o mundo. Explore o protótipo interativo abaixo para ter uma visão abrangente do trabalho realizado.
 <br/>
 
-### Começar inspeção
+<iframe width="800" height="600" src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/NfyIdS18c8cjEcsdLjMulH/TCC_RQ_ISP%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION" allowfullscreen></iframe>
 
-</div>
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/01.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Acessar inspeções
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/02.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Primeira Etapa do Formulário de Criação de inspeção
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/03.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Segunda Etapa do Formulário de Criação de inspeção
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/04.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Terceira Etapa do Formulário de Criação de inspeção
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/05.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Gerar código de acesso
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/06.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Estatísticas
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/08.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Lista de inspeções
-
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/07.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-### Marcar documentos
-
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/11.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-
-### Inspeção de Artefato
-
-<br/>
-<div align="center">
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/telas/12.png" width="100%" height="100%" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
 
 
 
