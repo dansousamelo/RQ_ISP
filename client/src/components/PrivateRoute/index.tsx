@@ -29,7 +29,7 @@ function isTokenExpired(): boolean {
   return currentTime > expirationTimestamp
 }
 
-async function regenerateToken(): Promise<boolean> {
+export async function regenerateToken(): Promise<boolean> {
   const refreshToken = Cookies.get(REFRESH_TOKEN_COOKIE_NAME)
 
   if (refreshToken) {
@@ -76,7 +76,7 @@ export function PrivateRoute({
 
   useEffect(() => {
     if (!accessToken || !refreshToken) {
-      navigate('/')
+      navigate('*')
       return
     }
 

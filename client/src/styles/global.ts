@@ -28,6 +28,25 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  ::-webkit-scrollbar {
+    width: 6px; 
+    border-radius: ${(props) => props.theme.radii.full};
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #D9D9D9; 
+    border-radius: ${(props) => props.theme.radii.full};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: ${(props) => props.theme.radii.full};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
 
   body {
     background-color: ${(props) => props.theme.colors.neutral900};

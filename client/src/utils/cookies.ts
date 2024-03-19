@@ -2,7 +2,6 @@ import Cookies from 'js-cookie'
 
 export const ACCESS_TOKEN_COOKIE_NAME = 'access_token'
 export const REFRESH_TOKEN_COOKIE_NAME = 'refresh_token'
-export const TOKEN_EXPIRATION_LIMIT = 900
 
 export function setAccessToken(token: string) {
   Cookies.set(ACCESS_TOKEN_COOKIE_NAME, token)
@@ -29,7 +28,7 @@ export function removeRefreshToken() {
 }
 
 export function createCookieWithExpiration(): void {
-  const expirationMinutes = 15
+  const expirationMinutes = 1060
   const expirationSeconds = expirationMinutes * 60
   const expirationDate = Math.floor(Date.now() / 1000) + expirationSeconds
 
