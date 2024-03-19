@@ -139,14 +139,7 @@ Nesta fase, cada participante realizou contribuições referentes às funcionali
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <figure>Figura 8: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/BRAINSTORMING-1.png" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <figure>Figura 9: <i>Brainstorming</i> de funcionalidades da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/BRAINSTORMING-2.png" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/FEATURE_BRAINSTORMING.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
@@ -171,17 +164,12 @@ Nesta dinâmica, a equipe se reuniu para avaliar o nível de esforço, valor de 
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <figure>Figura 11: Revisão técnica, de negócio e UX da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/TEUX-2.png" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/UX.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <figure>Figura 12: Revisão técnica, de negócio e UX da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/TEUX-3.png" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
+
 
 ### Sequênciador
 
@@ -194,31 +182,11 @@ Em seguida, a equipe elaborou o sequenciador, fundamentado nos valores de esfor�
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <figure>Figura 13: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-1.png" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <figure>Figura 14: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-2.png" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <figure>Figura 15: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-3.png" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
-
-<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
-    <figure>Figura 16: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR-4.png" />
-    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
-</div>
-<br/>
 
 ### MVP Canvas
 
