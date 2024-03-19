@@ -6,6 +6,7 @@ export type DocumentHeader = {
   id: string
   name: string
   url: string
+  s3Name: string
 }
 export interface HeaderInspectionProps {
   name: string

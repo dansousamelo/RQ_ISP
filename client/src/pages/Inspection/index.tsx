@@ -76,6 +76,7 @@ export function Inspection() {
   const [editorData, setEditorData] = useState<string>('')
   const [observationsData, setObservationsData] = useState<string>('')
   const [idEditing, setIsEditing] = useState(false)
+  const [isSubmitingForMarkTrail, setIsSubmitingForMarkTrail] = useState(false)
 
   const BREADCRUMBS: BreadcrumbItem[] = [
     {
@@ -190,6 +191,8 @@ export function Inspection() {
     setIsUpdating,
     handleSaveAll,
     reloadItems,
+    isSubmitingForMarkTrail,
+    setIsSubmitingForMarkTrail,
   })
 
   const [isSavingItems, setIsSaveItems] = useState(false)
@@ -296,7 +299,7 @@ export function Inspection() {
           isDialogControlledOpen={isDialogControlledOpen}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
-          isLoadingRequisition={isUpdating}
+          isLoadingRequisition={isUpdating || isSubmitingForMarkTrail}
           onClose={() => {
             setEditorData('')
             setObservationsData('')

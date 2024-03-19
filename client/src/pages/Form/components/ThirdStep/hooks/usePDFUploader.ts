@@ -1,4 +1,3 @@
-// import { uploadFile } from 'NovaEstrutura/App/Entities/Upload'
 import { useFileUpload } from '../../../../../components/FileUploader/hooks/useFileUpload'
 
 type VariantFile = 'valid' | 'invalid'

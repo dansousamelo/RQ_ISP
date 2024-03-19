@@ -6,6 +6,7 @@ interface DialogItemToRenderProps {
   handleGraphicPrint: any
   handleUpdateDialogControlled: (open: boolean) => void
   handleItensPrint: any
+  hasSubtypes: boolean
 }
 
 export function useDialogItemToRender({
@@ -13,6 +14,7 @@ export function useDialogItemToRender({
   handleGraphicPrint,
   handleUpdateDialogControlled,
   handleItensPrint,
+  hasSubtypes,
 }: DialogItemToRenderProps) {
   const dialogConfig: DialogConfig = {
     export_files: {
@@ -23,7 +25,7 @@ export function useDialogItemToRender({
       buttonConfig: [
         {
           id: 'export_graphic',
-          label: 'Exportar gráfico',
+          label: hasSubtypes ? 'Exportar gráficos' : 'Exportar gráfico',
           variant: 'primary',
           action: async () => {
             await handleGraphicPrint()

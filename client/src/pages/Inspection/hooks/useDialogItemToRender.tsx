@@ -61,6 +61,8 @@ interface DialogItemToRenderProps {
   setIsUpdating: React.Dispatch<React.SetStateAction<boolean>>
   handleSaveAll: () => Promise<void>
   reloadItems: () => void
+  isSubmitingForMarkTrail: boolean
+  setIsSubmitingForMarkTrail: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function useDialogItemToRender({
@@ -87,6 +89,8 @@ export function useDialogItemToRender({
   setIsUpdating,
   handleSaveAll,
   reloadItems,
+  isSubmitingForMarkTrail,
+  setIsSubmitingForMarkTrail,
 }: DialogItemToRenderProps) {
   const [trailType, setTrailType] = useState<TrailType>('text_editor')
 
@@ -191,7 +195,7 @@ export function useDialogItemToRender({
         },
         {
           id: 'continue',
-          label: idEditing ? 'Editar' : 'Salvar',
+          label: idEditing ? 'Editar' : 'Adicionar',
           variant: 'primary',
           action: () => saveTextEditorTrail(),
         },
@@ -222,6 +226,7 @@ export function useDialogItemToRender({
           inspectionId={id}
           token={token as string}
           reloadItems={reloadItems}
+          updateTrailType={updateTrailType}
         />
       ),
       width: '32rem',
@@ -262,6 +267,8 @@ export function useDialogItemToRender({
           userId={userId}
           inspectionId={id}
           handleSaveAll={handleSaveAll}
+          isSubmitingForMarkTrail={isSubmitingForMarkTrail}
+          setIsSubmitingForMarkTrail={setIsSubmitingForMarkTrail}
         />
       ),
       width: '28rem',

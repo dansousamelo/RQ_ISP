@@ -4,7 +4,7 @@ import { lightenColor } from '../../../../utils/colors'
 
 export const InputWrapper = styled.div`
   display: grid;
-  height: 14rem;
+  max-height: 550px;
   overflow-y: auto;
   gap: ${({ theme }) => theme.space[4]};
   margin-top: 1%;

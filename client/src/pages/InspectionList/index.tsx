@@ -135,9 +135,9 @@ export function InpectionList() {
   }
 
   const STATUS_OPTIONS = {
-    uninitiated: 'Não iniciado',
+    uninitiated: 'Não iniciada',
     initiated: 'Em andamento',
-    concluded: 'Concluído',
+    concluded: 'Concluída',
   }
 
   const hasInspections = isArrayNotEmpty(inspections)

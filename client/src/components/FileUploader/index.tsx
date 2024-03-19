@@ -14,4 +14,5 @@ export const FileUploader = {
   MessageUploadBold: S.MessageUploadBold,
   MessageUploadError: S.MessageUploadError,
   MessageUploadDescription: S.MessageUploadDescription,
+  MessageUploadDescriptionVariant: S.MessageUploadDescriptionVariant,
 }

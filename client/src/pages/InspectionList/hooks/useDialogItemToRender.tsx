@@ -107,7 +107,7 @@ export function useDialogItemToRender({
       ],
     },
     logout: {
-      title: 'Confirmar Saída',
+      title: 'Confirmar saída',
       description: 'Tem certeza de que deseja encerrar a sessão na plataforma?',
       width: '20rem',
       buttonConfig: [
