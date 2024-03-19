@@ -1,0 +1,15 @@
+export const ZERO = 0;
+export const FIVE = 5;
+export const ONE_HUNDRED = 100;
+export const TEN_MINUTES = 10 * 60 * 10;
+export const ONE_HOUR = 100 * 60 * 60;
+export const USER_STORY = "userStory";
+export const PRIVACY_REQUIREMENT = "privacyRequirement";
+export const UNINITIATED = "uninitiated";
+export const INITIATED = "initiated";
+export const CONCLUDED = "concluded";
+export const AS_PER = "as_per"
+export const INCOMPLETE = "incomplete"
+export const NON_COMPILANT = "non_compilant"
+export const NOT_APPLICABLE = "not_applicable"
+export const GENERAL = "general"

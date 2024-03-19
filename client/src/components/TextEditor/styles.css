@@ -1,0 +1,38 @@
+.ck-content {
+  color: #fff;
+  background-color: #181818 !important;
+  outline: none !important;
+  max-height: 30rem !important;
+  min-height: 10rem !important;
+  overflow-y: auto !important;
+}
+
+.ck {
+  color: #fff !important; 
+  background-color: #181818 !important;
+  outline: none !important;
+}
+
+.ck-toolbar__separator {
+  background-color: #FFF !important 
+}
+
+.ck-button {
+  color: #FFF !important 
+}
+
+.ck-content,
+.ck,
+.ck-toolbar__separator,
+.ck-button {
+  outline: none !important;
+}
+
+*:focus {
+  outline: none !important;
+  border-color: #FFF !important 
+}
+
+[data-cke-tooltip-text="Insert media"] {
+  display: none !important; 
+}
