@@ -104,3 +104,9 @@ export const MessageUploadDescription = styled.span`
   font-weight: ${(props) => props.theme.fontWeights.bold};
   margin-left: ${(props) => props.theme.space[4]};
 `
+
+export const MessageUploadDescriptionVariant = styled.span`
+  font-size: ${(props) => props.theme.fontSizes.xs};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  margin-left: -3rem;
+`

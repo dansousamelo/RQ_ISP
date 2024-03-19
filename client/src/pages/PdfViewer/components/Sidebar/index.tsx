@@ -58,7 +58,7 @@ export function SidebarLiContent({
         )}
       </div>
       <S.HighlightLocation>
-        Page {highlight.position.pageNumber}
+        Página {highlight.position.pageNumber}
       </S.HighlightLocation>
     </>
   )

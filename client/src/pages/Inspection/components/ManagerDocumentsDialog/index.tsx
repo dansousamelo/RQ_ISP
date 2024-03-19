@@ -9,6 +9,7 @@ import { LoadingBars } from '../../../../components/LoadingBars'
 import { useFileUpload } from './hooks/useFileUpload'
 import { HeaderInspectionProps } from '../../repository/getInspectionHeaderRepository'
 import { Files } from '../../../../contexts/InitialInspectionContext'
+import { TrailType } from '../../hooks/useDialogItemToRender'
 
 interface ManagerDocumentsDialogProps {
   userId: string
@@ -17,6 +18,7 @@ interface ManagerDocumentsDialogProps {
   handleUpdateDialogControlled: (open: boolean) => void
   headerData: HeaderInspectionProps
   reloadItems: () => void
+  updateTrailType: (value: TrailType) => void
   setHeaderData: React.Dispatch<React.SetStateAction<HeaderInspectionProps>>
 }
 
@@ -27,6 +29,7 @@ export function ManagerDocumentsDialog({
   userId,
   inspectionId,
   token,
+  updateTrailType,
   reloadItems,
 }: ManagerDocumentsDialogProps) {
   const [filesUploaded, setFilesUploaded] = useState<Files>(
@@ -57,9 +60,10 @@ export function ManagerDocumentsDialog({
   const onDeleteFile = useCallback(
     (name: string) => {
       onClearFile(name)
+      updateTrailType('text_editor')
       reloadItems()
     },
-    [onClearFile, reloadItems],
+    [onClearFile, reloadItems, updateTrailType],
   )
 
   const tabs = [
@@ -81,9 +85,9 @@ export function ManagerDocumentsDialog({
               </FileUploader.MessageUpload>
             </FileUploader.WrapperIconAndMessageUpload>
 
-            <FileUploader.MessageUploadDescription>
+            <FileUploader.MessageUploadDescriptionVariant>
               Apenas arquivos no formato pdf são permitidos.
-            </FileUploader.MessageUploadDescription>
+            </FileUploader.MessageUploadDescriptionVariant>
             <input
               name="dropzone-file"
               {...getInputProps()}

@@ -108,9 +108,9 @@ export function ThirdStepDialog() {
               </FileUploader.MessageUpload>
             </FileUploader.WrapperIconAndMessageUpload>
 
-            <FileUploader.MessageUploadDescription>
+            <FileUploader.MessageUploadDescriptionVariant>
               Apenas arquivos no formato pdf são permitidos.
-            </FileUploader.MessageUploadDescription>
+            </FileUploader.MessageUploadDescriptionVariant>
             <input
               name="dropzone-file"
               {...getInputProps()}
