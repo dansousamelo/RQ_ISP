@@ -95,14 +95,14 @@ Essa heurística enfatiza a importância de manter os usuários informados sobre
 <br/>
 <div align="center">
     <figure>Figura 6: Toasts de sucesso e erro, respectivamente.</figure>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/TOASTS.png" />
+    <img width="30%" height="30%" src="https://dansousamelo.github.io/RQ_ISP/assets/TOASTS.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
 <br/>
 <div align="center">
     <figure>Figura 7: Diálogo de sucesso.</figure>
-    <img width="40%" height="40%" src="https://dansousamelo.github.io/RQ_ISP/assets/SUCESSOMODAL.png" />
+    <img width="25%" height="25%" src="https://dansousamelo.github.io/RQ_ISP/assets/SUCESSOMODAL.png" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 
