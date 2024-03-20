@@ -4,8 +4,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 import { getErrorMessage } from "../utils/errorMessage";
 
-const secretKey =
-  process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
+const secretKey = process.env.TOKEN_SECRET_KEY;
 
 export interface CustomRequest extends Request {
   token: string | JwtPayload;
@@ -17,6 +16,9 @@ export const verifyToken = (
   next: NextFunction
 ) => {
   try {
+    if(!secretKey){
+      throw new Error("Não foi possível verificar a secret key!")
+    }
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
