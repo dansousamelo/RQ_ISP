@@ -7,7 +7,7 @@ import managerListPicture from '../../assets/managerList.png'
 import { Info } from 'phosphor-react'
 import * as S from './styles'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   createCookieWithExpiration,
   setAccessToken,
