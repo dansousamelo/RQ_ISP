@@ -11,7 +11,7 @@ import chartRoutes from "./routes/chartRoutes"
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 
 const app = Express();
 app.use(Express.json());

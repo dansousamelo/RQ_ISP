@@ -5,7 +5,7 @@ import fs from "fs";
 
 import multerConfig from "../config/multer";
 
-const bucket = process.env.S3_BUCKET || 'rqs-bucket-test';
+const bucket = process.env.S3_BUCKET;
 
 class S3Storage {
   private client: S3;
@@ -19,6 +19,9 @@ class S3Storage {
   async saveFile(fileName: string){
     const originalPath = path.resolve(multerConfig.directory, fileName);
     try {
+      if(!bucket) {
+        throw new Error("Não foi encontrado bucket aws")
+      }
       const ContentType = mime.getType(originalPath);
 
       if (!ContentType) {
@@ -50,6 +53,9 @@ class S3Storage {
 
   async deleteFile(fileName: string): Promise<void> {
     try {
+      if(!bucket) {
+        throw new Error("Não foi encontrado bucket aws")
+      }
       this.client.deleteObject({
         Bucket: bucket,
         Key: fileName,

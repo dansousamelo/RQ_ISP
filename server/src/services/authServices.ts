@@ -6,16 +6,26 @@ import { TEN_MINUTES, ONE_HOUR } from "../constants/constants";
 
 dotenv.config();
 
-const secretKey =
-  process.env.TOKEN_SECRET_KEY || crypto.randomBytes(32).toString("hex");
+const secretKey = process.env.TOKEN_SECRET_KEY;
 
 export function generateToken(user_id: string): string {
-  const expirationMinutes = 1060
-  const expirationSeconds = expirationMinutes * 60
-  return jwt.sign({ user_id }, secretKey, { expiresIn: expirationSeconds });
+  try{
+    if(!secretKey){
+      throw new Error("Não foi possível verificar a secret key!")
+    }
+
+    const expirationMinutes = 1060
+    const expirationSeconds = expirationMinutes * 60
+    return jwt.sign({ user_id }, secretKey, { expiresIn: expirationSeconds });
+  } catch(error){
+    throw error
+  }
 }
 
 export function generateRefreshToken(user_id: string): string {
+  if(!secretKey){
+    throw new Error("Não foi possível verificar a secret key!")
+  }
   const secondsPerMinute = 60;
   const minutesPerHour = 60;
   const hoursPerDay = 24;
@@ -27,5 +37,12 @@ export function generateRefreshToken(user_id: string): string {
 }
 
 export function getSecretKey(): string {
-  return secretKey;
+  try{
+    if(!secretKey){
+      throw new Error("Não foi possível verificar a secret key!")
+    }
+    return secretKey;
+  } catch(error) {
+    throw error;
+  }
 }
