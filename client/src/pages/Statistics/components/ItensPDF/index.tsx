@@ -26,15 +26,6 @@ interface Item {
   trail: TrailItem[] | string
 }
 
-interface Information {
-  final_date: string
-  start_date: string
-  responsable: string
-  email: string
-  record_link: string
-  participants: string
-}
-
 export interface ItemsExport {
   itens: Item[]
 }

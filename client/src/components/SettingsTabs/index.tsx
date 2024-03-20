@@ -2,7 +2,6 @@ import React, { ComponentProps, useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 import { TabItem } from './TabItem'
 import * as S from './styles'
-import { ActiveUploadTab } from '../../contexts/InitialInspectionContext'
 
 type TabType = {
   value: string
