@@ -170,8 +170,6 @@ Nesta dinâmica, a equipe se reuniu para avaliar o nível de esforço, valor de 
 </div>
 <br/>
 
-
-
 ### Sequênciador
 
 <div align="justify">
@@ -181,9 +179,9 @@ Em seguida, a equipe elaborou o sequenciador, fundamentado nos valores de esfor�
 <div>
 
 <br/>
-<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+<div style="position: relative; left: 10rem;display: flex; flex-direction: column; width: 60%; justify-content: center; align-items:center;">
     <figure>Figura 13: Sequênciador da ferramenta RQ_ISP.</figure>
-    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR.png" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/lean/SEQUENCIADOR.png"/>
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
