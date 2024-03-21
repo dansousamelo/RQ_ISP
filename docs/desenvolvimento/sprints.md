@@ -12,6 +12,18 @@
 | Data | Autor | Versão | Alteração |   
 | ---- | ------ | ------ | ------ |
 | 24/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de Sprint Overview |
+| 24/11/2023 | Daniel Veras e Paulo Almeida | 1.1 | Adicionando planejamento da Sprint 1 |
+| 08/01/2024 | Daniel Veras e Paulo Almeida | 1.2 | Adicionando planejamento da Sprint 2 |
+| 16/01/2024 | Daniel Veras e Paulo Almeida | 1.3 | Adicionando planejamento da Sprint 3 |
+| 23/01/2024 | Daniel Veras e Paulo Almeida | 1.4 | Adicionando planejamento da Sprint 4 |
+| 30/01/2024 | Daniel Veras e Paulo Almeida | 1.5 | Adicionando planejamento da Sprint 5 |
+| 06/02/2024 | Daniel Veras e Paulo Almeida | 1.6 | Adicionando planejamento da Sprint 6 |
+| 13/02/2024 | Daniel Veras e Paulo Almeida | 1.7 | Adicionando planejamento da Sprint 7 |
+| 20/02/2024 | Daniel Veras e Paulo Almeida | 1.8 | Adicionando planejamento da Sprint 8 |
+| 27/02/2024 | Daniel Veras e Paulo Almeida | 1.9 | Adicionando planejamento da Sprint 9 |
+| 05/03/2024 | Daniel Veras e Paulo Almeida | 2.0 | Adicionando planejamento da Sprint 10 |
+| 12/03/2024 | Daniel Veras e Paulo Almeida | 2.1 | Adicionando planejamento da Sprint 11 |
+
 
 
 ## Sprint 1
@@ -152,6 +164,281 @@ Eu, como um usuário, desejo poder visualizar o progresso de uma inspeção atra
 2. Deve haver um endpoint para o client-side consumir os dados dos gráficos.
 3. Quando houver categoria deve ter um endpoint para listar todas as categorias.
 
+## Sprint 4
+
+* Data de Início: 23/01/2024
+* Data de Término: 29/01/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU10| Eu, como um usuário, desejo poder imprimir os relatórios gerados. | 8 pontos |
+| HU07 | Eu, como um usuário, desejo poder salvar uma inspeção completa.  | 5 pontos |
+
+
+### HU10
+
+Eu, como um usuário, desejo poder imprimir os relatórios gerados.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma pre visualização para poder escolher a impressora e configurações da página.
+2. O usuário deve ser capaz de pré visualizar a página a ser impressa.
+
+
+### HU07
+
+Eu, como um usuário, desejo poder salvar uma inspeção completa.
+
+**Critérios de Aceitação:**
+
+1. Ao salvar uma inspeção deve haver uma mensagem avisando que a inspeção foi concluída.
+2. Deve haver um endpoint para o client-side enviar os dados completos da inspeção.
+
+## Sprint 5
+
+* Data de Início: 30/01/2024
+* Data de Término: 05/02/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU14 | Eu, como um usuário, desejo poder visualizar uma inspeção ao finalizá-la. | 5 pontos |
+| HU23 | Eu, como um sistema, desejo manter o registro da última data em que uma inspeção foi alterada. | 5 pontos |
+
+
+### HU14
+
+Eu, como um usuário, desejo poder visualizar uma inspeção ao finalizá-la.
+
+**Critérios de Aceitação:**
+
+1. Ao listar a inspeção o status deve ser concluída.
+2. Deve haver um endpoint para o client-side renderizar os itens da inspeção completa.
+3. Deve haver um botão visualizar na listagem de inspeção.
+
+
+### HU23
+
+Eu, como um sistema, desejo manter o registro da última data em que uma inspeção foi alterada.
+
+**Critérios de Aceitação:**
+
+1. Ao executar alguma atualização em que envolva o envia de dados por parte do clien-side deve refletir na mensagem de última alteração.
+
+## Sprint 6
+
+* Data de Início: 06/02/2024
+* Data de Término: 12/02/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU27 | Eu, como um usuário, desejo poder adicionar, visualizar e editar os participantes de uma inspeção. | 5 pontos |
+| HU16 | Eu, como um usuário, desejo poder marcar rastros existentes em arquivos submetidos durante uma inspeção. | 5 pontos |
+
+### HU27
+
+Eu, como um usuário, desejo poder adicionar, visualizar e editar os participantes de uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma interface para adicionar, visualizar e editar participantes.
+2. As alterações nos participantes devem ser refletidas na inspeção.
+
+
+### HU16
+
+Eu, como um usuário, desejo poder marcar rastros existentes em arquivos submetidos durante uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para marcar rastros em arquivos submetidos.
+2. As marcações devem ser armazenadas e exibidas adequadamente.
+
+## Sprint 7
+
+* Data de Início: 13/02/2024
+* Data de Término: 19/02/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU24 | Eu, como um usuário, desejo poder excluir uma inspeção. | 5 pontos |
+| HU03 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável por uma inspeção. | 5 pontos |
+
+### HU24
+
+Eu, como um usuário, desejo poder excluir uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para excluir uma inspeção.
+2. A exclusão deve ser confirmada pelo usuário antes de ser executada.
+
+
+### HU03
+
+Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável por uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver campos para adicionar, visualizar e editar o responsável.
+2. As alterações devem ser refletidas na inspeção.
+
+## Sprint 8
+
+* Data de Início: 20/02/2024
+* Data de Término: 26/02/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU04 | Eu, como um usuário, desejo ser informado de minhas credenciais de acesso ao criar uma inspeção na página inicial. | 3 pontos |
+| HU05 | Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção. | 3 pontos |
+
+### HU04
+
+Eu, como um usuário, desejo ser informado de minhas credenciais de acesso ao criar uma inspeção na página inicial.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma notificação ou indicação das credenciais necessárias ao criar uma inspeção.
+2. As credenciais devem ser claras e fáceis de entender.
+
+
+### HU05
+
+Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma interface para adicionar e gerenciar artefatos.
+2. Os artefatos devem ser associáveis à inspeção e editáveis.
+
+## Sprint 9
+
+* Data de Início: 27/02/2024
+* Data de Término: 04/03/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU06 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o nome de uma inspeção. | 3 pontos |
+| HU11 | Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção. | 3 pontos |
+
+### HU06
+
+Eu, como um usuário, desejo poder adicionar, visualizar e editar o nome de uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver campos para adicionar, visualizar e editar o nome da inspeção.
+2. As alterações devem ser refletidas adequadamente.
+
+
+### HU11
+
+Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para anexar textos em um rastro.
+2. Os textos anexados devem ser exibidos adequadamente.
+
+
+## Sprint 10
+
+* Data de Início: 05/03/2024
+* Data de Término: 11/03/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU12 | Eu, como um usuário, desejo poder anexar links externos em um rastro de uma inspeção. | 3 pontos |
+| HU13 | Eu, como um usuário, desejo poder sair da aplicação. | 2 pontos |
+
+### HU12
+
+Eu, como um usuário, desejo poder anexar links externos em um rastro de uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para anexar links externos em um rastro.
+2. Os links anexados devem ser acessíveis e exibidos adequadamente.
+
+
+### HU13
+
+Eu, como um usuário, desejo poder sair da aplicação.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção clara para sair da aplicação.
+2. A saída deve ser segura e sem perda de dados não salvos.
+
+## Sprint 11
+
+* Data de Início: 12/03/2024
+* Data de Término: 19/03/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU17 | Eu, como um usuário, desejo poder limpar uma única marcação ou todas as marcações durante uma inspeção. | 3 pontos |
+| HU18 | Eu, como um usuário, desejo poder adicionar, visualizar e editar um link para a gravação de uma inspeção. | 3 pontos |
+| HU22 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o e-mail do responsável por uma inspeção. | 3 pontos |
+| HU25 | Eu, como um usuário, desejo poder visualizar uma listagem de inspeções. | 3 pontos |
+| HU26 | Eu, como um usuário, desejo poder iniciar outro fluxo de criação de inspeção. | 2 pontos |
+
+### HU17
+
+Eu, como um usuário, desejo poder limpar uma única marcação ou todas as marcações durante uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para limpar uma única marcação.
+2. Deve haver uma opção para limpar todas as marcações de uma vez.
+
+
+### HU18
+
+Eu, como um usuário, desejo poder adicionar, visualizar e editar um link para a gravação de uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver campos para adicionar, visualizar e editar o link da gravação.
+2. O link deve ser acessível e exibido adequadamente.
+
+
+### HU22
+
+Eu, como um usuário, desejo poder adicionar, visualizar e editar o e-mail do responsável por uma inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver campos para adicionar, visualizar e editar o e-mail do responsável.
+2. As alterações devem ser refletidas na inspeção.
+
+
+### HU25
+
+Eu, como um usuário, desejo poder visualizar uma listagem de inspeções.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma página ou interface para visualizar a listagem de inspeções.
+2. As inspeções devem ser listadas de forma clara e organizada.
+
+
+### HU26
+
+Eu, como um usuário, desejo poder iniciar outro fluxo de criação de inspeção.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para iniciar outro fluxo de criação de inspeção após finalizar uma.
+2. O novo fluxo de criação deve ser iniciado sem perda de dados ou interferência na inspeção anterior.
 
 ## Referências
 
