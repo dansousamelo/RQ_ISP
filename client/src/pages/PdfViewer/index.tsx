@@ -172,7 +172,7 @@ const PdfViewer = () => {
     }
   }
   function verifyIfItemWasFilled(comment: CommentProps) {
-    return Number(comment.text) < Number(amountOfItens)
+    return Number(comment.text) <= Number(amountOfItens)
   }
 
   useEffect(() => {
