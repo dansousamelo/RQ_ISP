@@ -371,7 +371,10 @@ export function useDialogItemToRender({
           id: 'understand',
           label: 'Ok',
           variant: 'primary',
-          action: () => handleUpdateDialogControlled(false),
+          action: () => {
+            handleUpdateDialogControlled(false)
+            backToInpsectionList()
+          },
         },
       ],
     },
