@@ -87,6 +87,9 @@ export async function findDocumentTrails(documentId: string) {
           },
         },
       },
+      orderBy: {
+        createdAt: "desc"
+      },
     });
 
     if (!documentTrails || isArrayEmpty(documentTrails)) {
