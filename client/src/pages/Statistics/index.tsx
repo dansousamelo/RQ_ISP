@@ -23,8 +23,14 @@ import { getAccessToken } from '../../utils/cookies'
 import { getGraphicValuesRepository } from './repositories/getGraphicValuesRepository'
 import { getExportGraphicsRepository } from './repositories/getExportGraphicsRepository'
 import { getExportItemsRepository } from './repositories/getExportItemsRepository'
+import { AllExportPDF } from './components/AllExportPDF'
 
 export type DialogStep = '' | 'export_files'
+export type OptionToPrint =
+  | 'export_graphic'
+  | 'export_items'
+  | 'export_all'
+  | ''
 
 export function Statistics() {
   const GlobalStyle = createGlobalStyle`
@@ -37,6 +43,7 @@ export function Statistics() {
   const navigate = useNavigate()
   const graphicsRef = useRef<HTMLDivElement | null>(null)
   const itensRef = useRef<HTMLDivElement | null>(null)
+  const allRef = useRef<HTMLDivElement | null>(null)
 
   const token = getAccessToken()
 
@@ -47,10 +54,12 @@ export function Statistics() {
     })
 
   const [title, setTitle] = useState('general')
+  const [optionToPrint, setOptionToPrint] = useState<OptionToPrint>('')
 
   const handleGraphicPrint = useReactToPrint({
     content: () => graphicsRef.current,
     pageStyle: PAGE_PRINT_STYLE,
+    documentTitle: 'graficos_exportados',
   })
 
   const { handleUpdateDialogControlled, isDialogControlledOpen } =
@@ -87,6 +96,13 @@ export function Statistics() {
   const handleItensPrint = useReactToPrint({
     content: () => itensRef.current,
     pageStyle: PAGE_PRINT_STYLE,
+    documentTitle: 'itens_exportados',
+  })
+
+  const handleAllPrint = useReactToPrint({
+    content: () => allRef.current,
+    pageStyle: PAGE_PRINT_STYLE,
+    documentTitle: 'itens_grafico_exportados',
   })
 
   const [dialogStep, setDialogStep] = useState<DialogStep>('')
@@ -99,6 +115,9 @@ export function Statistics() {
     handleUpdateDialogControlled,
     handleGraphicPrint,
     hasSubtypes,
+    handleAllPrint,
+    optionToPrint,
+    setOptionToPrint,
   })
 
   const onValueChange = useCallback((value: string) => {
@@ -118,7 +137,7 @@ export function Statistics() {
 
   return (
     <>
-      <TitleUpdater title="Estatísticas" />
+      <TitleUpdater title="Relatório" />
       <S.Container>
         <Header
           handleUpdateDialogControlled={handleUpdateDialogControlled}
@@ -128,9 +147,10 @@ export function Statistics() {
         <Breadcrumb items={BREADCRUMBS} />
         <S.Title>{name}</S.Title>
         <S.Subtitle>
-          Abaixo, você encontrará as estatísticas da inspeção. Se desejar
-          examiná-las com mais detalhes, você pode optar por exportá-las para
-          uma visualização mais aprofundada.
+          Abaixo, você encontrará as estatísticas da inspeção em forma de
+          gráfico. Se desejar examiná-las com mais detalhes por meio de
+          relatórios, você pode optar por exportá-las para uma visualização mais
+          aprofundada.
         </S.Subtitle>
 
         {hasSubtypes ? (
@@ -204,12 +224,26 @@ export function Statistics() {
         </S.PrintComponent>
       )}
 
+      {isArrayNotEmpty(items) && isArrayNotEmpty(graphicLabels) && (
+        <S.PrintComponent>
+          <AllExportPDF
+            labels={graphicLabels}
+            componentRef={allRef}
+            subtypesData={categoriesValues}
+            items={items}
+            hasSubtypes={hasSubtypes}
+            inspectionInformation={inspectionInformation}
+          />
+        </S.PrintComponent>
+      )}
+
       {isDialogControlledOpen && isNotUndefined(dialogItemToRender) && (
         <DialogControlled
           isDialogControlledOpen={isDialogControlledOpen}
           handleUpdateDialogControlled={handleUpdateDialogControlled}
           dialogItemToRender={dialogItemToRender}
           isLoadingRequisition={isExportingGraphic}
+          onClose={() => setOptionToPrint('')}
         />
       )}
     </>

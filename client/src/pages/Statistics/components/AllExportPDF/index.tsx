@@ -10,9 +10,13 @@ import {
   Legend,
 } from 'chart.js'
 import * as S from './styles'
+import * as I from '../ItensPDF/styles'
 import { defaultTheme } from '../../../../styles/themes/default'
 import { lightenColor } from '../../../../utils/colors'
 import { InspectionInformation } from '../../services'
+import { isArray, isString } from '../../../../interfaces/typeGuards'
+import { SITUATION_OPTIONS } from '../../../Inspection/components/constants/mocks'
+import { InspectionItem } from '../../repositories/getExportItemsRepository'
 
 export interface SubtypesData {
   name: string
@@ -25,6 +29,7 @@ interface GraphicsPDFProps {
   subtypesData: SubtypesData[]
   hasSubtypes: boolean
   inspectionInformation: InspectionInformation
+  items: InspectionItem[]
 }
 
 ChartJS.register(
@@ -37,9 +42,10 @@ ChartJS.register(
   BarController,
 )
 
-export function GraphicsPDF({
+export function AllExportPDF({
   componentRef,
   labels,
+  items,
   subtypesData,
   hasSubtypes,
   inspectionInformation,
@@ -147,7 +153,10 @@ export function GraphicsPDF({
         )}
       </S.WrapperTitle>
       <S.Description dangerouslySetInnerHTML={{ __html: textFormatted }} />
-      <Bar data={data} options={options} />
+
+      <S.WrapperScale>
+        <Bar data={data} options={options} width={400} />
+      </S.WrapperScale>
 
       {hasSubtypes && (
         <S.DescriptionWithCategory
@@ -168,15 +177,64 @@ export function GraphicsPDF({
             return (
               <S.WrapperSubTypes key={subtype.name}>
                 <S.SubType>{subtype.name}</S.SubType>
-
-                <Bar
-                  data={generateData(subtype.name, subtype.values)}
-                  options={options}
-                />
+                <S.WrapperScale>
+                  <Bar
+                    data={generateData(subtype.name, subtype.values)}
+                    options={options}
+                  />
+                </S.WrapperScale>
               </S.WrapperSubTypes>
             )
           })}
       </div>
+      {items.map((item) => {
+        const formattedSituation = SITUATION_OPTIONS.find(
+          (situation) => situation.value === item.situation,
+        )?.label.toLowerCase()
+
+        return (
+          <I.WrapperItem key={item.itemIndex}>
+            <I.WrapperTitleAndSituation>
+              <I.TitleItem>Item {item.itemIndex.padStart(2, '0')}</I.TitleItem>
+              <I.Situation status={item.situation}>
+                {formattedSituation}
+              </I.Situation>
+            </I.WrapperTitleAndSituation>
+            {Boolean(item.category) && (
+              <I.LabelText>
+                <b>Categoria:</b> {item.category}
+              </I.LabelText>
+            )}
+
+            <I.LabelText>
+              <b>Descrição:</b> {item.description}
+            </I.LabelText>
+
+            {isString(item.trail) && Boolean(item.trail) && (
+              <I.LabelText>
+                <b>Rastro:</b>
+                <div dangerouslySetInnerHTML={{ __html: item.trail }} />
+              </I.LabelText>
+            )}
+
+            {Boolean(item.trail) &&
+              isArray(item.trail) &&
+              item.trail.map((trail, index) => (
+                <I.LabelText key={trail.id}>
+                  <b>Rastro {String(index + 1).padStart(2, '0')}:</b>{' '}
+                  {trail.text}. <i>({trail.documentName})</i>.
+                </I.LabelText>
+              ))}
+
+            {Boolean(item.observations) && (
+              <I.LabelText>
+                <b>Observações: </b>
+                {item.observations}
+              </I.LabelText>
+            )}
+          </I.WrapperItem>
+        )
+      })}
     </S.Content>
   )
 }

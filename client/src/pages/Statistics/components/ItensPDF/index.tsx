@@ -16,7 +16,7 @@ interface TrailItem {
   id: string
 }
 
-interface Item {
+export interface Item {
   id: string
   situation: ItemSituation
   category: string

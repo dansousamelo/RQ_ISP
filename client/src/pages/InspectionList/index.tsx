@@ -119,11 +119,11 @@ export function InpectionList() {
     ],
     concluded: [
       {
-        label: 'Visualizar',
+        label: 'Revisar',
         action: (id: string) => navigate(`/inspection/${id}/${userId}`),
       },
       {
-        label: 'Estatísticas',
+        label: 'Relatório',
         action: (id: string, name: string, type: string) =>
           navigate(`/inspection/${id}/${name}/${type}/${userId}/statistics`),
       },
