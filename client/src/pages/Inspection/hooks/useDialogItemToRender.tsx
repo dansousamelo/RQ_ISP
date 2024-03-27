@@ -357,7 +357,7 @@ export function useDialogItemToRender({
           </DialogStatus.Title>
           <DialogStatus.Description>
             {isInspectionCompleted
-              ? 'Parabéns! Você concluiu a inspeção. Para visualizar as estatísticas, retorne à lista de inspeções e acesse a seção de estatísticas.'
+              ? 'Parabéns! Você concluiu a inspeção. Para visualizar os relatórios, retorne à lista de inspeções e acesse a seção de relatório.'
               : `Você ainda não terminou sua inspeção. Sinta-se à vontade para retornar e concluir o processo.`}
           </DialogStatus.Description>
         </DialogStatus.Root>

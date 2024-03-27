@@ -39,7 +39,7 @@ const Label = styled(SelectRadix.Label)`
 const Item = styled(SelectRadix.Item)`
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  line-height: 1;
+  line-height: 1.5;
   color: ${({ theme }) => theme.colors.neutral700};
   display: flex;
   align-items: center;

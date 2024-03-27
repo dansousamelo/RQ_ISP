@@ -8,6 +8,11 @@ export const Container = styled.div`
   position: absolute;
 `
 
+export const ContainerAll = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const TitleInspection = styled.span`
   color: black;
   font-weight: bold;
