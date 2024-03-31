@@ -440,6 +440,28 @@ Eu, como um usuário, desejo poder iniciar outro fluxo de criação de inspeçã
 1. Deve haver uma opção para iniciar outro fluxo de criação de inspeção após finalizar uma.
 2. O novo fluxo de criação deve ser iniciado sem perda de dados ou interferência na inspeção anterior.
 
+## Sprint 12 
+
+* Data de Início: 24/03/2024
+* Data de Término: 30/03/2024
+
+### Backlog da Sprint
+| História de Usuário | Descrição | Pontuação |
+|---------------------|-----------|-----------|
+| HU42 | Eu, como um usuário, desejo poder exportar todos os itens e gráficos de uma inspeção em um arquivo só. | 3 pontos |
+| - | Deploy da aplicação. | - |
+
+
+### HU42
+
+Eu, como um usuário, desejo poder exportar todos os itens e gráficos de uma inspeção em um arquivo só.
+
+**Critérios de Aceitação:**
+
+1. Deve haver uma opção para exportar tudo na aba de estatísticas.
+2. Deve abrir um relatório mostrando os itens e gráficos de uma inspeção.
+
+
 ## Referências
 
  * Schwaber, K.; Beedle, M. Agile Software Development with Scrum. Pearson, 2002.

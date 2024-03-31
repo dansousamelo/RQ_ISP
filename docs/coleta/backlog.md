@@ -13,6 +13,7 @@
 | ---- | ------ | ------ | ------ |
 | 27/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento do Product Backlog |
 | 28/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Corrigindo histórias de usuário |
+| 30/03/2024 | Daniel Veras e Paulo Almeida | 1.0 | Adicionando histórias de usuário de acordo com o feedback de clientes |
 
 ## Introdução
 O *Product Backlog*, ou *Backlog* do produto, é um conceito fundamental na metodologia ágil, especialmente no framework *Scrum*. Trata-se de uma lista dinâmica e prioritizada de funcionalidades, melhorias e requisitos que compõem o produto a ser desenvolvido. Os itens no *Product Backlog* podem variar em termos de complexidade, esforço necessário para implementação e valor para o usuário final. Eles são frequentemente descritos em termos de histórias de usuário, que são pequenas narrativas centradas no usuário que descrevem uma funcionalidade desejada (Schwaber; Sutherland, 2017).
@@ -111,6 +112,9 @@ O épico de análise de resultados é orientado para a avaliação e a dissemina
 | HU10 | Eu, como um usuário, desejo poder imprimir os relatórios gerados. | 8 |
 | HU19 | Eu, como um usuário, desejo poder visualizar gráficos com a situação dos itens inspecionados. | 8 |
 | HU20 | Eu, como um usuário, desejo poder exportar os dados obtidos em uma inspeção. | 13 |
+| HU42 | Eu, como um usuário, desejo poder exportar todos os itens e gráficos de uma inspeção em um arquivo só. | 3 |
+| HU43 | Eu, como um usuário, desejo poder visualizar os gráficos através de gráficos de pizza. | 5 |
+| HU44 | Eu, como um usuário, desejo poder exportar gráficos de pizza. | 5 |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -247,7 +251,7 @@ Este tópico abrange os requisitos funcionais essenciais do mínimo produto viá
 | HU25 | Eu, como um usuário, desejo poder visualizar uma listagem de inspeções. | 3 |
 | HU26 | Eu, como um usuário, desejo poder iniciar outro fluxo de criação de inspeção. | 2 |
 | HU27 | Eu, como um usuário, desejo poder adicionar, visualizar e editar os participantes de uma inspeção. | 5 |
-
+| HU42 | Eu, como um usuário, desejo poder exportar todos os itens e gráficos de uma inspeção em um arquivo só. | 3 |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
