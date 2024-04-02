@@ -16,6 +16,9 @@
 
 ### Boas vindas
 
+<p align="flex-direction: column; justify">
+O formulário começa apresentando o seu propósito ao usuário, fornecendo uma breve explicação sobre como as respostas serão utilizadas para melhorar a experiência do usuário ou para avaliar determinados aspectos do serviço ou produto. Essa introdução visa garantir que o usuário compreenda a importância de suas respostas e se sinta incentivado a participar ativamente do processo de feedback.</p>
+
 <br/>
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <figure>Figura 1: Início do formulário de satisfação da ferramenta RQ_ISP.</figure>
@@ -71,6 +74,10 @@
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
+
+## Resultados
+
+<p align="flex-direction: column; justify">Abaixo estão os resultados do formulário. Utilizamos um grupo de 5 pessoas para validar a ferramenta, conforme recomendado por Nielsen. Os dados coletados foram analisados cuidadosamente para identificar padrões e tendências significativas. Esses resultados fornecem insights valiosos que nos ajudarão a aprimorar ainda mais a ferramenta, garantindo uma experiência mais eficaz e satisfatória para os usuários. Agradecemos sinceramente a participação de todos os envolvidos neste processo de avaliação.</p>
 
 ## Referências
  
