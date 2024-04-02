@@ -126,4 +126,5 @@ O formulário começa apresentando o seu propósito ao usuário, fornecendo uma 
  * Rubin, J. (1994). Funcionalidades do software e experiência do usuário. Em User-Centered Design: A Developer's Guide to Building User-Friendly Applications.
  * Fornell, C., & Wernerfelt, B. (1987). Avaliação do suporte ao cliente e satisfação do usuário. Em Customer Satisfaction Evaluation: Methods for Measuring and Implementing Service Quality.
  * Oliver, R. L. (1999). Satisfação geral do cliente e lealdade. Em Customer Loyalty: Toward an Integrated Conceptual Framework.
+ * Nielsen, J. (1993). Usability Engineering. Editora: Academic Press.
 
