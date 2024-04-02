@@ -79,6 +79,46 @@ O formulário começa apresentando o seu propósito ao usuário, fornecendo uma 
 
 <p align="flex-direction: column; justify">Abaixo estão os resultados do formulário. Utilizamos um grupo de 5 pessoas para validar a ferramenta, conforme recomendado por Nielsen. Os dados coletados foram analisados cuidadosamente para identificar padrões e tendências significativas. Esses resultados fornecem insights valiosos que nos ajudarão a aprimorar ainda mais a ferramenta, garantindo uma experiência mais eficaz e satisfatória para os usuários. Agradecemos sinceramente a participação de todos os envolvidos neste processo de avaliação.</p>
 
+### Facilidade de Uso
+
+<br/>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+    <figure>Figura 6: Resultados relacionados a facilidade de uso.</figure>
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/formulario/R02.png" width="60%" height="60%"/>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
+</div>
+<br/>
+
+### Desempenho
+
+<br/>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+    <figure>Figura 7: Resultados relacionados ao desempenho.</figure>
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/formulario/R03.png" width="60%" height="60%"/>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
+</div>
+<br/>
+
+### Funcionalidades
+
+<br/>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+    <figure>Figura 8: Resultados relacionados as funcionalidades.</figure>
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/formulario/R04.png" width="60%" height="60%"/>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
+</div>
+<br/>
+
+### Satisfação Geral
+
+<br/>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+    <figure>Figura 9: Resultados relacionados a satisfação geral.</figure>
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/formulario/R05.png" width="60%" height="60%"/>
+    <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
+</div>
+<br/>
+
 ## Referências
  
  * Chin, J. P., Diehl, V. A., & Norman, K. L. (1988). Desenvolvimento de um instrumento de medição da satisfação do usuário com a interface humano-computador. Em Proceedings of the SIGCHI conference on Human factors in computing systems (pp. 213-218).
