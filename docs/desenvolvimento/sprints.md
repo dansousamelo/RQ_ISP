@@ -35,7 +35,7 @@
 | História de Usuário | Descrição | Pontuação |
 |---------------------|-----------|-----------|
 |   -    |  Configurar o ambiente de desenvolvimento  | - |
-| HU01| Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 5 pontos |
+| HU01| Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 8 pontos |
 | HU02 | Eu, como usuário, gostaria de poder acessar minha lista de inspeções na página inicial, para ter fácil acesso às inspeções existentes.  | 5 pontos |
 | HU21 | Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao criar uma inspeção, para orientar o processo de inspeção. | 8 pontos |
 
