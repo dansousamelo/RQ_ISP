@@ -35,7 +35,7 @@ No épico de navegação inicial estão todas as histórias de usuário relacion
 
 | Item | Descrição | Pontos |
 |----------------------|-----------|--------|
-| HU01 | Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 5 |
+| HU01 | Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 8 |
 | HU02 | Eu, como usuário, gostaria de poder acessar minha lista de inspeções na página inicial, para ter fácil acesso às inspeções existentes. | 5 |
 | HU04 | Eu, como um usuário, desejo ser informado de minhas credenciais de acesso ao criar uma inspeção na página inicial. | 3 |
 
@@ -63,6 +63,7 @@ O épico de gerência de inspeção de artefatos concentra-se no controle e supe
 | HU28 | Eu, como um usuário, desejo poder adicionar, visualizar e editar qual é o cronograma de inspeção. | 3 |
 | HU29 | Eu, como um usuário, desejo poder buscar uma inspeção. | 2 |
 | HU33 | Eu, como um usuário, desejo poder filtrar a listagem de inspeções exibidas. | 3 |
+| HU45 | Eu, como um usuário desejo poder visualizar uma inspeção de forma paginada. | 13 |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -98,6 +99,7 @@ O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão 
 | HU16 | Eu, como um usuário, desejo poder marcar rastros existentes em arquivos submetidos durante uma inspeção. | 5 |
 | HU17 | Eu, como um usuário, desejo poder limpar uma única marcação ou todas as marcações durante uma inspeção. | 3 |
 | HU41 | Eu, como um usuário, desejo poder utilizar imagens como rastro. | 5 |
+| HU47 | Eu, como usuário, desejo que ao marcar um rastro de um item, a descrição correspondente seja exibida, sem a necessidade de voltar ou procurar pela descrição em outro lugar. | 5 |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -115,6 +117,7 @@ O épico de análise de resultados é orientado para a avaliação e a dissemina
 | HU42 | Eu, como um usuário, desejo poder exportar todos os itens e gráficos de uma inspeção em um arquivo só. | 3 |
 | HU43 | Eu, como um usuário, desejo poder visualizar os gráficos através de gráficos de pizza. | 5 |
 | HU44 | Eu, como um usuário, desejo poder exportar gráficos de pizza. | 5 |
+| HU46 | Eu, como usuário, desejo ter mais funcionalidades interativas com o gráfico na seção de estatísticas, a fim de facilitar a análise e compreensão dos dados. | 8 |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
