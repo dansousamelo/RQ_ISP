@@ -153,11 +153,10 @@ Nesta seção, destaca-se as principais tecnologias e _frameworks_ que serão ut
 <br/>
 <div align="center">
     <figure>Figura 3: Diagrama Entidade Relacionamento do sistema.</figure>
-    <img src="https://dansousamelo.github.io/RQ_ISP/assets/DER_TCC.png" width="100%" height="100%" />
+    <img src="https://raw.githubusercontent.com/dansousamelo/RQ_ISP/docs/docs/assets/DER_TCC_v2.png" width="100%" height="100%" />
     <figure style="font-style: italic;">Fonte: Os próprios autores.</figure>
 </div>
 <br/>
-
 
 ## Padrões de codificação
 A consistência no código desempenha um papel essencial na facilitação da colaboração entre desenvolvedores e na manutenção do sistema ao longo do tempo. Para garantir essa consistência, serão aplicados os seguintes padrões de codificação:
