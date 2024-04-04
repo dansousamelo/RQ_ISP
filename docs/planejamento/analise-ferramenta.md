@@ -130,6 +130,15 @@ A ferramenta é ideal para uma variedade de setores, incluindo manufatura, gest�
 - **Descrição**: Pagamento recorrente, mensal ou anual, pelo direito de usar o software.
 - **Benefícios**: Inclui atualizações automáticas de software e suporte. Mais acessível para empresas com orçamentos menores.
 
+## Comparativos com a ferramenta RQ_ISP
+
+A ferramenta RQ_ISP distingue-se no mercado por sua abordagem holística à gestão de qualidade de projetos. Ela não apenas facilita a inspeção detalhada de artefatos de software, mas também enfatiza a importância da rastreabilidade em todo o ciclo de vida do projeto. Diferente de outras ferramentas disponíveis, o RQ_ISP permite que cada item sob inspeção seja acompanhado por um rastro explícito, referenciando de forma clara o artefato inspecionado.
+
+O RQ_ISP se destaca entre as ferramentas de gestão de qualidade de projetos por sua abordagem única. Ao contrário de muitas ferramentas do mercado, o RQ_ISP é gratuito, o que o torna uma opção particularmente atraente para equipes de desenvolvimento que buscam eficiência e eficácia sem custos adicionais. A ferramenta não só facilita a inspeção meticulosa de artefatos de software mas também prioriza a rastreabilidade ao longo do ciclo de vida do projeto. Isso significa que cada item sob inspeção é claramente vinculado a um rastro de referência, garantindo uma integridade de projeto e um nível de responsabilidade que são difíceis de alcançar com outras ferramentas.
+
+Essa ênfase na rastreabilidade e inspeção detalhada, combinada com o benefício de ser uma solução sem custo, coloca o RQ_ISP em uma posição de vantagem em comparação a alternativas pagas como SonarQube, Crucible, Cenosco e MaintainX. Embora estas também ofereçam serviços valiosos de inspeção de código e gestão de qualidade, frequentemente não proporcionam a mesma cobertura integral que o RQ_ISP oferece. O fato de o RQ_ISP ser gratuito não diminui sua capacidade; pelo contrário, reforça seu valor como um recurso indispensável para projetos que visam a máxima qualidade e eficiência.
+
+
 ## Referências
 
  * SOFTWAREADVICE. **SonarQube Software Reviews, Demo & Pricing - 2023**. Disponível em: <https://www.softwareadvice.com>. Acesso em: 4 dez. 2023.
