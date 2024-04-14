@@ -30,11 +30,11 @@ export function Header({
     setDialogInspectionStep('manager_documents')
   }
 
-  const truncateLink = (link: string, maxLength: number) => {
-    if (link.length > maxLength) {
-      return link.slice(0, maxLength) + '...'
+  const truncateLabel = (label: string, maxLength: number) => {
+    if (label.length > maxLength) {
+      return label.slice(0, maxLength) + '...'
     }
-    return link
+    return label
   }
 
   const RecordLink = ({
@@ -61,20 +61,20 @@ export function Header({
         <S.WrapperTitleAndManagerdocument>
           <S.Title>{headerData.name}</S.Title>
           <S.EditInfoButton onClick={handleEditInformations}>
-            Editar informações{' '}
+            Editar informações
           </S.EditInfoButton>
         </S.WrapperTitleAndManagerdocument>
 
         <S.WrapperInformation hasRecordLing={!!headerData.recordingUrl}>
-          <S.InfoLabel>
-            <b>Responsável:</b> {headerData.responsible}
+          <S.InfoLabel title={headerData.responsible}>
+            <b>Responsável:</b> {truncateLabel(headerData.responsible, 20)}
           </S.InfoLabel>
-          <S.InfoLabel>
-            <b>Contato:</b> {headerData.responsibleEmail}
+          <S.InfoLabel title={headerData.responsibleEmail}>
+            <b>Contato:</b> {truncateLabel(headerData.responsibleEmail, 30)}
           </S.InfoLabel>
           {headerData.participants && (
-            <S.InfoLabel>
-              <b>Participantes:</b> {headerData.participants}
+            <S.InfoLabel title={headerData.participants}>
+              <b>Participantes:</b> {truncateLabel(headerData.participants, 20)}
             </S.InfoLabel>
           )}
         </S.WrapperInformation>
@@ -82,7 +82,7 @@ export function Header({
         {headerData.recordingUrl && (
           <RecordLink title={headerData.recordingUrl}>
             <b>Gravação disponível em:</b>{' '}
-            <span>{truncateLink(headerData.recordingUrl, 30)}</span>
+            <span>{truncateLabel(headerData.recordingUrl, 30)}</span>
           </RecordLink>
         )}
       </S.WrapperTitleAndInfo>

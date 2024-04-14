@@ -112,7 +112,7 @@ const TableRow: React.FC<TableRowProps> = ({
       </td>
       <td
         style={{
-          maxWidth: '400px',
+          maxWidth: '600px',
         }}
       >
         <S.Description>{item.description}</S.Description>
