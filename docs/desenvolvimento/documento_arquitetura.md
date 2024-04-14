@@ -22,7 +22,9 @@ Este documento de arquitetura tem como objetivo principal fornecer uma visão ab
 O documento abrange a arquitetura técnica do sistema *RQ\_ISP*, uma plataforma *web* projetada para criar inspeções por meio de modelos predefinidos e, posteriormente, gerar estatísticas e relatórios com base nas inspeções realizadas. É de suma importância que os desenvolvedores estejam alinhados com as diretrizes estabelecidas neste contexto, garantindo assim a conformidade com o padrão arquitetônico proposto. Neste documento, serão explorados os principais elementos e componentes que compõem essa arquitetura de *software*, com o objetivo de proporcionar uma análise mais aprofundada do sistema *RQ\_ISP*.
 
 ## Representação da arquitetura
-A arquitetura adotada no projeto é a abordagem monolítica, caracterizada pela integração de todos os componentes do sistema em uma única unidade. Em um sistema monolítico, todos os módulos e funcionalidades compartilham a mesma base de código e recursos, simplificando a manutenção, mas potencialmente limitando a escalabilidade e a flexibilidade. A comunicação entre o *frontend* e o *backend* ocorre internamente na mesma aplicação, com o servidor processando requisições do usuário e enviando respostas para atualizar a interface do usuário.
+A arquitetura adotada no projeto é a abordagem *cliente-servidor*, caracterizada pela divisão das funcionalidades do sistema entre clientes e servidores. Em um sistema cliente-servidor, os módulos e funcionalidades são distribuídos entre diferentes servidores que processam requisições dos clientes, permitindo uma melhor escalabilidade e flexibilidade. A comunicação entre o frontend e o backend ocorre através de requisições HTTP ou outras formas de comunicação de rede, com o servidor processando as requisições do usuário e enviando respostas para atualizar a interface do usuário.
+
+
 
 ## Metas e restrições de arquitetura
 
@@ -190,6 +192,9 @@ Por meio do uso do _Git_, todas as alterações feitas no código serão cuidado
  * LARMAN, Craig. Applying UML and Patterns. Prentice Hall, 2004.
  * MARTIN, Robert C. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Prentice Hall, 2017.
  * Prisma. Is Prisma an ORM? | What is an ORM? Disponível em: https://www.prisma.io/docs/concepts/overview/prisma-in-your-stack/is-prisma-an-orm. Acesso em: 23 nov. de  2023
+ * TANENBAUM, Andrew S.; VAN STEEN, Maarten. Distributed Systems: Principles and Paradigms. Upper Saddle River, NJ: Prentice Hall, 2007.
+
+
 
 
 
