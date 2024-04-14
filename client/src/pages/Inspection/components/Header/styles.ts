@@ -46,7 +46,7 @@ export const WrapperInformation = styled.div<WrapperInformationProps>`
   margin-bottom: ${({ hasRecordLing }) => (hasRecordLing ? '12px' : '0px')};
 `
 
-export const InfoLabel = styled.span`
+export const InfoLabel = styled.time`
   font-size: 16px;
   font-weight: ${({ theme }) => theme.fontWeights.medium};
 
