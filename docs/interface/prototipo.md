@@ -21,7 +21,7 @@ Protótipos de alta fidelidade são uma peça central no design e desenvolviment
 &emsp;&emsp;Abaixo encontram-se o protótipo completo da aplicação desenvolvido no Figma, uma poderosa ferramenta de design colaborativo. O Figma permite que equipes trabalhem simultaneamente em projetos, facilitando a criação de interfaces de usuário intuitivas e agradáveis. Com sua interface amigável e recursos robustos, o Figma é amplamente utilizado por designers e equipes de desenvolvimento em todo o mundo. Explore o protótipo interativo abaixo para ter uma visão abrangente do trabalho realizado.
 <br/>
 
-<iframe width="800" height="600" src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/NfyIdS18c8cjEcsdLjMulH/TCC_RQ_ISP%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION" allowfullscreen></iframe>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2Fwdc2nO5eYjjyKfctQ46b1A%2FRQ_ISP%3Ftype%3Ddesign%26mode%3Ddesign%26t%3DN6yibULuqko6iLlV-1" allowfullscreen></iframe>iframe>
 
 
 

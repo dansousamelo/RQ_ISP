@@ -134,6 +134,34 @@ A ferramenta é ideal para uma variedade de setores, incluindo manufatura, gest�
 
 A ferramenta RQ_ISP distingue-se no mercado por sua abordagem holística à gestão de qualidade de projetos. Ela não apenas facilita a inspeção detalhada de artefatos de software, mas também enfatiza a importância da rastreabilidade em todo o ciclo de vida do projeto. Diferente de outras ferramentas disponíveis, o RQ_ISP permite que cada item sob inspeção seja acompanhado por um rastro explícito, referenciando de forma clara o artefato inspecionado.
 
+| Funcionalidade                              | SonarQube | Crucible | Cenocco | MaintainX | RQ_ISP |
+|---------------------------------------------|-----------|----------|---------|-----------|--------|
+| Análise Estática de Código                  | x         |          |         |           |       |
+| Relatórios Detalhados                       | x         | x        |         |           |       |
+| Integração com Ferramentas de Construção e CI | x         |          |         |           | x      |
+| Suporte a Múltiplas Linguagens de Programação| x         |          |         |           |        |
+| Expansibilidade com Plug-ins                | x         |          |         |           |        |
+| Ferramenta de Revisão de Código             |           | x        |         |           |       |
+| Discussões Inline                           |           | x        |         |           |        |
+| Fluxos de Atividade Organizados             |           | x        |         |           |        |
+| Integração com Jira Software                |           | x        |         |           |        |
+| Gráficos e Relatórios                       |           | x        |         | x         | x      |
+| Gerenciamento Centralizado de Dados         |           |          | x       |           |        |
+| Cronogramas de Inspeção                     |           |          | x       |           |        |
+| Registro de Resultados de Inspeção          |           |          | x       |           |        |
+| Priorização e Otimização de Atividades de Inspeção |   |          | x       |           |        |
+| Customização de Listas de Verificação       |           |          | x       |           |        |
+| Baseado na Web e Móvel                      |           |          |         | x         |        |
+| Ordens de Trabalho                          |           |          |         | x         |        |
+| Rastreamento de Processos CMMS              |           |          |         | x         |        |
+| Versatilidade Setorial                      |           |          |         | x         |        |
+| Redução de Ineficiências Operacionais       |           |          |         | x         |        |
+| Rastreamento e Referência de Artefatos      |           |          |         |           | x      |
+| Inspeção de artefato de software      |           |          |         |           | x      |
+| Gratuito                                    |           |          |         |           | x      |
+
+
+
 O RQ_ISP se destaca entre as ferramentas de gestão de qualidade de projetos por sua abordagem única. Ao contrário de muitas ferramentas do mercado, o RQ_ISP é gratuito, o que o torna uma opção particularmente atraente para equipes de desenvolvimento que buscam eficiência e eficácia sem custos adicionais. A ferramenta não só facilita a inspeção meticulosa de artefatos de software mas também prioriza a rastreabilidade ao longo do ciclo de vida do projeto. Isso significa que cada item sob inspeção é claramente vinculado a um rastro de referência, garantindo uma integridade de projeto e um nível de responsabilidade que são difíceis de alcançar com outras ferramentas.
 
 Essa ênfase na rastreabilidade e inspeção detalhada, combinada com o benefício de ser uma solução sem custo, coloca o RQ_ISP em uma posição de vantagem em comparação a alternativas pagas como SonarQube, Crucible, Cenosco e MaintainX. Embora estas também ofereçam serviços valiosos de inspeção de código e gestão de qualidade, frequentemente não proporcionam a mesma cobertura integral que o RQ_ISP oferece. O fato de o RQ_ISP ser gratuito não diminui sua capacidade; pelo contrário, reforça seu valor como um recurso indispensável para projetos que visam a máxima qualidade e eficiência.
