@@ -114,12 +114,11 @@ Acesse a aplicação em `http://localhost:3000`
 
 ## 📄 Licença
 
-Este projeto é licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto é licenciado sob a Licença MIT.
 
 ## 👥 Contribuidores
 
-- Daniel de Sousa Oliveira Melo Veras (dansousamelo)
-- Paulo (owhenrique)
+![contribuidores](https://github.com/user-attachments/assets/42c599c7-224b-478e-9d5c-5fe0e15d2098)
 
 ## 🔮 Trabalhos Futuros
 
