@@ -4,6 +4,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1cm 2.65cm;
+  margin-right: 5rem !important;
   position: absolute;
 `
 

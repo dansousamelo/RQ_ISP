@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-const baseURL =
-  import.meta.env.NODE_ENV === 'production'
-    ? import.meta.env.VITE_BASE_URL
-    : 'http://localhost:8000'
+const BASE_URL = process.env.VITE_BASE_URL
 
 export const api = axios.create({
-  baseURL,
+  baseURL: BASE_URL,
 })
