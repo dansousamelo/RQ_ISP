@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-let baseURL = 'http://localhost:8000'
-
-if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://rq-isp-2.onrender.com/'
-}
+const baseURL =
+  import.meta.env.NODE_ENV === 'production'
+    ? import.meta.env.VITE_BASE_URL
+    : 'http://localhost:8000'
 
 export const api = axios.create({
   baseURL,
