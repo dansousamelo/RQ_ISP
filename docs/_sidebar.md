@@ -16,3 +16,6 @@
 * **Validação do Software**
 	* [Formulário de Satisfação](validacao/form.md)
 
+* **Politícas de Privacidade**
+	* [Politícas de Privacidade](politicas/politicas.md)
+
