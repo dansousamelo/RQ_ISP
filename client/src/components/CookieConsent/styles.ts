@@ -49,6 +49,11 @@ export const Wrapper = styled.div`
   span {
     color: ${({ theme }) => theme.colors.neutral900};
     font-size: 14px;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
 
   h1 {

@@ -29,7 +29,15 @@ export const CookieConsent = () => {
             <h1>Política de Cookies</h1>
             <span>
               Usamos cookies para garantir que você obtenha a melhor experiência
-              em nosso site. Consulte nossa Política de Privacidade.
+              em nosso site. Consulte nossa{' '}
+              <a
+                href="https://dansousamelo.github.io/RQ_ISP/#/politicas/politicas"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de Privacidade
+              </a>
+              .
             </span>
           </S.Wrapper>
           <S.ButtonStyled onClick={handleAccept}>Aceitar</S.ButtonStyled>
