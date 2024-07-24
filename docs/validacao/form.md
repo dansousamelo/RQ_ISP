@@ -1,17 +1,36 @@
+
 <br/>
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
     <img src="https://dansousamelo.github.io/RQ_ISP/assets/backlog/BACKLOG-ICON.png" width="200" height="200" />
 </div>
 
+Este documento mostra o processo de validação feito por que um grupo de 5 pessoas validou a ferramenta seguindo as recomendações de Nielsen, através de reuniões assíncronas. Após o uso, os participantes preencheram um formulário de satisfação, fornecendo feedback essencial para avaliar a experiência do usuário e identificar melhorias, garantindo a qualidade do produto final e o alinhamento com as expectativas do público-alvo.
+
 <br/>
-<p align="flex-direction: column; justify">A elaboração de um formulário de satisfação após a construção de um software é crucial para avaliar a experiência do usuário, identificar possíveis melhorias e garantir a qualidade do produto final. Essa ferramenta permite coletar feedback direto dos usuários, possibilitando ajustes e aprimoramentos com base em suas necessidades e preferências, resultando em um software mais eficiente e alinhado com as expectativas do público-alvo.</p>
 
 ## Histórico de versões
 
 | Data | Autor | Versão | Alteração |   
 | ---- | ------ | ------ | ------ |
-| 02/04/2024 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de Formulário de Satisfação|
+| 02/04/2024 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento de validação com grupo de usuários|
+
+<p align="flex-direction: column; justify">
+Durante o processo de desenvolvimento, a validação da ferramenta foi realizada com um grupo de 5 pessoas, conforme recomendado por Nielsen. As reuniões assíncronas, que são interações não simultâneas, permitiram aos participantes acessar e utilizar a aplicação conforme sua disponibilidade. Após a utilização, os usuários preencheram um formulário de satisfação, fornecendo feedback valioso que ajudou a moldar as próximas etapas do desenvolvimento.
+</p>
+
+<p align="flex-direction: column; justify">
+A elaboração de um formulário de satisfação após a construção de um software é crucial para avaliar a experiência do usuário, identificar possíveis melhorias e garantir a qualidade do produto final. Essa ferramenta permite coletar feedback direto dos usuários, possibilitando ajustes e aprimoramentos com base em suas necessidades e preferências. Isso resulta em um software mais eficiente e alinhado com as expectativas do público-alvo, além de aumentar a probabilidade de recomendação do produto.
+</p>
+
+<p align="flex-direction: column; justify">
+Além disso, a satisfação do usuário é um indicativo chave de sucesso, pois usuários satisfeitos são mais propensos a continuar utilizando o software e a recomendá-lo a outros. O feedback coletado pode revelar problemas não identificados anteriormente e fornecer insights para futuras atualizações e novas funcionalidades. A aplicação de metodologias recomendadas, como as de Nielsen, durante o processo de validação, não só melhora a qualidade do produto, mas também proporciona uma abordagem estruturada e confiável para a coleta de dados. Com isso, garante-se que a aplicação seja testada em diferentes cenários de uso e por um público variado, refletindo melhor as necessidades reais dos usuários finais.
+</p>
+
+<p align="flex-direction: column; justify">
+Ao utilizar reuniões assíncronas, demonstramos uma flexibilidade no processo de validação, respeitando o tempo e a disponibilidade dos participantes. Isso pode aumentar a taxa de participação e a diversidade de feedbacks recebidos. A seguir, encontra-se a estrutura do formulário e seus resultados.
+</p>
+
 
 
 ### Boas vindas
@@ -119,6 +138,18 @@ O formulário começa apresentando o seu propósito ao usuário, fornecendo uma 
 </div>
 <br/>
 
+### Histórias derivadas
+
+<p align="flex-direction: column; justify">
+As histórias derivadas são, essencialmente, histórias que emergem dos feedbacks recebidos através do formulário de satisfação. Essas histórias visam melhorar a experiência do usuário e adicionar funcionalidades que respondem diretamente às necessidades e sugestões identificadas durante o uso do sistema. Ao coletar e analisar o feedback dos usuários, é possível identificar áreas que necessitam de aprimoramento e implementar mudanças que tornem o produto mais eficiente e agradável de usar.
+
+As histórias derivadas foram:
+
+- Eu, como um usuário, desejo poder visualizar uma inspeção de forma paginada.
+- Eu, como usuário, desejo ter mais funcionalidades interativas com o gráfico na seção de estatísticas, a fim de facilitar a análise e compreensão dos dados.
+- Eu, como usuário, desejo que ao marcar um rastro de um item, a descrição correspondente seja exibida, sem a necessidade de voltar ou procurar pela descrição em outro lugar.
+</p>
+
 ## Referências
  
  * Chin, J. P., Diehl, V. A., & Norman, K. L. (1988). Desenvolvimento de um instrumento de medição da satisfação do usuário com a interface humano-computador. Em Proceedings of the SIGCHI conference on Human factors in computing systems (pp. 213-218).
@@ -127,4 +158,3 @@ O formulário começa apresentando o seu propósito ao usuário, fornecendo uma 
  * Fornell, C., & Wernerfelt, B. (1987). Avaliação do suporte ao cliente e satisfação do usuário. Em Customer Satisfaction Evaluation: Methods for Measuring and Implementing Service Quality.
  * Oliver, R. L. (1999). Satisfação geral do cliente e lealdade. Em Customer Loyalty: Toward an Integrated Conceptual Framework.
  * Nielsen, J. (1993). Usability Engineering. Editora: Academic Press.
-
