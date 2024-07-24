@@ -168,6 +168,7 @@ Neste tópico são apresentados requisitos não funcionais relacionados à usabi
 |--------|-----------------------------------------------------------------------------------------------------------------|
 | RQNF01 | A interface de autenticação deve ser projetada de forma intuitiva, seguindo as diretrizes de design de experiência do usuário. |
 | RQNF02 | Os avisos sobre o uso de *cookies* devem ser apresentados de forma clara e fácil de entender para os usuários.        |
+| RQNF03 | As políticas de privacidade devem ser apresentadas de forma clara e fácil de entender pelos usuários.        |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -179,7 +180,7 @@ Este tópico aborda um requisito não funcional de portabilidade do sistema. O o
 
 | Item   | Requisito não funcional                                                                                             |
 |--------|---------------------------------------------------------------------------------------------------------------------|
-| RQNF03 | O sistema de autenticação deve ser compatível com os principais navegadores da web, como Chrome, Firefox, Safari e Edge. |
+| RQNF04 | O sistema de autenticação deve ser compatível com os principais navegadores da web, como Chrome, Firefox, Safari e Edge. |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -191,7 +192,7 @@ Nesta seção, é apresentado um requisito não funcional relacionado à confiab
 
 | Item   | Requisito não funcional                                                                                                           |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------|
-| RQNF04 | Os *cookies* devem ter uma vida útil adequada e não expirar de forma prematura, a menos que o usuário opte por sair ou revogar seu consentimento. |
+| RQNF05 | Os *cookies* devem ter uma vida útil adequada e não expirar de forma prematura, a menos que o usuário opte por sair ou revogar seu consentimento. |
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -202,7 +203,7 @@ Aqui, é explorado um requisito não funcional relacionado à eficiência do sis
 
 | Item   | Requisito não funcional                              |
 |--------|------------------------------------------------------|
-| RQNF05 | O sistema deve ser capaz de apresentar respostas em tempo real. |
+| RQNF06 | O sistema deve ser capaz de apresentar respostas em tempo real. |
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
@@ -213,9 +214,9 @@ Nesta seção, são discutidos os requisitos não funcionais relacionados à seg
 
 | Item   | Requisito não funcional                                               |
 |--------|-----------------------------------------------------------------------|
-| RQNF06 | O sistema deve preservar a confidencialidade dos dados do usuário.      |
-| RQNF07 | O sistema deve assegurar a segurança dos dados.                         |
-| RQNF08 | O sistema deve proteger a integridade dos dados.                        |
+| RQNF07 | O sistema deve preservar a confidencialidade dos dados do usuário.      |
+| RQNF08 | O sistema deve assegurar a segurança dos dados.                         |
+| RQNF09 | O sistema deve proteger a integridade dos dados.                        |
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
