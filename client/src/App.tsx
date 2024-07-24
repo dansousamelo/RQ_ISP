@@ -1,3 +1,4 @@
+import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -17,6 +18,7 @@ import { Inspection } from './pages/Inspection'
 import PdfViewer from './pages/PdfViewer'
 import { Statistics } from './pages/Statistics'
 import { PageNotFound } from './pages/PageNotFound'
+import { CookieConsent } from './components/CookieConsent'
 
 export const queryClient = new QueryClient()
 
@@ -69,6 +71,7 @@ export function App() {
             </LoggedInspectionProvider>
           </InitialInspectionProvider>
         </Router>
+        <CookieConsent />
       </ThemeProvider>
     </QueryClientProvider>
   )
