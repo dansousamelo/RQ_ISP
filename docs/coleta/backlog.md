@@ -9,20 +9,20 @@
 
 ## Histórico de versões
 
-| Data | Autor | Versão | Alteração |   
-| ---- | ------ | ------ | ------ |
-| 27/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Criando documento do Product Backlog |
-| 28/11/2023 | Daniel Veras e Paulo Almeida | 1.0 | Corrigindo histórias de usuário |
-| 30/03/2024 | Daniel Veras e Paulo Almeida | 1.0 | Adicionando histórias de usuário de acordo com o feedback de clientes |
+| Data       | Autor                     | Versão | Alteração                                     |
+|------------|---------------------------|--------|-----------------------------------------------|
+| 27/11/2023 | Daniel Veras e Paulo Almeida | 1.0    | Criando documento do Product Backlog          |
+| 28/11/2023 | Daniel Veras e Paulo Almeida | 1.0    | Corrigindo histórias de usuário               |
+| 30/03/2024 | Daniel Veras e Paulo Almeida | 1.0    | Adicionando histórias de usuário de acordo com o feedback de clientes |
 
 ## Introdução
 O *Product Backlog*, ou *Backlog* do produto, é um conceito fundamental na metodologia ágil, especialmente no framework *Scrum*. Trata-se de uma lista dinâmica e prioritizada de funcionalidades, melhorias e requisitos que compõem o produto a ser desenvolvido. Os itens no *Product Backlog* podem variar em termos de complexidade, esforço necessário para implementação e valor para o usuário final. Eles são frequentemente descritos em termos de histórias de usuário, que são pequenas narrativas centradas no usuário que descrevem uma funcionalidade desejada (Schwaber; Sutherland, 2017).
 
 O <i>Backlog</i> do produto, deste projeto, foi construído combinando os requisitos, funcionais e não funcionais, coletados em cada etapa do processo de elaboração do *Lean Inception*. Os requisitos funcionais são aqueles que delineiam as necessidades, características e funcionalidades essenciais do produto de software, já os requisitos não funcionais focam nas qualidades e restrições que o produto deve cumprir, abrangendo aspectos como desempenho, segurança e usabilidade (Sommerville, 2011.). 
 
-As histórias de usuários são agrupadas e organizadas de acordo com seus épicos correspondentes, proporcionando uma estrutura que visa simplificar a gestão de requisitos em uma escala mais abrangente (Cohn, 2004). Os épicos estabelecidos nesta fase são: "Navegação Inicial", "Gerência de Inspeção de Artefatos", "Inspeção de Artefatos", "Rastreabilidade de Itens de uma Inspeção", "Análise de Resultados", "Criação Personalizada de Lista de Verificação", "Gerência de Criação de Lista de Verificação". Cada épico será explicado individulamente nas Seções a seguir.
+As histórias de usuários são agrupadas e organizadas de acordo com seus épicos correspondentes, proporcionando uma estrutura que visa simplificar a gestão de requisitos em uma escala mais abrangente (Cohn, 2004). Os épicos estabelecidos nesta fase são: "Navegação Inicial", "Gerência de Inspeção de Artefatos", "Inspeção de Artefatos", "Rastreabilidade de Itens de uma Inspeção", "Análise de Resultados", "Criação Personalizada de Lista de Verificação", "Gerência de Criação de Lista de Verificação". Cada épico será explicado individualmente nas Seções a seguir.
 
-E por fim, para calcular a pontuação de cada história, foi utilizada a sequência de Fibonacci. Este método reconhece a importância de atribuir valores que representem com precisão a complexidade relativa de cada tarefa. A sequência de Fibonacci, conhecida por seu crescimento exponencial, foi usada para criar um sistema que efetivamente abrange as variações de esforço e complexidade. As pontuações, que variam de 0 a 13, foram organizados de maneira a facilitar a priorização de histórias, otimizar o uso de recursos e tornar o desenvolvimento o mais eficiente possível (Conh, 2005). 
+E por fim, para calcular a pontuação de cada história, foi utilizada a sequência de Fibonacci. Este método reconhece a importância de atribuir valores que representem com precisão a complexidade relativa de cada tarefa. A sequência de Fibonacci, conhecida por seu crescimento exponencial, foi usada para criar um sistema que efetivamente abrange as variações de esforço e complexidade. As pontuações, que variam de 0 a 13, foram organizadas de maneira a facilitar a priorização de histórias, otimizar o uso de recursos e tornar o desenvolvimento o mais eficiente possível (Cohn, 2005). 
 
 
 ## Requisitos Funcionais
@@ -34,7 +34,7 @@ No épico de navegação inicial estão todas as histórias de usuário relacion
 <figure style="text-align: center;">Tabela 1: Histórias usuário relacionadas ao Épico de Navegação Inicial.</figure>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU01 | Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 8 |
 | HU02 | Eu, como usuário, gostaria de poder acessar minha lista de inspeções na página inicial, para ter fácil acesso às inspeções existentes. | 5 |
 | HU04 | Eu, como um usuário, desejo ser informado de minhas credenciais de acesso ao criar uma inspeção na página inicial. | 3 |
@@ -48,7 +48,7 @@ O épico de gerência de inspeção de artefatos concentra-se no controle e supe
 <p style="text-align: center;">Tabela 2: Histórias usuário relacionadas ao Épico de Gerência de Inspeção de Artefatos.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU03 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável por uma inspeção. | 5 |
 | HU06 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o nome de uma inspeção. | 3 |
 | HU13 | Eu, como um usuário, desejo poder sair da aplicação. | 2 |
@@ -74,7 +74,7 @@ Dedicado ao núcleo do processo de inspeção, o épico de inspeção de artefat
 <p style="text-align: center;">Tabela 3: Histórias usuário relacionadas ao Épico de Inspeção de Artefatos.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU05 | Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção. | 3 |
 | HU07 | Eu, como um usuário, desejo poder salvar uma inspeção completa. | 5 |
 | HU08 | Eu, como um usuário, desejo poder salvar uma inspeção incompleta. | 5 |
@@ -92,7 +92,7 @@ O foco do épico de rastreabilidade de Itens de uma Inspeção está na gestão 
 <p style="text-align: center;">Tabela 4: Histórias usuário relacionadas ao Épico de Rastreabilidade de Itens de uma Inspeção.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU11 | Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção. | 3 |
 | HU12 | Eu, como um usuário, desejo poder anexar links externos em um rastro de uma inspeção. | 3 |
 | HU15 | Eu, como um usuário, desejo poder submeter arquivos para cada um dos itens ao realizar uma inspeção. | 8 |
@@ -110,7 +110,7 @@ O épico de análise de resultados é orientado para a avaliação e a dissemina
 <p style="text-align: center;">Tabela 5: Histórias usuário relacionadas ao Épico de Análise de Resultados.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU10 | Eu, como um usuário, desejo poder imprimir os relatórios gerados. | 8 |
 | HU19 | Eu, como um usuário, desejo poder visualizar gráficos com a situação dos itens inspecionados. | 8 |
 | HU20 | Eu, como um usuário, desejo poder exportar os dados obtidos em uma inspeção. | 13 |
@@ -128,7 +128,7 @@ O épico de Criação Personalizada de lista de verificação foca na habilidade
 <p style="text-align: center;">Tabela 6: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU30 | Eu, como um usuário, desejo poder criar uma lista de verificação personalizada. | 13 |
 | HU31 | Eu, como um sistema, desejo gerar um código de acesso ao criar uma lista de verificação personalizada. | 5 |
 | HU32 | Eu, como um usuário, desejo ser perguntado se possuo um ID e senha ao criar uma lista de verificação para atribuir a ela. | 3 |
@@ -142,16 +142,13 @@ O épico de gerência de lista de verificação aborda o gerenciamento efetivo d
 <p style="text-align: center;">Tabela 7: Histórias usuário relacionadas ao Épico de Criação Personalizada de Lista de Verificação.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU34 | Eu, como um usuário, desejo poder visualizar as listas de verificação existentes ao criar uma nova lista de verificação. | 5 |
 | HU35 | Eu, como um usuário, desejo poder editar uma lista de verificação. | 13 |
 | HU36 | Eu, como um usuário, desejo poder exportar uma lista de verificação. | 3 |
 | HU37 | Eu, como um usuário, desejo poder excluir uma lista de verificação. | 3 |
 | HU39 | Eu, como um usuário, desejo poder duplicar uma lista de verificação. | 3 |
 | HU40 | Eu, como um usuário, desejo poder filtrar a listagem de listas de verificação por título e/ou data. | 3 |
-
-
-
 
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
@@ -221,13 +218,13 @@ Nesta seção, são discutidos os requisitos não funcionais relacionados à seg
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
-## Mínimo Produto Viável
-Este tópico abrange os requisitos funcionais essenciais do mínimo produto viável (MVP), selecionados e definidos na dinâmica do sequenciador implementada durante o método *Lean Inception*. A Tabela 13 detalha essas funcionalidades, apresentando as histórias de usuário que compõem a estrutura do MVP.
+## Backlog do Mínimo Produto Viável
+Este tópico abrange as histórias de usuário e requisitos não funcionais essenciais do mínimo produto viável (MVP), selecionados e definidos nas dinâmicas do *Lean Inception*. A Tabela 13 detalha essas funcionalidades, apresentando as histórias de usuário que compõem a estrutura do MVP.
 
 <p style="text-align: center;">Tabela 13: MVP do produto.</p>
 
 | Item | Descrição | Pontos |
-|----------------------|-----------|--------|
+|------|-----------|--------|
 | HU01 | Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 8 |
 | HU02 | Eu, como usuário, gostaria de poder acessar minha lista de inspeções na página inicial, para ter fácil acesso às inspeções existentes. | 5 |
 | HU03 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável por uma inspeção. | 5 |
@@ -256,18 +253,23 @@ Este tópico abrange os requisitos funcionais essenciais do mínimo produto viá
 | HU26 | Eu, como um usuário, desejo poder iniciar outro fluxo de criação de inspeção. | 2 |
 | HU27 | Eu, como um usuário, desejo poder adicionar, visualizar e editar os participantes de uma inspeção. | 5 |
 | HU42 | Eu, como um usuário, desejo poder exportar todos os itens e gráficos de uma inspeção em um arquivo só. | 3 |
-
+| RQNF01 | A interface de autenticação deve ser projetada de forma intuitiva, seguindo as diretrizes de design de experiência do usuário. | 2 |
+| RQNF02 | Os avisos sobre o uso de *cookies* devem ser apresentados de forma clara e fácil de entender para os usuários. | 2 |
+| RQNF03 | As políticas de privacidade devem ser apresentadas de forma clara e fácil de entender pelos usuários. | 2 |
+| RQNF04 | O sistema de autenticação deve ser compatível com os principais navegadores da web, como Chrome, Firefox, Safari e Edge. | 2 |
+| RQNF05 | Os *cookies* devem ter uma vida útil adequada e não expirar de forma prematura, a menos que o usuário opte por sair ou revogar seu consentimento. | 2 |
+| RQNF06 | O sistema deve ser capaz de apresentar respostas em tempo real. | 2 |
+| RQNF07 | O sistema deve preservar a confidencialidade dos dados do usuário. | 2 |
+| RQNF08 | O sistema deve assegurar a segurança dos dados. | 2 |
+| RQNF09 | O sistema deve proteger a integridade dos dados. | 2 |
 
 <p style="font-style: italic; text-align: center;">Fonte: Os próprios autores.</p>
 
- Na definição das funcionalidades do MVP, aspectos como o valor de negócio, o benefício para o usuário e o esforço necessário para o desenvolvimento pela equipe foram cuidadosamente considerados. É importante destacar que os épicos de criação personalizada de lista de verificação e gerência de lista de verificação não foram incorporados no MVP.
-
-</div>
+Na definição das funcionalidades do MVP, aspectos como o valor de negócio, o benefício para o usuário e o esforço necessário para o desenvolvimento pela equipe foram cuidadosamente considerados. É importante destacar que os épicos de criação personalizada de lista de verificação e gerência de lista de verificação não foram incorporados no MVP.
 
 ## Referências
- 
- * COHN, M. Agile Estimating and Planning. Prentice Hall, 2005.
- * COHN, M. User Stories Applied. Addison-Wesley Professional, 2004.
- * SCHWABER, K.; SUTHERLAND, J. The Scrum Guide. Scrum.org, 2017. Disponível em: <https://www.scrumguides.org/scrum-guide.html>. Acesso em: 27 de Nov. de 2023.
- * SOMMERVILLE, I. Software Engineering. 9ª. ed. Pearson Education India, 2011.
 
+* COHN, M. Agile Estimating and Planning. Prentice Hall, 2005.
+* COHN, M. User Stories Applied. Addison-Wesley Professional, 2004.
+* SCHWABER, K.; SUTHERLAND, J. The Scrum Guide. Scrum.org, 2017. Disponível em: <https://www.scrumguides.org/scrum-guide.html>. Acesso em: 27 de Nov. de 2023.
+* SOMMERVILLE, I. Software Engineering. 9ª. ed. Pearson Education India, 2011.

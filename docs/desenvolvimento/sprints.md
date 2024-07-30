@@ -34,12 +34,13 @@
 ### Backlog da Sprint
 | História de Usuário | Descrição | Pontuação |
 |---------------------|-----------|-----------|
-|   -    |  Configurar o ambiente de desenvolvimento  | - |
-| HU01| Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 8 pontos |
-| HU02 | Eu, como usuário, gostaria de poder acessar minha lista de inspeções na página inicial, para ter fácil acesso às inspeções existentes.  | 5 pontos |
+| - | Configurar o ambiente de desenvolvimento | - |
+| HU01 | Eu, como usuário, gostaria de poder iniciar o fluxo de criação de uma inspeção na página inicial, para facilitar o início do processo de inspeção. | 8 pontos |
+| HU02 | Eu, como usuário, gostaria de poder acessar minha lista de inspeções na página inicial, para ter fácil acesso às inspeções existentes. | 5 pontos |
 | HU21 | Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao criar uma inspeção, para orientar o processo de inspeção. | 8 pontos |
+| RQNF01 | A interface de autenticação deve ser projetada de forma intuitiva, seguindo as diretrizes de design de experiência do usuário. | 2 pontos |
 
-### Configuraçãos iniciais
+### Configurações iniciais
 
 Consiste em iniciar os projetos em cada um dos seus contextos.
 
@@ -49,7 +50,6 @@ Consiste em iniciar os projetos em cada um dos seus contextos.
 2. Iniciar repositório backend.
 3. Iniciar banco de dados.
 4. Iniciar repositório de documentação.
-
 
 ### HU01
 
@@ -88,6 +88,18 @@ Eu, como usuário, gostaria de escolher um modelo de lista de verificação ao c
 2. O usuário tem a opção de escolher o modelo de lista de verificação "Verificação de artefato - Estória de Usuário".
 3. O usuário deve ter a capacidade de cancelar a seleção do modelo de lista de verificação.
 4. Deve conter o nome dos responsáveis do projeto.
+
+### RQNF01
+
+A interface de autenticação deve ser projetada de forma intuitiva, seguindo as diretrizes de design de experiência do usuário.
+
+**Critérios de Aceitação:**
+
+1. A interface deve seguir as melhores práticas de design de experiência do usuário.
+2. A navegação deve ser clara e intuitiva.
+3. As mensagens e instruções devem ser facilmente compreensíveis pelos usuários.
+4. Deve haver feedback visual para as ações dos usuários, como cliques e submissões.
+
 
 ## Sprint 2
 
@@ -266,6 +278,9 @@ Eu, como um usuário, desejo poder marcar rastros existentes em arquivos submeti
 |---------------------|-----------|-----------|
 | HU24 | Eu, como um usuário, desejo poder excluir uma inspeção. | 5 pontos |
 | HU03 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável por uma inspeção. | 5 pontos |
+| RQNF05 | Os *cookies* devem ter uma vida útil adequada e não expirar de forma prematura, a menos que o usuário opte por sair ou revogar seu consentimento. | 2 pontos |
+| RQNF02 | Os avisos sobre o uso de *cookies* devem ser apresentados de forma clara e fácil de entender para os usuários. | 2 pontos |
+| RQNF03 | As políticas de privacidade devem ser apresentadas de forma clara e fácil de entender pelos usuários. | 2 pontos |
 
 ### HU24
 
@@ -275,7 +290,8 @@ Eu, como um usuário, desejo poder excluir uma inspeção.
 
 1. Deve haver uma opção para excluir uma inspeção.
 2. A exclusão deve ser confirmada pelo usuário antes de ser executada.
-
+3. A inspeção excluída deve ser removida permanentemente do sistema.
+4. O usuário deve receber uma confirmação de sucesso após a exclusão.
 
 ### HU03
 
@@ -285,6 +301,41 @@ Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável
 
 1. Deve haver campos para adicionar, visualizar e editar o responsável.
 2. As alterações devem ser refletidas na inspeção.
+3. As informações do responsável devem ser exibidas de forma clara e acessível.
+4. Deve haver uma opção para salvar as alterações feitas no responsável.
+
+### RQNF05
+
+Os *cookies* devem ter uma vida útil adequada e não expirar de forma prematura, a menos que o usuário opte por sair ou revogar seu consentimento.
+
+**Critérios de Aceitação:**
+
+1. A vida útil dos *cookies* deve ser configurada para um período adequado, conforme as necessidades do sistema.
+2. Os *cookies* não devem expirar prematuramente, exceto se o usuário optar por sair ou revogar seu consentimento.
+3. Deve haver uma opção clara para os usuários revogarem seu consentimento para o uso de *cookies*.
+4. O sistema deve informar os usuários sobre a vida útil dos *cookies*.
+
+### RQNF02
+
+Os avisos sobre o uso de *cookies* devem ser apresentados de forma clara e fácil de entender para os usuários.
+
+**Critérios de Aceitação:**
+
+1. Os avisos sobre o uso de *cookies* devem ser exibidos de forma proeminente e clara.
+2. A linguagem utilizada nos avisos deve ser simples e compreensível para todos os usuários.
+3. Deve haver um link para mais informações sobre a política de *cookies*.
+4. Os usuários devem poder aceitar o uso de *cookies* de forma fácil.
+
+### RQNF03
+
+As políticas de privacidade devem ser apresentadas de forma clara e fácil de entender pelos usuários.
+
+**Critérios de Aceitação:**
+
+1. A política de privacidade deve ser escrita em uma linguagem clara e acessível.
+2. Deve haver um link proeminente para a política de privacidade no site.
+3. A política de privacidade deve cobrir todos os aspectos relevantes sobre a coleta, uso e proteção dos dados dos usuários.
+
 
 ## Sprint 8
 
@@ -296,6 +347,8 @@ Eu, como um usuário, desejo poder adicionar, visualizar e editar o responsável
 |---------------------|-----------|-----------|
 | HU04 | Eu, como um usuário, desejo ser informado de minhas credenciais de acesso ao criar uma inspeção na página inicial. | 3 pontos |
 | HU05 | Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção. | 3 pontos |
+| RQNF08 | O sistema deve assegurar a segurança dos dados. | 2 pontos |
+| RQNF09 | O sistema deve proteger a integridade dos dados. | 2 pontos |
 
 ### HU04
 
@@ -306,7 +359,6 @@ Eu, como um usuário, desejo ser informado de minhas credenciais de acesso ao cr
 1. Deve haver uma notificação ou indicação das credenciais necessárias ao criar uma inspeção.
 2. As credenciais devem ser claras e fáceis de entender.
 
-
 ### HU05
 
 Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a criação de uma inspeção.
@@ -315,6 +367,28 @@ Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a 
 
 1. Deve haver uma interface para adicionar e gerenciar artefatos.
 2. Os artefatos devem ser associáveis à inspeção e editáveis.
+
+### RQNF08
+
+O sistema deve assegurar a segurança dos dados.
+
+**Critérios de Aceitação:**
+
+1. Os dados do usuário devem ser armazenados de forma segura utilizando criptografia adequada.
+2. O acesso aos dados deve ser restrito apenas a usuários autenticados e autorizados.
+3. Deve haver mecanismos de proteção contra ataques comuns, como SQL injection e XSS (cross-site scripting).
+4. Logs de segurança devem ser mantidos para monitorar acessos e atividades suspeitas.
+
+### RQNF09
+
+O sistema deve proteger a integridade dos dados.
+
+**Critérios de Aceitação:**
+
+1. Deve haver validações rigorosas de entrada de dados para prevenir a corrupção de dados.
+2. Transações críticas devem ser realizadas de forma atômica, garantindo que todas as operações sejam concluídas com sucesso ou nenhuma delas seja aplicada.
+3. Deve haver um sistema de controle de versões para rastrear mudanças nos dados e permitir a restauração de versões anteriores em caso de corrupção ou erro.
+
 
 ## Sprint 9
 
@@ -326,6 +400,8 @@ Eu, como um usuário, desejo poder adicionar e gerenciar artefatos ao iniciar a 
 |---------------------|-----------|-----------|
 | HU06 | Eu, como um usuário, desejo poder adicionar, visualizar e editar o nome de uma inspeção. | 3 pontos |
 | HU11 | Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção. | 3 pontos |
+| RQNF06 | O sistema deve ser capaz de apresentar respostas em tempo real. | 2 pontos |
+| RQNF07 | O sistema deve preservar a confidencialidade dos dados do usuário. | 2 pontos |
 
 ### HU06
 
@@ -336,7 +412,6 @@ Eu, como um usuário, desejo poder adicionar, visualizar e editar o nome de uma 
 1. Deve haver campos para adicionar, visualizar e editar o nome da inspeção.
 2. As alterações devem ser refletidas adequadamente.
 
-
 ### HU11
 
 Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção.
@@ -345,6 +420,27 @@ Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção.
 
 1. Deve haver uma opção para anexar textos em um rastro.
 2. Os textos anexados devem ser exibidos adequadamente.
+
+### RQNF06
+
+O sistema deve ser capaz de apresentar respostas em tempo real.
+
+**Critérios de Aceitação:**
+
+1. O sistema deve responder às interações do usuário em tempo real.
+2. As respostas devem ser rápidas e sem atrasos perceptíveis.
+
+### RQNF07
+
+O sistema deve preservar a confidencialidade dos dados do usuário.
+
+**Critérios de Aceitação:**
+
+1. Os dados do usuário devem ser protegidos contra acesso não autorizado.
+2. Deve haver criptografia de dados em repouso e em trânsito.
+3. Apenas usuários autorizados devem ter acesso aos dados confidenciais.
+4. Deve haver auditorias regulares para verificar a segurança dos dados.
+
 
 
 ## Sprint 10
@@ -357,6 +453,7 @@ Eu, como um usuário, desejo poder anexar textos em um rastro de uma inspeção.
 |---------------------|-----------|-----------|
 | HU12 | Eu, como um usuário, desejo poder anexar links externos em um rastro de uma inspeção. | 3 pontos |
 | HU13 | Eu, como um usuário, desejo poder sair da aplicação. | 2 pontos |
+| RQNF04 | O sistema de autenticação deve ser compatível com os principais navegadores da web, como Chrome, Firefox, Safari e Edge. | 2 pontos |
 
 ### HU12
 
@@ -367,7 +464,6 @@ Eu, como um usuário, desejo poder anexar links externos em um rastro de uma ins
 1. Deve haver uma opção para anexar links externos em um rastro.
 2. Os links anexados devem ser acessíveis e exibidos adequadamente.
 
-
 ### HU13
 
 Eu, como um usuário, desejo poder sair da aplicação.
@@ -376,6 +472,18 @@ Eu, como um usuário, desejo poder sair da aplicação.
 
 1. Deve haver uma opção clara para sair da aplicação.
 2. A saída deve ser segura e sem perda de dados não salvos.
+
+### RQNF04
+
+O sistema de autenticação deve ser compatível com os principais navegadores da web, como Chrome, Firefox, Safari e Edge.
+
+**Critérios de Aceitação:**
+
+1. O sistema deve ser testado e funcionar corretamente nos navegadores Chrome, Firefox, Safari e Edge.
+2. As funcionalidades de autenticação devem ser consistentes em todos os navegadores suportados.
+3. O layout e a usabilidade devem ser mantidos de forma consistente em todos os navegadores suportados.
+4. Deve haver documentação sobre a compatibilidade do sistema com os navegadores suportados.
+
 
 ## Sprint 11
 

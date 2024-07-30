@@ -145,11 +145,17 @@ A ferramenta RQ_ISP distingue-se no mercado por sua abordagem holística à gest
 | Discussões Inline                           |           | x        |         |           |        |
 | Fluxos de Atividade Organizados             |           | x        |         |           |        |
 | Integração com Jira Software                |           | x        |         |           |        |
-| Gráficos e Relatórios                       |           | x        |         | x         | x      |
+| Adicionar rastros aos itens de uma inspeção |           |          |         |           | x      |
+| Inspeção de artefato de software            | x         | x        |         |           | x      |
+| Ser utilizado para ensino                   |           |          |         |           | x      |
+| Gratuito                                    |           |          |         |           | x      |
+| Permitir navegação inicial                  | x         | x        |         |           | x      |
+| Gerenciamento de Inspeções                  | x         | x        |         |           | x      |
+| Análise de Resultados                       | x         | x        |         |           | x      |
 | Gerenciamento Centralizado de Dados         |           |          | x       |           |        |
 | Cronogramas de Inspeção                     |           |          | x       |           |        |
 | Registro de Resultados de Inspeção          |           |          | x       |           |        |
-| Priorização e Otimização de Atividades de Inspeção |   |          | x       |           |        |
+| Priorização e Otimização de Atividades de Inspeção |           |          | x       |           |        |
 | Customização de Listas de Verificação       |           |          | x       |           |        |
 | Baseado na Web e Móvel                      |           |          |         | x         |        |
 | Ordens de Trabalho                          |           |          |         | x         |        |
@@ -157,14 +163,14 @@ A ferramenta RQ_ISP distingue-se no mercado por sua abordagem holística à gest
 | Versatilidade Setorial                      |           |          |         | x         |        |
 | Redução de Ineficiências Operacionais       |           |          |         | x         |        |
 | Rastreamento e Referência de Artefatos      |           |          |         |           | x      |
-| Inspeção de artefato de software      |           |          |         |           | x      |
-| Gratuito                                    |           |          |         |           | x      |
 
 
 
-O RQ_ISP se destaca entre as ferramentas de gestão de qualidade de projetos por sua abordagem única. Ao contrário de muitas ferramentas do mercado, o RQ_ISP é gratuito, o que o torna uma opção particularmente atraente para equipes de desenvolvimento que buscam eficiência e eficácia sem custos adicionais. A ferramenta não só facilita a inspeção meticulosa de artefatos de software mas também prioriza a rastreabilidade ao longo do ciclo de vida do projeto. Isso significa que cada item sob inspeção é claramente vinculado a um rastro de referência, garantindo uma integridade de projeto e um nível de responsabilidade que são difíceis de alcançar com outras ferramentas.
+A tabela destaca que a ferramenta RQ_ISP se diferencia por combinar inspeção de artefatos de software, adição de rastros aos itens de uma inspeção, ser utilizada para ensino sobre inspeção de artefatos de software, além de ser uma solução gratuita. Ferramentas como SonarQube e Crucible, por exemplo, oferecem análise estática de código e revisão de código, mas não são de código aberto e não são totalmente gratuitas, apesar de fornecerem um período de teste gratuito.
 
-Essa ênfase na rastreabilidade e inspeção detalhada, combinada com o benefício de ser uma solução sem custo, coloca o RQ_ISP em uma posição de vantagem em comparação a alternativas pagas como SonarQube, Crucible, Cenosco e MaintainX. Embora estas também ofereçam serviços valiosos de inspeção de código e gestão de qualidade, frequentemente não proporcionam a mesma cobertura integral que o RQ_ISP oferece. O fato de o RQ_ISP ser gratuito não diminui sua capacidade; pelo contrário, reforça seu valor como um recurso indispensável para projetos que visam a máxima qualidade e eficiência.
+Vale ressaltar que a ferramenta RQ_ISP possui limitações: atualmente, é possível utilizar apenas dois modelos de lista de verificação – um baseado na Taxonomia de Requisitos de Privacidade conforme a LGPD e ISO/IEC 29100, e outro focado na verificação de artefatos de histórias de usuário. Em iterações futuras do software, deseja-se implementar a criação e gerência de listas de verificação personalizadas para atender a diferentes necessidades e contextos específicos dos usuários, proporcionando maior flexibilidade e adaptabilidade na inspeção de artefatos de software.
+
+As funcionalidades da ferramenta RQ_ISP combinada com o benefício de ser uma solução sem custo, coloca a RQ_ISP em uma posição de vantagem em comparação a alternativas pagas como SonarQube, Crucible, Cenosco e MaintainX. Embora estas também ofereçam serviços valiosos de inspeção de código e gestão de qualidade, não proporcionam as mesmas funcionalidades que a RQ_ISP oferece.
 
 
 ## Referências
